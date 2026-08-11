@@ -1,0 +1,7 @@
+Invoice,StockCode,Description,Quantity,InvoiceDate,Price,Customer ID,Country,transaction_type,description_recovered,description_source,invoice_date_only,invoice_year,invoice_month,invoice_weekday,is_guest_transaction,price_category,is_special_transaction
+A506401,B,Adjust bad debt,1,2010-04-29 13:36:00,-53594.36,,United Kingdom,INVALID,False,original,2010-04-29,2010,4,3,True,PRICE_NEGATIVE,True
+A516228,B,Adjust bad debt,1,2010-07-19 11:24:00,-44031.79,,United Kingdom,INVALID,False,original,2010-07-19,2010,7,0,True,PRICE_NEGATIVE,True
+A528059,B,Adjust bad debt,1,2010-10-20 12:04:00,-38925.87,,United Kingdom,INVALID,False,original,2010-10-20,2010,10,2,True,PRICE_NEGATIVE,True
+A563185,B,Adjust bad debt,1,2011-08-12 14:50:00,11062.06,,United Kingdom,INVALID,False,original,2011-08-12,2011,8,4,True,PRICE_POSITIVE,False
+A563186,B,Adjust bad debt,1,2011-08-12 14:51:00,-11062.06,,United Kingdom,INVALID,False,original,2011-08-12,2011,8,4,True,PRICE_NEGATIVE,True
+A563187,B,Adjust bad debt,1,2011-08-12 14:52:00,-11062.06,,United Kingdom,INVALID,False,original,2011-08-12,2011,8,4,True,PRICE_NEGATIVE,True

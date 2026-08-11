@@ -1,0 +1,809 @@
+{
+  "online_retail_ii": {
+    "dataset": "online_retail_ii",
+    "name": "Online Retail II (UCI)",
+    "original_rows": 1067371,
+    "final_rows": 1033036,
+    "columns": [
+      "Invoice",
+      "StockCode",
+      "Description",
+      "Quantity",
+      "InvoiceDate",
+      "Price",
+      "Customer ID",
+      "Country",
+      "transaction_type",
+      "description_recovered",
+      "description_source",
+      "invoice_date_only",
+      "invoice_year",
+      "invoice_month",
+      "invoice_weekday",
+      "is_guest_transaction",
+      "price_category",
+      "is_special_transaction"
+    ],
+    "schema": {
+      "dataset": "online_retail_ii",
+      "required_columns": [
+        "Invoice",
+        "StockCode",
+        "Description",
+        "Quantity",
+        "InvoiceDate",
+        "Price",
+        "Customer ID",
+        "Country"
+      ],
+      "present_columns": [
+        "Invoice",
+        "StockCode",
+        "Description",
+        "Quantity",
+        "InvoiceDate",
+        "Price",
+        "Customer ID",
+        "Country"
+      ],
+      "missing_columns": [],
+      "extra_columns": [],
+      "schema_ok": true
+    },
+    "duplicate_rows": 34335,
+    "duplicate_pct": 3.2168,
+    "duplicates_removed": 34335,
+    "date_column": "InvoiceDate",
+    "missing_dates": 0,
+    "invalid_dates": 0,
+    "future_dates": 0,
+    "min_date": "2009-12-01 07:45:00",
+    "max_date": "2011-12-09 12:50:00",
+    "total_days": 738,
+    "numeric_validation": {
+      "Quantity": {
+        "column": "Quantity",
+        "non_null": 1067371,
+        "negative": 22950,
+        "zero": 0,
+        "positive": 1044421,
+        "min": -80995.0,
+        "max": 80995.0,
+        "mean": 9.9388984711033
+      },
+      "Price": {
+        "column": "Price",
+        "non_null": 1067371,
+        "negative": 5,
+        "zero": 6202,
+        "positive": 1061164,
+        "min": -53594.36,
+        "max": 38970.0,
+        "mean": 4.64938772741624
+      }
+    },
+    "missing_values": {
+      "dataset": "online_retail_ii",
+      "missing_by_column": {
+        "Customer ID": {
+          "count": 243007,
+          "pct": 22.7669
+        }
+      }
+    },
+    "transaction_type_counts": {
+      "SALE": 1010533,
+      "CANCELLATION": 19104,
+      "RETURN": 3393,
+      "INVALID": 6
+    },
+    "cancellation_count": 19104,
+    "cancellation_pct": 1.7898,
+    "return_count": 3393,
+    "invalid_count": 6,
+    "invalid_values": 6,
+    "guest_transaction_count": 235151,
+    "guest_transaction_pct": 22.7631,
+    "special_transaction_count": 6019,
+    "unrecovered_description_rows": 363,
+    "quality_status": "REVIEW",
+    "quality_notes": [
+      "Exact duplicates removed (3.22% of raw); raw file untouched.",
+      "Cancellations (1.79%) and returns (0.32%) preserved in separate datasets.",
+      "Missing Customer ID (22.76%) treated as guest transactions - kept for sales analysis, excluded only from customer-level analysis.",
+      "Zero/negative-price special lines kept and flagged (is_special_transaction) instead of deleted.",
+      "363 lines have unrecoverable Description labelled 'Unknown Product'."
+    ],
+    "outliers": {
+      "Quantity": {
+        "dataset": "online_retail_ii",
+        "column": "Quantity",
+        "n": 1033036,
+        "q1": 1.0,
+        "q3": 10.0,
+        "iqr": 9.0,
+        "iqr_lower_bound": -12.5,
+        "iqr_upper_bound": 23.5,
+        "iqr_outlier_count": 114434,
+        "iqr_outlier_pct": 11.0774,
+        "iqr_outlier_min": -80995.0,
+        "iqr_outlier_max": 80995.0,
+        "z_outlier_count": 1244,
+        "z_outlier_pct": 0.1204,
+        "z_outlier_min": -80995.0,
+        "z_outlier_max": 80995.0,
+        "z_threshold": 3.0,
+        "note": "Outliers are reported, not removed. Extreme but legitimate retail transactions (high-volume / high-value orders) are kept."
+      },
+      "Price": {
+        "dataset": "online_retail_ii",
+        "column": "Price",
+        "n": 1033036,
+        "q1": 1.25,
+        "q3": 4.15,
+        "iqr": 2.9000000000000004,
+        "iqr_lower_bound": -3.1000000000000005,
+        "iqr_upper_bound": 8.5,
+        "iqr_outlier_count": 66196,
+        "iqr_outlier_pct": 6.4079,
+        "iqr_outlier_min": -53594.36,
+        "iqr_outlier_max": 38970.0,
+        "z_outlier_count": 617,
+        "z_outlier_pct": 0.0597,
+        "z_outlier_min": -53594.36,
+        "z_outlier_max": 38970.0,
+        "z_threshold": 3.0,
+        "note": "Outliers are reported, not removed. Extreme but legitimate retail transactions (high-volume / high-value orders) are kept."
+      }
+    }
+  },
+  "store_master": {
+    "dataset": "store_master",
+    "name": "Store Master",
+    "original_rows": 30,
+    "final_rows": 30,
+    "columns": [
+      "store_id",
+      "store_name",
+      "city",
+      "state",
+      "region",
+      "store_type",
+      "store_size_sqft",
+      "opening_date"
+    ],
+    "schema": {
+      "dataset": "store_master",
+      "required_columns": [
+        "store_id",
+        "store_name",
+        "city",
+        "state",
+        "region",
+        "store_type",
+        "store_size_sqft",
+        "opening_date"
+      ],
+      "present_columns": [
+        "store_id",
+        "store_name",
+        "city",
+        "state",
+        "region",
+        "store_type",
+        "store_size_sqft",
+        "opening_date"
+      ],
+      "missing_columns": [],
+      "extra_columns": [],
+      "schema_ok": true
+    },
+    "duplicate_rows": 0,
+    "duplicates_removed": 0,
+    "duplicate_store_ids": 0,
+    "missing_ids": 0,
+    "invalid_store_sizes": 0,
+    "invalid_values": 0,
+    "missing_values": {
+      "dataset": "store_master",
+      "missing_by_column": {}
+    },
+    "date_validation": {
+      "dataset": "store_master",
+      "date_column": "opening_date",
+      "missing_dates": 0,
+      "invalid_dates": 0,
+      "future_dates": 0,
+      "min_date": "2015-08-03 00:00:00",
+      "max_date": "2021-12-07 00:00:00",
+      "total_days": 2318
+    },
+    "issues": [],
+    "quality_status": "PASS"
+  },
+  "sku_master": {
+    "dataset": "sku_master",
+    "name": "SKU Master",
+    "original_rows": 5000,
+    "final_rows": 5000,
+    "columns": [
+      "sku_id",
+      "sku_name",
+      "category",
+      "sub_category",
+      "brand",
+      "cost_price",
+      "base_price",
+      "weight_kg",
+      "supplier_id",
+      "lead_time_days",
+      "reorder_point",
+      "safety_stock"
+    ],
+    "schema": {
+      "dataset": "sku_master",
+      "required_columns": [
+        "sku_id",
+        "sku_name",
+        "category",
+        "sub_category",
+        "brand",
+        "cost_price",
+        "base_price",
+        "weight_kg",
+        "supplier_id",
+        "lead_time_days",
+        "reorder_point",
+        "safety_stock"
+      ],
+      "present_columns": [
+        "sku_id",
+        "sku_name",
+        "category",
+        "sub_category",
+        "brand",
+        "cost_price",
+        "base_price",
+        "weight_kg",
+        "supplier_id",
+        "lead_time_days",
+        "reorder_point",
+        "safety_stock"
+      ],
+      "missing_columns": [],
+      "extra_columns": [],
+      "schema_ok": true
+    },
+    "duplicate_rows": 0,
+    "duplicates_removed": 0,
+    "duplicate_sku_ids": 0,
+    "missing_ids": 0,
+    "invalid_cost_price": 0,
+    "invalid_base_price": 0,
+    "invalid_weight_kg": 0,
+    "invalid_lead_time_days": 0,
+    "negative_reorder_point": 0,
+    "negative_safety_stock": 0,
+    "missing_category": 0,
+    "missing_supplier": 0,
+    "cost_price_ge_base_price": 0,
+    "missing_values": {
+      "dataset": "sku_master",
+      "missing_by_column": {}
+    },
+    "invalid_values": 0,
+    "issues": [],
+    "quality_status": "PASS",
+    "outliers": {
+      "lead_time_days": {
+        "dataset": "sku_master",
+        "column": "lead_time_days",
+        "n": 5000,
+        "q1": 10.0,
+        "q3": 21.0,
+        "iqr": 11.0,
+        "iqr_lower_bound": -6.5,
+        "iqr_upper_bound": 37.5,
+        "iqr_outlier_count": 0,
+        "iqr_outlier_pct": 0.0,
+        "iqr_outlier_min": null,
+        "iqr_outlier_max": null,
+        "z_outlier_count": 0,
+        "z_outlier_pct": 0.0,
+        "z_outlier_min": null,
+        "z_outlier_max": null,
+        "z_threshold": 3.0,
+        "note": "Outliers are reported, not removed. Extreme but legitimate retail transactions (high-volume / high-value orders) are kept."
+      },
+      "base_price": {
+        "dataset": "sku_master",
+        "column": "base_price",
+        "n": 5000,
+        "q1": 32.557500000000005,
+        "q3": 157.3,
+        "iqr": 124.7425,
+        "iqr_lower_bound": -154.55625,
+        "iqr_upper_bound": 344.41375000000005,
+        "iqr_outlier_count": 216,
+        "iqr_outlier_pct": 4.32,
+        "iqr_outlier_min": 345.14,
+        "iqr_outlier_max": 449.86,
+        "z_outlier_count": 82,
+        "z_outlier_pct": 1.64,
+        "z_outlier_min": 412.79,
+        "z_outlier_max": 449.86,
+        "z_threshold": 3.0,
+        "note": "Outliers are reported, not removed. Extreme but legitimate retail transactions (high-volume / high-value orders) are kept."
+      }
+    }
+  },
+  "customer_master": {
+    "dataset": "customer_master",
+    "name": "Customer Master",
+    "original_rows": 10000,
+    "final_rows": 10000,
+    "columns": [
+      "customer_id",
+      "customer_name",
+      "customer_segment",
+      "loyalty_member",
+      "signup_date"
+    ],
+    "schema": {
+      "dataset": "customer_master",
+      "required_columns": [
+        "customer_id",
+        "customer_name",
+        "customer_segment",
+        "loyalty_member",
+        "signup_date"
+      ],
+      "present_columns": [
+        "customer_id",
+        "customer_name",
+        "customer_segment",
+        "loyalty_member",
+        "signup_date"
+      ],
+      "missing_columns": [],
+      "extra_columns": [],
+      "schema_ok": true
+    },
+    "duplicate_rows": 0,
+    "duplicates_removed": 0,
+    "duplicate_customer_ids": 0,
+    "missing_ids": 0,
+    "invalid_loyalty_member": 0,
+    "invalid_segment": 0,
+    "invalid_values": 0,
+    "missing_values": {
+      "dataset": "customer_master",
+      "missing_by_column": {}
+    },
+    "date_validation": {
+      "dataset": "customer_master",
+      "date_column": "signup_date",
+      "missing_dates": 0,
+      "invalid_dates": 0,
+      "future_dates": 0,
+      "min_date": "2019-01-01 00:00:00",
+      "max_date": "2023-12-28 00:00:00",
+      "total_days": 1822
+    },
+    "issues": [],
+    "quality_status": "PASS"
+  },
+  "calendar": {
+    "dataset": "calendar",
+    "name": "Calendar",
+    "original_rows": 1461,
+    "final_rows": 1461,
+    "columns": [
+      "date",
+      "year",
+      "month",
+      "quarter",
+      "day",
+      "day_of_week",
+      "day_name",
+      "is_weekend",
+      "is_holiday",
+      "holiday_name",
+      "season",
+      "week_of_year",
+      "parsed_date"
+    ],
+    "schema": {
+      "dataset": "calendar",
+      "required_columns": [
+        "date",
+        "year",
+        "month",
+        "quarter",
+        "day",
+        "day_of_week",
+        "day_name",
+        "is_weekend",
+        "is_holiday",
+        "holiday_name",
+        "season",
+        "week_of_year"
+      ],
+      "present_columns": [
+        "date",
+        "year",
+        "month",
+        "quarter",
+        "day",
+        "day_of_week",
+        "day_name",
+        "is_weekend",
+        "is_holiday",
+        "holiday_name",
+        "season",
+        "week_of_year"
+      ],
+      "missing_columns": [],
+      "extra_columns": [],
+      "schema_ok": true
+    },
+    "duplicate_rows": 0,
+    "duplicates_removed": 0,
+    "duplicate_dates": 0,
+    "missing_dates": 0,
+    "attribute_mismatches": {
+      "year": 0,
+      "month": 0,
+      "day": 0,
+      "quarter": 0,
+      "week_of_year": 0,
+      "day_of_week": 0,
+      "is_weekend": 0,
+      "is_holiday": 0
+    },
+    "attribute_mismatch_total": 0,
+    "invalid_values": 0,
+    "missing_values": {
+      "dataset": "calendar",
+      "missing_by_column": {}
+    },
+    "date_validation": {
+      "dataset": "calendar",
+      "date_column": "date",
+      "missing_dates": 0,
+      "invalid_dates": 0,
+      "future_dates": 0,
+      "min_date": "2022-01-01 00:00:00",
+      "max_date": "2025-12-31 00:00:00",
+      "total_days": 1460
+    },
+    "issues": [],
+    "quality_status": "PASS"
+  },
+  "sales_daily": {
+    "dataset": "sales_daily",
+    "name": "Sales Daily",
+    "original_rows": 1461000,
+    "final_rows": 1461000,
+    "columns": [
+      "date",
+      "store_id",
+      "sku_id",
+      "units_sold",
+      "total_revenue",
+      "avg_unit_price",
+      "transaction_count",
+      "unique_customers",
+      "promotion_flag"
+    ],
+    "schema": {
+      "dataset": "sales_daily",
+      "required_columns": [
+        "date",
+        "store_id",
+        "sku_id",
+        "units_sold",
+        "total_revenue",
+        "avg_unit_price",
+        "transaction_count",
+        "unique_customers",
+        "promotion_flag"
+      ],
+      "present_columns": [
+        "date",
+        "store_id",
+        "sku_id",
+        "units_sold",
+        "total_revenue",
+        "avg_unit_price",
+        "transaction_count",
+        "unique_customers",
+        "promotion_flag"
+      ],
+      "missing_columns": [],
+      "extra_columns": [],
+      "schema_ok": true
+    },
+    "duplicate_rows": 0,
+    "duplicates_removed": 0,
+    "duplicate_grain": 0,
+    "grain_columns": [
+      "date",
+      "store_id",
+      "sku_id"
+    ],
+    "numeric_validation": {
+      "units_sold": {
+        "column": "units_sold",
+        "non_null": 1461000,
+        "negative": 0,
+        "zero": 915612,
+        "positive": 545388,
+        "min": 0.0,
+        "max": 111.0,
+        "mean": 7.3887330595482545
+      },
+      "total_revenue": {
+        "column": "total_revenue",
+        "non_null": 1461000,
+        "negative": 0,
+        "zero": 915612,
+        "positive": 545388,
+        "min": 0.0,
+        "max": 34674.18,
+        "mean": 840.1466976522929
+      },
+      "avg_unit_price": {
+        "column": "avg_unit_price",
+        "non_null": 1461000,
+        "negative": 0,
+        "zero": 0,
+        "positive": 1461000,
+        "min": 3.68,
+        "max": 401.15,
+        "mean": 108.55120780971939
+      },
+      "transaction_count": {
+        "column": "transaction_count",
+        "non_null": 1461000,
+        "negative": 0,
+        "zero": 915612,
+        "positive": 545388,
+        "min": 0.0,
+        "max": 62.0,
+        "mean": 4.268514031485284
+      },
+      "unique_customers": {
+        "column": "unique_customers",
+        "non_null": 1461000,
+        "negative": 0,
+        "zero": 915612,
+        "positive": 545388,
+        "min": 0.0,
+        "max": 55.0,
+        "mean": 3.6851560574948667
+      }
+    },
+    "invalid_promotion_flags": 0,
+    "orphan_store_ids": 0,
+    "orphan_sku_ids": 0,
+    "orphan_dates": 0,
+    "revenue_mismatch_rows": 0,
+    "zero_unit_rows": 915612,
+    "missing_values": {
+      "dataset": "sales_daily",
+      "missing_by_column": {}
+    },
+    "invalid_values": 0,
+    "issues": [],
+    "quality_status": "PASS",
+    "outliers": {
+      "units_sold": {
+        "dataset": "sales_daily",
+        "column": "units_sold",
+        "n": 1461000,
+        "q1": 0.0,
+        "q3": 13.0,
+        "iqr": 13.0,
+        "iqr_lower_bound": -19.5,
+        "iqr_upper_bound": 32.5,
+        "iqr_outlier_count": 78461,
+        "iqr_outlier_pct": 5.3704,
+        "iqr_outlier_min": 33.0,
+        "iqr_outlier_max": 111.0,
+        "z_outlier_count": 24495,
+        "z_outlier_pct": 1.6766,
+        "z_outlier_min": 44.0,
+        "z_outlier_max": 111.0,
+        "z_threshold": 3.0,
+        "note": "Outliers are reported, not removed. Extreme but legitimate retail transactions (high-volume / high-value orders) are kept."
+      },
+      "total_revenue": {
+        "dataset": "sales_daily",
+        "column": "total_revenue",
+        "n": 1461000,
+        "q1": 0.0,
+        "q3": 579.15,
+        "iqr": 579.15,
+        "iqr_lower_bound": -868.7249999999999,
+        "iqr_upper_bound": 1447.875,
+        "iqr_outlier_count": 229883,
+        "iqr_outlier_pct": 15.7346,
+        "iqr_outlier_min": 1448.0,
+        "iqr_outlier_max": 34674.18,
+        "z_outlier_count": 38612,
+        "z_outlier_pct": 2.6428,
+        "z_outlier_min": 7051.98,
+        "z_outlier_max": 34674.18,
+        "z_threshold": 3.0,
+        "note": "Outliers are reported, not removed. Extreme but legitimate retail transactions (high-volume / high-value orders) are kept."
+      }
+    }
+  },
+  "inventory_snapshots": {
+    "dataset": "inventory_snapshots",
+    "name": "Inventory Snapshots",
+    "original_rows": 1461000,
+    "final_rows": 1461000,
+    "columns": [
+      "date",
+      "store_id",
+      "sku_id",
+      "beginning_inventory",
+      "receipts",
+      "units_sold",
+      "ending_inventory",
+      "stockout_flag",
+      "on_order_qty",
+      "beginning_inventory_pre_receipts",
+      "inventory_balance_ok"
+    ],
+    "schema": {
+      "dataset": "inventory_snapshots",
+      "required_columns": [
+        "date",
+        "store_id",
+        "sku_id",
+        "beginning_inventory",
+        "receipts",
+        "units_sold",
+        "ending_inventory",
+        "stockout_flag",
+        "on_order_qty"
+      ],
+      "present_columns": [
+        "date",
+        "store_id",
+        "sku_id",
+        "beginning_inventory",
+        "receipts",
+        "units_sold",
+        "ending_inventory",
+        "stockout_flag",
+        "on_order_qty"
+      ],
+      "missing_columns": [],
+      "extra_columns": [],
+      "schema_ok": true
+    },
+    "duplicate_rows": 0,
+    "duplicates_removed": 0,
+    "duplicate_grain": 0,
+    "grain_columns": [
+      "date",
+      "store_id",
+      "sku_id"
+    ],
+    "numeric_validation": {
+      "beginning_inventory": {
+        "column": "beginning_inventory",
+        "non_null": 1461000,
+        "negative": 0,
+        "zero": 915580,
+        "positive": 545420,
+        "min": 0.0,
+        "max": 1030.0,
+        "mean": 46.672215605749486
+      },
+      "receipts": {
+        "column": "receipts",
+        "non_null": 1461000,
+        "negative": 0,
+        "zero": 1338792,
+        "positive": 122208,
+        "min": 0.0,
+        "max": 732.0,
+        "mean": 7.338034907597536
+      },
+      "units_sold": {
+        "column": "units_sold",
+        "non_null": 1461000,
+        "negative": 0,
+        "zero": 915612,
+        "positive": 545388,
+        "min": 0.0,
+        "max": 111.0,
+        "mean": 7.3887330595482545
+      },
+      "ending_inventory": {
+        "column": "ending_inventory",
+        "non_null": 1461000,
+        "negative": 0,
+        "zero": 1034695,
+        "positive": 426305,
+        "min": 0.0,
+        "max": 1021.0,
+        "mean": 39.283482546201235
+      },
+      "on_order_qty": {
+        "column": "on_order_qty",
+        "non_null": 1461000,
+        "negative": 0,
+        "zero": 169305,
+        "positive": 1291695,
+        "min": 0.0,
+        "max": 732.0,
+        "mean": 103.95666598220397
+      }
+    },
+    "invalid_stockout_flags": 0,
+    "canonical_equation_ok_rows": 1338792,
+    "canonical_equation_mismatch_rows": 122208,
+    "canonical_equation_mismatch_pct": 8.3647,
+    "ending_equals_beginning_minus_sold_rows": 1461000,
+    "derived_balance_ok_rows": 1461000,
+    "cross_sales_units_match": true,
+    "derived_column_added": "beginning_inventory_pre_receipts",
+    "missing_values": {
+      "dataset": "inventory_snapshots",
+      "missing_by_column": {}
+    },
+    "invalid_values": 122208,
+    "issues": [
+      "Canonical balance equation violated on 122208 rows (documented semantic: beginning_inventory already includes receipts)"
+    ],
+    "quality_status": "REVIEW",
+    "outliers": {
+      "ending_inventory": {
+        "dataset": "inventory_snapshots",
+        "column": "ending_inventory",
+        "n": 1461000,
+        "q1": 0.0,
+        "q3": 12.0,
+        "iqr": 12.0,
+        "iqr_lower_bound": -18.0,
+        "iqr_upper_bound": 30.0,
+        "iqr_outlier_count": 285679,
+        "iqr_outlier_pct": 19.5537,
+        "iqr_outlier_min": 31.0,
+        "iqr_outlier_max": 1021.0,
+        "z_outlier_count": 46085,
+        "z_outlier_pct": 3.1543,
+        "z_outlier_min": 378.0,
+        "z_outlier_max": 1021.0,
+        "z_threshold": 3.0,
+        "note": "Outliers are reported, not removed. Extreme but legitimate retail transactions (high-volume / high-value orders) are kept."
+      },
+      "on_order_qty": {
+        "dataset": "inventory_snapshots",
+        "column": "on_order_qty",
+        "n": 1461000,
+        "q1": 34.0,
+        "q3": 113.0,
+        "iqr": 79.0,
+        "iqr_lower_bound": -84.5,
+        "iqr_upper_bound": 231.5,
+        "iqr_outlier_count": 130415,
+        "iqr_outlier_pct": 8.9264,
+        "iqr_outlier_min": 241.0,
+        "iqr_outlier_max": 732.0,
+        "z_outlier_count": 46167,
+        "z_outlier_pct": 3.16,
+        "z_outlier_min": 520.0,
+        "z_outlier_max": 732.0,
+        "z_threshold": 3.0,
+        "note": "Outliers are reported, not removed. Extreme but legitimate retail transactions (high-volume / high-value orders) are kept."
+      }
+    }
+  }
+}

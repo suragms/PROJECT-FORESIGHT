@@ -19,19 +19,13 @@ build/
 .DS_Store
 Thumbs.db
 
-# Large Raw CSV files (>50MB) - Use Parquet or Sample datasets
+# Large raw archive files
+*.zip
+*.tar.gz
+
+# Exclude all large CSV files over 50MB
 data/raw/online_retail_II.csv
 data/raw/sales_daily.csv
 data/raw/inventory_snapshots.csv
-data/raw/*.zip
-
-# Keep parquet and smaller masters in data/raw
-!data/raw/sales_daily.parquet
-!data/raw/inventory_snapshots.parquet
-!data/raw/store_master.csv
-!data/raw/sku_master.csv
-!data/raw/customer_master.csv
-!data/raw/calendar.csv
-
-# Keep sample datasets
-!data/sample/*
+data/processed/online_retail_clean.csv
+data/processed/online_retail_sales.csv

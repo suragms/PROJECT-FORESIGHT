@@ -1,0 +1,8 @@
+Dataset,Dataset Key,Original Rows,Final Rows,Columns,Duplicates Found,Duplicates Removed,Missing Values,Invalid Values,Outliers,Date Range,Quality Status
+Online Retail II (UCI),online_retail_ii,1067371,1033036,18,34335,34335,243007,6,180630,2009-12-01 07:45:00 to 2011-12-09 12:50:00,REVIEW
+Store Master,store_master,30,30,8,0,0,0,0,0,2015-08-03 00:00:00 to 2021-12-07 00:00:00,PASS
+SKU Master,sku_master,5000,5000,12,0,0,0,0,216,N/A,PASS
+Customer Master,customer_master,10000,10000,5,0,0,0,0,0,2019-01-01 00:00:00 to 2023-12-28 00:00:00,PASS
+Calendar,calendar,1461,1461,13,0,0,0,0,0,2022-01-01 00:00:00 to 2025-12-31 00:00:00,PASS
+Sales Daily,sales_daily,1461000,1461000,9,0,0,0,0,308344,N/A,PASS
+Inventory Snapshots,inventory_snapshots,1461000,1461000,11,0,0,0,122208,416094,N/A,REVIEW
