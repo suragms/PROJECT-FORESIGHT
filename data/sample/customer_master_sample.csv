@@ -1,0 +1,101 @@
+customer_id,customer_name,customer_segment,loyalty_member,signup_date
+CUST_000001,Michael Brown,VIP Loyalty,1,2021-08-21
+CUST_000002,Michael Martinez,Consumer,1,2023-04-08
+CUST_000003,Lisa Williams,Consumer,0,2022-06-02
+CUST_000004,Christopher Smith,Consumer,0,2022-09-17
+CUST_000005,Elizabeth Lopez,VIP Loyalty,1,2021-12-23
+CUST_000006,Karen Rodriguez,Consumer,0,2023-09-07
+CUST_000007,Sarah Brown,VIP Loyalty,1,2020-10-09
+CUST_000008,Christopher Johnson,Corporate,0,2022-08-15
+CUST_000009,John Wilson,Consumer,1,2022-02-06
+CUST_000010,Nancy Martinez,Consumer,1,2020-10-12
+CUST_000011,Mary Martinez,Small Business,0,2022-09-08
+CUST_000012,Christopher Gonzalez,Consumer,0,2020-09-28
+CUST_000013,Richard Rodriguez,Consumer,1,2019-07-09
+CUST_000014,Lisa Smith,Consumer,1,2021-03-17
+CUST_000015,Linda Williams,Corporate,0,2020-07-26
+CUST_000016,William Lopez,Small Business,0,2020-01-16
+CUST_000017,Daniel Miller,Corporate,0,2022-08-22
+CUST_000018,John Smith,Consumer,0,2021-01-05
+CUST_000019,Daniel Anderson,Consumer,1,2020-10-28
+CUST_000020,Richard Williams,Consumer,0,2022-04-05
+CUST_000021,Daniel Miller,Consumer,0,2022-07-27
+CUST_000022,Charles Garcia,Small Business,0,2019-05-06
+CUST_000023,Barbara Lopez,Consumer,0,2020-07-28
+CUST_000024,Michael Wilson,Consumer,1,2019-04-13
+CUST_000025,William Williams,Consumer,0,2019-05-01
+CUST_000026,Charles Martinez,Consumer,0,2019-04-17
+CUST_000027,Thomas Martinez,VIP Loyalty,1,2020-03-17
+CUST_000028,Robert Smith,VIP Loyalty,1,2021-01-02
+CUST_000029,Mary Lopez,Consumer,1,2019-01-19
+CUST_000030,Mary Jones,Consumer,0,2022-07-11
+CUST_000031,Lisa Hernandez,Consumer,0,2023-04-02
+CUST_000032,Jennifer Garcia,Consumer,1,2019-09-28
+CUST_000033,Jennifer Gonzalez,Small Business,1,2022-03-26
+CUST_000034,John Anderson,Consumer,0,2022-09-01
+CUST_000035,Linda Miller,VIP Loyalty,1,2019-11-28
+CUST_000036,Sarah Miller,Consumer,0,2022-10-16
+CUST_000037,Karen Lopez,Consumer,0,2022-05-05
+CUST_000038,Daniel Rodriguez,Consumer,0,2021-04-24
+CUST_000039,Nancy Davis,Small Business,0,2019-08-04
+CUST_000040,Jennifer Davis,Corporate,1,2019-03-25
+CUST_000041,Sarah Wilson,Consumer,0,2023-09-04
+CUST_000042,James Brown,Consumer,1,2022-08-08
+CUST_000043,Michael Williams,Corporate,0,2022-11-19
+CUST_000044,Nancy Miller,Consumer,0,2023-03-22
+CUST_000045,Linda Hernandez,Consumer,0,2019-12-15
+CUST_000046,James Jones,Consumer,0,2022-03-17
+CUST_000047,Thomas Lopez,VIP Loyalty,1,2023-05-06
+CUST_000048,John Lopez,Consumer,0,2019-05-03
+CUST_000049,James Brown,Consumer,0,2019-03-18
+CUST_000050,Elizabeth Anderson,Small Business,0,2020-06-23
+CUST_000051,Mary Anderson,Consumer,0,2019-08-01
+CUST_000052,William Hernandez,Corporate,0,2020-07-26
+CUST_000053,John Johnson,Small Business,0,2020-07-25
+CUST_000054,Patricia Gonzalez,Consumer,1,2022-03-23
+CUST_000055,Joseph Lopez,Consumer,0,2021-09-26
+CUST_000056,Nancy Martinez,Small Business,1,2020-06-15
+CUST_000057,Nancy Hernandez,Consumer,0,2023-12-12
+CUST_000058,Barbara Jones,Consumer,0,2022-03-23
+CUST_000059,Linda Brown,Consumer,0,2020-03-17
+CUST_000060,Lisa Anderson,Consumer,0,2020-05-26
+CUST_000061,Christopher Wilson,Small Business,0,2023-01-26
+CUST_000062,James Anderson,Consumer,0,2019-08-13
+CUST_000063,Christopher Smith,VIP Loyalty,1,2023-06-23
+CUST_000064,John Lopez,Consumer,1,2019-12-05
+CUST_000065,Joseph Smith,Consumer,0,2023-12-16
+CUST_000066,Jessica Jones,Consumer,1,2023-07-26
+CUST_000067,Elizabeth Garcia,Corporate,1,2020-10-19
+CUST_000068,James Davis,Corporate,1,2020-01-28
+CUST_000069,Karen Davis,Corporate,0,2019-01-19
+CUST_000070,David Jones,Corporate,0,2020-11-12
+CUST_000071,Richard Lopez,Consumer,1,2021-02-03
+CUST_000072,Daniel Smith,Corporate,0,2020-10-02
+CUST_000073,Charles Rodriguez,Consumer,0,2020-11-24
+CUST_000074,Patricia Rodriguez,Small Business,1,2020-05-09
+CUST_000075,Lisa Williams,VIP Loyalty,1,2022-02-17
+CUST_000076,Michael Davis,Small Business,0,2022-01-23
+CUST_000077,Richard Miller,Corporate,1,2019-01-20
+CUST_000078,Jessica Rodriguez,Consumer,0,2019-04-12
+CUST_000079,William Williams,Consumer,1,2022-03-26
+CUST_000080,Joseph Jones,Consumer,0,2022-11-21
+CUST_000081,Patricia Jones,Corporate,0,2023-05-10
+CUST_000082,Michael Wilson,Consumer,0,2023-11-11
+CUST_000083,Sarah Anderson,Consumer,0,2022-01-06
+CUST_000084,Michael Wilson,Corporate,1,2020-11-26
+CUST_000085,Mary Jones,Consumer,1,2023-01-22
+CUST_000086,Karen Smith,VIP Loyalty,1,2019-04-04
+CUST_000087,Jennifer Lopez,Consumer,0,2021-10-26
+CUST_000088,Charles Miller,Consumer,1,2020-12-26
+CUST_000089,Karen Lopez,Corporate,0,2019-03-13
+CUST_000090,Thomas Rodriguez,Small Business,1,2020-12-13
+CUST_000091,Richard Gonzalez,Consumer,1,2023-11-28
+CUST_000092,Robert Brown,Consumer,0,2020-09-17
+CUST_000093,Susan Anderson,Consumer,0,2021-07-25
+CUST_000094,David Lopez,VIP Loyalty,1,2022-08-28
+CUST_000095,Christopher Davis,Consumer,0,2020-12-18
+CUST_000096,Robert Rodriguez,Consumer,0,2019-09-01
+CUST_000097,Christopher Brown,Corporate,1,2023-03-06
+CUST_000098,Sarah Williams,Corporate,0,2020-10-24
+CUST_000099,Sarah Hernandez,Consumer,1,2019-06-01
+CUST_000100,Sarah Anderson,Consumer,0,2019-06-27

@@ -1,0 +1,51 @@
+sku_id,sku_name,category,sub_category,brand,cost_price,base_price,weight_kg,supplier_id,lead_time_days,reorder_point,safety_stock
+SKU_00001,Brand_CE Accessories Item 1,Apparel,Accessories,Brand_CE,64.46,142.99,0.99,SUPP_043,20,56,8
+SKU_00002,Brand_EB Footwear Item 2,Apparel,Footwear,Brand_EB,48.7,133.3,0.1,SUPP_002,30,114,13
+SKU_00003,Brand_ID Household Supplies Item 3,Groceries & Essentials,Household Supplies,Brand_ID,10.83,14.88,0.33,SUPP_025,14,289,44
+SKU_00004,Brand_ID Footwear Item 4,Apparel,Footwear,Brand_ID,67.27,156.47,1.0,SUPP_003,27,379,43
+SKU_00005,Brand_BD Outdoor Recreation Item 5,Sports & Outdoors,Outdoor Recreation,Brand_BD,26.87,47.72,0.97,SUPP_026,16,62,9
+SKU_00006,Brand_CD Vitamins & Supplements Item 6,Health & Beauty,Vitamins & Supplements,Brand_CD,13.65,35.5,0.66,SUPP_017,10,19,4
+SKU_00007,Brand_DC Household Supplies Item 7,Groceries & Essentials,Household Supplies,Brand_DC,16.66,21.61,4.02,SUPP_026,10,38,7
+SKU_00008,Brand_DA Household Supplies Item 8,Groceries & Essentials,Household Supplies,Brand_DA,9.6,14.03,0.76,SUPP_045,14,55,9
+SKU_00009,Brand_CE Accessories Item 9,Apparel,Accessories,Brand_CE,8.66,24.52,2.32,SUPP_045,21,43,6
+SKU_00010,Brand_DB Smart Home Item 10,Electronics,Smart Home,Brand_DB,197.86,332.12,0.22,SUPP_008,13,57,9
+SKU_00011,Brand_BC Skincare Item 11,Health & Beauty,Skincare,Brand_BC,23.35,43.72,0.66,SUPP_012,9,49,9
+SKU_00012,Brand_GE Packaged Foods Item 12,Groceries & Essentials,Packaged Foods,Brand_GE,12.31,18.77,2.93,SUPP_001,7,27,6
+SKU_00013,Brand_BD Storage & Org Item 13,Home & Kitchen,Storage & Org,Brand_BD,72.62,112.61,0.27,SUPP_015,13,39,6
+SKU_00014,Brand_FE Personal Care Item 14,Groceries & Essentials,Personal Care,Brand_FE,10.05,13.09,2.21,SUPP_037,6,90,19
+SKU_00015,Brand_EB Packaged Foods Item 15,Groceries & Essentials,Packaged Foods,Brand_EB,28.92,42.01,1.61,SUPP_028,8,25,5
+SKU_00016,Brand_FE Sportswear Item 16,Apparel,Sportswear,Brand_FE,37.86,66.49,0.76,SUPP_011,10,21,4
+SKU_00017,Brand_CC Beverages Item 17,Groceries & Essentials,Beverages,Brand_CC,12.62,15.45,1.25,SUPP_041,7,37,8
+SKU_00018,Brand_GB Footwear Item 18,Apparel,Footwear,Brand_GB,52.78,105.76,0.2,SUPP_032,29,53,6
+SKU_00019,Brand_JD Storage & Org Item 19,Home & Kitchen,Storage & Org,Brand_JD,50.36,78.36,1.51,SUPP_037,8,23,5
+SKU_00020,Brand_AA Audio Item 20,Electronics,Audio,Brand_AA,200.3,311.11,0.99,SUPP_019,12,24,4
+SKU_00021,Brand_DB Storage & Org Item 21,Home & Kitchen,Storage & Org,Brand_DB,51.45,98.27,1.61,SUPP_038,17,116,16
+SKU_00022,Brand_BA Cookware Item 22,Home & Kitchen,Cookware,Brand_BA,10.52,19.79,1.8,SUPP_016,25,120,14
+SKU_00023,Brand_GB Cosmetics Item 23,Health & Beauty,Cosmetics,Brand_GB,9.76,25.88,0.83,SUPP_007,12,19,3
+SKU_00024,Brand_JE Men's Wear Item 24,Apparel,Men's Wear,Brand_JE,43.87,102.96,0.49,SUPP_023,25,167,20
+SKU_00025,Brand_JD Personal Care Item 25,Groceries & Essentials,Personal Care,Brand_JD,29.46,44.84,1.33,SUPP_002,13,23,4
+SKU_00026,Brand_JC Footwear Item 26,Apparel,Footwear,Brand_JC,61.54,162.71,2.37,SUPP_016,29,40,5
+SKU_00027,Brand_GE Wearables Item 27,Electronics,Wearables,Brand_GE,36.51,59.14,0.11,SUPP_048,20,67,9
+SKU_00028,Brand_IA Small Appliances Item 28,Home & Kitchen,Small Appliances,Brand_IA,109.01,180.92,0.69,SUPP_036,26,60,7
+SKU_00029,Brand_DB Storage & Org Item 29,Home & Kitchen,Storage & Org,Brand_DB,76.87,140.21,1.62,SUPP_033,28,51,6
+SKU_00030,Brand_BC Team Sports Item 30,Sports & Outdoors,Team Sports,Brand_BC,101.13,160.52,1.65,SUPP_027,24,71,9
+SKU_00031,Brand_JC Accessories Item 31,Apparel,Accessories,Brand_JC,44.09,108.1,0.17,SUPP_019,21,276,35
+SKU_00032,Brand_BA Team Sports Item 32,Sports & Outdoors,Team Sports,Brand_BA,135.24,265.49,0.7,SUPP_035,23,407,50
+SKU_00033,Brand_EA Fitness Gear Item 33,Sports & Outdoors,Fitness Gear,Brand_EA,191.07,300.13,0.38,SUPP_032,19,242,32
+SKU_00034,Brand_GB Bedding Item 34,Home & Kitchen,Bedding,Brand_GB,154.01,247.61,1.2,SUPP_047,8,19,4
+SKU_00035,Brand_IC Skincare Item 35,Health & Beauty,Skincare,Brand_IC,32.84,69.02,0.92,SUPP_048,17,24,4
+SKU_00036,Brand_IE Wearables Item 36,Electronics,Wearables,Brand_IE,181.5,297.73,2.48,SUPP_020,18,166,23
+SKU_00037,Brand_AB Accessories Item 37,Electronics,Accessories,Brand_AB,198.0,266.55,1.04,SUPP_032,23,29,4
+SKU_00038,Brand_HB Vitamins & Supplements Item 38,Health & Beauty,Vitamins & Supplements,Brand_HB,48.39,100.38,5.14,SUPP_033,11,16,3
+SKU_00039,Brand_FE Wearables Item 39,Electronics,Wearables,Brand_FE,230.63,319.29,0.31,SUPP_047,24,74,9
+SKU_00040,Brand_DD Men's Wear Item 40,Apparel,Men's Wear,Brand_DD,73.61,137.0,0.41,SUPP_028,18,84,12
+SKU_00041,Brand_AA Accessories Item 41,Electronics,Accessories,Brand_AA,79.29,123.86,1.98,SUPP_047,14,180,27
+SKU_00042,Brand_HD Household Supplies Item 42,Groceries & Essentials,Household Supplies,Brand_HD,21.83,28.5,0.53,SUPP_005,5,33,8
+SKU_00043,Brand_AE Wearables Item 43,Electronics,Wearables,Brand_AE,18.94,32.72,1.92,SUPP_047,18,22,3
+SKU_00044,Brand_HD Small Appliances Item 44,Home & Kitchen,Small Appliances,Brand_HD,29.05,51.57,0.86,SUPP_036,16,233,33
+SKU_00045,Brand_GA Cosmetics Item 45,Health & Beauty,Cosmetics,Brand_GA,32.81,77.35,3.01,SUPP_010,9,44,8
+SKU_00046,Brand_JD Snacks Item 46,Groceries & Essentials,Snacks,Brand_JD,18.14,27.4,1.39,SUPP_028,4,17,4
+SKU_00047,Brand_IC Computers Item 47,Electronics,Computers,Brand_IC,168.32,287.28,1.68,SUPP_037,17,29,4
+SKU_00048,Brand_JE Accessories Item 48,Electronics,Accessories,Brand_JE,99.88,161.4,0.83,SUPP_035,16,20,3
+SKU_00049,Brand_BB Skincare Item 49,Health & Beauty,Skincare,Brand_BB,39.34,84.99,4.24,SUPP_004,8,23,5
+SKU_00050,Brand_BE Cycling Item 50,Sports & Outdoors,Cycling,Brand_BE,143.52,266.46,7.09,SUPP_037,25,38,5

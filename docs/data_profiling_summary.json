@@ -1,0 +1,385 @@
+{
+  "online_retail_ii": {
+    "name": "Online Retail II (UCI)",
+    "rows": 1067371,
+    "columns_count": 8,
+    "columns": [
+      "Invoice",
+      "StockCode",
+      "Description",
+      "Quantity",
+      "InvoiceDate",
+      "Price",
+      "Customer ID",
+      "Country"
+    ],
+    "dtypes": {
+      "Invoice": "str",
+      "StockCode": "str",
+      "Description": "str",
+      "Quantity": "int64",
+      "InvoiceDate": "str",
+      "Price": "float64",
+      "Customer ID": "float64",
+      "Country": "str"
+    },
+    "null_counts": {
+      "Invoice": 0,
+      "StockCode": 0,
+      "Description": 4382,
+      "Quantity": 0,
+      "InvoiceDate": 0,
+      "Price": 0,
+      "Customer ID": 243007,
+      "Country": 0
+    },
+    "null_pct": {
+      "Invoice": 0.0,
+      "StockCode": 0.0,
+      "Description": 0.41,
+      "Quantity": 0.0,
+      "InvoiceDate": 0.0,
+      "Price": 0.0,
+      "Customer ID": 22.77,
+      "Country": 0.0
+    },
+    "duplicate_rows": 34335,
+    "duplicate_pct": 3.22,
+    "date_range": {
+      "min": "2009-12-01 07:45:00",
+      "max": "2011-12-09 12:50:00",
+      "total_days": 738
+    },
+    "unique_products": 5305,
+    "unique_customers": 5942
+  },
+  "store_master": {
+    "name": "Store Master",
+    "rows": 30,
+    "columns_count": 8,
+    "columns": [
+      "store_id",
+      "store_name",
+      "city",
+      "state",
+      "region",
+      "store_type",
+      "store_size_sqft",
+      "opening_date"
+    ],
+    "dtypes": {
+      "store_id": "str",
+      "store_name": "str",
+      "city": "str",
+      "state": "str",
+      "region": "str",
+      "store_type": "str",
+      "store_size_sqft": "int64",
+      "opening_date": "str"
+    },
+    "null_counts": {
+      "store_id": 0,
+      "store_name": 0,
+      "city": 0,
+      "state": 0,
+      "region": 0,
+      "store_type": 0,
+      "store_size_sqft": 0,
+      "opening_date": 0
+    },
+    "null_pct": {
+      "store_id": 0.0,
+      "store_name": 0.0,
+      "city": 0.0,
+      "state": 0.0,
+      "region": 0.0,
+      "store_type": 0.0,
+      "store_size_sqft": 0.0,
+      "opening_date": 0.0
+    },
+    "duplicate_rows": 0,
+    "duplicate_pct": 0.0
+  },
+  "sku_master": {
+    "name": "SKU Master",
+    "rows": 5000,
+    "columns_count": 12,
+    "columns": [
+      "sku_id",
+      "sku_name",
+      "category",
+      "sub_category",
+      "brand",
+      "cost_price",
+      "base_price",
+      "weight_kg",
+      "supplier_id",
+      "lead_time_days",
+      "reorder_point",
+      "safety_stock"
+    ],
+    "dtypes": {
+      "sku_id": "str",
+      "sku_name": "str",
+      "category": "str",
+      "sub_category": "str",
+      "brand": "str",
+      "cost_price": "float64",
+      "base_price": "float64",
+      "weight_kg": "float64",
+      "supplier_id": "str",
+      "lead_time_days": "int64",
+      "reorder_point": "int64",
+      "safety_stock": "int64"
+    },
+    "null_counts": {
+      "sku_id": 0,
+      "sku_name": 0,
+      "category": 0,
+      "sub_category": 0,
+      "brand": 0,
+      "cost_price": 0,
+      "base_price": 0,
+      "weight_kg": 0,
+      "supplier_id": 0,
+      "lead_time_days": 0,
+      "reorder_point": 0,
+      "safety_stock": 0
+    },
+    "null_pct": {
+      "sku_id": 0.0,
+      "sku_name": 0.0,
+      "category": 0.0,
+      "sub_category": 0.0,
+      "brand": 0.0,
+      "cost_price": 0.0,
+      "base_price": 0.0,
+      "weight_kg": 0.0,
+      "supplier_id": 0.0,
+      "lead_time_days": 0.0,
+      "reorder_point": 0.0,
+      "safety_stock": 0.0
+    },
+    "duplicate_rows": 0,
+    "duplicate_pct": 0.0,
+    "unique_products": 5000
+  },
+  "customer_master": {
+    "name": "Customer Master",
+    "rows": 10000,
+    "columns_count": 5,
+    "columns": [
+      "customer_id",
+      "customer_name",
+      "customer_segment",
+      "loyalty_member",
+      "signup_date"
+    ],
+    "dtypes": {
+      "customer_id": "str",
+      "customer_name": "str",
+      "customer_segment": "str",
+      "loyalty_member": "int64",
+      "signup_date": "str"
+    },
+    "null_counts": {
+      "customer_id": 0,
+      "customer_name": 0,
+      "customer_segment": 0,
+      "loyalty_member": 0,
+      "signup_date": 0
+    },
+    "null_pct": {
+      "customer_id": 0.0,
+      "customer_name": 0.0,
+      "customer_segment": 0.0,
+      "loyalty_member": 0.0,
+      "signup_date": 0.0
+    },
+    "duplicate_rows": 0,
+    "duplicate_pct": 0.0,
+    "unique_customers": 10000
+  },
+  "calendar": {
+    "name": "Calendar",
+    "rows": 1461,
+    "columns_count": 12,
+    "columns": [
+      "date",
+      "year",
+      "month",
+      "quarter",
+      "day",
+      "day_of_week",
+      "day_name",
+      "is_weekend",
+      "is_holiday",
+      "holiday_name",
+      "season",
+      "week_of_year"
+    ],
+    "dtypes": {
+      "date": "str",
+      "year": "int64",
+      "month": "int64",
+      "quarter": "int64",
+      "day": "int64",
+      "day_of_week": "int64",
+      "day_name": "str",
+      "is_weekend": "int64",
+      "is_holiday": "int64",
+      "holiday_name": "str",
+      "season": "str",
+      "week_of_year": "int64"
+    },
+    "null_counts": {
+      "date": 0,
+      "year": 0,
+      "month": 0,
+      "quarter": 0,
+      "day": 0,
+      "day_of_week": 0,
+      "day_name": 0,
+      "is_weekend": 0,
+      "is_holiday": 0,
+      "holiday_name": 0,
+      "season": 0,
+      "week_of_year": 0
+    },
+    "null_pct": {
+      "date": 0.0,
+      "year": 0.0,
+      "month": 0.0,
+      "quarter": 0.0,
+      "day": 0.0,
+      "day_of_week": 0.0,
+      "day_name": 0.0,
+      "is_weekend": 0.0,
+      "is_holiday": 0.0,
+      "holiday_name": 0.0,
+      "season": 0.0,
+      "week_of_year": 0.0
+    },
+    "duplicate_rows": 0,
+    "duplicate_pct": 0.0,
+    "date_range": {
+      "min": "2022-01-01 00:00:00",
+      "max": "2025-12-31 00:00:00",
+      "total_days": 1460
+    }
+  },
+  "sales_daily": {
+    "name": "Sales Daily",
+    "rows": 1461000,
+    "columns_count": 9,
+    "columns": [
+      "date",
+      "store_id",
+      "sku_id",
+      "units_sold",
+      "total_revenue",
+      "avg_unit_price",
+      "transaction_count",
+      "unique_customers",
+      "promotion_flag"
+    ],
+    "dtypes": {
+      "date": "str",
+      "store_id": "str",
+      "sku_id": "str",
+      "units_sold": "int32",
+      "total_revenue": "float64",
+      "avg_unit_price": "float64",
+      "transaction_count": "int32",
+      "unique_customers": "int32",
+      "promotion_flag": "int64"
+    },
+    "null_counts": {
+      "date": 0,
+      "store_id": 0,
+      "sku_id": 0,
+      "units_sold": 0,
+      "total_revenue": 0,
+      "avg_unit_price": 0,
+      "transaction_count": 0,
+      "unique_customers": 0,
+      "promotion_flag": 0
+    },
+    "null_pct": {
+      "date": 0.0,
+      "store_id": 0.0,
+      "sku_id": 0.0,
+      "units_sold": 0.0,
+      "total_revenue": 0.0,
+      "avg_unit_price": 0.0,
+      "transaction_count": 0.0,
+      "unique_customers": 0.0,
+      "promotion_flag": 0.0
+    },
+    "duplicate_rows": 0,
+    "duplicate_pct": 0.0,
+    "date_range": {
+      "min": "2022-01-01 00:00:00",
+      "max": "2025-12-31 00:00:00",
+      "total_days": 1460
+    },
+    "unique_products": 100
+  },
+  "inventory_snapshots": {
+    "name": "Inventory Snapshots",
+    "rows": 1461000,
+    "columns_count": 9,
+    "columns": [
+      "date",
+      "store_id",
+      "sku_id",
+      "beginning_inventory",
+      "receipts",
+      "units_sold",
+      "ending_inventory",
+      "stockout_flag",
+      "on_order_qty"
+    ],
+    "dtypes": {
+      "date": "str",
+      "store_id": "str",
+      "sku_id": "str",
+      "beginning_inventory": "int32",
+      "receipts": "int32",
+      "units_sold": "int32",
+      "ending_inventory": "int32",
+      "stockout_flag": "int32",
+      "on_order_qty": "int32"
+    },
+    "null_counts": {
+      "date": 0,
+      "store_id": 0,
+      "sku_id": 0,
+      "beginning_inventory": 0,
+      "receipts": 0,
+      "units_sold": 0,
+      "ending_inventory": 0,
+      "stockout_flag": 0,
+      "on_order_qty": 0
+    },
+    "null_pct": {
+      "date": 0.0,
+      "store_id": 0.0,
+      "sku_id": 0.0,
+      "beginning_inventory": 0.0,
+      "receipts": 0.0,
+      "units_sold": 0.0,
+      "ending_inventory": 0.0,
+      "stockout_flag": 0.0,
+      "on_order_qty": 0.0
+    },
+    "duplicate_rows": 0,
+    "duplicate_pct": 0.0,
+    "date_range": {
+      "min": "2022-01-01 00:00:00",
+      "max": "2025-12-31 00:00:00",
+      "total_days": 1460
+    },
+    "unique_products": 100
+  }
+}

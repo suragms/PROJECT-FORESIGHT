@@ -1,0 +1,37 @@
+# Python Virtual Environment
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+
+# Jupyter Checkpoints
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# IDE and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Large Raw CSV files (>50MB) - Use Parquet or Sample datasets
+data/raw/online_retail_II.csv
+data/raw/sales_daily.csv
+data/raw/inventory_snapshots.csv
+data/raw/*.zip
+
+# Keep parquet and smaller masters in data/raw
+!data/raw/sales_daily.parquet
+!data/raw/inventory_snapshots.parquet
+!data/raw/store_master.csv
+!data/raw/sku_master.csv
+!data/raw/customer_master.csv
+!data/raw/calendar.csv
+
+# Keep sample datasets
+!data/sample/*

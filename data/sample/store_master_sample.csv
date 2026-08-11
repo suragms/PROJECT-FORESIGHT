@@ -1,0 +1,11 @@
+store_id,store_name,city,state,region,store_type,store_size_sqft,opening_date
+STORE_001,New York Express Retail,New York,NY,East,Express,85000,2021-11-08
+STORE_002,Los Angeles Express Retail,Los Angeles,CA,West,Express,25000,2017-07-11
+STORE_003,Chicago Express Retail,Chicago,IL,Midwest,Express,85000,2018-08-24
+STORE_004,Houston Standard Retail,Houston,TX,South,Standard,85000,2016-08-12
+STORE_005,Phoenix Outlet Retail,Phoenix,AZ,West,Outlet,25000,2018-05-01
+STORE_006,Philadelphia Flagship Retail,Philadelphia,PA,East,Flagship,85000,2018-09-17
+STORE_007,San Antonio Express Retail,San Antonio,TX,South,Express,25000,2018-12-16
+STORE_008,San Diego Flagship Retail,San Diego,CA,West,Flagship,45000,2018-07-20
+STORE_009,Dallas Express Retail,Dallas,TX,South,Express,45000,2019-03-07
+STORE_010,San Jose Superstore Retail,San Jose,CA,West,Superstore,25000,2018-09-28
