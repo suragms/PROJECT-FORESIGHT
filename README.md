@@ -57,7 +57,7 @@ Demand-Inventory-Intelligence/
 │   └── sample/                   # Samples for rapid testing
 ├── notebooks/
 │   ├── 01_project_and_data_understanding.ipynb   # [COMPLETED & EXECUTED]
-│   ├── 02_data_cleaning.ipynb
+│   ├── 02_data_cleaning.ipynb                    # [COMPLETED & EXECUTED]
 │   ├── 03_data_integration.ipynb
 │   ├── 04_eda.ipynb
 │   ├── 05_feature_engineering.ipynb
@@ -127,7 +127,13 @@ pip install -r requirements.txt
 python src/inspect_datasets.py
 ```
 
-### Step 4: Explore the Notebooks
+### Step 4: Run the Data Cleaning Pipeline
+```bash
+python src/data_cleaning.py        # end-to-end cleaning -> data/processed/ + docs/data_quality_report.json
+jupyter nbconvert --to notebook --execute notebooks/02_data_cleaning.ipynb --output-dir notebooks
+```
+
+### Step 5: Explore the Notebooks
 ```bash
 jupyter notebook notebooks/01_project_and_data_understanding.ipynb
 ```
@@ -138,7 +144,7 @@ jupyter notebook notebooks/01_project_and_data_understanding.ipynb
 
 - [x] **Phase 1: Business Understanding** — Defined problem statement, KPI framework, and target metrics.
 - [x] **Phase 2: Data Collection & Profiling** — Ingested datasets, executed comprehensive data inspection, and completed `01_project_and_data_understanding.ipynb`.
-- [ ] **Phase 3: Data Cleaning** — Handling negative quantities/prices, cancellations, and schema normalization.
+- [x] **Phase 3: Data Cleaning** — Full data-quality engineering pipeline in `src/data_cleaning.py` + `notebooks/02_data_cleaning.ipynb`. See [Section 7.1](#71-phase-3-data-cleaning--quality-engineering-report).
 - [ ] **Phase 4: Data Integration** — Building the Common Analytical Model (CAM).
 - [ ] **Phase 5: Exploratory Data Analysis (EDA)** — Sales, product, customer, and temporal patterns.
 - [ ] **Phase 6: Feature Engineering** — Lags, rolling statistics, and calendar features.
@@ -149,6 +155,42 @@ jupyter notebook notebooks/01_project_and_data_understanding.ipynb
 - [ ] **Phase 11: Power BI Dashboard** — 12-page executive BI dashboard.
 - [ ] **Phase 12: Streamlit Interactive Application** — Web portal with SKU selector and scenario forecasting.
 - [ ] **Phase 13–15: Deployment, Documentation & Final Presentation**.
+
+---
+
+## 📋 7.1 Phase 3: Data Cleaning & Quality Engineering Report
+
+**Status: COMPLETED & EXECUTED** — full pipeline in [src/data_cleaning.py](src/data_cleaning.py), executed notebook in [notebooks/02_data_cleaning.ipynb](notebooks/02_data_cleaning.ipynb). Machine-readable report: `docs/data_quality_report.json` / `.csv`.
+
+### Online Retail II (UCI) — status **REVIEW**
+| Step | Result |
+|---|---|
+| Original rows | 1,067,371 |
+| Exact duplicates removed | 34,335 (3.22%) — raw file untouched |
+| Final rows | 1,033,036 |
+| Missing `Customer ID` | 243,007 (22.77%) — treated as **guest transactions**, kept for sales analysis, excluded only from customer-level analysis |
+| Missing `Description` | 4,382 — 4,019 recovered via StockCode; 363 labelled `"Unknown Product"` |
+| Cancellations (`C`-prefix) | 19,104 (1.79%) → `online_retail_cancellations.csv` |
+| Returns (negative qty) | 3,393 (0.32%) → `online_retail_returns.csv` |
+| Invalid accounting lines | 6 (Adjust bad debt) → `online_retail_invalid.csv` |
+| Special transactions (zero/neg price) | 6,019 — flagged, **not deleted** |
+| Derived columns | `transaction_type`, `is_guest_transaction`, `price_category`, `is_special_transaction`, `description_recovered` |
+
+### Synthetic relational data — status **PASS** (all tables), Inventory **REVIEW**
+- Store, SKU, Customer, Calendar, Sales Daily all pass schema/numeric/categorical validation with zero issues.
+- `sales_daily` grain `(date, store_id, sku_id)` unique; `total_revenue == units_sold × avg_unit_price` holds 100%.
+- **Inventory equation:** raw `beginning_inventory` already *includes* the day's receipts. Canonical form `End = Beg_pre_receipts + Receipts − Sold` fails on 122,208 rows (8.36%) as written in the generator; `End = Beg − Sold` holds 100%, proving the semantic. Fix: added documented derived column `beginning_inventory_pre_receipts` + `inventory_balance_ok` flag — **values were reported, never silently overwritten**.
+
+### Referential integrity & outliers
+- All orphan checks (sales→store/sku, inventory→store/sku) pass with 0 orphans; no master records invented.
+- Outliers investigated via IQR & Z-score (e.g. `Quantity`, `ending_inventory`, `on_order_qty`) — **reported, not removed** (extreme but legitimate high-volume/high-value retail).
+
+### Outputs
+`data/processed/`: `online_retail_clean.csv`, `online_retail_sales.csv`, `online_retail_returns.csv`, `online_retail_cancellations.csv`, `online_retail_invalid.csv`, `store_master_clean.csv`, `sku_master_clean.csv`, `customer_master_clean.csv`, `calendar_clean.csv`, `sales_daily_clean.parquet`, `inventory_snapshots_clean.parquet`.
+`outputs/figures/`: 6 cleaning figures (transaction types, quantity distribution, price categories, inventory balance, outlier boxplots, before/after rows).
+
+### Data-science rules upheld
+No raw data modified · no fabricated values · no silent deletion (every removal logged with reason) · returns/cancellations preserved · missing Customer ID ≠ invalid · legitimate outliers kept · no leakage · reproducible `run_cleaning_pipeline()` · reusable functions, no repeated code.
 
 ---
 
