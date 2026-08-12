@@ -1,0 +1,12 @@
+table_name,source_dataset,row_count,column_count,primary_key,duplicate_keys,null_keys,foreign_key_violations,grain,status
+dim_calendar,N/A,2200,13,date,0,0,0,date,PASS
+dim_product,"SYNTHETIC,UCI",10304,14,product_key,0,0,0,product_key,PASS
+dim_entity,"SYNTHETIC,UCI",31,10,source_dataset+entity_id,0,0,0,source_dataset+entity_id,PASS
+dim_customer,"SYNTHETIC,UCI",15881,9,customer_key,0,0,0,customer_key,PASS
+fact_sales,"SYNTHETIC,UCI",1995496,12,date+source_dataset+entity_id+product_key,0,0,0,date+source_dataset+entity_id+product_key,PASS
+fact_inventory,SYNTHETIC,1461000,13,date+source_dataset+entity_id+product_key,0,0,0,date+source_dataset+entity_id+product_key,PASS
+fact_returns,UCI,3338,9,date+source_dataset+entity_id+product_key,0,0,0,date+source_dataset+entity_id+product_key,PASS
+fact_cancellations,UCI,17132,9,date+source_dataset+entity_id+product_key,0,0,0,date+source_dataset+entity_id+product_key,PASS
+customer_analytics,"SYNTHETIC,UCI",15881,12,customer_key,0,0,0,customer_key,PASS
+inventory_analytics,SYNTHETIC,1461000,14,date+source_dataset+entity_id+product_key,0,0,0,date+source_dataset+entity_id+product_key,PASS
+forecast_base,"SYNTHETIC,UCI",1995496,12,date+source_dataset+entity_id+product_key,0,0,0,date+source_dataset+entity_id+product_key,PASS

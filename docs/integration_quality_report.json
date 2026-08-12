@@ -1,0 +1,200 @@
+{
+  "project": "FORESIGHT \u2014 Demand & Inventory Intelligence",
+  "phase": "Phase 4 \u2014 Data Integration & Common Analytical Model (CAM)",
+  "generated_at": "2026-08-12 12:41:11.372126",
+  "inventory_data_status": "REVIEW",
+  "inventory_data_status_notes": "Phase 3 semantic preserved: beginning_inventory already includes the day's receipts; ending_inventory = beginning_inventory - units_sold. Receipts are never re-added.",
+  "tables": [
+    {
+      "table_name": "dim_calendar",
+      "source_dataset": "N/A",
+      "row_count": 2200,
+      "column_count": 13,
+      "primary_key": "date",
+      "duplicate_keys": 0,
+      "null_keys": 0,
+      "foreign_key_violations": 0,
+      "grain": "date",
+      "status": "PASS"
+    },
+    {
+      "table_name": "dim_product",
+      "source_dataset": "SYNTHETIC,UCI",
+      "row_count": 10304,
+      "column_count": 14,
+      "primary_key": "product_key",
+      "duplicate_keys": 0,
+      "null_keys": 0,
+      "foreign_key_violations": 0,
+      "grain": "product_key",
+      "status": "PASS"
+    },
+    {
+      "table_name": "dim_entity",
+      "source_dataset": "SYNTHETIC,UCI",
+      "row_count": 31,
+      "column_count": 10,
+      "primary_key": "source_dataset+entity_id",
+      "duplicate_keys": 0,
+      "null_keys": 0,
+      "foreign_key_violations": 0,
+      "grain": "source_dataset+entity_id",
+      "status": "PASS"
+    },
+    {
+      "table_name": "dim_customer",
+      "source_dataset": "SYNTHETIC,UCI",
+      "row_count": 15881,
+      "column_count": 9,
+      "primary_key": "customer_key",
+      "duplicate_keys": 0,
+      "null_keys": 0,
+      "foreign_key_violations": 0,
+      "grain": "customer_key",
+      "status": "PASS"
+    },
+    {
+      "table_name": "fact_sales",
+      "source_dataset": "SYNTHETIC,UCI",
+      "row_count": 1995496,
+      "column_count": 12,
+      "primary_key": "date+source_dataset+entity_id+product_key",
+      "duplicate_keys": 0,
+      "null_keys": 0,
+      "foreign_key_violations": 0,
+      "grain": "date+source_dataset+entity_id+product_key",
+      "status": "PASS"
+    },
+    {
+      "table_name": "fact_inventory",
+      "source_dataset": "SYNTHETIC",
+      "row_count": 1461000,
+      "column_count": 13,
+      "primary_key": "date+source_dataset+entity_id+product_key",
+      "duplicate_keys": 0,
+      "null_keys": 0,
+      "foreign_key_violations": 0,
+      "grain": "date+source_dataset+entity_id+product_key",
+      "status": "PASS"
+    },
+    {
+      "table_name": "fact_returns",
+      "source_dataset": "UCI",
+      "row_count": 3338,
+      "column_count": 9,
+      "primary_key": "date+source_dataset+entity_id+product_key",
+      "duplicate_keys": 0,
+      "null_keys": 0,
+      "foreign_key_violations": 0,
+      "grain": "date+source_dataset+entity_id+product_key",
+      "status": "PASS"
+    },
+    {
+      "table_name": "fact_cancellations",
+      "source_dataset": "UCI",
+      "row_count": 17132,
+      "column_count": 9,
+      "primary_key": "date+source_dataset+entity_id+product_key",
+      "duplicate_keys": 0,
+      "null_keys": 0,
+      "foreign_key_violations": 0,
+      "grain": "date+source_dataset+entity_id+product_key",
+      "status": "PASS"
+    },
+    {
+      "table_name": "customer_analytics",
+      "source_dataset": "SYNTHETIC,UCI",
+      "row_count": 15881,
+      "column_count": 12,
+      "primary_key": "customer_key",
+      "duplicate_keys": 0,
+      "null_keys": 0,
+      "foreign_key_violations": 0,
+      "grain": "customer_key",
+      "status": "PASS"
+    },
+    {
+      "table_name": "inventory_analytics",
+      "source_dataset": "SYNTHETIC",
+      "row_count": 1461000,
+      "column_count": 14,
+      "primary_key": "date+source_dataset+entity_id+product_key",
+      "duplicate_keys": 0,
+      "null_keys": 0,
+      "foreign_key_violations": 0,
+      "grain": "date+source_dataset+entity_id+product_key",
+      "status": "PASS"
+    },
+    {
+      "table_name": "forecast_base",
+      "source_dataset": "SYNTHETIC,UCI",
+      "row_count": 1995496,
+      "column_count": 12,
+      "primary_key": "date+source_dataset+entity_id+product_key",
+      "duplicate_keys": 0,
+      "null_keys": 0,
+      "foreign_key_violations": 0,
+      "grain": "date+source_dataset+entity_id+product_key",
+      "status": "PASS"
+    }
+  ],
+  "business_rules": [
+    {
+      "rule": "inventory_equation_ending_eq_beginning_minus_units_sold",
+      "passed": true,
+      "detail": "1,461,000 balanced rows verified"
+    },
+    {
+      "rule": "receipts_not_rea_added_to_ending",
+      "passed": true,
+      "detail": "122,208 receipt-days checked"
+    },
+    {
+      "rule": "sales_units_nonnegative",
+      "passed": true,
+      "detail": "0 negatives"
+    },
+    {
+      "rule": "source_dataset_enum_valid",
+      "passed": true,
+      "detail": "['SYNTHETIC', 'UCI']"
+    },
+    {
+      "rule": "uci_promotion_flag_null_not_invented",
+      "passed": true,
+      "detail": "UCI has no promotion source -> NULL"
+    },
+    {
+      "rule": "returns_separated_from_sales",
+      "passed": true,
+      "detail": "3,338 return rows"
+    },
+    {
+      "rule": "cancellations_separated_from_sales",
+      "passed": true,
+      "detail": "17,132 cancellation rows"
+    },
+    {
+      "rule": "cancellation_anomaly_preserved",
+      "passed": true,
+      "detail": "source line C496350 preserved: True; fact group UCI_M/2010-02-01 revenue_impact=-444.62000000000006"
+    },
+    {
+      "rule": "inventory_synthetic_only_no_fake_uci_inventory",
+      "passed": true,
+      "detail": "['SYNTHETIC']"
+    },
+    {
+      "rule": "customer_analytics_no_null_customer_key",
+      "passed": true,
+      "detail": "0 null keys"
+    },
+    {
+      "rule": "forecast_base_has_no_lag_rolling_features",
+      "passed": true,
+      "detail": "leaky cols found: []"
+    }
+  ],
+  "rule_passed": 11,
+  "rule_total": 11
+}
