@@ -1,7 +1,7 @@
 {
   "project": "FORESIGHT \u2014 Demand & Inventory Intelligence",
   "phase": "Phase 4 \u2014 Data Integration & Common Analytical Model (CAM)",
-  "generated_at": "2026-08-12 12:41:11.372126",
+  "generated_at": "2026-08-12 21:06:36.547077",
   "inventory_data_status": "REVIEW",
   "inventory_data_status_notes": "Phase 3 semantic preserved: beginning_inventory already includes the day's receipts; ending_inventory = beginning_inventory - units_sold. Receipts are never re-added.",
   "tables": [
