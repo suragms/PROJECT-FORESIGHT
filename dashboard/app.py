@@ -30,7 +30,10 @@ from src.data_integration import (
     get_executive_kpis,
     get_top_bottom_skus,
 )
-from src.feature_engineering import build_forecasting_feature_matrix
+from src.feature_engineering import (
+    build_forecasting_feature_matrix,
+    aggregate_daily_sales,
+)
 from src.forecasting import (
     MLDemandForecaster,
     BaselineForecaster,
@@ -206,15 +209,29 @@ def get_cached_10_questions():
 
 
 @st.cache_resource(show_spinner="Training / Loading ML Forecasters...")
-def get_cached_forecasting_models(sales_sample_df, skus_df, stores_df, calendar_df):
+def get_cached_forecasting_models():
+    """
+    Train ML forecasters on SKU-level daily demand aggregated across stores.
+
+    The forecast history served in the app is a SKU's daily total across all
+    stores. Training on a random sample of store-SKU rows produced a 10x scale
+    mismatch (store-SKU days average ~7 units vs SKU-total ~74) and silently
+    under-scaled every forecast. Training on the full SKU-total series matches
+    the inference grain and breaks the random-sampling of the time series.
+    """
+    sales = load_sales_daily()
+    skus = load_sku_master()
+    calendar = load_calendar()
+    daily = aggregate_daily_sales(sales, group_cols=("sku_id",))
     feat_matrix = build_forecasting_feature_matrix(
-        sales_df=sales_sample_df,
-        sku_df=skus_df,
-        store_df=stores_df,
-        calendar_df=calendar_df,
+        sales_df=daily,
+        sku_df=skus,
+        store_df=None,
+        calendar_df=calendar,
+        group_cols=["sku_id"],
     )
-    models, leaderboard, split_info = train_and_benchmark_models(feat_matrix, test_days=30)
-    return models, leaderboard, feat_matrix
+    models, leaderboard, _ = train_and_benchmark_models(feat_matrix, test_days=30)
+    return models, leaderboard
 
 
 # Load datasets
@@ -223,9 +240,8 @@ risk_df = get_cached_risk_matrix()
 q_answers = get_cached_10_questions()
 kpis = get_executive_kpis()
 
-# Train/cache models on aggregate or representative sample for fast UI response
-sample_sales = sales_df.sample(n=min(100000, len(sales_df)), random_state=42).sort_values(by="date")
-models_dict, leaderboard_df, full_feat_matrix = get_cached_forecasting_models(sample_sales, skus_df, stores_df, cal_df)
+# Train/cache models at SKU-total grain (matches forecast inference grain)
+models_dict, leaderboard_df = get_cached_forecasting_models()
 
 
 # ---------------------------------------------------------------------------
@@ -237,27 +253,34 @@ with st.sidebar:
     st.divider()
 
     st.markdown("#### 🏢 Global Filters")
-    all_regions = ["All"] + sorted(stores_df["region"].unique().tolist())
+    # Only expose stores and SKUs that actually have transactional data so
+    # selections never produce empty history / empty risk slices.
+    active_store_ids = set(sales_df["store_id"].unique())
+    active_sku_ids = set(sales_df["sku_id"].unique())
+    active_stores = stores_df[stores_df["store_id"].isin(active_store_ids)]
+    active_skus_catalog = skus_df[skus_df["sku_id"].isin(active_sku_ids)]
+
+    all_regions = ["All"] + sorted(active_stores["region"].unique().tolist())
     selected_region = st.selectbox("Filter Region", all_regions, index=0)
 
-    filtered_stores = stores_df if selected_region == "All" else stores_df[stores_df["region"] == selected_region]
+    filtered_stores = active_stores if selected_region == "All" else active_stores[active_stores["region"] == selected_region]
     store_options = ["All Stores"] + [f"{r.store_id} - {r.store_name} ({r.city})" for _, r in filtered_stores.iterrows()]
     selected_store_str = st.selectbox("Store Location", store_options, index=0)
     selected_store_id = None if selected_store_str == "All Stores" else selected_store_str.split(" - ")[0]
 
-    all_categories = ["All"] + sorted(skus_df["category"].unique().tolist())
+    all_categories = ["All"] + sorted(active_skus_catalog["category"].unique().tolist())
     selected_category = st.selectbox("Product Category", all_categories, index=0)
 
-    filtered_skus = skus_df if selected_category == "All" else skus_df[skus_df["category"] == selected_category]
-    sku_options = [f"{r.sku_id} - {r.sku_name} (${r.base_price:.2f})" for _, r in filtered_skus.head(100).iterrows()]
+    filtered_skus = active_skus_catalog if selected_category == "All" else active_skus_catalog[active_skus_catalog["category"] == selected_category]
+    sku_options = [f"{r.sku_id} - {r.sku_name} (${r.base_price:.2f})" for _, r in filtered_skus.iterrows()]
     selected_sku_str = st.selectbox("Target SKU Selection", sku_options, index=0)
-    selected_sku_id = selected_sku_str.split(" - ")[0] if sku_options else skus_df["sku_id"].iloc[0]
+    selected_sku_id = selected_sku_str.split(" - ")[0] if sku_options else active_skus_catalog["sku_id"].iloc[0]
 
     st.divider()
     st.markdown("#### 🎯 Platform Highlights")
     st.info(f"""
-    - **Stores Monitored:** {len(stores_df)}
-    - **SKUs in Catalog:** {len(skus_df)}
+    - **Stores Monitored:** {len(active_stores)} (of {len(stores_df)} in master)
+    - **Tracked SKUs:** {len(active_skus_catalog)} (of {len(skus_df)} in catalog)
     - **Active Sales Records:** {len(sales_df):,}
     - **Inventory Horizon:** 2022 – 2025
     """)
@@ -292,14 +315,22 @@ tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs([
 # ===========================================================================
 with tab1:
     st.markdown("### 📊 Enterprise Key Performance Indicators")
-    
+
+    # Compute real year-over-year revenue growth (2025 vs 2024) instead of a fabricated delta
+    rev_by_year = sales_df.groupby(sales_df["date"].dt.year)["total_revenue"].sum()
+    yoy_growth = None
+    if 2025 in rev_by_year.index and 2024 in rev_by_year.index and rev_by_year[2024] > 0:
+        yoy_growth = (rev_by_year[2025] - rev_by_year[2024]) / rev_by_year[2024] * 100
+    delta_class = "metric-delta-pos" if (yoy_growth or 0) >= 0 else "metric-delta-neg"
+    delta_text = f"{yoy_growth:+.1f}% YoY (2025 vs 2024) • {kpis['total_units_sold']:,} units" if yoy_growth is not None else f"{kpis['total_units_sold']:,} units"
+
     c1, c2, c3, c4 = st.columns(4)
     with c1:
         st.markdown(f"""
         <div class="metric-card">
             <div class="metric-title">Total Gross Revenue</div>
             <div class="metric-value">${kpis['total_revenue']:,.2f}</div>
-            <div class="metric-delta-pos">▲ +12.4% vs prev cycle • {kpis['total_units_sold']:,} units</div>
+            <div class="{delta_class}">{delta_text}</div>
         </div>
         """, unsafe_allow_html=True)
     with c2:
@@ -432,22 +463,52 @@ with tab2:
         avg_unit_price=("avg_unit_price", "mean")
     ).reset_index()
 
-    # Map model choice to forecaster
+    # Map model choice to forecaster. Baseline choices produce a real baseline
+    # forecast instead of silently falling back to LightGBM.
+    chosen_forecaster = None
+    baseline_kind = None
     if "LightGBM" in model_choice:
         chosen_forecaster = models_dict.get("lightgbm")
     elif "XGBoost" in model_choice:
         chosen_forecaster = models_dict.get("xgboost")
     elif "Random Forest" in model_choice:
         chosen_forecaster = models_dict.get("random_forest")
+    elif "Moving Average" in model_choice:
+        baseline_kind = "moving_average"
+    elif "Seasonal Naive" in model_choice:
+        baseline_kind = "seasonal_naive"
     else:
         chosen_forecaster = models_dict.get("lightgbm")
 
-    # Generate multi-step forecast
-    fc_df = generate_multi_step_forecast(
-        model=chosen_forecaster,
-        history_df=sku_sales_history,
-        horizon_days=forecast_horizon,
-    )
+    def _baseline_forecast_frame(values, last_date, horizon):
+        dates = pd.date_range(last_date + pd.Timedelta(days=1), periods=horizon, freq="D")
+        std = float(np.std(values)) if len(values) > 1 else 1.0
+        return pd.DataFrame({
+            "date": dates,
+            "forecast_units": values,
+            "forecast_lower": np.maximum(0, values - 1.96 * std),
+            "forecast_upper": values + 1.96 * std,
+            "step": list(range(1, horizon + 1)),
+            "discount_applied": 0.0,
+            "promo_applied": 0,
+        })
+
+    # Generate multi-step forecast (guard against insufficient history)
+    fc_df = None
+    if len(sku_sales_history) < 7:
+        st.warning("Insufficient historical observations for the selected SKU. Choose a different SKU to see a forecast.")
+    elif baseline_kind == "moving_average":
+        vals = BaselineForecaster.moving_average_forecast(sku_sales_history["units_sold"], window=7, horizon=forecast_horizon)
+        fc_df = _baseline_forecast_frame(vals, sku_sales_history["date"].max(), forecast_horizon)
+    elif baseline_kind == "seasonal_naive":
+        vals = BaselineForecaster.seasonal_naive_forecast(sku_sales_history["units_sold"], season_length=7, horizon=forecast_horizon)
+        fc_df = _baseline_forecast_frame(vals, sku_sales_history["date"].max(), forecast_horizon)
+    else:
+        fc_df = generate_multi_step_forecast(
+            model=chosen_forecaster,
+            history_df=sku_sales_history,
+            horizon_days=forecast_horizon,
+        )
 
     # Plot actuals + forecast
     recent_actuals = sku_sales_history.tail(60)
@@ -464,36 +525,37 @@ with tab2:
         marker=dict(size=4)
     ))
 
-    # Upper Confidence Interval
-    fig_fc.add_trace(go.Scatter(
-        x=fc_df["date"],
-        y=fc_df["forecast_upper"],
-        mode="lines",
-        name="Upper Bound (95% CI)",
-        line=dict(width=0),
-        showlegend=False
-    ))
+    if fc_df is not None:
+        # Upper Confidence Interval
+        fig_fc.add_trace(go.Scatter(
+            x=fc_df["date"],
+            y=fc_df["forecast_upper"],
+            mode="lines",
+            name="Upper Bound (95% CI)",
+            line=dict(width=0),
+            showlegend=False
+        ))
 
-    # Lower Confidence Interval (filled area)
-    fig_fc.add_trace(go.Scatter(
-        x=fc_df["date"],
-        y=fc_df["forecast_lower"],
-        mode="lines",
-        name="Confidence Interval (95%)",
-        line=dict(width=0),
-        fill="tonexty",
-        fillcolor="rgba(99, 102, 241, 0.2)",
-    ))
+        # Lower Confidence Interval (filled area)
+        fig_fc.add_trace(go.Scatter(
+            x=fc_df["date"],
+            y=fc_df["forecast_lower"],
+            mode="lines",
+            name="Confidence Interval (95%)",
+            line=dict(width=0),
+            fill="tonexty",
+            fillcolor="rgba(99, 102, 241, 0.2)",
+        ))
 
-    # Point Forecast
-    fig_fc.add_trace(go.Scatter(
-        x=fc_df["date"],
-        y=fc_df["forecast_units"],
-        mode="lines+markers",
-        name=f"Forecast ({model_choice})",
-        line=dict(color="#f59e0b", width=3, dash="dash"),
-        marker=dict(size=6, color="#f59e0b")
-    ))
+        # Point Forecast
+        fig_fc.add_trace(go.Scatter(
+            x=fc_df["date"],
+            y=fc_df["forecast_units"],
+            mode="lines+markers",
+            name=f"Forecast ({model_choice})",
+            line=dict(color="#f59e0b", width=3, dash="dash"),
+            marker=dict(size=6, color="#f59e0b")
+        ))
 
     fig_fc.update_layout(
         title=f"Multi-Step Demand Forecast for {sku_meta['sku_name']} (Next {forecast_horizon} Days)",
@@ -578,67 +640,70 @@ with tab3:
             avg_unit_price=("avg_unit_price", "mean")
         ).reset_index()
 
-        # Baseline forecast (no discount/surge)
-        base_fc = generate_multi_step_forecast(
-            model=models_dict["lightgbm"],
-            history_df=sku_hist,
-            horizon_days=sim_horizon,
-            scenario_discount_pct=0.0,
-            scenario_promo_flag=0,
-            scenario_surge_factor=1.0,
-        )
+        if len(sku_hist) < 7:
+            st.warning("Insufficient historical observations for the selected SKU. Choose a different SKU to run a scenario.")
+        else:
+            # Baseline forecast (no discount/surge)
+            base_fc = generate_multi_step_forecast(
+                model=models_dict["lightgbm"],
+                history_df=sku_hist,
+                horizon_days=sim_horizon,
+                scenario_discount_pct=0.0,
+                scenario_promo_flag=0,
+                scenario_surge_factor=1.0,
+            )
 
-        # Simulated forecast (with parameters)
-        scenario_fc = generate_multi_step_forecast(
-            model=models_dict["lightgbm"],
-            history_df=sku_hist,
-            horizon_days=sim_horizon,
-            scenario_discount_pct=sim_discount,
-            scenario_promo_flag=1 if sim_promo else 0,
-            scenario_surge_factor=sim_surge,
-        )
+            # Simulated forecast (with parameters)
+            scenario_fc = generate_multi_step_forecast(
+                model=models_dict["lightgbm"],
+                history_df=sku_hist,
+                horizon_days=sim_horizon,
+                scenario_discount_pct=sim_discount,
+                scenario_promo_flag=1 if sim_promo else 0,
+                scenario_surge_factor=sim_surge,
+            )
 
-        base_total_units = base_fc["forecast_units"].sum()
-        sim_total_units = scenario_fc["forecast_units"].sum()
-        unit_lift = sim_total_units - base_total_units
-        unit_lift_pct = (unit_lift / max(1, base_total_units)) * 100
+            base_total_units = base_fc["forecast_units"].sum()
+            sim_total_units = scenario_fc["forecast_units"].sum()
+            unit_lift = sim_total_units - base_total_units
+            unit_lift_pct = (unit_lift / max(1, base_total_units)) * 100
 
-        base_rev = base_total_units * sim_sku["base_price"]
-        sim_rev = sim_total_units * discounted_price
-        rev_impact = sim_rev - base_rev
+            base_rev = base_total_units * sim_sku["base_price"]
+            sim_rev = sim_total_units * discounted_price
+            rev_impact = sim_rev - base_rev
 
-        m1, m2, m3 = st.columns(3)
-        m1.metric("Simulated Demand Volume", f"{sim_total_units:,.0f} units", delta=f"{unit_lift_pct:+.1f}% lift")
-        m2.metric("Projected Gross Revenue", f"${sim_rev:,.2f}", delta=f"${rev_impact:+,.2f}")
-        m3.metric("Required Inventory Buffer", f"{sim_total_units * 1.15:,.0f} units", delta="Includes 15% safety")
+            m1, m2, m3 = st.columns(3)
+            m1.metric("Simulated Demand Volume", f"{sim_total_units:,.0f} units", delta=f"{unit_lift_pct:+.1f}% lift")
+            m2.metric("Projected Gross Revenue", f"${sim_rev:,.2f}", delta=f"${rev_impact:+,.2f}")
+            m3.metric("Required Inventory Buffer", f"{sim_total_units * 1.15:,.0f} units", delta="Includes 15% safety")
 
-        # Visual comparison
-        fig_sim = go.Figure()
-        fig_sim.add_trace(go.Scatter(
-            x=base_fc["date"],
-            y=base_fc["forecast_units"],
-            mode="lines+markers",
-            name="Baseline Demand (No Promo)",
-            line=dict(color="#94a3b8", dash="dot", width=2)
-        ))
-        fig_sim.add_trace(go.Scatter(
-            x=scenario_fc["date"],
-            y=scenario_fc["forecast_units"],
-            mode="lines+markers",
-            name="Simulated Scenario Demand",
-            line=dict(color="#10b981", width=3.5)
-        ))
-        fig_sim.update_layout(
-            title="What-If Demand Lift Trajectory",
-            xaxis_title="Date",
-            yaxis_title="Projected Daily Units",
-            template="plotly_dark",
-            paper_bgcolor="rgba(0,0,0,0)",
-            plot_bgcolor="rgba(30, 41, 59, 0.4)",
-            height=380,
-            hovermode="x unified",
-        )
-        st.plotly_chart(fig_sim, use_container_width=True)
+            # Visual comparison
+            fig_sim = go.Figure()
+            fig_sim.add_trace(go.Scatter(
+                x=base_fc["date"],
+                y=base_fc["forecast_units"],
+                mode="lines+markers",
+                name="Baseline Demand (No Promo)",
+                line=dict(color="#94a3b8", dash="dot", width=2)
+            ))
+            fig_sim.add_trace(go.Scatter(
+                x=scenario_fc["date"],
+                y=scenario_fc["forecast_units"],
+                mode="lines+markers",
+                name="Simulated Scenario Demand",
+                line=dict(color="#10b981", width=3.5)
+            ))
+            fig_sim.update_layout(
+                title="What-If Demand Lift Trajectory",
+                xaxis_title="Date",
+                yaxis_title="Projected Daily Units",
+                template="plotly_dark",
+                paper_bgcolor="rgba(0,0,0,0)",
+                plot_bgcolor="rgba(30, 41, 59, 0.4)",
+                height=380,
+                hovermode="x unified",
+            )
+            st.plotly_chart(fig_sim, use_container_width=True)
 
 
 # ===========================================================================
@@ -880,13 +945,13 @@ with tab8:
     with dq_col1:
         st.markdown("#### 📑 Dataset Catalog & Dimensions")
         data_summary = pd.DataFrame([
-            {"Dataset": "Store Master", "Records": len(stores_df), "Type": "Dimension", "Status": "PASS (100%)"},
-            {"Dataset": "SKU Master", "Records": len(skus_df), "Type": "Dimension", "Status": "PASS (100%)"},
-            {"Dataset": "Customer Master", "Records": 10000, "Type": "Dimension", "Status": "PASS (100%)"},
-            {"Dataset": "Calendar", "Records": len(cal_df), "Type": "Dimension", "Status": "PASS (100%)"},
+            {"Dataset": "Store Master", "Records": f"{len(stores_df):,}", "Type": "Dimension", "Status": "PASS (100%)"},
+            {"Dataset": "SKU Master", "Records": f"{len(skus_df):,}", "Type": "Dimension", "Status": "PASS (100%)"},
+            {"Dataset": "Customer Master", "Records": "10,000", "Type": "Dimension", "Status": "PASS (100%)"},
+            {"Dataset": "Calendar", "Records": f"{len(cal_df):,}", "Type": "Dimension", "Status": "PASS (100%)"},
             {"Dataset": "Daily Sales Fact", "Records": f"{len(sales_df):,}", "Type": "Fact (Parquet)", "Status": "PASS (100%)"},
             {"Dataset": "Inventory Snapshots", "Records": f"{len(inv_df):,}", "Type": "Fact (Parquet)", "Status": "REVIEW (Balance Validated)"},
-            {"Dataset": "UCI Online Retail II", "Records": "1,033,036", "Type": "Transaction Log", "Status": "PASS (Dups Removed)"},
+            {"Dataset": "UCI Online Retail II", "Records": "1,033,036", "Type": "Transaction Log", "Status": "REVIEW (Guest Txns Preserved)"},
         ])
         st.dataframe(data_summary, use_container_width=True, hide_index=True)
 

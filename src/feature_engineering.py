@@ -11,6 +11,44 @@ import numpy as np
 import pandas as pd
 
 
+def aggregate_daily_sales(
+    sales_df: pd.DataFrame,
+    group_cols: tuple[str, ...] = ("sku_id",),
+) -> pd.DataFrame:
+    """
+    Aggregate store-SKU daily sales records to a coarser entity grain while
+    keeping the columns the forecasting feature pipeline expects.
+
+    The forecasting engine is trained and served at a single entity grain
+    (default: SKU level, i.e. demand summed across stores). Aggregating the
+    training data to the SAME grain as inference avoids the store-SKU vs
+    SKU-total scale mismatch that otherwise produces systematically
+    under-scaled forecasts.
+
+    Derived fields:
+      - `units_sold` / `total_revenue` / `transaction_count` /
+        `unique_customers`: summed across the grouped entities.
+      - `promotion_flag`: 1 if any member store ran a promotion that day.
+      - `avg_unit_price`: volume-weighted price (revenue / units); when a day
+        has zero units the price is imputed with the entity median.
+    """
+    df = sales_df.copy()
+    agg = {
+        "units_sold": "sum",
+        "total_revenue": "sum",
+        "transaction_count": "sum",
+        "unique_customers": "sum",
+        "promotion_flag": "max",
+    }
+    group_cols = list(group_cols)
+    out = df.groupby(["date", *group_cols], as_index=False).agg(agg)
+    out["avg_unit_price"] = out["total_revenue"] / out["units_sold"].replace(0, np.nan)
+    out["avg_unit_price"] = out["avg_unit_price"].fillna(
+        out.groupby(group_cols)["avg_unit_price"].transform("median")
+    )
+    return out
+
+
 def create_calendar_features(df: pd.DataFrame, date_col: str = "date") -> pd.DataFrame:
     """Extract temporal, day-of-week, seasonal, and cyclical calendar features."""
     df = df.copy()
