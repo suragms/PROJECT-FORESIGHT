@@ -145,15 +145,15 @@ jupyter notebook notebooks/01_project_and_data_understanding.ipynb
 - [x] **Phase 1: Business Understanding** — Defined problem statement, KPI framework, and target metrics.
 - [x] **Phase 2: Data Collection & Profiling** — Ingested datasets, executed comprehensive data inspection, and completed `01_project_and_data_understanding.ipynb`.
 - [x] **Phase 3: Data Cleaning** — Full data-quality engineering pipeline in `src/data_cleaning.py` + `notebooks/02_data_cleaning.ipynb`. See [Section 7.1](#71-phase-3-data-cleaning--quality-engineering-report).
-- [ ] **Phase 4: Data Integration** — Building the Common Analytical Model (CAM).
+- [x] **Phase 4: Data Integration** — Building the Common Analytical Model (CAM) in `src/data_integration.py`.
 - [ ] **Phase 5: Exploratory Data Analysis (EDA)** — Sales, product, customer, and temporal patterns.
-- [ ] **Phase 6: Feature Engineering** — Lags, rolling statistics, and calendar features.
-- [ ] **Phase 7: Baseline Forecasting** — Naive, moving average, and seasonal lag baselines.
-- [ ] **Phase 8: Machine Learning Forecasting** — Random Forest, XGBoost, LightGBM.
-- [ ] **Phase 9: Model Evaluation & Benchmarking** — MAE, RMSE, MAPE, and model selection.
-- [ ] **Phase 10: Inventory Risk Scoring Engine** — Stockout risk, overstock scoring, and days of inventory.
+- [x] **Phase 6: Feature Engineering** — Lags, rolling statistics, and calendar features in `src/feature_engineering.py`.
+- [x] **Phase 7: Baseline Forecasting** — Naive, moving average, and seasonal lag baselines in `src/forecasting.py`.
+- [x] **Phase 8: Machine Learning Forecasting** — Random Forest, XGBoost, LightGBM in `src/forecasting.py`.
+- [x] **Phase 9: Model Evaluation & Benchmarking** — MAE, RMSE, MAPE, and model selection in `src/evaluation.py`.
+- [x] **Phase 10: Inventory Risk Scoring Engine** — Stockout risk, overstock scoring, ROP triggers, and answers to the 10 Core Questions in `src/risk_scoring.py`.
 - [ ] **Phase 11: Power BI Dashboard** — 12-page executive BI dashboard.
-- [ ] **Phase 12: Streamlit Interactive Application** — Web portal with SKU selector and scenario forecasting.
+- [x] **Phase 12: Streamlit Interactive Application** — Executive web portal with SKU selector, scenario forecasting, risk triage, and PO generator in `dashboard/app.py`.
 - [ ] **Phase 13–15: Deployment, Documentation & Final Presentation**.
 
 ---
