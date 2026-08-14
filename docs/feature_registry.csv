@@ -1,0 +1,54 @@
+feature_name,feature_group,data_type,source_availability,lookback_period,description,leakage_safe
+units_sold,target,int64,BOTH,N/A,Target variable: daily units sold,Yes
+year,calendar,int32,BOTH,N/A,Calendar year,Yes
+month,calendar,int32,BOTH,N/A,Month 1-12,Yes
+quarter,calendar,int32,BOTH,N/A,Quarter 1-4,Yes
+week_of_year,calendar,int64,BOTH,N/A,ISO week of year,Yes
+day_of_week,calendar,int32,BOTH,N/A,Day of week 0=Mon..6=Sun,Yes
+day_of_month,calendar,int32,BOTH,N/A,Day of month 1-31,Yes
+day_of_year,calendar,int32,BOTH,N/A,Day of year 1-366,Yes
+is_weekend,calendar,int64,BOTH,N/A,1 if Sat/Sun else 0,Yes
+month_sin,cyclical,float64,BOTH,N/A,sin(2*pi*month/12),Yes
+month_cos,cyclical,float64,BOTH,N/A,cos(2*pi*month/12),Yes
+dow_sin,cyclical,float64,BOTH,N/A,sin(2*pi*dow/7),Yes
+dow_cos,cyclical,float64,BOTH,N/A,cos(2*pi*dow/7),Yes
+units_sold_lag_1,lag,float64,BOTH,1,units_sold at t-1 within grain,Yes
+units_sold_lag_2,lag,float64,BOTH,2,units_sold at t-2 within grain,Yes
+units_sold_lag_3,lag,float64,BOTH,3,units_sold at t-3 within grain,Yes
+units_sold_lag_7,lag,float64,BOTH,7,units_sold at t-7 within grain,Yes
+units_sold_lag_14,lag,float64,BOTH,14,units_sold at t-14 within grain,Yes
+units_sold_lag_21,lag,float64,BOTH,21,units_sold at t-21 within grain,Yes
+units_sold_lag_28,lag,float64,BOTH,28,units_sold at t-28 within grain,Yes
+units_sold_lag_30,lag,float64,BOTH,30,units_sold at t-30 within grain,Yes
+rolling_mean_7,rolling,float64,BOTH,7,Mean of units_sold[t-7..t-1] (shift-1),Yes
+rolling_mean_14,rolling,float64,BOTH,14,Mean of units_sold[t-14..t-1] (shift-1),Yes
+rolling_mean_30,rolling,float64,BOTH,30,Mean of units_sold[t-30..t-1] (shift-1),Yes
+rolling_std_7,rolling,float64,BOTH,7,Std of units_sold[t-7..t-1] (shift-1),Yes
+rolling_std_14,rolling,float64,BOTH,14,Std of units_sold[t-14..t-1] (shift-1),Yes
+rolling_std_30,rolling,float64,BOTH,30,Std of units_sold[t-30..t-1] (shift-1),Yes
+demand_change_1,demand_trend,float64,BOTH,2,lag_1 - lag_2,Yes
+demand_change_7,demand_trend,float64,BOTH,8,lag_1 - units_sold(t-8),Yes
+demand_growth_7,demand_trend,float64,BOTH,7,(rolling_mean_7 - lag_7) / (|lag_7|+1),Yes
+demand_growth_30,demand_trend,float64,BOTH,30,(rolling_mean_30 - lag_30) / (|lag_30|+1),Yes
+average_unit_price,price,float64,BOTH,N/A,CAM average unit price (same-day observed),Yes
+base_price,price,float64,SYNTHETIC,N/A,Product list price; UCI left NaN,Yes
+discount_pct,price,float64,SYNTHETIC,N/A,(base-avg)/base; UCI NaN (not fabricated),Yes
+price_lag_1,price,float64,BOTH,1,average_unit_price at t-1,Yes
+price_change,price,float64,BOTH,1,average_unit_price(t) - price_lag_1,Yes
+promotion_flag,promotion,Int64,SYNTHETIC,N/A,Promo flag; UCI all NaN (unknown ≠ 0),Yes
+promotion_available,promotion,int64,BOTH,N/A,1 if promotion_flag known else 0,Yes
+promo_rolling_7,promotion,float64,SYNTHETIC,7,Mean of shifted promo flag over 7 days,Yes
+category,product,string,SYNTHETIC,N/A,Product category; UCI NaN,Yes
+sub_category,product,string,SYNTHETIC,N/A,Product sub-category; UCI NaN,Yes
+brand,product,string,SYNTHETIC,N/A,Brand; UCI NaN,Yes
+region,entity,object,SYNTHETIC,N/A,Store region; UCI NaN,Yes
+store_type,entity,object,SYNTHETIC,N/A,Store type; UCI NaN,Yes
+store_size_sqft,entity,float64,SYNTHETIC,N/A,Store size sqft; UCI NaN,Yes
+ending_inventory,inventory,float64,SYNTHETIC,1,Prior-day ending inventory (shift-1),Yes
+on_order_qty,inventory,float64,SYNTHETIC,1,Prior-day on-order qty (shift-1),Yes
+stockout_flag,inventory,float64,SYNTHETIC,1,Prior-day stockout flag (shift-1),Yes
+historical_doi,inventory,float64,SYNTHETIC,7,ending_inventory / rolling_mean_7,Yes
+is_holiday,calendar_dim,int64,BOTH,N/A,Holiday indicator from dim_calendar,Yes
+season,calendar_dim,str,BOTH,N/A,Season label from dim_calendar,Yes
+split,metadata,str,BOTH,N/A,Chronological train/validation/test,Yes
+insufficient_history,metadata,int64,BOTH,N/A,1 if lag_1 is NaN (series warm-up),Yes
