@@ -1,0 +1,22 @@
+{
+  "generated_at": "2026-08-14T07:26:12.950046+00:00",
+  "n": 957949,
+  "prediction_mean": 11.766894,
+  "prediction_median": 6.732274,
+  "prediction_std": 18.686698,
+  "prediction_min": 0.0,
+  "prediction_max": 1819.328216,
+  "zero_prediction_rate_pct": 11.5568,
+  "forecast_volume": 957949,
+  "horizon_distribution": {
+    "1": 226545,
+    "3": 214571,
+    "7": 200364,
+    "14": 178526,
+    "30": 137943
+  },
+  "synthetic_h1_n": 147000,
+  "synthetic_zero_prediction_rate_pct": 62.3925,
+  "synthetic_zero_false_positive_rate_pct": 1.4233,
+  "alerts": []
+}

@@ -1,0 +1,30 @@
+{
+  "generated_at": "2026-08-14T07:26:12.950046+00:00",
+  "features": {
+    "units_sold_lag_1": {
+      "ref_mean": 10.8582,
+      "cur_mean": 12.3791,
+      "ref_std": 82.6503,
+      "cur_std": 46.7117,
+      "psi": 0.0202,
+      "ks": 0.0669
+    },
+    "rolling_mean_7": {
+      "ref_mean": 11.0787,
+      "cur_mean": 12.3872,
+      "ref_std": 79.9709,
+      "cur_std": 23.021,
+      "psi": 0.0135,
+      "ks": 0.0386
+    },
+    "average_unit_price": {
+      "ref_mean": 81.7608,
+      "cur_mean": 71.7228,
+      "ref_std": 96.7065,
+      "cur_std": 93.9656,
+      "psi": 0.0413,
+      "ks": 0.0933
+    }
+  },
+  "note": "Reference = Phase 6 train split; current = TEST origins in final forecasts joined to features."
+}

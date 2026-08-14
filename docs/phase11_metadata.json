@@ -1,0 +1,196 @@
+{
+  "phase": 11,
+  "executed_at_utc": "2026-08-14T07:02:30.269701+00:00",
+  "python_version": "3.12.13",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "packages": {
+    "pandas": "3.0.5",
+    "numpy": "2.5.2",
+    "sklearn": "1.9.0",
+    "lightgbm": "4.7.0"
+  },
+  "random_state": 42,
+  "code_version": "2048fcda9b9bd82dc542129656edafdabcabe3b4",
+  "features_md5": "c7cd3e3cd1372a987451051b841d8392",
+  "phase10_ready": {
+    "ready": true,
+    "issues": [],
+    "validation": {
+      "passed": 87,
+      "total": 87,
+      "summary": "87/87 PASS"
+    },
+    "decision": {
+      "option": "A",
+      "label": "Major improvement",
+      "statement": "Structural models substantially outperform frozen LightGBM.",
+      "hurdle_wape_improvement_pct": 32.5046,
+      "direct_helps_long_horizon": true,
+      "hpo_beats_phase8_on_test": true
+    },
+    "phase8_unchanged": true,
+    "phase9_unchanged": true
+  },
+  "selection_logic": "Primary (in order):\n  1. WAPE on held-out TEST (lower is better).\n  2. MAE if WAPE is within 2% relative.\n  3. Stability: if relative WAPE gain vs a walk-forward-validated model\n     is below 3%, keep the walk-forward-validated model.\n  4. Horizon: select independently per horizon. Operational h=1 uses the\n     Phase 8 same-row contract; h in {3,7,14,30} uses leakage-safe direct models.\n\nSecondary:\n  5. Bias closer to 0.\n  6. Zero-demand MAE and false-positive demand rate (SYNTHETIC).\n  7. Prediction-interval coverage near 80% (diagnostic, not a point-forecast rule).\n  8. Training / inference cost.\n  9. Model complexity (prefer one-stage unless zeros require a hurdle).\n 10. Reproducibility (frozen serialized artifacts preferred when quality is comparable).\n\nGates:\n  - Exclude models with WAPE worse than the Phase 7 baseline.\n  - Exclude hurdle on UCI (train zero share 0%; not identified).\n  - Exclude Croston / SBA / TSB (worse than Naive on SYNTHETIC).\n  - Do not select a model solely for lowest RMSE.\n  - Quantile P50 is a point-forecast candidate only if it beats the selected\n    point model on WAPE; otherwise P10/P90 remain interval companions.",
+  "final_uci_model": "uci_h1_phase8_lightgbm",
+  "final_synthetic_model": "synthetic_h1_hurdle_th050",
+  "horizon_strategy": {
+    "h=1_UCI": "Phase8_LightGBM",
+    "h=1_SYNTHETIC": "Hurdle_th0.50",
+    "h=3_7_14_30": "Direct_LightGBM"
+  },
+  "production_readiness": "READY WITH MONITORING",
+  "stability": {
+    "SYNTHETIC": {
+      "label": "Stable",
+      "detail": "time_month=Stable; entity=Stable"
+    },
+    "UCI": {
+      "label": "Moderately Stable",
+      "detail": "time_month=Stable; entity=Not applicable; upgraded from Stable due to Phase 9 fold-2 WAPE 105.31"
+    }
+  },
+  "h1_metrics": [
+    {
+      "dataset": "SYNTHETIC",
+      "horizon": 1,
+      "model": "synthetic_h1_hurdle_th050",
+      "MAE": 1.9004,
+      "RMSE": 5.0573,
+      "MAPE": 29.4059,
+      "sMAPE": 13.5443,
+      "WAPE": 26.2505,
+      "n": 147000,
+      "bias": -0.2557,
+      "mean_residual": 0.2557,
+      "median_residual": 0.0,
+      "residual_std": 5.0509,
+      "overprediction_pct": 19.84,
+      "underprediction_pct": 19.76,
+      "n_zero": 90070,
+      "n_nonzero": 56930,
+      "zero_share_pct": 61.27,
+      "zero_mae": 0.3,
+      "nonzero_mae": 4.4324,
+      "zero_positive_prediction_rate": 1.42,
+      "predicted_zero_rate": 62.39,
+      "actual_zero_rate": 61.27,
+      "counts_reconcile": 1
+    },
+    {
+      "dataset": "UCI",
+      "horizon": 1,
+      "model": "uci_h1_phase8_lightgbm",
+      "MAE": 17.3447,
+      "RMSE": 70.8952,
+      "MAPE": 283.0189,
+      "sMAPE": 82.8734,
+      "WAPE": 79.471,
+      "n": 79545,
+      "bias": 0.0335,
+      "mean_residual": -0.0335,
+      "median_residual": -3.8346,
+      "residual_std": 70.8956,
+      "overprediction_pct": 71.72,
+      "underprediction_pct": 28.28,
+      "n_zero": 0,
+      "n_nonzero": 79545,
+      "zero_share_pct": 0.0,
+      "zero_mae": NaN,
+      "nonzero_mae": 17.3447,
+      "zero_positive_prediction_rate": NaN,
+      "predicted_zero_rate": 0.26,
+      "actual_zero_rate": 0.0,
+      "counts_reconcile": 1
+    }
+  ],
+  "baseline_improvement": [
+    {
+      "Dataset": "UCI",
+      "Baseline": "moving_average_30",
+      "Baseline WAPE": 86.387,
+      "Final Model WAPE": 79.471,
+      "Absolute improvement": 6.916,
+      "Improvement %": 8.0058
+    },
+    {
+      "Dataset": "SYNTHETIC",
+      "Baseline": "naive",
+      "Baseline WAPE": 72.8181,
+      "Final Model WAPE": 26.2505,
+      "Absolute improvement": 46.5676,
+      "Improvement %": 63.9506
+    }
+  ],
+  "phase8_unchanged": true,
+  "phase9_unchanged": true,
+  "phase8_hashes": {
+    "data\\processed\\forecasts\\ml\\ml_predictions.parquet": {
+      "exists": true,
+      "size": 2249306,
+      "md5": "024100d45295179c431036615ba440f1"
+    },
+    "data\\processed\\forecasts\\ml\\ml_model_metrics.parquet": {
+      "exists": true,
+      "size": 9476,
+      "md5": "c022012874088e9ccaba3f2c67383996"
+    },
+    "models\\uci_best_model.joblib": {
+      "exists": true,
+      "size": 435247,
+      "md5": "3121ef9c06755fa3b14a612aee8b889a"
+    },
+    "models\\synthetic_best_model.joblib": {
+      "exists": true,
+      "size": 464550,
+      "md5": "029802631c86f254d0bbf6fba60a6eb0"
+    },
+    "models\\lightgbm_forecaster.joblib": {
+      "exists": true,
+      "size": 440688,
+      "md5": "d3e19a87b8e0ed7779807ff64f9f5fae"
+    }
+  },
+  "phase9_hashes": {
+    "docs\\phase9_analysis_report.md": {
+      "exists": true,
+      "size": 15612,
+      "md5": "8554fe022d3fc72b154de42f498b8d43"
+    },
+    "docs\\phase9_metadata.json": {
+      "exists": true,
+      "size": 6695,
+      "md5": "30059530c240e8cb80efe2a73d55001d"
+    },
+    "data\\processed\\forecasts\\phase9\\horizon_summary.parquet": {
+      "exists": true,
+      "size": 5464,
+      "md5": "3ad8baf6cacbbfc30b8481046470378c"
+    },
+    "data\\processed\\forecasts\\phase9\\horizon_detail.parquet": {
+      "exists": true,
+      "size": 1281132,
+      "md5": "31de7e6e9b6c147ca4fc991e198b8a7c"
+    },
+    "data\\processed\\forecasts\\phase9\\zero_demand.parquet": {
+      "exists": true,
+      "size": 12072,
+      "md5": "52f013fa5e21f792f4a71a2aa39f9969"
+    },
+    "data\\processed\\forecasts\\phase9\\walk_forward_folds.parquet": {
+      "exists": true,
+      "size": 15118,
+      "md5": "12a494e91622ff9c092c965aeecccf37"
+    },
+    "data\\processed\\forecasts\\phase9\\residual_overall.parquet": {
+      "exists": true,
+      "size": 8175,
+      "md5": "4d6afafcb0d49236f27e39af13fb34c4"
+    }
+  },
+  "validation": {
+    "passed": 140,
+    "total": 140,
+    "summary": "140/140 PASS"
+  }
+}

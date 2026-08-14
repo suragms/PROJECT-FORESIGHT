@@ -1,0 +1,16 @@
+{
+  "generated_at": "2026-08-14T07:26:12.950046+00:00",
+  "n_rows": 957949,
+  "n_columns": 12,
+  "missing_required_columns": [],
+  "missing_value_rate_pct": {
+    "lower_bound": 76.351,
+    "upper_bound": 76.351
+  },
+  "duplicate_rate_pct": 0.0,
+  "n_duplicates": 0,
+  "invalid_negative_counts": {},
+  "category_changes": {},
+  "date_gaps": null,
+  "leakage_columns_present": []
+}

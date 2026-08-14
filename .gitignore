@@ -12,6 +12,7 @@ build/
 # Jupyter Checkpoints
 .ipynb_checkpoints
 */.ipynb_checkpoints/*
+.pytest_cache/
 
 # IDE and OS files
 .vscode/

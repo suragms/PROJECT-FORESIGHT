@@ -138,6 +138,23 @@ jupyter nbconvert --to notebook --execute notebooks/02_data_cleaning.ipynb --out
 jupyter notebook notebooks/01_project_and_data_understanding.ipynb
 ```
 
+### Forecast serving (Phase 12)
+
+Final models: UCI h=1 frozen Phase 8 LightGBM; SYNTHETIC h=1 hurdle; both sources h=3/7/14/30 direct LightGBM. See `docs/final_forecasting_report.md`.
+
+```bash
+python src/validate_phase12.py
+python -m pytest tests -q
+uvicorn src.api.app:app --host 127.0.0.1 --port 8000
+streamlit run dashboard/forecast_analytics.py
+python -m src.forecasting.batch_forecast --help
+python -m src.monitoring.run_monitoring
+```
+
+Docs: `docs/api_documentation.md`, `docs/deployment_guide.md`, `docs/monitoring_guide.md`.
+
+Authentication is not included in this academic/reference implementation.
+
 ---
 
 ## 📈 7. Development Roadmap & Status
@@ -149,12 +166,13 @@ jupyter notebook notebooks/01_project_and_data_understanding.ipynb
 - [ ] **Phase 5: Exploratory Data Analysis (EDA)** — Sales, product, customer, and temporal patterns.
 - [x] **Phase 6: Feature Engineering** — Lags, rolling statistics, and calendar features in `src/feature_engineering.py`.
 - [x] **Phase 7: Baseline Forecasting** — Naive, moving average, and seasonal lag baselines in `src/forecasting.py`.
-- [x] **Phase 8: Machine Learning Forecasting** — Random Forest, XGBoost, LightGBM in `src/forecasting.py`.
-- [x] **Phase 9: Model Evaluation & Benchmarking** — MAE, RMSE, MAPE, and model selection in `src/evaluation.py`.
-- [x] **Phase 10: Inventory Risk Scoring Engine** — Stockout risk, overstock scoring, ROP triggers, and answers to the 10 Core Questions in `src/risk_scoring.py`.
-- [ ] **Phase 11: Power BI Dashboard** — 12-page executive BI dashboard.
-- [x] **Phase 12: Streamlit Interactive Application** — Executive web portal with SKU selector, scenario forecasting, risk triage, and PO generator in `dashboard/app.py`.
-- [ ] **Phase 13–15: Deployment, Documentation & Final Presentation**.
+- [x] **Phase 8: Machine Learning Forecasting** — LightGBM selected; 57/57 validation. Frozen benchmark.
+- [x] **Phase 9: Stability & residual analysis** — 146/146 PASS.
+- [x] **Phase 10: Experimental improvements** — hurdle, direct horizon, intervals, HPO.
+- [x] **Phase 11: Final model selection** — 140/140 PASS; READY WITH MONITORING.
+- [x] **Phase 12: Production packaging** — inference package, FastAPI, monitoring, forecast dashboard (academic/reference).
+- [x] **Streamlit executive application** — `dashboard/app.py` (inventory + scenario UI).
+- [ ] **Power BI Dashboard / cloud deployment** — not executed in this repository.
 
 ---
 

@@ -19,7 +19,8 @@ import xgboost as xgb
 from src.feature_engineering import build_forecasting_feature_matrix
 from src.evaluation import calculate_metrics, compare_models
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# Package lives at src/forecasting/; project root is three levels up.
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 MODELS_DIR = os.path.join(BASE_DIR, "models")
 OUTPUTS_DIR = os.path.join(BASE_DIR, "outputs", "forecasts")
 
