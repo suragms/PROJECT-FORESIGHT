@@ -1,0 +1,250 @@
+{
+  "phase": 9,
+  "executed_at_utc": "2026-08-14T05:09:49.139352+00:00",
+  "python_version": "3.12.13",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "packages": {
+    "pandas": "3.0.5",
+    "numpy": "2.5.2",
+    "sklearn": "1.9.0",
+    "lightgbm": "4.7.0",
+    "xgboost": "3.4.0",
+    "matplotlib": "3.11.1",
+    "joblib": "1.5.3"
+  },
+  "random_state": 42,
+  "features_path": "C:\\Users\\SURAG\\Documents\\zidio\\Project_FORESIGHT\\Demand-Inventory-Intelligence\\data\\processed\\features\\forecast_features.parquet",
+  "features_rows": 1995496,
+  "phase8_frozen_models": {
+    "UCI": "lightgbm",
+    "SYNTHETIC": "lightgbm",
+    "paths": {
+      "UCI": "C:\\Users\\SURAG\\Documents\\zidio\\Project_FORESIGHT\\Demand-Inventory-Intelligence\\models\\uci_best_model.joblib",
+      "SYNTHETIC": "C:\\Users\\SURAG\\Documents\\zidio\\Project_FORESIGHT\\Demand-Inventory-Intelligence\\models\\synthetic_best_model.joblib"
+    },
+    "test_benchmarks": {
+      "UCI": {
+        "model": "lightgbm",
+        "MAE": 17.3447,
+        "RMSE": 70.8952,
+        "sMAPE": 82.8734,
+        "WAPE": 79.471
+      },
+      "SYNTHETIC": {
+        "model": "lightgbm",
+        "MAE": 2.8156,
+        "RMSE": 5.1469,
+        "sMAPE": 113.6813,
+        "WAPE": 38.8923
+      }
+    }
+  },
+  "lightgbm_walk_forward_params": {
+    "n_estimators": 150,
+    "learning_rate": 0.05,
+    "num_leaves": 31,
+    "subsample": 0.8,
+    "colsample_bytree": 0.8,
+    "random_state": 42
+  },
+  "fold_definitions": {
+    "UCI": [
+      {
+        "fold": 1,
+        "train_end": "2010-07-13",
+        "val_start": "2010-07-14",
+        "val_end": "2010-12-31"
+      },
+      {
+        "fold": 2,
+        "train_end": "2010-12-31",
+        "val_start": "2011-01-01",
+        "val_end": "2011-04-30"
+      },
+      {
+        "fold": 3,
+        "train_end": "2011-04-30",
+        "val_start": "2011-05-01",
+        "val_end": "2011-07-13"
+      },
+      {
+        "fold": 4,
+        "train_end": "2011-07-13",
+        "val_start": "2011-07-14",
+        "val_end": "2011-09-25"
+      },
+      {
+        "fold": 5,
+        "train_end": "2011-09-25",
+        "val_start": "2011-09-26",
+        "val_end": "2011-12-09"
+      }
+    ],
+    "SYNTHETIC": [
+      {
+        "fold": 1,
+        "train_end": "2023-12-31",
+        "val_start": "2024-01-01",
+        "val_end": "2024-06-30"
+      },
+      {
+        "fold": 2,
+        "train_end": "2024-06-30",
+        "val_start": "2024-07-01",
+        "val_end": "2024-12-31"
+      },
+      {
+        "fold": 3,
+        "train_end": "2024-12-31",
+        "val_start": "2025-01-01",
+        "val_end": "2025-03-13"
+      },
+      {
+        "fold": 4,
+        "train_end": "2025-03-13",
+        "val_start": "2025-03-14",
+        "val_end": "2025-08-06"
+      },
+      {
+        "fold": 5,
+        "train_end": "2025-08-06",
+        "val_start": "2025-08-07",
+        "val_end": "2025-12-31"
+      }
+    ]
+  },
+  "horizon_definitions": {
+    "horizons": [
+      1,
+      3,
+      7,
+      14,
+      30
+    ],
+    "unit": "observation_step_at_forecast_grain",
+    "method": "iterated_recursive_frozen_lightgbm",
+    "uci_series_cap": 400,
+    "origin_stride": {
+      "UCI": 5,
+      "SYNTHETIC": 7
+    }
+  },
+  "metric_definitions": {
+    "MAE": "mean(|y-yhat|)",
+    "RMSE": "sqrt(mean((y-yhat)^2))",
+    "WAPE": "sum(|y-yhat|)/sum(|y|)*100; 0 if sum(|y|)=0",
+    "sMAPE": "mean(2|y-yhat|/(|y|+|yhat|))*100; (0,0)->0",
+    "bias": "mean(prediction - actual)  # Phase 8 convention",
+    "residual": "actual - prediction"
+  },
+  "stability_rules": {
+    "stable_cv_max": 0.15,
+    "stable_range_ratio_max": 1.5,
+    "moderate_cv_max": 0.35,
+    "moderate_range_ratio_max": 2.0
+  },
+  "walk_forward_summaries": {
+    "UCI": {
+      "label": "Stable",
+      "cv_wape": 0.1354,
+      "range_ratio": 1.3691,
+      "WAPE": {
+        "mean": 85.3126,
+        "median": 82.4168,
+        "std": 11.5479,
+        "min": 76.9218,
+        "max": 105.3143
+      }
+    },
+    "SYNTHETIC": {
+      "label": "Stable",
+      "cv_wape": 0.0132,
+      "range_ratio": 1.037,
+      "WAPE": {
+        "mean": 39.394,
+        "median": 39.3596,
+        "std": 0.5186,
+        "min": 38.6743,
+        "max": 40.1044
+      }
+    }
+  },
+  "conclusion": {
+    "option": "B",
+    "label": "Moderately Stable",
+    "statement": "LightGBM is promising but requires targeted improvements before productionization.",
+    "horizon_wape_ratio_30_over_1": {
+      "UCI": 1.2614396025975103,
+      "SYNTHETIC": 1.5702100400676033
+    },
+    "synthetic_zero_positive_pred_rate": 82.64,
+    "walk_forward_labels": {
+      "UCI": "Stable",
+      "SYNTHETIC": "Stable"
+    }
+  },
+  "phase8_hashes_before": {
+    "data\\processed\\forecasts\\ml\\ml_predictions.parquet": {
+      "exists": true,
+      "size": 2249306,
+      "md5": "024100d45295179c431036615ba440f1"
+    },
+    "data\\processed\\forecasts\\ml\\ml_model_metrics.parquet": {
+      "exists": true,
+      "size": 9476,
+      "md5": "c022012874088e9ccaba3f2c67383996"
+    },
+    "models\\uci_best_model.joblib": {
+      "exists": true,
+      "size": 435247,
+      "md5": "3121ef9c06755fa3b14a612aee8b889a"
+    },
+    "models\\synthetic_best_model.joblib": {
+      "exists": true,
+      "size": 464550,
+      "md5": "029802631c86f254d0bbf6fba60a6eb0"
+    },
+    "models\\lightgbm_forecaster.joblib": {
+      "exists": true,
+      "size": 440688,
+      "md5": "d3e19a87b8e0ed7779807ff64f9f5fae"
+    }
+  },
+  "phase8_hashes_after": {
+    "data\\processed\\forecasts\\ml\\ml_predictions.parquet": {
+      "exists": true,
+      "size": 2249306,
+      "md5": "024100d45295179c431036615ba440f1"
+    },
+    "data\\processed\\forecasts\\ml\\ml_model_metrics.parquet": {
+      "exists": true,
+      "size": 9476,
+      "md5": "c022012874088e9ccaba3f2c67383996"
+    },
+    "models\\uci_best_model.joblib": {
+      "exists": true,
+      "size": 435247,
+      "md5": "3121ef9c06755fa3b14a612aee8b889a"
+    },
+    "models\\synthetic_best_model.joblib": {
+      "exists": true,
+      "size": 464550,
+      "md5": "029802631c86f254d0bbf6fba60a6eb0"
+    },
+    "models\\lightgbm_forecaster.joblib": {
+      "exists": true,
+      "size": 440688,
+      "md5": "d3e19a87b8e0ed7779807ff64f9f5fae"
+    }
+  },
+  "phase8_unchanged": true,
+  "evaluation_windows": {
+    "UCI_test": "2011-09-26 to 2011-12-09",
+    "SYNTHETIC_test": "2025-08-07 to 2025-12-31"
+  },
+  "validation": {
+    "passed": 146,
+    "total": 146,
+    "summary": "146/146 PASS"
+  }
+}
