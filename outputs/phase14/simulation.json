@@ -23,12 +23,12 @@
     {
       "name": "Single Forecast",
       "passed": true,
-      "detail": "pred=10.749200294243758 latency_s=0.0818"
+      "detail": "pred=10.749200294243758 latency_s=0.1895"
     },
     {
       "name": "Batch Forecast",
       "passed": true,
-      "detail": "[{\"n\": 10, \"status_code\": 200, \"rows_processed\": 10, \"success_count\": 10, \"failure_count\": 0, \"latency_s\": 0.0679, \"rows_per_s\": 147.25, \"response_bytes\": 4301}, {\"n\": 100, \"status_code\": 200, \"rows_processed\": 100, \"success_count\": 100, \"failure_count\": 0, \"latency_s\": 0.0811, \"rows_per_s\": 1232.75, \"response_bytes\": 39312}, {\"n\": 500, \"status_code\": 200, \"rows_processed\": 500, \"success_count\": 500, \"failure_count\": 0, \"latency_s\": 0.1051, \"rows_per_s\": 4758.33, \"response_bytes\": 195312}]"
+      "detail": "[{\"n\": 10, \"status_code\": 200, \"rows_processed\": 10, \"success_count\": 10, \"failure_count\": 0, \"latency_s\": 0.109, \"rows_per_s\": 91.73, \"response_bytes\": 4301}, {\"n\": 100, \"status_code\": 200, \"rows_processed\": 100, \"success_count\": 100, \"failure_count\": 0, \"latency_s\": 0.1112, \"rows_per_s\": 899.32, \"response_bytes\": 39312}, {\"n\": 500, \"status_code\": 200, \"rows_processed\": 500, \"success_count\": 500, \"failure_count\": 0, \"latency_s\": 0.1799, \"rows_per_s\": 2780.01, \"response_bytes\": 195312}]"
     },
     {
       "name": "Model Integrity",
@@ -93,7 +93,7 @@
     {
       "name": "Performance",
       "passed": true,
-      "detail": "{\"single_s\": 0.0818, \"batch10_s\": 0.0679, \"batch10_rows_per_s\": 147.25}"
+      "detail": "{\"single_s\": 0.1895, \"batch10_s\": 0.109, \"batch10_rows_per_s\": 91.73}"
     }
   ],
   "evidence": {
@@ -107,8 +107,8 @@
       "prediction": 10.749200294243758,
       "lower_bound": 0.9803840782755803,
       "upper_bound": 12.034108979147309,
-      "latency_s": 0.0818,
-      "request_id": "8e1d310f-58c3-4f26-9b3b-82eafcff5715",
+      "latency_s": 0.1895,
+      "request_id": "f539a594-7c30-4e66-8470-b1ab86634f00",
       "status_code": 200
     },
     "batch": {
@@ -119,8 +119,8 @@
           "rows_processed": 10,
           "success_count": 10,
           "failure_count": 0,
-          "latency_s": 0.0679,
-          "rows_per_s": 147.25,
+          "latency_s": 0.109,
+          "rows_per_s": 91.73,
           "response_bytes": 4301
         },
         {
@@ -129,8 +129,8 @@
           "rows_processed": 100,
           "success_count": 100,
           "failure_count": 0,
-          "latency_s": 0.0811,
-          "rows_per_s": 1232.75,
+          "latency_s": 0.1112,
+          "rows_per_s": 899.32,
           "response_bytes": 39312
         },
         {
@@ -139,13 +139,13 @@
           "rows_processed": 500,
           "success_count": 500,
           "failure_count": 0,
-          "latency_s": 0.1051,
-          "rows_per_s": 4758.33,
+          "latency_s": 0.1799,
+          "rows_per_s": 2780.01,
           "response_bytes": 195312
         }
       ],
-      "rss_before": 499855360,
-      "rss_after": 502644736
+      "rss_before": 126558208,
+      "rss_after": 98742272
     },
     "hashes": {
       "uci_h1": "331909f0fe191c0b9cb0418884b25eb59012f479f61f8b3e2ad51b729273e90d",
@@ -274,10 +274,10 @@
     "monitoring": {
       "n_alerts": 0,
       "retraining": "disabled",
-      "api_request_count": 39,
-      "auth_failures": 1,
-      "rate_limit_events": 1,
-      "mean_latency_ms": 27.115,
+      "api_request_count": 38,
+      "auth_failures": 2,
+      "rate_limit_events": 2,
+      "mean_latency_ms": 52.25,
       "files": [
         "monitoring_summary.json",
         "data_quality_report.json",
@@ -286,7 +286,7 @@
       ]
     },
     "performance": {
-      "single_s": 0.0818,
+      "single_s": 0.1895,
       "batch": [
         {
           "n": 10,
@@ -294,8 +294,8 @@
           "rows_processed": 10,
           "success_count": 10,
           "failure_count": 0,
-          "latency_s": 0.0679,
-          "rows_per_s": 147.25,
+          "latency_s": 0.109,
+          "rows_per_s": 91.73,
           "response_bytes": 4301
         },
         {
@@ -304,8 +304,8 @@
           "rows_processed": 100,
           "success_count": 100,
           "failure_count": 0,
-          "latency_s": 0.0811,
-          "rows_per_s": 1232.75,
+          "latency_s": 0.1112,
+          "rows_per_s": 899.32,
           "response_bytes": 39312
         },
         {
@@ -314,8 +314,8 @@
           "rows_processed": 500,
           "success_count": 500,
           "failure_count": 0,
-          "latency_s": 0.1051,
-          "rows_per_s": 4758.33,
+          "latency_s": 0.1799,
+          "rows_per_s": 2780.01,
           "response_bytes": 195312
         }
       ],
@@ -327,8 +327,8 @@
         "note": "Historical Phase 12 freeze snapshot; not an SLO."
       },
       "vs_phase12": {
-        "single_s_delta": 0.0137,
-        "batch10_s_delta": 0.0072,
+        "single_s_delta": 0.1214,
+        "batch10_s_delta": 0.0483,
         "note": "Phase 14 timings include production auth/TestClient overhead; not an SLO."
       }
     },

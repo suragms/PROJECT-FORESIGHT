@@ -80,16 +80,16 @@ Quantile P10/P90 models are **interval companions**, not selected point forecast
 
 ## Model validation evidence
 
-| Phase | Documented result |
-| --- | --- |
-| 8 | FROZEN LightGBM benchmark (57/57 in repo validation history) |
-| 9 | COMPLETE (146/146 PASS) |
-| 10 | COMPLETE (experimental comparators; Phase 8 unchanged) |
-| 11 | COMPLETE (140/140 PASS; READY WITH MONITORING) |
-| 12 | COMPLETE (42/42 PASS; academic/reference packaging) |
-| 13 | COMPLETE (42/42 PASS; security/operationalization; cloud not executed) |
-| 14 | COMPLETE (19/19 PASS; local E2E simulation; Docker local image) |
-| 15 | See `docs/phase15_metadata.json` after `python src/validate_phase15.py` |
+| Phase | Documented result | Current runtime result |
+| --- | --- | --- |
+| 8 | FROZEN LightGBM benchmark (57/57 in repo validation history) | FROZEN |
+| 9 | COMPLETE (146/146 PASS) | COMPLETE |
+| 10 | COMPLETE (experimental comparators; Phase 8 unchanged) | COMPLETE |
+| 11 | COMPLETE (140/140 PASS; READY WITH MONITORING) | COMPLETE |
+| 12 | COMPLETE (42/42 PASS; academic/reference packaging) | **41/42 PASS** — `models\lightgbm_forecaster.joblib` stale hash; frozen `models/final/` intact |
+| 13 | COMPLETE (42/42 PASS; security/operationalization; cloud not executed) | **41/42 PASS** — same cascading failure |
+| 14 | COMPLETE (19/19 PASS; local E2E simulation; Docker local image) | **17/19 PASS** — regression gates cascade from Phase 12/13 failure |
+| 15 | See `docs/phase15_metadata.json` after `python src/validate_phase15.py` | 9/12 PASS |
 
 ## Inventory intelligence
 
@@ -172,10 +172,11 @@ python src/validate_phase15.py
 | Phase 9 | COMPLETE | `docs/phase9_analysis_report.md`; 146/146 PASS |
 | Phase 10 | COMPLETE | `docs/phase10_analysis_report.md` |
 | Phase 11 | COMPLETE | `docs/phase11_metadata.json`; 140/140 PASS |
-| Phase 12 | COMPLETE | `docs/phase12_metadata.json`; 42/42 PASS |
-| Phase 13 | COMPLETE | `docs/phase13_metadata.json`; 42/42 PASS |
-| Phase 14 | COMPLETE | `docs/phase14_metadata.json`; 19/19 PASS |
-| Phase 15 | COMPLETE | `docs/phase15_metadata.json` (12/12 PASS) |
+| Phase 12 | COMPLETE | `docs/phase12_metadata.json`; **41/42 PASS** (1 stale legacy model hash; see known limitations) |
+| Phase 13 | COMPLETE | `docs/phase13_metadata.json`; **41/42 PASS** (same cascading failure) |
+| Phase 14 | INCOMPLETE | `docs/phase14_metadata.json`; **17/19 PASS** (regression gates cascade) |
+| Phase 15 | INCOMPLETE | `docs/phase15_metadata.json`; **9/12 PASS** |
+| Phase 16 | COMPLETE | `docs/phase16_metadata.json`; 39/39 PASS (dataset provenance audit) |
 
 Phase 5 was previously unchecked in the README even though `docs/eda_report.md` exists; the matrix follows repository evidence, not the stale checkbox.
 

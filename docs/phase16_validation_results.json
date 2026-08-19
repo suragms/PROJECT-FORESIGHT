@@ -1,0 +1,208 @@
+{
+  "phase": 16,
+  "validator": "validate_phase16_datasets.py",
+  "timestamp": "2026-08-19T09:29:31.535714+00:00",
+  "passed": 39,
+  "failed": 0,
+  "warned": 0,
+  "skipped": 0,
+  "total": 39,
+  "overall": "PASS",
+  "results": [
+    {
+      "test": "external_dir_uci_online_retail_ii",
+      "status": "PASS",
+      "detail": "C:\\Users\\SURAG\\Documents\\zidio\\Project_FORESIGHT\\Demand-Inventory-Intelligence\\data\\external\\uci_online_retail_ii"
+    },
+    {
+      "test": "external_dir_kaggle_synthetic_retail_10m",
+      "status": "PASS",
+      "detail": "C:\\Users\\SURAG\\Documents\\zidio\\Project_FORESIGHT\\Demand-Inventory-Intelligence\\data\\external\\kaggle_synthetic_retail_10m"
+    },
+    {
+      "test": "external_manifest_valid_json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "external_manifest_has_sources",
+      "status": "PASS",
+      "detail": "2 source(s)"
+    },
+    {
+      "test": "raw_file_calendar.csv",
+      "status": "PASS",
+      "detail": "Hash unchanged"
+    },
+    {
+      "test": "raw_file_customer_master.csv",
+      "status": "PASS",
+      "detail": "Hash unchanged"
+    },
+    {
+      "test": "raw_file_inventory_snapshots.csv",
+      "status": "PASS",
+      "detail": "Hash unchanged"
+    },
+    {
+      "test": "raw_file_inventory_snapshots.parquet",
+      "status": "PASS",
+      "detail": "Hash unchanged"
+    },
+    {
+      "test": "raw_file_online_retail_II.csv",
+      "status": "PASS",
+      "detail": "Hash unchanged"
+    },
+    {
+      "test": "raw_file_sales_daily.csv",
+      "status": "PASS",
+      "detail": "Hash unchanged"
+    },
+    {
+      "test": "raw_file_sales_daily.parquet",
+      "status": "PASS",
+      "detail": "Hash unchanged"
+    },
+    {
+      "test": "raw_file_sku_master.csv",
+      "status": "PASS",
+      "detail": "Hash unchanged"
+    },
+    {
+      "test": "raw_file_store_master.csv",
+      "status": "PASS",
+      "detail": "Hash unchanged"
+    },
+    {
+      "test": "raw_data_all_unchanged",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "model_uci_h1_phase8_lightgbm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "model_synthetic_h1_hurdle_th050",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "model_uci_h3_direct_lightgbm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "model_uci_h7_direct_lightgbm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "model_uci_h14_direct_lightgbm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "model_uci_h30_direct_lightgbm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "model_uci_h1_quantile_p10p90",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "model_synthetic_h3_direct_lightgbm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "model_synthetic_h7_direct_lightgbm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "model_synthetic_h14_direct_lightgbm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "model_synthetic_h30_direct_lightgbm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "model_synthetic_h1_quantile_p10p90",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "frozen_model_integrity",
+      "status": "PASS",
+      "detail": "All 12 models verified"
+    },
+    {
+      "test": "source_separation",
+      "status": "PASS",
+      "detail": "Sources: ['SYNTHETIC', 'UCI']"
+    },
+    {
+      "test": "forecast_base_no_duplicate_keys",
+      "status": "PASS",
+      "detail": "0 duplicate grain rows"
+    },
+    {
+      "test": "forecast_base_no_null_keys",
+      "status": "PASS",
+      "detail": "No null keys"
+    },
+    {
+      "test": "uci_no_fabricated_inventory",
+      "status": "PASS",
+      "detail": "Zero UCI rows in fact_inventory \u2014 no fabricated inventory"
+    },
+    {
+      "test": "synthetic_inventory_raw_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "synthetic_generator_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "generator_produces_inventory",
+      "status": "PASS",
+      "detail": "generate_synthetic_retail.py references inventory_snapshots"
+    },
+    {
+      "test": "artifact_phase15_metadata.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "artifact_phase15_known_limitations.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "artifact_final_model_registry.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "schema_alignment_doc_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "source_labels_valid",
+      "status": "PASS",
+      "detail": "Labels: ['SYNTHETIC', 'UCI']"
+    }
+  ]
+}

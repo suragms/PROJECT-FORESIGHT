@@ -1,12 +1,12 @@
 {
   "generated": {
     "label": "file snapshot \u2014 not live data",
-    "data_as_of": "2026-08-18T16:44:32.888951+00:00",
+    "data_as_of": "2026-08-19T09:37:57.713084+00:00",
     "forecast_generated": "2026-08-14T07:02:30.269701+00:00",
-    "monitoring_snapshot": "2026-08-18T16:44:32.888951+00:00",
+    "monitoring_snapshot": "2026-08-19T09:37:57.713084+00:00",
     "inventory_risk_mtime_utc": "2026-08-19T07:22:56.918473+00:00",
     "final_forecasts_exists": true,
-    "bi_generated_at": "2026-08-19T07:23:31.672122+00:00"
+    "bi_generated_at": "2026-08-19T09:37:58.660992+00:00"
   },
   "files": {
     "executive_kpis.parquet": "C:\\Users\\SURAG\\Documents\\zidio\\Project_FORESIGHT\\Demand-Inventory-Intelligence\\outputs\\bi\\executive_kpis.parquet",

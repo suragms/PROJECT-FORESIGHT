@@ -11,13 +11,13 @@
 
 ## What has been validated (baseline this phase)
 
-| Gate | Result |
-| --- | --- |
-| Phase 12 | 42/42 PASS |
-| Phase 13 | 42/42 PASS |
-| Phase 14 | 19/19 PASS |
-| Pytest (pre–Phase 15 tests) | 59/59 PASS |
-| Model hashes | UNCHANGED |
+| Gate | Historical recorded result | Current runtime validation result |
+| --- | --- | --- |
+| Phase 12 | 42/42 PASS | **41/42 PASS** — 1 failure: legacy `models\lightgbm_forecaster.joblib` hash mismatch (stale artifact; all 12 frozen `models/final/` hashes PASS) |
+| Phase 13 | 42/42 PASS | **41/42 PASS** — same cascading failure |
+| Phase 14 | 19/19 PASS | **17/19 PASS** — 2 failures: Phase 12/13 regression gates cascade from the above |
+| Pytest (pre–Phase 15 tests) | 59/59 PASS | **87/88 PASS** — 1 failure: `test_phase8_hashes_match_phase11_snapshot` (same root cause); 19 Phase 16 tests added |
+| Model hashes (frozen `models/final/`) | UNCHANGED | **UNCHANGED** — all 12 frozen model SHA-256 hashes verified |
 
 Phase 15 validation counts are written by `python src/validate_phase15.py` and are **not** hardcoded here.
 

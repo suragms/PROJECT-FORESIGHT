@@ -31,6 +31,16 @@ data/raw/inventory_snapshots.csv
 data/processed/online_retail_clean.csv
 data/processed/online_retail_sales.csv
 
+# External datasets (large files — download separately)
+data/external/uci_online_retail_ii/*.csv
+data/external/uci_online_retail_ii/*.xlsx
+data/external/kaggle_synthetic_retail_10m/*.csv
+data/external/kaggle_synthetic_retail_10m/*.parquet
+
+# Phase 16 temporary scripts
+_phase16_*.py
+_phase16_*.json
+
 # Local secrets — never commit
 .env
 .env.local

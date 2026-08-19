@@ -1,0 +1,67 @@
+{
+  "phase": 16,
+  "title": "Dataset Extraction + Provenance Verification + Zidio Alignment",
+  "status": "YELLOW",
+  "status_detail": "Structurally usable but provenance/scope differences require documentation",
+  "generated_at": "2026-08-19T14:55:00+05:30",
+  "validation": {
+    "command": "python src/validate_phase16_datasets.py",
+    "passed": 39,
+    "total": 39,
+    "summary": "39/39 PASS"
+  },
+  "pytest": {
+    "command": "python -m pytest tests/test_phase16_dataset_alignment.py -v",
+    "passed": 19,
+    "total": 19,
+    "summary": "19/19 PASS"
+  },
+  "regression": {
+    "phase12_validation": "41/42 PASS (pre-existing failure: models/lightgbm_forecaster.joblib missing)",
+    "phase13_validation": "41/42 PASS (same pre-existing failure)",
+    "phase14_validation": "16/19 PASS (pre-existing failures)",
+    "phase15_validation": "9/12 PASS (pre-existing failures)",
+    "phase16_caused_no_regressions": true
+  },
+  "uci_dataset": {
+    "status": "VERIFIED",
+    "rows": 1067371,
+    "columns": 8,
+    "date_range": "2009-12-01 to 2011-12-09",
+    "inventory_available": false,
+    "fabricated_inventory": false
+  },
+  "synthetic_dataset": {
+    "provenance": "REPOSITORY-GENERATED SYNTHETIC DATA",
+    "generator": "src/generate_synthetic_retail.py",
+    "kaggle_equivalence": "NOT PROVEN",
+    "rows": 1461000,
+    "stores_in_sales": 10,
+    "skus_in_sales": 100,
+    "date_range": "2022-01-01 to 2025-12-31"
+  },
+  "kaggle_10m_dataset": {
+    "status": "EXTERNAL DATA NOT LOCALLY AVAILABLE — MANUAL DOWNLOAD REQUIRED",
+    "downloaded": false,
+    "verified": false
+  },
+  "frozen_model_integrity": "PASS (all 12 model hashes verified)",
+  "source_separation": "PASS",
+  "schema_alignment": "PASS (Repository); PARTIAL (UCI — no inventory/cost concepts)",
+  "business_scope": "DOCUMENTED SCOPE EXTENSION",
+  "risk_logic_gap": "Risk scoring uses historical demand, NOT forecast demand",
+  "data_lineage_integrity": "PASS",
+  "documents_created": [
+    "docs/phase16_dataset_extraction_report.md",
+    "docs/phase16_dataset_audit.md",
+    "docs/phase16_kaggle_equivalence_report.md",
+    "docs/phase16_schema_alignment.md",
+    "docs/phase16_model_compatibility.md",
+    "docs/phase16_data_source_manifest.json",
+    "docs/phase16_external_dataset_manifest.json",
+    "docs/phase16_metadata.json",
+    "docs/phase16_validation_results.json",
+    "src/validate_phase16_datasets.py",
+    "tests/test_phase16_dataset_alignment.py"
+  ]
+}

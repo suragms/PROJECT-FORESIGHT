@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-08-18T16:44:32Z",
-  "request_count": 39,
-  "error_count": 19,
-  "error_rate": 0.4872,
-  "auth_failures": 1,
-  "rate_limit_events": 1,
-  "forecast_failures": 7,
-  "mean_latency_ms": 27.115,
-  "mean_batch_size": 56.182,
+  "generated_at": "2026-08-19T09:38:04Z",
+  "request_count": 38,
+  "error_count": 16,
+  "error_rate": 0.4211,
+  "auth_failures": 2,
+  "rate_limit_events": 2,
+  "forecast_failures": 3,
+  "mean_latency_ms": 52.25,
+  "mean_batch_size": 76.875,
   "note": "In-process counters for this API worker. Not a live cloud APM export."
 }

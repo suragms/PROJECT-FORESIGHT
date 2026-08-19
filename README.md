@@ -274,10 +274,11 @@ Copy `.env.example` for local configuration. Do not commit `.env`. Development m
 | Phase 9 | COMPLETE |
 | Phase 10 | COMPLETE |
 | Phase 11 | COMPLETE |
-| Phase 12 | COMPLETE (42/42 PASS) |
-| Phase 13 | COMPLETE (42/42 PASS) |
-| Phase 14 | COMPLETE (19/19 PASS) |
-| Phase 15 | COMPLETE (12/12 PASS) |
+| Phase 12 | COMPLETE (41/42 PASS — 1 stale legacy model hash; frozen `models/final/` intact) |
+| Phase 13 | COMPLETE (41/42 PASS — same cascading failure) |
+| Phase 14 | INCOMPLETE (17/19 PASS — regression gates cascade from Phase 12/13) |
+| Phase 15 | INCOMPLETE (9/12 PASS) |
+| Phase 16 | COMPLETE (39/39 PASS — dataset provenance & alignment audit) |
 
 - [x] **Phase 1: Business Understanding**
 - [x] **Phase 2: Data Collection & Profiling**

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-18T16:43:50.434029+00:00",
+  "generated_at": "2026-08-19T09:37:55.608389+00:00",
   "questions_with_evidence": 10,
   "questions_total": 10,
   "status": "PASS",
@@ -31,7 +31,7 @@
     "missing_columns": [],
     "n_rows": 1000,
     "status": "PASS",
-    "n_reorder_triggered": 0,
+    "n_reorder_triggered": 887,
     "n_critical_stockout": 733,
     "n_severe_overstock": 0,
     "note": "Inventory risk is a reference scoring layer over synthetic store-SKU snapshots. It is not a live warehouse execution system."
@@ -161,7 +161,7 @@
       "layer": "INVENTORY RISK",
       "evidence_available": true,
       "evidence": {
-        "n_reorder_triggered": 0,
+        "n_reorder_triggered": 887,
         "executed_in_production": false,
         "note": "ROP breach is scored; purchase orders are not sent."
       }

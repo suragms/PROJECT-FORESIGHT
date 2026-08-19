@@ -1,0 +1,47 @@
+[
+  {
+    "filename": "calendar.csv",
+    "size_bytes": 87019,
+    "sha256": "a7cc1a7e3fb3acbc75854c5cc38f453912cc8380d4fe33bd291008dc6384d933"
+  },
+  {
+    "filename": "customer_master.csv",
+    "size_bytes": 510945,
+    "sha256": "0d0a02b9dd665c1dd2e310a351cb0ba33dcdc1d8accec7a7b5b6036de1c071e5"
+  },
+  {
+    "filename": "inventory_snapshots.csv",
+    "size_bytes": 67830275,
+    "sha256": "fd9e7f9ef13be3aad928638e4cde5a9627bcb42adb7eb1bd2772bf16f5bfcf07"
+  },
+  {
+    "filename": "inventory_snapshots.parquet",
+    "size_bytes": 4979408,
+    "sha256": "674e65ba321fc55265dc51bb851f377df94a0177fe5a50eb55c0175140ea5972"
+  },
+  {
+    "filename": "online_retail_II.csv",
+    "size_bytes": 94850204,
+    "sha256": "32569a66f3842a82b0d8c4d63b263c5d98a76bde5d1f65c6c01bf457e541d3a9"
+  },
+  {
+    "filename": "sales_daily.csv",
+    "size_bytes": 76131903,
+    "sha256": "4485b2317a3752136e66c5679c1128dc8a942781f9d31350d6a2c5be36555a3e"
+  },
+  {
+    "filename": "sales_daily.parquet",
+    "size_bytes": 6259981,
+    "sha256": "4c521a50f15e1a3c4634bc372613af369c4f0310e583f48df7502999c3c472ab"
+  },
+  {
+    "filename": "sku_master.csv",
+    "size_bytes": 560108,
+    "sha256": "e94ed3a23542ff4c59232a36883a0fafb63a1c0c2f6d0518c27e585eb30c1c9a"
+  },
+  {
+    "filename": "store_master.csv",
+    "size_bytes": 2500,
+    "sha256": "9d729d2d727f5dafaff53b37dbfefb8fc4bb7a9d1ddcfa477e742188b2bb1d5e"
+  }
+]

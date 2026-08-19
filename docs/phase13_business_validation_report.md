@@ -1,6 +1,6 @@
 # Phase 13 — Business validation report
 
-Generated: `2026-08-18T16:43:50.434029+00:00`
+Generated: `2026-08-19T09:37:55.608389+00:00`
 
 ## Status
 
@@ -37,7 +37,7 @@ This report does **not** claim live supplier execution, cloud deployment, or aut
 - Exists: `True`
 - Rows: `1000`
 - Status: `PASS`
-- Reorder triggered: `0`
+- Reorder triggered: `887`
 - Critical stockout: `733`
 - Severe overstock: `0`
 
@@ -69,7 +69,7 @@ Not implemented: sending purchase orders, ERP write-back, live warehouse telemet
 The checked file contains **1000 rows**. Treat it as a reference extract, not a live warehouse census.
 
 - Critical / high stockout labels: **733**
-- Reorder-point flag `reorder_triggered`: **0**
+- Reorder-point flag `reorder_triggered`: **887**
 - Severe overstock labels: **0**
 
 These counts are not mixed with model forecasts. Recommended quantity is reference logic only.

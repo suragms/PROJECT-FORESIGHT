@@ -1,18 +1,18 @@
 {
   "phase": 14,
-  "status": "COMPLETE",
+  "status": "INCOMPLETE",
   "implementation_class": "academic/reference",
   "production_deployment": false,
   "validation": {
     "command": "python src/validate_phase14.py",
-    "passed": 19,
+    "passed": 17,
     "total": 19,
-    "summary": "19/19 PASS",
+    "summary": "17/19 PASS",
     "note": "Counts are calculated at runtime, not hardcoded."
   },
   "regression": {
-    "phase12_validation": "42/42 PASS",
-    "phase13_validation": "42/42 PASS"
+    "phase12_validation": "41/42 PASS",
+    "phase13_validation": "41/42 PASS"
   },
   "model_hash_status": "UNCHANGED",
   "final_models": {
@@ -42,24 +42,24 @@
     "prediction": 10.749200294243758,
     "lower_bound": 0.9803840782755803,
     "upper_bound": 12.034108979147309,
-    "latency_s": 0.0964,
-    "request_id": "ea7395ae-5560-45bf-9eca-9ff7f0458de2",
+    "latency_s": 0.1895,
+    "request_id": "f539a594-7c30-4e66-8470-b1ab86634f00",
     "status_code": 200
   },
   "batch": {
-    "batch10_s": 0.0873,
-    "batch10_rows_per_s": 114.52,
+    "batch10_s": 0.109,
+    "batch10_rows_per_s": 91.73,
     "batch10_response_bytes": 4301,
-    "batch100_s": 0.139,
-    "batch100_rows_per_s": 719.47,
+    "batch100_s": 0.1112,
+    "batch100_rows_per_s": 899.32,
     "batch100_response_bytes": 39312,
-    "batch500_s": 0.1804,
-    "batch500_rows_per_s": 2771.7,
+    "batch500_s": 0.1799,
+    "batch500_rows_per_s": 2780.01,
     "batch500_response_bytes": 195312,
     "error_rate": 0.0
   },
   "performance": {
-    "single_s": 0.0964,
+    "single_s": 0.1895,
     "batch": [
       {
         "n": 10,
@@ -67,8 +67,8 @@
         "rows_processed": 10,
         "success_count": 10,
         "failure_count": 0,
-        "latency_s": 0.0873,
-        "rows_per_s": 114.52,
+        "latency_s": 0.109,
+        "rows_per_s": 91.73,
         "response_bytes": 4301
       },
       {
@@ -77,8 +77,8 @@
         "rows_processed": 100,
         "success_count": 100,
         "failure_count": 0,
-        "latency_s": 0.139,
-        "rows_per_s": 719.47,
+        "latency_s": 0.1112,
+        "rows_per_s": 899.32,
         "response_bytes": 39312
       },
       {
@@ -87,8 +87,8 @@
         "rows_processed": 500,
         "success_count": 500,
         "failure_count": 0,
-        "latency_s": 0.1804,
-        "rows_per_s": 2771.7,
+        "latency_s": 0.1799,
+        "rows_per_s": 2780.01,
         "response_bytes": 195312
       }
     ],
@@ -100,8 +100,8 @@
       "note": "Historical Phase 12 freeze snapshot; not an SLO."
     },
     "vs_phase12": {
-      "single_s_delta": 0.0283,
-      "batch10_s_delta": 0.0266,
+      "single_s_delta": 0.1214,
+      "batch10_s_delta": 0.0483,
       "note": "Phase 14 timings include production auth/TestClient overhead; not an SLO."
     }
   },
