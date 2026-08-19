@@ -41,6 +41,14 @@
   "notes": [
     "Authentication is not included in this academic/reference implementation.",
     "SYNTHETIC zero-demand alerts are evaluated on h=1 only.",
-    "Phase 8/9/10/11 freeze artifacts were not modified."
-  ]
+    "Phase 8/9/10/11 freeze artifacts were not modified.",
+    "Performance numbers above are the historical Phase 12 freeze record. Re-running validate_phase12.py measures current latency but must not replace this snapshot."
+  ],
+  "last_run_performance": {
+    "load_s": 0.027,
+    "single_s": 0.0727,
+    "batch10_s": 0.0755,
+    "rows_per_s": 132.47,
+    "app_version": "0.13.0"
+  }
 }

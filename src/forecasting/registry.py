@@ -36,6 +36,7 @@ def resolve_model_file(record: dict[str, Any]) -> Path:
     if not raw or not isinstance(raw, str):
         raise RegistryError("Registry record missing model_file")
     # Reject absolute paths outside the repo and any parent traversal.
+    raw = raw.replace("\\", "/")
     p = Path(raw)
     if p.is_absolute():
         resolved = p.resolve()

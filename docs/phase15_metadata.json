@@ -1,0 +1,84 @@
+{
+  "phase": 15,
+  "status": "COMPLETE",
+  "implementation_class": "academic/reference",
+  "production_deployment": false,
+  "power_bi_deployment": false,
+  "validation": {
+    "command": "python src/validate_phase15.py",
+    "passed": 12,
+    "total": 12,
+    "summary": "12/12 PASS",
+    "note": "Counts are calculated at runtime, not hardcoded."
+  },
+  "regression": {
+    "phase12_validation": "42/42 PASS",
+    "phase13_validation": "42/42 PASS",
+    "phase14_validation": "19/19 PASS"
+  },
+  "model_hash_status": "UNCHANGED",
+  "final_models": {
+    "uci_h1": {
+      "model_id": "uci_h1_phase8_lightgbm",
+      "sha256": "331909f0fe191c0b9cb0418884b25eb59012f479f61f8b3e2ad51b729273e90d"
+    },
+    "synthetic_h1": {
+      "model_id": "synthetic_h1_hurdle_th050",
+      "sha256": "59a2b72024861d7f9c827596a52256af95facabfa796bdae5955374221cf1bf4"
+    }
+  },
+  "kpi_layer": {
+    "n_rows": 1000,
+    "extract_note": "1000-row reference extract \u2014 not the operational inventory universe",
+    "stockout_critical_high": 733,
+    "overstock_severe": 0,
+    "overstock_moderate": 1,
+    "reorder_review_count": 0,
+    "no_exceptional_risk": 78,
+    "mean_days_of_supply": 3.5399
+  },
+  "bi_exports": {
+    "executive_kpis.parquet": "C:\\Users\\SURAG\\Documents\\zidio\\Project_FORESIGHT\\Demand-Inventory-Intelligence\\outputs\\bi\\executive_kpis.parquet",
+    "product_demand.parquet": "C:\\Users\\SURAG\\Documents\\zidio\\Project_FORESIGHT\\Demand-Inventory-Intelligence\\outputs\\bi\\product_demand.parquet",
+    "forecast_performance.parquet": "C:\\Users\\SURAG\\Documents\\zidio\\Project_FORESIGHT\\Demand-Inventory-Intelligence\\outputs\\bi\\forecast_performance.parquet",
+    "inventory_risk.parquet": "C:\\Users\\SURAG\\Documents\\zidio\\Project_FORESIGHT\\Demand-Inventory-Intelligence\\outputs\\bi\\inventory_risk.parquet",
+    "recommendations.parquet": "C:\\Users\\SURAG\\Documents\\zidio\\Project_FORESIGHT\\Demand-Inventory-Intelligence\\outputs\\bi\\recommendations.parquet",
+    "system_health.parquet": "C:\\Users\\SURAG\\Documents\\zidio\\Project_FORESIGHT\\Demand-Inventory-Intelligence\\outputs\\bi\\system_health.parquet"
+  },
+  "schema_issues": [],
+  "inventory_extract_rows": 1000,
+  "recommendations_autonomous": false,
+  "dashboard": "dashboard/executive_intelligence.py",
+  "data_quality": {
+    "source": "outputs/monitoring/data_quality_report.json",
+    "generated_at": "2026-08-18T16:43:56.573086+00:00",
+    "n_rows": 957949,
+    "n_columns": 12,
+    "missing_required_columns": [],
+    "missing_value_rate_pct": {
+      "lower_bound": 76.351,
+      "upper_bound": 76.351
+    },
+    "duplicate_rate_pct": 0.0,
+    "n_duplicates": 0,
+    "invalid_negative_counts": {},
+    "date_gaps": null,
+    "categorical_consistency": {},
+    "leakage_columns_present": [],
+    "schema_validity": "PASS",
+    "feature_completeness_note": "Required forecast columns present if missing_required_columns is empty.",
+    "no_invented_quality_score": true,
+    "phase3_cleaning_report": "C:\\Users\\SURAG\\Documents\\zidio\\Project_FORESIGHT\\Demand-Inventory-Intelligence\\docs\\data_quality_report.json"
+  },
+  "freshness": {
+    "label": "file snapshot \u2014 not live data",
+    "data_as_of": "2026-08-18T16:43:56.577326+00:00",
+    "forecast_generated": "2026-08-14T07:02:30.269701+00:00",
+    "monitoring_snapshot": "2026-08-18T16:43:56.577326+00:00",
+    "inventory_risk_mtime_utc": "2026-08-14T07:48:30.578118+00:00",
+    "final_forecasts_exists": true,
+    "bi_generated_at": "2026-08-18T16:44:05.711846+00:00"
+  },
+  "deployment_status": "NOT EXECUTED",
+  "known_limitations_doc": "docs/phase15_known_limitations.md"
+}

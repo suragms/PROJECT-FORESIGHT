@@ -129,16 +129,27 @@ def calculate_inventory_risk_matrix(
     )
 
     # 5. Replenishment Trigger & Recommended Order Quantity (ROQ)
-    merged["reorder_triggered"] = inventory_position <= merged["reorder_point"]
+    # Physical shelf position drives replenishment review (on-order does not hide zero shelf stock).
+    merged["rop_position_triggered"] = inventory_position <= merged["reorder_point"]
+    merged["reorder_triggered"] = merged["ending_inventory"] <= merged["reorder_point"]
 
     # Target maximum inventory S = LTD + SS + Review cycle (e.g. 14 days)
     target_max_inventory = (merged["effective_daily_demand"] * (merged["lead_time_days"] + 14)) + merged["safety_stock"]
     merged["recommended_reorder_qty"] = np.where(
         merged["reorder_triggered"],
-        np.maximum(10, np.round(target_max_inventory - inventory_position)).astype(int),
+        np.maximum(10, np.round(target_max_inventory - merged["ending_inventory"])).astype(int),
         0
     )
     merged["recommended_order_spend"] = merged["recommended_reorder_qty"] * merged["cost_price"]
+    merged["replenishment_note"] = np.where(
+        merged["reorder_triggered"] & (merged["on_order_qty"] > 0),
+        "Shelf at/below ROP; on-order qty in transit — draft review only, not a supplier PO.",
+        np.where(
+            merged["reorder_triggered"],
+            "Shelf at/below ROP — draft review only, not a supplier PO.",
+            "",
+        ),
+    )
 
     # Save to disk
     output_path = os.path.join(RISK_DIR, "inventory_risk_matrix.parquet")
@@ -219,7 +230,7 @@ def answer_10_core_questions() -> dict:
 
     # 10. Actionable Recommendations
     recommendations = [
-        f"Immediate Purchase Orders: {reorder_count} Store-SKU items have breached their Reorder Point (ROP). Issue supplier orders totaling ${total_reorder_spend:,.2f} immediately to prevent out-of-stock events.",
+        f"Immediate Purchase Orders: {reorder_count} Store-SKU items have shelf stock at or below their Reorder Point (ROP). Draft review spend totals ${total_reorder_spend:,.2f}. These are analytical recommendations — purchase orders are not sent automatically.",
         f"Critical Stockout Mitigation: {stockout_count} items are at critical stockout risk with potential monthly revenue loss of ${potential_lost_rev:,.2f}. Expedite lead times for high-margin category leaders.",
         f"Overstock Liquidation: ${total_capital_tied:,.2f} in working capital is locked in excess inventory costing ${annual_carrying_cost:,.2f}/yr in holding charges. Deploy targeted 10-15% promotional markdowns on severe overstock SKUs.",
         f"Seasonal Inventory Staging: Holiday periods show a +{holiday_uplift:.1f}% surge in daily unit velocity. Increase safety stock buffer by 25% starting 3 weeks prior to major holiday peaks.",

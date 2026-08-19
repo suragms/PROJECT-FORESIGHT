@@ -16,7 +16,7 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
       - name: Syntax check
-        run: python -m py_compile src/config.py src/forecasting/inference.py src/api/app.py src/monitoring/run_monitoring.py src/validate_phase12.py
+        run: python -m py_compile src/config.py src/forecasting/inference.py src/api/app.py src/monitoring/run_monitoring.py src/validate_phase12.py src/validate_phase13.py src/validate_phase14.py src/validate_phase15.py src/security/auth.py src/production/readiness.py src/production/simulation.py src/production/docker_check.py src/bi/exports.py src/bi/kpis.py dashboard/executive_intelligence.py
       - name: Unit / API / inference tests
         run: python -m pytest tests -q
         continue-on-error: true

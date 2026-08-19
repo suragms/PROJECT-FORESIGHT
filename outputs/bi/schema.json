@@ -1,0 +1,86 @@
+{
+  "generated": {
+    "label": "file snapshot \u2014 not live data",
+    "data_as_of": "2026-08-18T16:44:32.888951+00:00",
+    "forecast_generated": "2026-08-14T07:02:30.269701+00:00",
+    "monitoring_snapshot": "2026-08-18T16:44:32.888951+00:00",
+    "inventory_risk_mtime_utc": "2026-08-19T07:22:56.918473+00:00",
+    "final_forecasts_exists": true,
+    "bi_generated_at": "2026-08-19T07:23:31.672122+00:00"
+  },
+  "files": {
+    "executive_kpis.parquet": "C:\\Users\\SURAG\\Documents\\zidio\\Project_FORESIGHT\\Demand-Inventory-Intelligence\\outputs\\bi\\executive_kpis.parquet",
+    "product_demand.parquet": "C:\\Users\\SURAG\\Documents\\zidio\\Project_FORESIGHT\\Demand-Inventory-Intelligence\\outputs\\bi\\product_demand.parquet",
+    "forecast_performance.parquet": "C:\\Users\\SURAG\\Documents\\zidio\\Project_FORESIGHT\\Demand-Inventory-Intelligence\\outputs\\bi\\forecast_performance.parquet",
+    "inventory_risk.parquet": "C:\\Users\\SURAG\\Documents\\zidio\\Project_FORESIGHT\\Demand-Inventory-Intelligence\\outputs\\bi\\inventory_risk.parquet",
+    "recommendations.parquet": "C:\\Users\\SURAG\\Documents\\zidio\\Project_FORESIGHT\\Demand-Inventory-Intelligence\\outputs\\bi\\recommendations.parquet",
+    "system_health.parquet": "C:\\Users\\SURAG\\Documents\\zidio\\Project_FORESIGHT\\Demand-Inventory-Intelligence\\outputs\\bi\\system_health.parquet"
+  },
+  "required_columns": {
+    "executive_kpis.parquet": [
+      "layer",
+      "decision_support_only",
+      "forecast_mae",
+      "forecast_rmse",
+      "forecast_wape",
+      "forecast_bias",
+      "inventory_n_rows",
+      "inventory_stockout_critical_high",
+      "inventory_extract_note"
+    ],
+    "product_demand.parquet": [
+      "sku_id",
+      "store_id",
+      "total_recent_units",
+      "demand_share",
+      "growth_class",
+      "stockout_risk_level",
+      "demand_rank_label",
+      "extract_note"
+    ],
+    "forecast_performance.parquet": [
+      "forecast_date",
+      "source_dataset",
+      "horizon",
+      "actual",
+      "forecast",
+      "error",
+      "absolute_error",
+      "p10",
+      "p90",
+      "grain"
+    ],
+    "inventory_risk.parquet": [
+      "sku_id",
+      "store_id",
+      "stockout_risk_level",
+      "overstock_risk_level",
+      "reorder_triggered",
+      "risk_matrix_cell",
+      "extract_note"
+    ],
+    "recommendations.parquet": [
+      "sku_id",
+      "recommended_review",
+      "evidence",
+      "reason",
+      "confidence_limitation",
+      "autonomous_decision"
+    ],
+    "system_health.parquet": [
+      "uci_h1_hash",
+      "synthetic_h1_hash",
+      "uci_hash_matches_phase12",
+      "synthetic_hash_matches_phase12",
+      "live_data",
+      "monitoring_snapshot"
+    ]
+  },
+  "notes": [
+    "Compact BI extracts. Full final_predictions.parquet is not duplicated.",
+    "Inventory tables are the 1000-row reference extract.",
+    "File snapshots are not live data.",
+    "forecast_metrics.parquet is optional compact MAE/RMSE/WAPE by dataset-horizon.",
+    "seasonality.parquet is optional monthly/weekly TEST actuals."
+  ]
+}

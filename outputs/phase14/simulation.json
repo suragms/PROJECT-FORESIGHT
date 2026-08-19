@@ -1,0 +1,342 @@
+{
+  "results": [
+    {
+      "name": "API Health",
+      "passed": true,
+      "detail": "200"
+    },
+    {
+      "name": "API Readiness",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Authentication",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Valid API key",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Single Forecast",
+      "passed": true,
+      "detail": "pred=10.749200294243758 latency_s=0.0818"
+    },
+    {
+      "name": "Batch Forecast",
+      "passed": true,
+      "detail": "[{\"n\": 10, \"status_code\": 200, \"rows_processed\": 10, \"success_count\": 10, \"failure_count\": 0, \"latency_s\": 0.0679, \"rows_per_s\": 147.25, \"response_bytes\": 4301}, {\"n\": 100, \"status_code\": 200, \"rows_processed\": 100, \"success_count\": 100, \"failure_count\": 0, \"latency_s\": 0.0811, \"rows_per_s\": 1232.75, \"response_bytes\": 39312}, {\"n\": 500, \"status_code\": 200, \"rows_processed\": 500, \"success_count\": 500, \"failure_count\": 0, \"latency_s\": 0.1051, \"rows_per_s\": 4758.33, \"response_bytes\": 195312}]"
+    },
+    {
+      "name": "Model Integrity",
+      "passed": true,
+      "detail": "331909f0fe191c0b9cb0418884b25eb59012f479f61f8b3e2ad51b729273e90d"
+    },
+    {
+      "name": "Data Contract",
+      "passed": true,
+      "detail": "{\"valid\": true, \"missing_field\": true, \"wrong_datatype\": true, \"nan\": true, \"infinity\": true, \"invalid_categorical\": {\"status_code\": 200, \"traceback\": true, \"note\": \"Existing encoder accepts unseen season levels; no 5xx and no traceback.\"}, \"invalid_categorical_safe\": true, \"excessive_batch\": true, \"oversized_payload\": true, \"duplicate_records\": true, \"malformed_json\": true}"
+    },
+    {
+      "name": "Inventory Risk",
+      "passed": true,
+      "detail": "NOT AVAILABLE"
+    },
+    {
+      "name": "Business Questions",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Business Scenarios",
+      "passed": true,
+      "detail": "n=5"
+    },
+    {
+      "name": "Business Workflow",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Dashboard",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Reproducibility",
+      "passed": true,
+      "detail": "10.749200294243758 vs 10.749200294243758"
+    },
+    {
+      "name": "Rate Limiting",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Failure Recovery",
+      "passed": true,
+      "detail": "missing model/registry/hash 503, invalid 4xx, internal 5xx without traceback"
+    },
+    {
+      "name": "Audit Logging",
+      "passed": true,
+      "detail": "events=['application_shutdown', 'application_startup', 'authentication_failure', 'authentication_success', 'batch_forecast_request', 'forecast_request', 'model_hash_verification', 'model_loaded', 'rate_limit_rejection', 'readiness_check', 'unhandled_error', 'validation_failure']"
+    },
+    {
+      "name": "Monitoring",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Performance",
+      "passed": true,
+      "detail": "{\"single_s\": 0.0818, \"batch10_s\": 0.0679, \"batch10_rows_per_s\": 147.25}"
+    }
+  ],
+  "evidence": {
+    "single_forecast": {
+      "dataset": "UCI",
+      "entity_id": "ONLINE",
+      "product_key": "UCI_10135",
+      "horizon": 1,
+      "model": "uci_h1_phase8_lightgbm",
+      "hash": "331909f0fe191c0b9cb0418884b25eb59012f479f61f8b3e2ad51b729273e90d",
+      "prediction": 10.749200294243758,
+      "lower_bound": 0.9803840782755803,
+      "upper_bound": 12.034108979147309,
+      "latency_s": 0.0818,
+      "request_id": "8e1d310f-58c3-4f26-9b3b-82eafcff5715",
+      "status_code": 200
+    },
+    "batch": {
+      "runs": [
+        {
+          "n": 10,
+          "status_code": 200,
+          "rows_processed": 10,
+          "success_count": 10,
+          "failure_count": 0,
+          "latency_s": 0.0679,
+          "rows_per_s": 147.25,
+          "response_bytes": 4301
+        },
+        {
+          "n": 100,
+          "status_code": 200,
+          "rows_processed": 100,
+          "success_count": 100,
+          "failure_count": 0,
+          "latency_s": 0.0811,
+          "rows_per_s": 1232.75,
+          "response_bytes": 39312
+        },
+        {
+          "n": 500,
+          "status_code": 200,
+          "rows_processed": 500,
+          "success_count": 500,
+          "failure_count": 0,
+          "latency_s": 0.1051,
+          "rows_per_s": 4758.33,
+          "response_bytes": 195312
+        }
+      ],
+      "rss_before": 499855360,
+      "rss_after": 502644736
+    },
+    "hashes": {
+      "uci_h1": "331909f0fe191c0b9cb0418884b25eb59012f479f61f8b3e2ad51b729273e90d",
+      "synthetic_h1": "59a2b72024861d7f9c827596a52256af95facabfa796bdae5955374221cf1bf4",
+      "used_for_inference": "331909f0fe191c0b9cb0418884b25eb59012f479f61f8b3e2ad51b729273e90d"
+    },
+    "data_contract": {
+      "valid": true,
+      "missing_field": true,
+      "wrong_datatype": true,
+      "nan": true,
+      "infinity": true,
+      "invalid_categorical": {
+        "status_code": 200,
+        "traceback": true,
+        "note": "Existing encoder accepts unseen season levels; no 5xx and no traceback."
+      },
+      "invalid_categorical_safe": true,
+      "excessive_batch": true,
+      "oversized_payload": true,
+      "duplicate_records": true,
+      "malformed_json": true
+    },
+    "inventory": {
+      "layer": "INVENTORY RISK",
+      "forecast_layer": "MODEL FORECAST",
+      "product_key": "UCI_10135",
+      "ending_inventory": "NOT AVAILABLE",
+      "lead_time_days": "NOT AVAILABLE",
+      "safety_stock": "NOT AVAILABLE",
+      "reorder_point": "NOT AVAILABLE",
+      "stockout_risk_level": "NOT AVAILABLE",
+      "overstock_risk_level": "NOT AVAILABLE",
+      "recommended_reorder_qty": "NOT AVAILABLE",
+      "join": "NOT AVAILABLE",
+      "recommendation": "NOT AVAILABLE \u2014 UCI/online product keys are not store-SKU inventory rows. Do not invent a warehouse position."
+    },
+    "questions": {
+      "status": "PASS",
+      "n": 10
+    },
+    "scenarios": [
+      {
+        "name": "A_high_stockout",
+        "status": "PASS",
+        "source": "primary_label",
+        "sku_id": "SKU_00001",
+        "store_id": "STORE_001",
+        "stockout_risk_level": "CRITICAL / HIGH",
+        "overstock_risk_level": "OPTIMAL",
+        "ending_inventory": "0",
+        "interpretation": "Inventory may be insufficient relative to expected demand. Review replenishment requirements. Not an automatic purchase order.",
+        "autonomous_decision": false
+      },
+      {
+        "name": "B_high_overstock",
+        "status": "PASS",
+        "source": "fallback_label",
+        "sku_id": "SKU_00004",
+        "store_id": "STORE_009",
+        "stockout_risk_level": "LOW / SAFE",
+        "overstock_risk_level": "MODERATE OVERSTOCK",
+        "ending_inventory": "677",
+        "interpretation": "Potential excess inventory exposure. Review demand and inventory alignment.",
+        "autonomous_decision": false
+      },
+      {
+        "name": "C_stable_demand",
+        "status": "PASS",
+        "source": "primary_label",
+        "sku_id": "SKU_00007",
+        "store_id": "STORE_001",
+        "stockout_risk_level": "LOW / SAFE",
+        "overstock_risk_level": "OPTIMAL",
+        "ending_inventory": "50",
+        "interpretation": "No exceptional intervention indicated.",
+        "autonomous_decision": false
+      },
+      {
+        "name": "D_strong_demand_growth",
+        "status": "PASS",
+        "layer": "MODEL FORECAST feature (demand_growth_30), not inventory execution",
+        "demand_growth_30": 1.3142857142857143,
+        "interpretation": "Review future supply capacity and inventory requirements.",
+        "autonomous_decision": false
+      },
+      {
+        "name": "E_high_uncertainty",
+        "status": "PASS",
+        "p10": 0.9803840782755803,
+        "p90": 12.034108979147309,
+        "prediction": 10.749200294243758,
+        "relative_interval_width": 1.0283,
+        "interpretation": "Additional business review recommended.",
+        "autonomous_decision": false
+      }
+    ],
+    "dashboard": {
+      "starts_import": true,
+      "forecast_rows": 957949,
+      "dataset_filter_present": true,
+      "horizon_filter_present": true,
+      "intervals_labelled": true,
+      "point_forecast_labelled": true,
+      "monitoring_snapshot_labelled": true,
+      "does_not_claim_realtime_monitoring": true,
+      "inventory_risk_labelled": true,
+      "recommendations_labelled": true,
+      "registry_loads": true,
+      "passed": true
+    },
+    "audit_events": [
+      "application_shutdown",
+      "application_startup",
+      "authentication_failure",
+      "authentication_success",
+      "batch_forecast_request",
+      "forecast_request",
+      "model_hash_verification",
+      "model_loaded",
+      "rate_limit_rejection",
+      "readiness_check",
+      "unhandled_error",
+      "validation_failure"
+    ],
+    "monitoring": {
+      "n_alerts": 0,
+      "retraining": "disabled",
+      "api_request_count": 39,
+      "auth_failures": 1,
+      "rate_limit_events": 1,
+      "mean_latency_ms": 27.115,
+      "files": [
+        "monitoring_summary.json",
+        "data_quality_report.json",
+        "drift_report.json",
+        "api_metrics.json"
+      ]
+    },
+    "performance": {
+      "single_s": 0.0818,
+      "batch": [
+        {
+          "n": 10,
+          "status_code": 200,
+          "rows_processed": 10,
+          "success_count": 10,
+          "failure_count": 0,
+          "latency_s": 0.0679,
+          "rows_per_s": 147.25,
+          "response_bytes": 4301
+        },
+        {
+          "n": 100,
+          "status_code": 200,
+          "rows_processed": 100,
+          "success_count": 100,
+          "failure_count": 0,
+          "latency_s": 0.0811,
+          "rows_per_s": 1232.75,
+          "response_bytes": 39312
+        },
+        {
+          "n": 500,
+          "status_code": 200,
+          "rows_processed": 500,
+          "success_count": 500,
+          "failure_count": 0,
+          "latency_s": 0.1051,
+          "rows_per_s": 4758.33,
+          "response_bytes": 195312
+        }
+      ],
+      "success_rate": 1.0,
+      "phase12_reference": {
+        "single_s": 0.0681,
+        "batch10_s": 0.0607,
+        "rows_per_s": 164.8,
+        "note": "Historical Phase 12 freeze snapshot; not an SLO."
+      },
+      "vs_phase12": {
+        "single_s_delta": 0.0137,
+        "batch10_s_delta": 0.0072,
+        "note": "Phase 14 timings include production auth/TestClient overhead; not an SLO."
+      }
+    },
+    "security_regression": {
+      "headers": true,
+      "dockerfile_non_root": true,
+      "no_api_key_in_dockerfile": true,
+      "production_requires_key": true
+    }
+  }
+}

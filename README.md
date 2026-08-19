@@ -8,7 +8,7 @@
 ---
 
 ## 📌 1. Project Overview
-**Demand & Inventory Intelligence** is an enterprise-grade retail intelligence platform developed under **Project FORESIGHT**. The system analyzes multi-year retail transactions, detects seasonal buying patterns and demand drivers, forecasts future product demand using machine learning, identifies inventory risks (stockouts & overstocking), and generates actionable business recommendations.
+**Demand & Inventory Intelligence** is a retail **decision-support** platform developed under **Project FORESIGHT**. The system analyzes multi-year retail transactions, forecasts product demand with frozen machine-learning models, scores inventory risk on a reference extract, and produces business reviews. It does **not** place purchase orders or retrain models in production. Serving is academic/reference: local API, dashboards, and BI extracts — not a live cloud deployment.
 
 ---
 
@@ -47,61 +47,160 @@ The platform leverages two complementary datasets:
 
 ---
 
-## 🏗️ 4. Project Architecture & Directory Structure
+## Architecture
+
+```
+Historical Data → Data Validation → Feature Engineering → Frozen ML Models
+        → Forecast API → Forecast Output + Monitoring
+        → Inventory Risk (1000-row reference extract)
+        → Recommendations (decision support)
+        → BI exports + Streamlit dashboards
+```
+
+**Implemented** locally: data pipeline, frozen models, FastAPI, monitoring files, dashboards, `outputs/bi/`. Inventory scoring is **reference**. Cloud hosting, TLS, identity provider, secrets manager, autoscaling, automated retraining, and Power BI publication are **not deployed**. See `docs/phase15_final_system_report.md`.
 
 ```
 Demand-Inventory-Intelligence/
-├── data/
-│   ├── raw/                      # Ingested datasets (Parquet, CSV)
-│   ├── processed/                # Cleaned, standardized analytical datasets
-│   └── sample/                   # Samples for rapid testing
-├── notebooks/
-│   ├── 01_project_and_data_understanding.ipynb   # [COMPLETED & EXECUTED]
-│   ├── 02_data_cleaning.ipynb                    # [COMPLETED & EXECUTED]
-│   ├── 03_data_integration.ipynb
-│   ├── 04_eda.ipynb
-│   ├── 05_feature_engineering.ipynb
-│   ├── 06_baseline_forecasting.ipynb
-│   ├── 07_ml_forecasting.ipynb
-│   ├── 08_model_evaluation.ipynb
-│   └── 09_inventory_risk.ipynb
-├── src/
-│   ├── __init__.py
-│   ├── data_cleaning.py
-│   ├── data_integration.py
-│   ├── feature_engineering.py
-│   ├── forecasting.py
-│   ├── evaluation.py
-│   ├── risk_scoring.py
-│   ├── generate_synthetic_retail.py
-│   └── inspect_datasets.py
-├── models/                       # Trained ML models (.joblib)
-├── outputs/
-│   ├── figures/                  # High-resolution visual artifacts
-│   ├── forecasts/                # Demand forecast outputs
-│   └── risk_scores/              # Inventory risk scores
-├── dashboard/
-│   └── app.py                   # Streamlit Intelligence Web Application
-├── powerbi/                      # Power BI dashboard templates & data
-├── docs/                         # Documentation and profiling summaries
-├── requirements.txt              # Environment dependencies
-├── README.md
-└── .gitignore
+├── data/processed/           # Cleaned CAM, frozen features, final forecasts
+├── models/final/             # Frozen Phase 11 joblibs (do not retrain)
+├── src/api/                  # FastAPI serving
+├── src/bi/                   # Phase 15 KPI / export layer (no ML training)
+├── src/forecasting/          # Inference, registry, batch
+├── src/monitoring/           # File-based monitoring
+├── src/production/           # Readiness, simulation, Docker check
+├── src/security/             # API key, rate limit, audit
+├── dashboard/                # app.py, forecast_analytics.py, executive_intelligence.py
+├── outputs/bi/               # Power BI–ready parquet extracts
+├── outputs/monitoring/       # JSON snapshots (not live APM)
+├── outputs/risk_scores/      # 1000-row inventory extract
+├── docs/                     # Phase reports including Phase 15
+├── Dockerfile
+└── tests/
 ```
 
 ---
 
-## 🛠️ 5. Technology Stack
+## Data Sources
+
+See [Section 3](#-3-datasets-analyzed). Forecast grain: UCI product × invoice-day (`ONLINE`); SYNTHETIC store × SKU × day. Inventory BI uses only `outputs/risk_scores/inventory_risk_matrix.parquet` (1,000 rows).
+
+---
+
+## Forecasting
+
+Final models (frozen): UCI h=1 Phase 8 LightGBM `uci_h1_phase8_lightgbm`; SYNTHETIC h=1 hurdle `synthetic_h1_hurdle_th050`; both sources h=3/7/14/30 direct LightGBM. P10/P90 are interval companions. SHA-256 hashes must remain:
+
+* UCI h=1 `331909f0fe191c0b9cb0418884b25eb59012f479f61f8b3e2ad51b729273e90d`
+* SYNTHETIC h=1 `59a2b72024861d7f9c827596a52256af95facabfa796bdae5955374221cf1bf4`
+
+Details: `docs/final_forecasting_report.md`, `docs/final_model_registry.json`.
+
+---
+
+## Model Validation
+
+Phase 8 is **FROZEN**. Phases 9–14 completed in-repo (see Project Status). Phase 15 validates nested Phase 12–14 plus the BI layer via `python src/validate_phase15.py` (counts calculated at runtime).
+
+Held-out TEST monitoring snapshot: MAE 8.8075, RMSE 37.7012, WAPE 73.4244, bias −0.2285 on 957,949 rows with actuals.
+
+---
+
+## Inventory Intelligence
+
+Reference scoring on a **1000-row extract**: 733 CRITICAL / HIGH stockout labels, **887** replenishment-review flags (`reorder_triggered`), 1 MODERATE OVERSTOCK, 0 SEVERE OVERSTOCK. UCI keys do not join this extract (NOT AVAILABLE). Not a live WMS.
+
+---
+
+## API
+
+```bash
+uvicorn src.api.app:app --host 127.0.0.1 --port 8000
+```
+
+`GET /health`, `GET /ready`, `POST /forecast` (single and batch). Docs: `docs/api_documentation.md`.
+
+---
+
+## Security
+
+Configurable API-key auth, in-process rate limits, audit log lines, security headers. Copy `.env.example`; do not commit `.env`. Development may disable auth; production-style local serving must set `FORESIGHT_API_AUTH_ENABLED=true` and `FORESIGHT_API_API_KEY`. This is **not** an identity provider. See `docs/phase13_security_report.md`.
+
+---
+
+## Monitoring
+
+```bash
+python -m src.monitoring.run_monitoring
+```
+
+Writes `outputs/monitoring/*.json`. File snapshots, not live telemetry. Automatic retraining is disabled. Guide: `docs/monitoring_guide.md`.
+
+---
+
+## Dashboard
+
+```bash
+streamlit run dashboard/app.py
+streamlit run dashboard/forecast_analytics.py
+streamlit run dashboard/executive_intelligence.py
+```
+
+The in-session trainer in `app.py` does **not** write `models/final`. Executive Intelligence reads `outputs/bi/` and shows Data as of / Forecast generated / Monitoring snapshot. Filters do not change frozen models.
+
+---
+
+## BI Exports
+
+```bash
+python -m src.bi.exports
+```
+
+Produces `outputs/bi/executive_kpis.parquet`, `product_demand.parquet`, `forecast_performance.parquet`, `inventory_risk.parquet`, `recommendations.parquet`, `system_health.parquet`. Compact extracts; the 957k forecast file is not duplicated.
+
+---
+
+## Power BI Preparation
+
+Schema and intended relationships: `docs/powerbi_data_model.md`. **Power BI was not deployed.** Tests do not require Power BI Desktop.
+
+---
+
+## Testing
+
+```bash
+python src/validate_phase12.py
+python src/validate_phase13.py
+python -m pytest tests -q
+python src/validate_phase14.py
+python src/validate_phase15.py
+```
+
+---
+
+## Deployment
+
+Local Docker (non-root, healthcheck) is documented in `docs/deployment_guide.md` and `docs/phase14_known_limitations.md`. **Cloud deployment was not executed.**
+
+---
+
+## Limitations
+
+Cloud, TLS, identity provider, secrets manager, autoscaling, automated retraining, full-universe inventory, and Power BI publication are **not deployed**. The risk matrix is a 1000-row reference extract. See `docs/phase15_known_limitations.md`.
+
+---
+
+## 🛠️ Technology Stack
 - **Languages:** Python 3.12
 - **Data Engineering & Manipulation:** Pandas, NumPy, PyArrow (Parquet)
 - **Visualization:** Matplotlib, Seaborn, Plotly
 - **Machine Learning & Time Series:** Scikit-learn, XGBoost, LightGBM, Statsmodels
-- **Dashboard & Delivery:** Streamlit, Power BI
+- **Serving:** FastAPI, Uvicorn
+- **Dashboard & BI prep:** Streamlit; Power BI–ready parquet (Power BI not published)
 - **Serialization:** Joblib
 
 ---
 
-## 🚀 6. Installation & Quickstart
+## 🚀 Installation & Quickstart
 
 ### Step 1: Clone the Repository
 ```bash
@@ -138,41 +237,87 @@ jupyter nbconvert --to notebook --execute notebooks/02_data_cleaning.ipynb --out
 jupyter notebook notebooks/01_project_and_data_understanding.ipynb
 ```
 
-### Forecast serving (Phase 12)
-
-Final models: UCI h=1 frozen Phase 8 LightGBM; SYNTHETIC h=1 hurdle; both sources h=3/7/14/30 direct LightGBM. See `docs/final_forecasting_report.md`.
+### Forecast serving and Phase 15 BI
 
 ```bash
 python src/validate_phase12.py
+python src/validate_phase13.py
+python src/validate_phase14.py
+python src/validate_phase15.py
 python -m pytest tests -q
 uvicorn src.api.app:app --host 127.0.0.1 --port 8000
 streamlit run dashboard/forecast_analytics.py
+streamlit run dashboard/executive_intelligence.py
+python -m src.bi.exports
 python -m src.forecasting.batch_forecast --help
 python -m src.monitoring.run_monitoring
 ```
 
-Docs: `docs/api_documentation.md`, `docs/deployment_guide.md`, `docs/monitoring_guide.md`.
+Docs: `docs/api_documentation.md`, `docs/deployment_guide.md`, `docs/monitoring_guide.md`, `docs/phase15_executive_summary.md`, `docs/powerbi_data_model.md`.
 
-Authentication is not included in this academic/reference implementation.
+Copy `.env.example` for local configuration. Do not commit `.env`. Development may disable authentication; production-style local serving must set `FORESIGHT_API_AUTH_ENABLED=true` and `FORESIGHT_API_API_KEY`.
 
 ---
 
-## 📈 7. Development Roadmap & Status
+## Project Status
 
-- [x] **Phase 1: Business Understanding** — Defined problem statement, KPI framework, and target metrics.
-- [x] **Phase 2: Data Collection & Profiling** — Ingested datasets, executed comprehensive data inspection, and completed `01_project_and_data_understanding.ipynb`.
-- [x] **Phase 3: Data Cleaning** — Full data-quality engineering pipeline in `src/data_cleaning.py` + `notebooks/02_data_cleaning.ipynb`. See [Section 7.1](#71-phase-3-data-cleaning--quality-engineering-report).
-- [x] **Phase 4: Data Integration** — Building the Common Analytical Model (CAM) in `src/data_integration.py`.
-- [ ] **Phase 5: Exploratory Data Analysis (EDA)** — Sales, product, customer, and temporal patterns.
-- [x] **Phase 6: Feature Engineering** — Lags, rolling statistics, and calendar features in `src/feature_engineering.py`.
-- [x] **Phase 7: Baseline Forecasting** — Naive, moving average, and seasonal lag baselines in `src/forecasting.py`.
-- [x] **Phase 8: Machine Learning Forecasting** — LightGBM selected; 57/57 validation. Frozen benchmark.
-- [x] **Phase 9: Stability & residual analysis** — 146/146 PASS.
-- [x] **Phase 10: Experimental improvements** — hurdle, direct horizon, intervals, HPO.
-- [x] **Phase 11: Final model selection** — 140/140 PASS; READY WITH MONITORING.
-- [x] **Phase 12: Production packaging** — inference package, FastAPI, monitoring, forecast dashboard (academic/reference).
-- [x] **Streamlit executive application** — `dashboard/app.py` (inventory + scenario UI).
-- [ ] **Power BI Dashboard / cloud deployment** — not executed in this repository.
+| Phase | Status |
+| --- | --- |
+| Phase 1 | COMPLETE |
+| Phase 2 | COMPLETE |
+| Phase 3 | COMPLETE |
+| Phase 4 | COMPLETE |
+| Phase 5 | COMPLETE (`docs/eda_report.md`) |
+| Phase 6 | COMPLETE |
+| Phase 7 | COMPLETE |
+| Phase 8 | FROZEN |
+| Phase 9 | COMPLETE |
+| Phase 10 | COMPLETE |
+| Phase 11 | COMPLETE |
+| Phase 12 | COMPLETE (42/42 PASS) |
+| Phase 13 | COMPLETE (42/42 PASS) |
+| Phase 14 | COMPLETE (19/19 PASS) |
+| Phase 15 | COMPLETE (12/12 PASS) |
+
+- [x] **Phase 1: Business Understanding**
+- [x] **Phase 2: Data Collection & Profiling**
+- [x] **Phase 3: Data Cleaning** — See [Phase 3 report](#71-phase-3-data-cleaning--quality-engineering-report).
+- [x] **Phase 4: Data Integration**
+- [x] **Phase 5: Exploratory Data Analysis** — `docs/eda_report.md`, `notebooks/04_eda.ipynb`
+- [x] **Phase 6: Feature Engineering**
+- [x] **Phase 7: Baseline Forecasting**
+- [x] **Phase 8: Machine Learning Forecasting** — FROZEN LightGBM benchmark
+- [x] **Phase 9: Stability & residual analysis**
+- [x] **Phase 10: Experimental improvements**
+- [x] **Phase 11: Final model selection**
+- [x] **Phase 12: Production packaging**
+- [x] **Phase 13: Production security & operationalization** — cloud **not** executed
+- [x] **Phase 14: End-to-end production simulation** — cloud **not** deployed
+- [x] **Phase 15: Executive intelligence, BI dashboard, project completion** — Power BI **prepared, not published**
+
+### Implemented
+
+* Frozen forecasting, validation, inference, API, dashboards, monitoring snapshots
+* Security hardening (configurable; local/reference)
+* Business validation against the 10 original questions
+* Phase 15 KPI layer, BI parquet exports, executive dashboard
+
+### Partially implemented / reference
+
+* Inventory risk on a 1000-row extract (not full operational universe)
+* In-process API metrics (not cloud APM)
+* Local Docker image
+
+### Not deployed
+
+* Cloud deployment
+* TLS infrastructure
+* Enterprise identity provider
+* Production secrets manager
+* Autoscaling
+* Automated retraining
+* Power BI workspace / scheduled refresh
+* Managed database / live warehouse feed
 
 ---
 

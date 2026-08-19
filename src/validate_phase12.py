@@ -206,11 +206,15 @@ if __name__ == "__main__":
     try:
         result, perf = run_validation()
         meta_path = PROJECT_ROOT / "docs" / "phase12_metadata.json"
-        payload = {
-            "phase": 12,
-            "validation": {"passed": result.passed, "total": result.total, "summary": result.summary()},
-            "performance": perf,
-        }
+        payload = {}
+        if meta_path.exists():
+            payload = json.loads(meta_path.read_text(encoding="utf-8"))
+        payload["phase"] = 12
+        payload["validation"] = {"passed": result.passed, "total": result.total, "summary": result.summary()}
+        # Keep the historical Phase 12 performance snapshot. Current timings are printed
+        # above and recorded separately by later phases; do not overwrite frozen numbers.
+        payload.setdefault("performance", perf)
+        payload["last_run_performance"] = perf
         with open(meta_path, "w", encoding="utf-8") as f:
             json.dump(payload, f, indent=2)
         sys.exit(0 if result.failed == 0 else 1)

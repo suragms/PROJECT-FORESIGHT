@@ -1,0 +1,182 @@
+{
+  "generated_at": "2026-08-18T16:43:50.434029+00:00",
+  "questions_with_evidence": 10,
+  "questions_total": 10,
+  "status": "PASS",
+  "layers": {
+    "MODEL FORECAST": "Phase 11 registered joblib predictions in final_predictions.parquet",
+    "INVENTORY RISK": "Reference scoring in inventory_risk_matrix.parquet (synthetic snapshots)",
+    "BUSINESS RECOMMENDATION": "Derived actions in src/risk_scoring.py; not executed against suppliers"
+  },
+  "inventory_risk": {
+    "path": "C:\\Users\\SURAG\\Documents\\zidio\\Project_FORESIGHT\\Demand-Inventory-Intelligence\\outputs\\risk_scores\\inventory_risk_matrix.parquet",
+    "exists": true,
+    "columns_present": [
+      "store_id",
+      "sku_id",
+      "ending_inventory",
+      "on_order_qty",
+      "lead_time_days",
+      "reorder_point",
+      "safety_stock",
+      "avg_daily_demand",
+      "days_of_supply",
+      "stockout_risk_score",
+      "stockout_risk_level",
+      "overstock_risk_score",
+      "overstock_risk_level",
+      "reorder_triggered",
+      "recommended_reorder_qty"
+    ],
+    "missing_columns": [],
+    "n_rows": 1000,
+    "status": "PASS",
+    "n_reorder_triggered": 0,
+    "n_critical_stockout": 733,
+    "n_severe_overstock": 0,
+    "note": "Inventory risk is a reference scoring layer over synthetic store-SKU snapshots. It is not a live warehouse execution system."
+  },
+  "forecast_evidence": {
+    "exists": true,
+    "status": "PASS",
+    "path": "C:\\Users\\SURAG\\Documents\\zidio\\Project_FORESIGHT\\Demand-Inventory-Intelligence\\data\\processed\\forecasts\\final\\final_predictions.parquet",
+    "n_rows": 957949,
+    "datasets": [
+      "SYNTHETIC",
+      "UCI"
+    ],
+    "horizons": [
+      1,
+      3,
+      7,
+      14,
+      30
+    ],
+    "mean_prediction": 11.7669,
+    "note": "These rows are MODEL FORECAST outputs from Phase 11 registered models."
+  },
+  "questions": [
+    {
+      "id": "Q1",
+      "title": "Top Products",
+      "layer": "BUSINESS RECOMMENDATION / HISTORICAL ANALYTICS",
+      "evidence_available": true,
+      "evidence": {
+        "source": "outputs/risk_scores/inventory_risk_matrix.parquet",
+        "top_sku_ids": [
+          "SKU_00057",
+          "SKU_00032",
+          "SKU_00033",
+          "SKU_00060",
+          "SKU_00092"
+        ]
+      }
+    },
+    {
+      "id": "Q2",
+      "title": "Bottom Products",
+      "layer": "BUSINESS RECOMMENDATION / HISTORICAL ANALYTICS",
+      "evidence_available": true,
+      "evidence": {
+        "source": "outputs/risk_scores/inventory_risk_matrix.parquet",
+        "bottom_sku_ids": [
+          "SKU_00064",
+          "SKU_00023",
+          "SKU_00043",
+          "SKU_00009",
+          "SKU_00098"
+        ]
+      }
+    },
+    {
+      "id": "Q3",
+      "title": "Demand Dynamics",
+      "layer": "HISTORICAL ANALYTICS",
+      "evidence_available": true,
+      "evidence": {
+        "source": "src/risk_scoring.py answer_10_core_questions / CAM sales",
+        "implemented": true
+      }
+    },
+    {
+      "id": "Q4",
+      "title": "Seasonality",
+      "layer": "HISTORICAL ANALYTICS",
+      "evidence_available": true,
+      "evidence": {
+        "source": "calendar-joined sales in src/risk_scoring.py",
+        "implemented": true
+      }
+    },
+    {
+      "id": "Q5",
+      "title": "Demand Growth",
+      "layer": "HISTORICAL ANALYTICS",
+      "evidence_available": true,
+      "evidence": {
+        "source": "year-over-year SKU units in src/risk_scoring.py",
+        "implemented": true
+      }
+    },
+    {
+      "id": "Q6",
+      "title": "Future Demand",
+      "layer": "MODEL FORECAST",
+      "evidence_available": true,
+      "evidence": {
+        "source": "C:\\Users\\SURAG\\Documents\\zidio\\Project_FORESIGHT\\Demand-Inventory-Intelligence\\data\\processed\\forecasts\\final\\final_predictions.parquet",
+        "n_forecast_rows": 957949,
+        "horizons": [
+          1,
+          3,
+          7,
+          14,
+          30
+        ]
+      }
+    },
+    {
+      "id": "Q7",
+      "title": "Stockout Risk",
+      "layer": "INVENTORY RISK",
+      "evidence_available": true,
+      "evidence": {
+        "n_critical": 733,
+        "column": "stockout_risk_level"
+      }
+    },
+    {
+      "id": "Q8",
+      "title": "Overstock Risk",
+      "layer": "INVENTORY RISK",
+      "evidence_available": true,
+      "evidence": {
+        "n_severe": 0,
+        "column": "overstock_risk_level"
+      }
+    },
+    {
+      "id": "Q9",
+      "title": "Replenishment Trigger",
+      "layer": "INVENTORY RISK",
+      "evidence_available": true,
+      "evidence": {
+        "n_reorder_triggered": 0,
+        "executed_in_production": false,
+        "note": "ROP breach is scored; purchase orders are not sent."
+      }
+    },
+    {
+      "id": "Q10",
+      "title": "Actionable Recommendations",
+      "layer": "BUSINESS RECOMMENDATION",
+      "evidence_available": true,
+      "evidence": {
+        "source": "src/risk_scoring.py recommendations list",
+        "automated_replenishment": false
+      }
+    }
+  ],
+  "automated_replenishment_implemented": false,
+  "automatic_retraining_enabled": false
+}

@@ -20,7 +20,29 @@ Do **not** overwrite Phase 8 files in `models/uci_best_model.joblib` or `models/
 
 ## Retraining policy
 
-Phase 12 inference **never retrains**. The API, batch CLI, and forecast dashboard only load registered joblibs.
+Automatic retraining is **not enabled**.
+
+```text
+Training
+   ↓
+Validation
+   ↓
+Model Selection
+   ↓
+Registry
+   ↓
+Hash Verification
+   ↓
+Deployment (local/reference serving)
+   ↓
+Monitoring
+   ↓
+Drift / Accuracy Review
+   ↓
+Human-approved Retraining
+```
+
+Phase 12/13 inference **never retrains**. The API, batch CLI, and forecast dashboard only load registered joblibs. Monitoring must not modify frozen models. A new candidate requires a human-approved experiment, a new `model_id`, and a new SHA-256 registry row.
 
 ## Rollback
 

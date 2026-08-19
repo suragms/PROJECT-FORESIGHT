@@ -16,8 +16,75 @@ PROJECT_ROOT = Path(
 )
 
 APP_NAME = "Demand-Inventory-Intelligence"
-APP_VERSION = os.environ.get("FORESIGHT_APP_VERSION", "0.12.0")
+APP_VERSION = os.environ.get("FORESIGHT_APP_VERSION", "0.13.0")
 LOG_LEVEL = os.environ.get("FORESIGHT_LOG_LEVEL", "INFO")
+
+VALID_ENVIRONMENTS = ("development", "production")
+VALID_LOG_LEVELS = ("DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL")
+
+
+def _env_bool(name: str, default: bool = False) -> bool:
+    raw = os.environ.get(name)
+    if raw is None:
+        return default
+    return raw.strip().lower() in ("1", "true", "yes", "on")
+
+
+def _env_int(name: str, default: int) -> int:
+    raw = os.environ.get(name)
+    if raw is None or raw.strip() == "":
+        return default
+    return int(raw)
+
+
+def foresight_env() -> str:
+    return os.environ.get("FORESIGHT_ENV", "development").strip().lower()
+
+
+def api_auth_enabled() -> bool:
+    return _env_bool("FORESIGHT_API_AUTH_ENABLED", default=False)
+
+
+def api_api_key() -> str:
+    return os.environ.get("FORESIGHT_API_API_KEY", "").strip()
+
+
+def rate_limit_enabled() -> bool:
+    return _env_bool("FORESIGHT_RATE_LIMIT_ENABLED", default=False)
+
+
+def rate_limit_requests() -> int:
+    return _env_int("FORESIGHT_RATE_LIMIT_REQUESTS", 60)
+
+
+def rate_limit_window_seconds() -> int:
+    return _env_int("FORESIGHT_RATE_LIMIT_WINDOW_SECONDS", 60)
+
+
+def rate_limit_forecast_requests() -> int:
+    general = rate_limit_requests()
+    default = max(1, general // 3)
+    return _env_int("FORESIGHT_RATE_LIMIT_FORECAST_REQUESTS", default)
+
+
+def api_host() -> str:
+    return os.environ.get("FORESIGHT_API_HOST", API_HOST)
+
+
+def api_port() -> int:
+    return _env_int("FORESIGHT_API_PORT", API_PORT)
+
+
+def api_max_batch() -> int:
+    return _env_int("FORESIGHT_API_MAX_BATCH", API_MAX_BATCH)
+
+
+def api_max_payload_bytes() -> int:
+    return _env_int("FORESIGHT_API_MAX_PAYLOAD_BYTES", API_MAX_PAYLOAD_BYTES)
+
+
+def log_level() -> str:
+    return os.environ.get("FORESIGHT_LOG_LEVEL", LOG_LEVEL).strip().upper()
 
 REGISTRY_PATH = PROJECT_ROOT / os.environ.get(
     "FORESIGHT_REGISTRY_PATH", os.path.join("docs", "final_model_registry.json")
@@ -34,6 +101,9 @@ SAMPLES_DIR = PROJECT_ROOT / "data" / "samples"
 OUTPUTS_FORECASTS_DIR = PROJECT_ROOT / "outputs" / "forecasts"
 OUTPUTS_MONITORING_DIR = PROJECT_ROOT / "outputs" / "monitoring"
 OUTPUTS_FIGURES_DIR = PROJECT_ROOT / "outputs" / "figures"
+OUTPUTS_RISK_DIR = PROJECT_ROOT / "outputs" / "risk_scores"
+INVENTORY_RISK_PATH = OUTPUTS_RISK_DIR / "inventory_risk_matrix.parquet"
+OUTPUTS_BI_DIR = PROJECT_ROOT / "outputs" / "bi"
 
 SUPPORTED_DATASETS = ("UCI", "SYNTHETIC")
 SUPPORTED_HORIZONS = (1, 3, 7, 14, 30)

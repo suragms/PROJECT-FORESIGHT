@@ -42,6 +42,9 @@ def configure_logging(level: str | None = None) -> logging.Logger:
     log.propagate = False
     logging.getLogger("forecast_service").handlers = log.handlers
     logging.getLogger("forecast_service").setLevel(log.level)
+    logging.getLogger("forecast_service.audit").handlers = log.handlers
+    logging.getLogger("forecast_service.audit").setLevel(log.level)
+    logging.getLogger("forecast_service.audit").propagate = False
     logging.getLogger("final_forecasting").handlers = log.handlers
     logging.getLogger("final_forecasting").setLevel(log.level)
     return log

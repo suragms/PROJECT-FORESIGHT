@@ -16,7 +16,12 @@ python -m src.monitoring.run_monitoring
 | `forecast_monitoring_report.json` | prediction mean/median/std, zero rate, volume, horizon mix, alerts |
 | `accuracy_monitoring_report.json` | MAE/RMSE/WAPE/sMAPE/bias by dataset, horizon, entity, demand regime — **only where actuals exist** |
 | `drift_report.json` | PSI and KS on `units_sold_lag_1`, `rolling_mean_7`, `average_unit_price` vs train split |
-| `monitoring_summary.json` | alert count and pointers |
+| `monitoring_summary.json` | alert count, pointers, in-process API counters |
+| `api_metrics.json` | request count, error rate, auth failures, rate-limit events, mean latency, batch size |
+
+API counters are **in-process** and empty unless that worker served traffic. They do not replace a production APM.
+
+Monitoring **does not retrain** and **does not modify** frozen models. Automatic retraining is not enabled.
 
 ## Alert codes
 

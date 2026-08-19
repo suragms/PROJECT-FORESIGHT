@@ -1,8 +1,17 @@
 {
-  "generated_at": "2026-08-14T07:26:12.950046+00:00",
+  "generated_at": "2026-08-18T16:44:32.888951+00:00",
   "forecast_file": "C:\\Users\\SURAG\\Documents\\zidio\\Project_FORESIGHT\\Demand-Inventory-Intelligence\\data\\processed\\forecasts\\final\\final_predictions.parquet",
   "n_forecasts": 957949,
   "n_alerts": 0,
   "alerts": [],
-  "accuracy_available": true
+  "accuracy_available": true,
+  "api_metrics": {
+    "request_count": 39,
+    "error_rate": 0.4872,
+    "auth_failures": 1,
+    "rate_limit_events": 1,
+    "mean_latency_ms": 27.115,
+    "note": "In-process API counters; empty unless this process served traffic."
+  },
+  "retraining": "disabled"
 }

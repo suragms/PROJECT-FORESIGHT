@@ -7,7 +7,9 @@ from datetime import datetime, timezone
 import numpy as np
 import pandas as pd
 from fastapi import APIRouter, HTTPException, Request
+from fastapi.responses import JSONResponse
 
+from src.api.metrics import incr, observe_batch, snapshot
 from src.api.schemas import (
     BatchForecastRequest,
     ForecastRequest,
@@ -25,6 +27,9 @@ from src.config import (
 from src.forecasting.inference import ForecastEngine
 from src.forecasting.registry import RegistryError, load_registry, resolve_selected, verify_hash
 from src.forecasting.validation import InputValidationError, records_to_frame, validate_dataset_horizon
+from src.production.health import liveness
+from src.production.readiness import check_readiness
+from src.security.audit import audit
 
 router = APIRouter()
 
@@ -66,12 +71,39 @@ def _engine(request: Request, dataset: str, horizon: int) -> ForecastEngine:
     key = (dataset, int(horizon))
     if key not in cache:
         cache[key] = ForecastEngine(dataset, int(horizon))
+        meta = cache[key].metadata()
+        audit(
+            "model_loaded",
+            model_id=meta.get("model_id"),
+            dataset=dataset,
+            horizon=int(horizon),
+            hash=meta.get("hash"),
+        )
+        audit("model_hash_verification", model_id=meta.get("model_id"), hash=meta.get("hash"))
     return cache[key]
 
 
 @router.get("/health", response_model=HealthResponse)
 def health() -> HealthResponse:
-    return HealthResponse(status="ok", version=APP_VERSION, timestamp=_now())
+    body = liveness()
+    return HealthResponse(**body)
+
+
+@router.get("/ready")
+def ready() -> JSONResponse:
+    status_code, body = check_readiness()
+    audit(
+        "readiness_check",
+        status=body.get("status"),
+        models_verified=body.get("models_verified"),
+        registry_verified=body.get("registry_verified"),
+    )
+    return JSONResponse(status_code=status_code, content=body)
+
+
+@router.get("/metrics")
+def metrics() -> dict:
+    return snapshot()
 
 
 @router.get("/model", response_model=ModelListResponse)
@@ -119,12 +151,24 @@ def forecast(body: ForecastRequest, request: Request) -> ForecastResponse:
         df = records_to_frame([rec])
         engine = _engine(request, body.source_dataset, body.horizon)
         out = engine.predict(df, include_actual=body.include_actual)
+        observe_batch(1)
+        rid = getattr(request.state, "request_id", None)
+        audit(
+            "forecast_request",
+            dataset=body.source_dataset,
+            horizon=body.horizon,
+            n=1,
+            model_id=engine.metadata().get("model_id"),
+            request_id=rid,
+        )
         return ForecastResponse(
             forecasts=_frame_to_rows(out),
             metadata=engine.metadata(),
             n=len(out),
         )
     except (InputValidationError, RegistryError) as exc:
+        incr("forecast_failures")
+        audit("validation_failure", path="/forecast", reason=str(exc)[:200])
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 
 
@@ -141,10 +185,22 @@ def forecast_batch(body: BatchForecastRequest, request: Request) -> ForecastResp
         df = records_to_frame(payload)
         engine = _engine(request, body.source_dataset, body.horizon)
         out = engine.predict(df, include_actual=body.include_actual)
+        observe_batch(len(out))
+        rid = getattr(request.state, "request_id", None)
+        audit(
+            "batch_forecast_request",
+            dataset=body.source_dataset,
+            horizon=body.horizon,
+            n=len(out),
+            model_id=engine.metadata().get("model_id"),
+            request_id=rid,
+        )
         return ForecastResponse(
             forecasts=_frame_to_rows(out),
             metadata=engine.metadata(),
             n=len(out),
         )
     except (InputValidationError, RegistryError) as exc:
+        incr("forecast_failures")
+        audit("validation_failure", path="/forecast/batch", reason=str(exc)[:200])
         raise HTTPException(status_code=400, detail=str(exc)) from exc

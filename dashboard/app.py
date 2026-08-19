@@ -292,7 +292,13 @@ with st.sidebar:
 # Top Header
 # ---------------------------------------------------------------------------
 st.markdown('<div class="header-banner">Demand & Inventory Intelligence</div>', unsafe_allow_html=True)
-st.markdown("<p style='color: #94a3b8; font-size: 1.05rem; margin-bottom: 20px;'>Enterprise Retail Demand Forecasting, Dynamic Inventory Risk Scoring, and Automated Replenishment Engine</p>", unsafe_allow_html=True)
+st.markdown("<p style='color: #94a3b8; font-size: 1.05rem; margin-bottom: 8px;'>Retail demand forecasting, inventory risk scoring, and replenishment recommendations</p>", unsafe_allow_html=True)
+st.caption(
+    "The in-session SKU trainer below does **not** write Phase 11 joblibs under `models/final/`. "
+    "Risk scores are reference recommendations — purchase orders are not sent. "
+    "Use **Forecast Analytics** (`dashboard/forecast_analytics.py`) for frozen registry forecasts "
+    "and **Executive Intelligence** (`dashboard/executive_intelligence.py`) for Phase 15 BI over saved extracts."
+)
 
 
 # ---------------------------------------------------------------------------
@@ -303,7 +309,7 @@ tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs([
     "📈 Demand Forecasting Studio",
     "🎛️ What-If Scenario Simulator",
     "⚠️ Inventory Risk Triage",
-    "📦 Automated Replenishment & PO",
+    "📦 Replenishment Review & Draft PO",
     "🔍 SKU & Store Deep-Dive",
     "💡 The 10 Core Questions",
     "📊 Data Quality & Profiling",
@@ -354,7 +360,7 @@ with tab1:
         <div class="metric-card">
             <div class="metric-title">Reorder Triggers Active</div>
             <div class="metric-value">{kpis['reorder_triggered_count']}</div>
-            <div class="metric-delta-warn">⚡ Urgent PO generation required</div>
+            <div class="metric-delta-warn">Draft replenishment reviews (not auto POs)</div>
         </div>
         """, unsafe_allow_html=True)
 
@@ -711,7 +717,11 @@ with tab3:
 # ===========================================================================
 with tab4:
     st.markdown("### ⚠️ Supply Chain Inventory Risk & Stockout Prediction")
-    st.caption("Real-time identification of imminent stockout risks, safety stock breaches, and excess carrying capital.")
+    st.caption(
+        "INVENTORY RISK scores from the latest synthetic snapshot, not a live warehouse feed. "
+        "CRITICAL / HIGH, MEDIUM (REORDER), and LOW / SAFE are scoring labels. "
+        "Recommendations are not purchase orders."
+    )
 
     # Filter controls
     r_c1, r_c2, r_c3 = st.columns(3)
@@ -746,7 +756,7 @@ with tab4:
     rk1.metric("Critical Stockout SKUs", f"{crit_count}", delta="Action Required", delta_color="inverse")
     rk2.metric("Severe Overstock SKUs", f"{sever_overstock}", delta="Excess Capital", delta_color="inverse")
     rk3.metric("Capital Locked in Overstock", f"${total_tied_capital:,.2f}", delta="Annual Cost: $" + f"{total_tied_capital*0.25:,.2f}")
-    rk4.metric("Active Reorder Triggers", f"{(risk_df['reorder_triggered']).sum()}", delta="POs Pending")
+    rk4.metric("Replenishment Reviews", f"{(risk_df['reorder_triggered']).sum():,}", delta="Shelf at/below ROP")
 
     # Visual Risk Matrix Scatter: Days of Supply vs Stockout Score
     st.markdown("#### 🎯 Inventory Risk Quadrant Matrix (Days of Supply vs Stockout Risk)")
@@ -793,43 +803,66 @@ with tab4:
 
 
 # ===========================================================================
-# TAB 5: AUTOMATED REPLENISHMENT & PURCHASE ORDERS (PO)
+# TAB 5: REPLENISHMENT REVIEW (DRAFT PO SCHEDULE)
 # ===========================================================================
 with tab5:
-    st.markdown("### 📦 Dynamic Reorder Point (ROP) & Purchase Order Generator")
-    st.caption("Automated procurement triggers calculating Economic Order Quantities and supplier replenishment schedules.")
-
-    po_items = risk_df[risk_df["reorder_triggered"]].sort_values(by="recommended_order_spend", ascending=False)
-
-    p1, p2, p3 = st.columns(3)
-    p1.metric("SKUs Requiring Immediate Reorder", f"{len(po_items):,}")
-    p2.metric("Total Procurement Spend", f"${po_items['recommended_order_spend'].sum():,.2f}")
-    p3.metric("Total Units to Order", f"{po_items['recommended_reorder_qty'].sum():,}")
-
-    st.markdown("#### 📝 Recommended Purchase Order Schedule")
-    po_export_cols = [
-        "store_id", "sku_id", "sku_name", "supplier_id", "category",
-        "ending_inventory", "on_order_qty", "reorder_point", "safety_stock",
-        "lead_time_days", "recommended_reorder_qty", "cost_price", "recommended_order_spend"
-    ]
-    st.dataframe(
-        po_items[po_export_cols].head(100).style.format({
-            "cost_price": "${:.2f}",
-            "recommended_order_spend": "${:,.2f}",
-            "recommended_reorder_qty": "{:,}"
-        }),
-        use_container_width=True,
-        hide_index=True,
+    st.markdown("### 📦 Replenishment Review & Draft Purchase Order Schedule")
+    st.caption(
+        "Store-SKU rows where **ending shelf inventory** is at or below the catalog reorder point. "
+        "On-order quantity does not suppress a review when the shelf is empty. "
+        "This is **decision support only** — CSV exports are draft schedules, not supplier purchase orders."
     )
 
-    # CSV Download Button
-    csv_data = po_items[po_export_cols].to_csv(index=False).encode("utf-8")
-    st.download_button(
-        label="📥 Download Official Purchase Orders (CSV)",
-        data=csv_data,
-        file_name="FORESIGHT_Purchase_Orders_Export.csv",
-        mime="text/csv",
+    po_source = risk_df.copy()
+    if selected_store_id:
+        po_source = po_source[po_source["store_id"] == selected_store_id]
+    if selected_category != "All":
+        po_source = po_source[po_source["category"] == selected_category]
+    if selected_sku_id:
+        po_source = po_source[po_source["sku_id"] == selected_sku_id]
+
+    po_items = po_source[po_source["reorder_triggered"]].sort_values(
+        by="recommended_order_spend", ascending=False
     )
+
+    p1, p2, p3, p4 = st.columns(4)
+    p1.metric("SKUs Requiring Replenishment Review", f"{len(po_items):,}")
+    p2.metric("Draft Procurement Spend", f"${po_items['recommended_order_spend'].sum():,.2f}")
+    p3.metric("Draft Units to Order", f"{po_items['recommended_reorder_qty'].sum():,}")
+    p4.metric("Critical Stockout (all extract)", f"{(risk_df['stockout_risk_level'] == 'CRITICAL / HIGH').sum():,}")
+
+    if po_items.empty:
+        st.info(
+            "No store-SKU rows match the current sidebar filters with shelf stock at or below ROP. "
+            "Try **All Stores** / **All** category, or open the Inventory Risk tab for stockout labels."
+        )
+    else:
+        st.markdown("#### 📝 Draft Purchase Order Schedule (review only)")
+        po_export_cols = [
+            "store_id", "sku_id", "sku_name", "supplier_id", "category",
+            "ending_inventory", "on_order_qty", "reorder_point", "safety_stock",
+            "lead_time_days", "stockout_risk_level", "recommended_reorder_qty",
+            "cost_price", "recommended_order_spend", "replenishment_note",
+        ]
+        po_export_cols = [c for c in po_export_cols if c in po_items.columns]
+        st.dataframe(
+            po_items[po_export_cols].head(100).style.format({
+                "cost_price": "${:.2f}",
+                "recommended_order_spend": "${:,.2f}",
+                "recommended_reorder_qty": "{:,}",
+            }),
+            use_container_width=True,
+            hide_index=True,
+        )
+
+        csv_data = po_items[po_export_cols].to_csv(index=False).encode("utf-8")
+        st.download_button(
+            label="📥 Download Draft PO Schedule (CSV)",
+            data=csv_data,
+            file_name="FORESIGHT_Draft_PO_Schedule.csv",
+            mime="text/csv",
+            disabled=len(po_items) == 0,
+        )
 
 
 # ===========================================================================

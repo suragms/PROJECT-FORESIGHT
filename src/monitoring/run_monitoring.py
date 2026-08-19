@@ -107,6 +107,13 @@ def run_monitoring(
     quality_report = {"generated_at": datetime.now(timezone.utc).isoformat(), **quality}
     dist_report = {"generated_at": datetime.now(timezone.utc).isoformat(), **dist, "alerts": uniq}
     drift_report = {"generated_at": datetime.now(timezone.utc).isoformat(), **drift}
+    _write(out_dir / "data_quality_report.json", quality_report)
+    _write(out_dir / "forecast_monitoring_report.json", dist_report)
+    _write(out_dir / "accuracy_monitoring_report.json", accuracy_report)
+    _write(out_dir / "drift_report.json", drift_report)
+    from src.api.metrics import snapshot as api_snapshot
+    api_metrics = api_snapshot()
+    _write(out_dir / "api_metrics.json", api_metrics)
     summary = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "forecast_file": str(fc_path),
@@ -114,11 +121,16 @@ def run_monitoring(
         "n_alerts": len(uniq),
         "alerts": uniq,
         "accuracy_available": bool(acc_overall.get("n_with_actuals")),
+        "api_metrics": {
+            "request_count": api_metrics.get("request_count"),
+            "error_rate": api_metrics.get("error_rate"),
+            "auth_failures": api_metrics.get("auth_failures"),
+            "rate_limit_events": api_metrics.get("rate_limit_events"),
+            "mean_latency_ms": api_metrics.get("mean_latency_ms"),
+            "note": "In-process API counters; empty unless this process served traffic.",
+        },
+        "retraining": "disabled",
     }
-    _write(out_dir / "data_quality_report.json", quality_report)
-    _write(out_dir / "forecast_monitoring_report.json", dist_report)
-    _write(out_dir / "accuracy_monitoring_report.json", accuracy_report)
-    _write(out_dir / "drift_report.json", drift_report)
     _write(out_dir / "monitoring_summary.json", summary)
     logger.info("monitoring_done n=%s alerts=%s out=%s", len(fc), len(uniq), out_dir)
     return summary

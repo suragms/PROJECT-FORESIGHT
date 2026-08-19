@@ -30,3 +30,8 @@ data/raw/sales_daily.csv
 data/raw/inventory_snapshots.csv
 data/processed/online_retail_clean.csv
 data/processed/online_retail_sales.csv
+
+# Local secrets — never commit
+.env
+.env.local
+*.pem

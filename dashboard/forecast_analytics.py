@@ -54,7 +54,11 @@ def load_parquet(path: str):
 
 def main() -> None:
     st.title("FORESIGHT — Forecast Analytics")
-    st.caption("Read-only Phase 11/12 dashboard. Models are not retrained.")
+    st.caption(
+        "Read-only Phase 11/12 dashboard. Frozen registry models are not retrained. "
+        "Values labelled **prediction** are model point forecasts. "
+        "P10/P90 bands are interval companions, not live inventory."
+    )
 
     meta = load_json(str(PHASE11_META_PATH)) or {}
     registry = load_json(str(REGISTRY_PATH)) or []
@@ -89,7 +93,7 @@ def main() -> None:
     st.header("Forecast summary")
     s1, s2, s3, s4, s5 = st.columns(5)
     s1.metric("Total forecasts", f"{len(view):,}")
-    s2.metric("Mean prediction", f"{view['prediction'].mean():.3f}")
+    s2.metric("Mean point forecast", f"{view['prediction'].mean():.3f}")
     s3.metric("Min", f"{view['prediction'].min():.3f}")
     s4.metric("Max", f"{view['prediction'].max():.3f}")
     s5.metric("Zero-prediction %", f"{100 * (view['prediction'] == 0).mean():.2f}")
@@ -100,7 +104,7 @@ def main() -> None:
         actual=("actual", "mean") if "actual" in view.columns else ("prediction", "mean"),
     )
     fig = go.Figure()
-    fig.add_trace(go.Scatter(x=daily["forecast_date"], y=daily["prediction"], name="Predicted", mode="lines"))
+    fig.add_trace(go.Scatter(x=daily["forecast_date"], y=daily["prediction"], name="Point forecast", mode="lines"))
     if "actual" in view.columns and view["actual"].notna().any():
         fig.add_trace(go.Scatter(x=daily["forecast_date"], y=daily["actual"], name="Actual", mode="lines"))
     fig.update_layout(height=360, margin=dict(l=10, r=10, t=30, b=10), template="plotly_white")
@@ -149,6 +153,7 @@ def main() -> None:
         st.info("UCI TEST grain has no coded zeros; zero-demand analysis is SYNTHETIC-only.")
 
     st.header("Prediction intervals")
+    st.caption("P10/P90 are quantile companions on h=1 only. They are not guaranteed coverage bands for live operations.")
     if view["lower_bound"].notna().any() and view["upper_bound"].notna().any():
         sample = view.sort_values("forecast_date").head(200)
         fig = go.Figure()
@@ -157,7 +162,7 @@ def main() -> None:
             x=sample["forecast_date"], y=sample["lower_bound"], name="P10",
             fill="tonexty", fillcolor="rgba(29,78,216,0.15)", line=dict(width=0),
         ))
-        fig.add_trace(go.Scatter(x=sample["forecast_date"], y=sample["prediction"], name="Point / P50 companion"))
+        fig.add_trace(go.Scatter(x=sample["forecast_date"], y=sample["prediction"], name="Point forecast (not an interval)"))
         fig.update_layout(height=360, template="plotly_white")
         st.plotly_chart(fig, use_container_width=True)
         iv = load_parquet(str(FINAL_DIR / "analysis_intervals.parquet"))
@@ -182,6 +187,11 @@ def main() -> None:
     mon = load_json(str(MONITOR_DIR / "monitoring_summary.json"))
     if mon:
         st.header("Monitoring snapshot")
+        generated = mon.get("generated_at", "unknown")
+        st.warning(
+            f"This is a file snapshot from `outputs/monitoring` (generated_at={generated}). "
+            "It is not a live production telemetry stream."
+        )
         st.json(mon)
 
     st.sidebar.info("This dashboard never writes to data/ or models/.")

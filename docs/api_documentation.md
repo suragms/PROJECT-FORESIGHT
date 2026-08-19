@@ -2,16 +2,32 @@
 
 Base URL (local): `http://127.0.0.1:8000`
 
-Authentication is not included in this academic/reference implementation.
+Version: `0.13.0` (Phase 13). Forecast math is unchanged from Phase 11/12.
 
-Payload limit: 2,000,000 bytes (`FORESIGHT_API_MAX_PAYLOAD_BYTES`). Batch limit: 500 records (`FORESIGHT_API_MAX_BATCH`). Errors return JSON `{"detail": "..."}` without stack traces.
+Authentication is **configurable**. Development defaults to off. Production requires `FORESIGHT_API_AUTH_ENABLED=true` and `FORESIGHT_API_API_KEY`. Send `X-API-Key` or `Authorization: Bearer <key>`.
+
+Public (no auth): `GET /health`, `GET /ready`. Protected in production: `/model`, `/forecast`, `/forecast/batch`.
+
+Rate limiting is optional (`FORESIGHT_RATE_LIMIT_ENABLED`). Forecast POST routes use a stricter bucket than general API traffic. Exceeding the window returns HTTP 429 `{"detail":"Rate limit exceeded"}`.
+
+Payload limit: 2,000,000 bytes (`FORESIGHT_API_MAX_PAYLOAD_BYTES`). Batch limit: 500 records (`FORESIGHT_API_MAX_BATCH`). Errors return JSON `{"detail": "..."}` without stack traces. Security headers: `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Content-Security-Policy`.
 
 ## GET /health
+
+Lightweight liveness. Does not hash models.
 
 **Response**
 
 ```json
-{"status": "ok", "version": "0.12.0", "timestamp": "2026-08-14T00:00:00+00:00"}
+{"status": "ok", "version": "0.13.0", "timestamp": "2026-08-16T00:00:00+00:00"}
+```
+
+## GET /ready
+
+Verifies process init, registry load, SHA-256 of registered joblibs, and configuration. Returns HTTP 503 when not ready.
+
+```json
+{"status": "ready", "version": "0.13.0", "models_verified": true, "registry_verified": true, "config_valid": true}
 ```
 
 ## GET /model
@@ -73,3 +89,5 @@ Each forecast row:
 - No parent-directory traversal in registry `model_file`.
 - Hash mismatch refuses to load.
 - Unhandled exceptions return `{"detail":"Internal server error"}`.
+- API keys are read from the environment and are never logged.
+- Production process start fails if auth is disabled or the API key is missing.
