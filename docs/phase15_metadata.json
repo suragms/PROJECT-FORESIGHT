@@ -1,20 +1,20 @@
 {
   "phase": 15,
-  "status": "INCOMPLETE",
+  "status": "COMPLETE",
   "implementation_class": "academic/reference",
   "production_deployment": false,
   "power_bi_deployment": false,
   "validation": {
     "command": "python src/validate_phase15.py",
-    "passed": 9,
+    "passed": 12,
     "total": 12,
-    "summary": "9/12 PASS",
+    "summary": "12/12 PASS",
     "note": "Counts are calculated at runtime, not hardcoded."
   },
   "regression": {
-    "phase12_validation": "41/42 PASS",
-    "phase13_validation": "41/42 PASS",
-    "phase14_validation": "17/19 PASS"
+    "phase12_validation": "42/42 PASS",
+    "phase13_validation": "42/42 PASS",
+    "phase14_validation": "19/19 PASS"
   },
   "model_hash_status": "UNCHANGED",
   "final_models": {
@@ -51,7 +51,7 @@
   "dashboard": "dashboard/executive_intelligence.py",
   "data_quality": {
     "source": "outputs/monitoring/data_quality_report.json",
-    "generated_at": "2026-08-19T09:28:51.777848+00:00",
+    "generated_at": "2026-08-19T13:43:46.441736+00:00",
     "n_rows": 957949,
     "n_columns": 12,
     "missing_required_columns": [],
@@ -72,12 +72,12 @@
   },
   "freshness": {
     "label": "file snapshot \u2014 not live data",
-    "data_as_of": "2026-08-19T09:28:51.784264+00:00",
+    "data_as_of": "2026-08-19T13:43:46.446928+00:00",
     "forecast_generated": "2026-08-14T07:02:30.269701+00:00",
-    "monitoring_snapshot": "2026-08-19T09:28:51.784264+00:00",
+    "monitoring_snapshot": "2026-08-19T13:43:46.446928+00:00",
     "inventory_risk_mtime_utc": "2026-08-19T07:22:56.918473+00:00",
     "final_forecasts_exists": true,
-    "bi_generated_at": "2026-08-19T09:29:09.350394+00:00"
+    "bi_generated_at": "2026-08-19T13:43:57.961933+00:00"
   },
   "deployment_status": "NOT EXECUTED",
   "known_limitations_doc": "docs/phase15_known_limitations.md"
