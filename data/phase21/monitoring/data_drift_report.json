@@ -1,0 +1,97 @@
+{
+  "timestamp": "2026-08-28T05:58:17.313079+00:00",
+  "baseline_weeks": 147,
+  "current_weeks": 42,
+  "feature_drift": {
+    "is_holiday_week": {
+      "psi": 0.0,
+      "status": "STABLE"
+    },
+    "holiday_count": {
+      "psi": 0.0,
+      "status": "STABLE"
+    },
+    "season_Winter": {
+      "psi": 0.0,
+      "status": "STABLE"
+    },
+    "season_Spring": {
+      "psi": 0.0,
+      "status": "STABLE"
+    },
+    "season_Summer": {
+      "psi": 0.0,
+      "status": "STABLE"
+    },
+    "season_Fall": {
+      "psi": 0.0,
+      "status": "STABLE"
+    },
+    "weeks_to_next_holiday": {
+      "psi": 1.5846,
+      "status": "CRITICAL_DRIFT"
+    },
+    "weeks_since_last_holiday": {
+      "psi": 0.0865,
+      "status": "STABLE"
+    },
+    "lag_1": {
+      "psi": 0.0213,
+      "status": "STABLE"
+    },
+    "lag_2": {
+      "psi": 0.0202,
+      "status": "STABLE"
+    },
+    "lag_4": {
+      "psi": 0.0219,
+      "status": "STABLE"
+    },
+    "lag_7": {
+      "psi": 0.0214,
+      "status": "STABLE"
+    },
+    "lag_13": {
+      "psi": 0.0241,
+      "status": "STABLE"
+    },
+    "lag_26": {
+      "psi": 0.028,
+      "status": "STABLE"
+    },
+    "lag_52": {
+      "psi": 0.0298,
+      "status": "STABLE"
+    },
+    "rolling_mean_4": {
+      "psi": 0.0046,
+      "status": "STABLE"
+    },
+    "rolling_std_4": {
+      "psi": 0.0198,
+      "status": "STABLE"
+    },
+    "rolling_min_4": {
+      "psi": 0.0335,
+      "status": "STABLE"
+    },
+    "rolling_max_4": {
+      "psi": 0.0197,
+      "status": "STABLE"
+    },
+    "rolling_mean_8": {
+      "psi": 0.0039,
+      "status": "STABLE"
+    }
+  },
+  "demand_psi": 0.2583,
+  "demand_drift_status": "CRITICAL_DRIFT",
+  "sku_coverage_baseline": 100,
+  "sku_coverage_current": 100,
+  "thresholds_documented": {
+    "PSI_STABLE": 0.1,
+    "PSI_WATCH": 0.2,
+    "PSI_DRIFT": 0.25
+  },
+  "overall_status": "WARNING"
+}

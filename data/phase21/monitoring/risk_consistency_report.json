@@ -1,0 +1,15 @@
+{
+  "timestamp": "2026-08-28T05:58:17.343960+00:00",
+  "total_skus": 100,
+  "action_distribution": {
+    "WATCH / VOLATILE": 69,
+    "REORDER NOW": 15,
+    "HEALTHY": 15,
+    "MARKDOWN / CLEAR": 1
+  },
+  "reorder_pct": 15.0,
+  "inconsistencies": [],
+  "consistency_status": "PASS",
+  "distribution_status": "PASS",
+  "overall_status": "PASS"
+}

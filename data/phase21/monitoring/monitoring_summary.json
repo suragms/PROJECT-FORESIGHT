@@ -1,0 +1,200 @@
+{
+  "timestamp": "2026-08-28T05:58:17.680175+00:00",
+  "health_score": "DEGRADED",
+  "components": {
+    "data_quality": "PASS",
+    "feature_quality": "PASS",
+    "data_drift": "WARNING",
+    "prediction_drift": "WARNING",
+    "forecast_performance": "PASS",
+    "risk_consistency": "PASS",
+    "model_integrity": "PASS"
+  },
+  "holiday_monitoring": {
+    "timestamp": "2026-08-28T05:58:17.363920+00:00",
+    "calendar_source": "data/raw/calendar.csv",
+    "holiday_weeks_in_data": 1200,
+    "status": "WARNING",
+    "holiday_wape_pct": 20.9116,
+    "non_holiday_wape_pct": 10.9053,
+    "holiday_bias": 40.6461,
+    "non_holiday_bias": 6.4977,
+    "note": "Holiday-period WAPE elevated vs non-holiday (documented limitation)"
+  },
+  "alerts": [
+    {
+      "alert_id": "f700efff",
+      "timestamp": "2026-08-28T05:58:17.379620+00:00",
+      "component": "data_drift",
+      "severity": "WARNING",
+      "message": "data_drift warning",
+      "evidence": {
+        "timestamp": "2026-08-28T05:58:17.313079+00:00",
+        "baseline_weeks": 147,
+        "current_weeks": 42,
+        "feature_drift": {
+          "is_holiday_week": {
+            "psi": 0.0,
+            "status": "STABLE"
+          },
+          "holiday_count": {
+            "psi": 0.0,
+            "status": "STABLE"
+          },
+          "season_Winter": {
+            "psi": 0.0,
+            "status": "STABLE"
+          },
+          "season_Spring": {
+            "psi": 0.0,
+            "status": "STABLE"
+          },
+          "season_Summer": {
+            "psi": 0.0,
+            "status": "STABLE"
+          },
+          "season_Fall": {
+            "psi": 0.0,
+            "status": "STABLE"
+          },
+          "weeks_to_next_holiday": {
+            "psi": 1.5846,
+            "status": "CRITICAL_DRIFT"
+          },
+          "weeks_since_last_holiday": {
+            "psi": 0.0865,
+            "status": "STABLE"
+          },
+          "lag_1": {
+            "psi": 0.0213,
+            "status": "STABLE"
+          },
+          "lag_2": {
+            "psi": 0.0202,
+            "status": "STABLE"
+          },
+          "lag_4": {
+            "psi": 0.0219,
+            "status": "STABLE"
+          },
+          "lag_7": {
+            "psi": 0.0214,
+            "status": "STABLE"
+          },
+          "lag_13": {
+            "psi": 0.0241,
+            "status": "STABLE"
+          },
+          "lag_26": {
+            "psi": 0.028,
+            "status": "STABLE"
+          },
+          "lag_52": {
+            "psi": 0.0298,
+            "status": "STABLE"
+          },
+          "rolling_mean_4": {
+            "psi": 0.0046,
+            "status": "STABLE"
+          },
+          "rolling_std_4": {
+            "psi": 0.0198,
+            "status": "STABLE"
+          },
+          "rolling_min_4": {
+            "psi": 0.0335,
+            "status": "STABLE"
+          },
+          "rolling_max_4": {
+            "psi": 0.0197,
+            "status": "STABLE"
+          },
+          "rolling_mean_8": {
+            "psi": 0.0039,
+            "status": "STABLE"
+          }
+        },
+        "demand_psi": 0.2583,
+        "demand_drift_status": "CRITICAL_DRIFT",
+        "sku_coverage_baseline": 100,
+        "sku_coverage_current": 100,
+        "thresholds_documented": {
+          "PSI_STABLE": 0.1,
+          "PSI_WATCH": 0.2,
+          "PSI_DRIFT": 0.25
+        },
+        "overall_status": "WARNING"
+      },
+      "recommended_action": "Investigate drift in input features"
+    },
+    {
+      "alert_id": "cea707ae",
+      "timestamp": "2026-08-28T05:58:17.379620+00:00",
+      "component": "prediction_drift",
+      "severity": "WARNING",
+      "message": "prediction_drift warning",
+      "evidence": {
+        "timestamp": "2026-08-28T05:58:17.325346+00:00",
+        "current_distribution": {
+          "mean": 183.1597,
+          "median": 140.6482,
+          "std": 157.0314,
+          "zero_rate_pct": 1.0,
+          "p25": 101.954,
+          "p75": 192.9298
+        },
+        "baseline_distribution": {
+          "mean": 499.5862,
+          "std": 356.674
+        },
+        "shifts_detected": [
+          "mean_shift_-63.3%"
+        ],
+        "overall_status": "WARNING"
+      },
+      "recommended_action": "Investigate forecast distribution shift"
+    }
+  ],
+  "drift_simulations": {
+    "pass": 9,
+    "total": 9,
+    "details": [
+      {
+        "scenario": "stable_input",
+        "pass": true
+      },
+      {
+        "scenario": "missing_critical_feature",
+        "pass": true
+      },
+      {
+        "scenario": "high_missing_rate",
+        "pass": true
+      },
+      {
+        "scenario": "demand_shift",
+        "pass": true
+      },
+      {
+        "scenario": "sku_coverage_collapse",
+        "pass": true
+      },
+      {
+        "scenario": "prediction_variance",
+        "pass": true
+      },
+      {
+        "scenario": "excessive_zeros",
+        "pass": true
+      },
+      {
+        "scenario": "model_hash_check",
+        "pass": true
+      },
+      {
+        "scenario": "risk_inconsistency",
+        "pass": true
+      }
+    ]
+  }
+}

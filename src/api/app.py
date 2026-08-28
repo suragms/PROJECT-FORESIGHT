@@ -184,6 +184,8 @@ def create_app() -> FastAPI:
     application.include_router(router)
     from src.api.phase20_routes import router as phase20_router
     application.include_router(phase20_router, prefix="/phase20", tags=["phase20"])
+    from src.api.phase21_routes import router as phase21_router
+    application.include_router(phase21_router, prefix="/phase21", tags=["phase21"])
     return application
 
 

@@ -23,12 +23,12 @@
     {
       "name": "Single Forecast",
       "passed": true,
-      "detail": "pred=10.749200294243758 latency_s=0.0983"
+      "detail": "pred=10.749200294243758 latency_s=0.1125"
     },
     {
       "name": "Batch Forecast",
       "passed": true,
-      "detail": "[{\"n\": 10, \"status_code\": 200, \"rows_processed\": 10, \"success_count\": 10, \"failure_count\": 0, \"latency_s\": 0.0821, \"rows_per_s\": 121.81, \"response_bytes\": 4301}, {\"n\": 100, \"status_code\": 200, \"rows_processed\": 100, \"success_count\": 100, \"failure_count\": 0, \"latency_s\": 0.0829, \"rows_per_s\": 1205.71, \"response_bytes\": 39312}, {\"n\": 500, \"status_code\": 200, \"rows_processed\": 500, \"success_count\": 500, \"failure_count\": 0, \"latency_s\": 0.1256, \"rows_per_s\": 3980.76, \"response_bytes\": 195312}]"
+      "detail": "[{\"n\": 10, \"status_code\": 200, \"rows_processed\": 10, \"success_count\": 10, \"failure_count\": 0, \"latency_s\": 0.0912, \"rows_per_s\": 109.7, \"response_bytes\": 4301}, {\"n\": 100, \"status_code\": 200, \"rows_processed\": 100, \"success_count\": 100, \"failure_count\": 0, \"latency_s\": 0.0945, \"rows_per_s\": 1058.6, \"response_bytes\": 39312}, {\"n\": 500, \"status_code\": 200, \"rows_processed\": 500, \"success_count\": 500, \"failure_count\": 0, \"latency_s\": 0.1731, \"rows_per_s\": 2888.31, \"response_bytes\": 195312}]"
     },
     {
       "name": "Model Integrity",
@@ -93,7 +93,7 @@
     {
       "name": "Performance",
       "passed": true,
-      "detail": "{\"single_s\": 0.0983, \"batch10_s\": 0.0821, \"batch10_rows_per_s\": 121.81}"
+      "detail": "{\"single_s\": 0.1125, \"batch10_s\": 0.0912, \"batch10_rows_per_s\": 109.7}"
     }
   ],
   "evidence": {
@@ -107,8 +107,8 @@
       "prediction": 10.749200294243758,
       "lower_bound": 0.9803840782755803,
       "upper_bound": 12.034108979147309,
-      "latency_s": 0.0983,
-      "request_id": "82e4a19d-94ff-4c6a-b2bd-b021cd2e6277",
+      "latency_s": 0.1125,
+      "request_id": "50543d4a-d8f2-455c-8357-18a408dbd39e",
       "status_code": 200
     },
     "batch": {
@@ -119,8 +119,8 @@
           "rows_processed": 10,
           "success_count": 10,
           "failure_count": 0,
-          "latency_s": 0.0821,
-          "rows_per_s": 121.81,
+          "latency_s": 0.0912,
+          "rows_per_s": 109.7,
           "response_bytes": 4301
         },
         {
@@ -129,8 +129,8 @@
           "rows_processed": 100,
           "success_count": 100,
           "failure_count": 0,
-          "latency_s": 0.0829,
-          "rows_per_s": 1205.71,
+          "latency_s": 0.0945,
+          "rows_per_s": 1058.6,
           "response_bytes": 39312
         },
         {
@@ -139,13 +139,13 @@
           "rows_processed": 500,
           "success_count": 500,
           "failure_count": 0,
-          "latency_s": 0.1256,
-          "rows_per_s": 3980.76,
+          "latency_s": 0.1731,
+          "rows_per_s": 2888.31,
           "response_bytes": 195312
         }
       ],
-      "rss_before": 486957056,
-      "rss_after": 490110976
+      "rss_before": 491679744,
+      "rss_after": 494776320
     },
     "hashes": {
       "uci_h1": "331909f0fe191c0b9cb0418884b25eb59012f479f61f8b3e2ad51b729273e90d",
@@ -277,7 +277,7 @@
       "api_request_count": 39,
       "auth_failures": 1,
       "rate_limit_events": 1,
-      "mean_latency_ms": 31.679,
+      "mean_latency_ms": 33.794,
       "files": [
         "monitoring_summary.json",
         "data_quality_report.json",
@@ -286,7 +286,7 @@
       ]
     },
     "performance": {
-      "single_s": 0.0983,
+      "single_s": 0.1125,
       "batch": [
         {
           "n": 10,
@@ -294,8 +294,8 @@
           "rows_processed": 10,
           "success_count": 10,
           "failure_count": 0,
-          "latency_s": 0.0821,
-          "rows_per_s": 121.81,
+          "latency_s": 0.0912,
+          "rows_per_s": 109.7,
           "response_bytes": 4301
         },
         {
@@ -304,8 +304,8 @@
           "rows_processed": 100,
           "success_count": 100,
           "failure_count": 0,
-          "latency_s": 0.0829,
-          "rows_per_s": 1205.71,
+          "latency_s": 0.0945,
+          "rows_per_s": 1058.6,
           "response_bytes": 39312
         },
         {
@@ -314,8 +314,8 @@
           "rows_processed": 500,
           "success_count": 500,
           "failure_count": 0,
-          "latency_s": 0.1256,
-          "rows_per_s": 3980.76,
+          "latency_s": 0.1731,
+          "rows_per_s": 2888.31,
           "response_bytes": 195312
         }
       ],
@@ -327,8 +327,8 @@
         "note": "Historical Phase 12 freeze snapshot; not an SLO."
       },
       "vs_phase12": {
-        "single_s_delta": 0.0302,
-        "batch10_s_delta": 0.0214,
+        "single_s_delta": 0.0444,
+        "batch10_s_delta": 0.0305,
         "note": "Phase 14 timings include production auth/TestClient overhead; not an SLO."
       }
     },

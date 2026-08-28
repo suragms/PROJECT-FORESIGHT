@@ -45,3 +45,6 @@ _phase16_*.json
 .env
 .env.local
 *.pem
+
+# Phase 21 monitoring history snapshots (regenerable)
+data/phase21/monitoring/history/

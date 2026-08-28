@@ -1,0 +1,19 @@
+{
+  "timestamp": "2026-08-28T05:58:17.325346+00:00",
+  "current_distribution": {
+    "mean": 183.1597,
+    "median": 140.6482,
+    "std": 157.0314,
+    "zero_rate_pct": 1.0,
+    "p25": 101.954,
+    "p75": 192.9298
+  },
+  "baseline_distribution": {
+    "mean": 499.5862,
+    "std": 356.674
+  },
+  "shifts_detected": [
+    "mean_shift_-63.3%"
+  ],
+  "overall_status": "WARNING"
+}

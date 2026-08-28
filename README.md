@@ -263,22 +263,52 @@ Copy `.env.example` for local configuration. Do not commit `.env`. Development m
 
 | Phase | Status |
 | --- | --- |
-| Phase 1 | COMPLETE |
-| Phase 2 | COMPLETE |
-| Phase 3 | COMPLETE |
-| Phase 4 | COMPLETE |
-| Phase 5 | COMPLETE (`docs/eda_report.md`) |
-| Phase 6 | COMPLETE |
-| Phase 7 | COMPLETE |
-| Phase 8 | FROZEN |
-| Phase 9 | COMPLETE |
-| Phase 10 | COMPLETE |
-| Phase 11 | COMPLETE |
-| Phase 12 | COMPLETE (41/42 PASS — 1 stale legacy model hash; frozen `models/final/` intact) |
-| Phase 13 | COMPLETE (41/42 PASS — same cascading failure) |
-| Phase 14 | INCOMPLETE (17/19 PASS — regression gates cascade from Phase 12/13) |
-| Phase 15 | INCOMPLETE (9/12 PASS) |
-| Phase 16 | COMPLETE (39/39 PASS — dataset provenance & alignment audit) |
+| Phase 1–16 | COMPLETE |
+| Phase 17 | COMPLETE — Dataset integration & revalidation |
+| Phase 18 | COMPLETE — Promotion gate |
+| Phase 19 | COMPLETE — Candidate hardening (WAPE 13.96%) |
+| Phase 20 | COMPLETE — Production promotion (`phase20_synthetic_lightgbm`) |
+| Phase 21 | COMPLETE — Monitoring & drift detection (24/24 tests) |
+| Phase 22 | COMPLETE — Executive dashboard & final delivery package |
+
+**Production model:** `phase20_synthetic_lightgbm` | **Horizon:** 6 weeks | **Source:** SYNTHETIC  
+**Validation WAPE:** 13.96% overall, 11.03% h1–h6 | **Live performance:** PENDING ACTUALS
+
+See `docs/PROJECT_FORESIGHT_FINAL_REPORT.md` for the complete project report.
+
+---
+
+## Phase 20–22 Quick Reference
+
+### Production API
+```bash
+uvicorn src.api.app:app --host 127.0.0.1 --port 8000
+```
+Endpoints: `/phase20/forecast`, `/phase20/risk/explain`, `/phase21/health` — see `docs/phase22_api_documentation.md`
+
+### Dashboards
+```bash
+streamlit run dashboard/phase20_production.py      # Production forecast
+streamlit run dashboard/phase21_monitoring.py      # Observability
+streamlit run dashboard/phase22_executive_dashboard.py  # Executive view
+```
+
+### Monitoring
+```bash
+python src/run_phase21.py
+python src/phase22_final_audit.py
+```
+
+### Known Limitations
+- Holiday bias (Nov–Dec) partially unresolved
+- h7–h8 extended horizon has partial accuracy
+- UCI dataset: RESEARCH CANDIDATE only
+- `models/lightgbm_forecaster.joblib`: LEGACY NON-PRODUCTION ARTIFACT ISSUE
+- Cloud deployment: NOT IMPLEMENTED IN CURRENT REPOSITORY
+
+---
+
+## Legacy Project Status (Phases 1–15)
 
 - [x] **Phase 1: Business Understanding**
 - [x] **Phase 2: Data Collection & Profiling**

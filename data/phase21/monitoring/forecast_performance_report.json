@@ -1,0 +1,80 @@
+{
+  "timestamp": "2026-08-28T05:58:17.337730+00:00",
+  "data_source": "VALIDATION_REFERENCE_NOT_LIVE_PRODUCTION",
+  "performance_status": "MEASURED",
+  "production_actuals_status": "PENDING_ACTUALS",
+  "overall_wape_pct": 13.9562,
+  "overall_bias": 17.0049,
+  "h1_h6_wape_pct": 11.0309,
+  "validation_baselines": {
+    "overall_wape": 13.96,
+    "h1_h6_wape": 11.03
+  },
+  "horizon_performance": [
+    {
+      "horizon": 1,
+      "wape_pct": 10.9248,
+      "bias": 2.8791,
+      "n": 500,
+      "label": "PRODUCTION",
+      "status": "MEASURED"
+    },
+    {
+      "horizon": 2,
+      "wape_pct": 10.805,
+      "bias": -2.6846,
+      "n": 500,
+      "label": "PRODUCTION",
+      "status": "MEASURED"
+    },
+    {
+      "horizon": 3,
+      "wape_pct": 11.2705,
+      "bias": 0.862,
+      "n": 500,
+      "label": "PRODUCTION",
+      "status": "MEASURED"
+    },
+    {
+      "horizon": 4,
+      "wape_pct": 10.8428,
+      "bias": -2.8197,
+      "n": 500,
+      "label": "PRODUCTION",
+      "status": "MEASURED"
+    },
+    {
+      "horizon": 5,
+      "wape_pct": 11.1914,
+      "bias": 0.493,
+      "n": 500,
+      "label": "PRODUCTION",
+      "status": "MEASURED"
+    },
+    {
+      "horizon": 6,
+      "wape_pct": 11.1601,
+      "bias": 2.6973,
+      "n": 500,
+      "label": "PRODUCTION",
+      "status": "MEASURED"
+    },
+    {
+      "horizon": 7,
+      "wape_pct": 24.4181,
+      "bias": 67.7624,
+      "n": 500,
+      "label": "EXTENDED_PARTIAL",
+      "status": "MEASURED"
+    },
+    {
+      "horizon": 8,
+      "wape_pct": 27.2355,
+      "bias": 79.3106,
+      "n": 400,
+      "label": "EXTENDED_PARTIAL",
+      "status": "MEASURED"
+    }
+  ],
+  "overall_status": "PASS"
+}

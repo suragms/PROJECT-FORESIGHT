@@ -1,0 +1,121 @@
+{
+  "expected_feature_count": 45,
+  "actual_feature_count": 45,
+  "missing_features": [],
+  "unexpected_features": [],
+  "null_rates": {
+    "is_holiday_week": 0.0,
+    "holiday_count": 0.0,
+    "season_Winter": 0.0,
+    "season_Spring": 0.0,
+    "season_Summer": 0.0,
+    "season_Fall": 0.0,
+    "weeks_to_next_holiday": 0.0,
+    "weeks_since_last_holiday": 0.0,
+    "lag_1": 0.0,
+    "lag_2": 0.0,
+    "lag_4": 0.0,
+    "lag_7": 0.0,
+    "lag_13": 0.0,
+    "lag_26": 0.0,
+    "lag_52": 0.0,
+    "rolling_mean_4": 0.0,
+    "rolling_std_4": 0.0,
+    "rolling_min_4": 0.0,
+    "rolling_max_4": 0.0,
+    "rolling_mean_8": 0.0,
+    "rolling_std_8": 0.0,
+    "rolling_min_8": 0.0,
+    "rolling_max_8": 0.0,
+    "rolling_mean_13": 0.0,
+    "rolling_std_13": 0.0,
+    "rolling_min_13": 0.0,
+    "rolling_max_13": 0.0,
+    "rolling_mean_26": 0.0,
+    "rolling_std_26": 0.0,
+    "rolling_min_26": 0.0,
+    "rolling_max_26": 0.0,
+    "ewm_4": 0.0,
+    "ewm_13": 0.0,
+    "ewm_26": 0.0,
+    "week_of_year": 0.0,
+    "month": 0.0,
+    "quarter": 0.0,
+    "year": 0.0,
+    "sin_week": 0.0,
+    "cos_week": 0.0,
+    "sin_month": 0.0,
+    "cos_month": 0.0,
+    "price_lag1": 0.0,
+    "promo_lag1": 0.0,
+    "holiday_x_promo": 0.0
+  },
+  "distribution_summary": {
+    "is_holiday_week": {
+      "mean": 1.0,
+      "std": 0.0,
+      "min": 1.0,
+      "max": 1.0
+    },
+    "holiday_count": {
+      "mean": 1.0,
+      "std": 0.0,
+      "min": 1.0,
+      "max": 1.0
+    },
+    "season_Winter": {
+      "mean": 1.0,
+      "std": 0.0,
+      "min": 1.0,
+      "max": 1.0
+    },
+    "season_Spring": {
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "season_Summer": {
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "season_Fall": {
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "weeks_to_next_holiday": {
+      "mean": 52.0,
+      "std": 0.0,
+      "min": 52.0,
+      "max": 52.0
+    },
+    "weeks_since_last_holiday": {
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "lag_1": {
+      "mean": 514.87,
+      "std": 408.7338,
+      "min": 41.0,
+      "max": 1859.0
+    },
+    "lag_2": {
+      "mean": 481.86,
+      "std": 345.6272,
+      "min": 7.0,
+      "max": 1611.0
+    }
+  },
+  "feature_count_match": "PASS",
+  "missing_required": "PASS",
+  "critical_nulls": "PASS",
+  "unexpected_documented": "PASS",
+  "overall_status": "PASS",
+  "timestamp": "2026-08-28T05:58:17.250794+00:00"
+}

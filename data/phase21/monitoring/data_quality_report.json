@@ -1,0 +1,26 @@
+{
+  "schema_validity": "PASS",
+  "missing_critical_columns": [],
+  "unexpected_source": "PASS",
+  "sources_found": [
+    "SYNTHETIC"
+  ],
+  "null_rates": {
+    "week": 0.0,
+    "product_key": 0.0,
+    "units_sold": 0.0,
+    "source_dataset": 0.0
+  },
+  "missing_values": "PASS",
+  "duplicate_records": "PASS",
+  "duplicate_count": 0,
+  "invalid_dates": "PASS",
+  "negative_quantities": "PASS",
+  "sku_count": 100,
+  "sku_coverage": "PASS",
+  "latest_week_rows": 100,
+  "median_weekly_rows": 100,
+  "row_count_anomaly": "PASS",
+  "overall_status": "PASS",
+  "timestamp": "2026-08-28T05:58:17.232555+00:00"
+}
