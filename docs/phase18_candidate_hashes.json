@@ -1,0 +1,12 @@
+{
+  "UCI": {
+    "path": "C:\\Users\\SURAG\\Documents\\zidio\\Project_FORESIGHT\\Demand-Inventory-Intelligence\\models\\phase17\\uci\\phase17_uci_lightgbm.joblib",
+    "sha256": "0ee70bb3265e26daa6bad5c8916d79db98e3ba8f18f5509bf73f0d0f562e80dd",
+    "size_bytes": 414024
+  },
+  "SYNTHETIC": {
+    "path": "C:\\Users\\SURAG\\Documents\\zidio\\Project_FORESIGHT\\Demand-Inventory-Intelligence\\models\\phase17\\synthetic\\phase17_synthetic_lightgbm.joblib",
+    "sha256": "3a55bed13149d965cb37e4b79e09e2fba8a076bb20646db5aa4896b280488e7c",
+    "size_bytes": 417759
+  }
+}

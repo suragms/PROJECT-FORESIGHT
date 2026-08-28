@@ -1,0 +1,1020 @@
+{
+  "prod_hashes": {
+    "timestamp": "2026-08-19T14:30:33.075112Z",
+    "models": [
+      {
+        "model_id": "uci_h1_phase8_lightgbm",
+        "path": "models\\final\\uci_h1_phase8_lightgbm.joblib",
+        "expected": "331909f0fe191c0b9cb0418884b25eb59012f479f61f8b3e2ad51b729273e90d",
+        "actual": "331909f0fe191c0b9cb0418884b25eb59012f479f61f8b3e2ad51b729273e90d",
+        "match": true
+      },
+      {
+        "model_id": "synthetic_h1_hurdle_th050",
+        "path": "models\\final\\synthetic_h1_hurdle_th050.joblib",
+        "expected": "59a2b72024861d7f9c827596a52256af95facabfa796bdae5955374221cf1bf4",
+        "actual": "59a2b72024861d7f9c827596a52256af95facabfa796bdae5955374221cf1bf4",
+        "match": true
+      },
+      {
+        "model_id": "uci_h3_direct_lightgbm",
+        "path": "models\\final\\uci_h3_direct_lightgbm.joblib",
+        "expected": "28403041bd349d68993c51f5aae43b3d064b458e92e5d89c32b71279d4c0c2f8",
+        "actual": "28403041bd349d68993c51f5aae43b3d064b458e92e5d89c32b71279d4c0c2f8",
+        "match": true
+      },
+      {
+        "model_id": "uci_h7_direct_lightgbm",
+        "path": "models\\final\\uci_h7_direct_lightgbm.joblib",
+        "expected": "ce215ffcd0cf3a5db1489c85e86c283cb60bb7501914efd882872a7b0bbe5406",
+        "actual": "ce215ffcd0cf3a5db1489c85e86c283cb60bb7501914efd882872a7b0bbe5406",
+        "match": true
+      },
+      {
+        "model_id": "uci_h14_direct_lightgbm",
+        "path": "models\\final\\uci_h14_direct_lightgbm.joblib",
+        "expected": "905b7859f163a9623cd38792bf101812bf5d4622924502248a9b96885e2f816d",
+        "actual": "905b7859f163a9623cd38792bf101812bf5d4622924502248a9b96885e2f816d",
+        "match": true
+      },
+      {
+        "model_id": "uci_h30_direct_lightgbm",
+        "path": "models\\final\\uci_h30_direct_lightgbm.joblib",
+        "expected": "d87831a4aa65a28aad5fd282612309d3b1952c8f4d9eae2f5516b2b393ed1c9b",
+        "actual": "d87831a4aa65a28aad5fd282612309d3b1952c8f4d9eae2f5516b2b393ed1c9b",
+        "match": true
+      },
+      {
+        "model_id": "uci_h1_quantile_p10p90",
+        "path": "models\\final\\uci_h1_quantile_p10p90.joblib",
+        "expected": "294e1dbbda363321820482036ee69557238dfa56f03dce7cf890cd982c30c3ed",
+        "actual": "294e1dbbda363321820482036ee69557238dfa56f03dce7cf890cd982c30c3ed",
+        "match": true
+      },
+      {
+        "model_id": "synthetic_h3_direct_lightgbm",
+        "path": "models\\final\\synthetic_h3_direct_lightgbm.joblib",
+        "expected": "2c896d2c4589a24457ee3df9f37442f5d837a551c1a9a8e5d29f158868b08d6e",
+        "actual": "2c896d2c4589a24457ee3df9f37442f5d837a551c1a9a8e5d29f158868b08d6e",
+        "match": true
+      },
+      {
+        "model_id": "synthetic_h7_direct_lightgbm",
+        "path": "models\\final\\synthetic_h7_direct_lightgbm.joblib",
+        "expected": "f6df774aa0a9e287912e8a654e2998ce38af06412cfafefad86ce036ce83ce9a",
+        "actual": "f6df774aa0a9e287912e8a654e2998ce38af06412cfafefad86ce036ce83ce9a",
+        "match": true
+      },
+      {
+        "model_id": "synthetic_h14_direct_lightgbm",
+        "path": "models\\final\\synthetic_h14_direct_lightgbm.joblib",
+        "expected": "a31dbb6cc97618a068c5ee5ad8eaf3c6449d794efedec8ef10cc69e1bd4ede39",
+        "actual": "a31dbb6cc97618a068c5ee5ad8eaf3c6449d794efedec8ef10cc69e1bd4ede39",
+        "match": true
+      },
+      {
+        "model_id": "synthetic_h30_direct_lightgbm",
+        "path": "models\\final\\synthetic_h30_direct_lightgbm.joblib",
+        "expected": "2b9124359964f112efaced0869d761d752c0ac9944a745c77e1e1534d4d58251",
+        "actual": "2b9124359964f112efaced0869d761d752c0ac9944a745c77e1e1534d4d58251",
+        "match": true
+      },
+      {
+        "model_id": "synthetic_h1_quantile_p10p90",
+        "path": "models\\final\\synthetic_h1_quantile_p10p90.joblib",
+        "expected": "9c09a25717cab87f2d594fe71aa9fc11d158bfa56380e902decc957daa5d574e",
+        "actual": "9c09a25717cab87f2d594fe71aa9fc11d158bfa56380e902decc957daa5d574e",
+        "match": true
+      }
+    ],
+    "all_match": true
+  },
+  "candidates": {
+    "UCI": {
+      "path": "C:\\Users\\SURAG\\Documents\\zidio\\Project_FORESIGHT\\Demand-Inventory-Intelligence\\models\\phase17\\uci\\phase17_uci_lightgbm.joblib",
+      "exists": true,
+      "size_bytes": 414024,
+      "sha256": "0ee70bb3265e26daa6bad5c8916d79db98e3ba8f18f5509bf73f0d0f562e80dd",
+      "loadable": true,
+      "model_type": "LGBMRegressor",
+      "n_features": 36,
+      "n_estimators": 150,
+      "source_dataset": "UCI",
+      "horizon_weeks": 8
+    },
+    "SYNTHETIC": {
+      "path": "C:\\Users\\SURAG\\Documents\\zidio\\Project_FORESIGHT\\Demand-Inventory-Intelligence\\models\\phase17\\synthetic\\phase17_synthetic_lightgbm.joblib",
+      "exists": true,
+      "size_bytes": 417759,
+      "sha256": "3a55bed13149d965cb37e4b79e09e2fba8a076bb20646db5aa4896b280488e7c",
+      "loadable": true,
+      "model_type": "LGBMRegressor",
+      "n_features": 36,
+      "n_estimators": 150,
+      "source_dataset": "SYNTHETIC",
+      "horizon_weeks": 8
+    }
+  },
+  "fold_stability": {
+    "SYNTHETIC": {
+      "fold_details": [
+        {
+          "fold": "0",
+          "origin": "2025-10-14",
+          "val_start": "2025-10-21",
+          "val_end": "2025-12-09",
+          "n_predictions": 800,
+          "baseline_wape_pct": 23.3473,
+          "candidate_wape_pct": 11.463,
+          "candidate_bias": 3.1031,
+          "improvement_pp": 11.884,
+          "candidate_beats_baseline": true
+        },
+        {
+          "fold": "1",
+          "origin": "2025-10-21",
+          "val_start": "2025-10-28",
+          "val_end": "2025-12-16",
+          "n_predictions": 800,
+          "baseline_wape_pct": 22.536,
+          "candidate_wape_pct": 11.6285,
+          "candidate_bias": 4.3118,
+          "improvement_pp": 10.908,
+          "candidate_beats_baseline": true
+        },
+        {
+          "fold": "2",
+          "origin": "2025-10-28",
+          "val_start": "2025-11-04",
+          "val_end": "2025-12-23",
+          "n_predictions": 800,
+          "baseline_wape_pct": 22.4208,
+          "candidate_wape_pct": 11.2371,
+          "candidate_bias": 7.5014,
+          "improvement_pp": 11.184,
+          "candidate_beats_baseline": true
+        },
+        {
+          "fold": "3",
+          "origin": "2025-11-04",
+          "val_start": "2025-11-11",
+          "val_end": "2025-12-30",
+          "n_predictions": 800,
+          "baseline_wape_pct": 29.7049,
+          "candidate_wape_pct": 18.9579,
+          "candidate_bias": 40.205,
+          "improvement_pp": 10.747,
+          "candidate_beats_baseline": true
+        },
+        {
+          "fold": "4",
+          "origin": "2025-11-11",
+          "val_start": "2025-11-18",
+          "val_end": "2025-12-30",
+          "n_predictions": 700,
+          "baseline_wape_pct": 30.9974,
+          "candidate_wape_pct": 20.414,
+          "candidate_bias": 47.2256,
+          "improvement_pp": 10.583,
+          "candidate_beats_baseline": true
+        }
+      ],
+      "folds_beating_baseline": 5,
+      "total_folds": 5,
+      "fold_stability": "STRONG"
+    },
+    "UCI": {
+      "fold_details": [
+        {
+          "fold": "0",
+          "origin": "2011-09-20",
+          "val_start": "2011-09-27",
+          "val_end": "2011-11-15",
+          "n_predictions": 15539,
+          "baseline_wape_pct": 96.8238,
+          "candidate_wape_pct": 64.9744,
+          "candidate_bias": -7.0361,
+          "improvement_pp": 31.849,
+          "candidate_beats_baseline": true
+        },
+        {
+          "fold": "1",
+          "origin": "2011-09-27",
+          "val_start": "2011-10-04",
+          "val_end": "2011-11-22",
+          "n_predictions": 15788,
+          "baseline_wape_pct": 90.7145,
+          "candidate_wape_pct": 62.4041,
+          "candidate_bias": -11.9779,
+          "improvement_pp": 28.31,
+          "candidate_beats_baseline": true
+        },
+        {
+          "fold": "2",
+          "origin": "2011-10-04",
+          "val_start": "2011-10-11",
+          "val_end": "2011-11-29",
+          "n_predictions": 16003,
+          "baseline_wape_pct": 91.5633,
+          "candidate_wape_pct": 61.3172,
+          "candidate_bias": -7.5793,
+          "improvement_pp": 30.246,
+          "candidate_beats_baseline": true
+        },
+        {
+          "fold": "3",
+          "origin": "2011-10-11",
+          "val_start": "2011-10-18",
+          "val_end": "2011-12-06",
+          "n_predictions": 16049,
+          "baseline_wape_pct": 88.9606,
+          "candidate_wape_pct": 61.281,
+          "candidate_bias": -14.1743,
+          "improvement_pp": 27.68,
+          "candidate_beats_baseline": true
+        },
+        {
+          "fold": "4",
+          "origin": "2011-10-18",
+          "val_start": "2011-10-25",
+          "val_end": "2011-12-06",
+          "n_predictions": 14134,
+          "baseline_wape_pct": 90.1315,
+          "candidate_wape_pct": 60.8268,
+          "candidate_bias": -12.4224,
+          "improvement_pp": 29.305,
+          "candidate_beats_baseline": true
+        }
+      ],
+      "folds_beating_baseline": 5,
+      "total_folds": 5,
+      "fold_stability": "STRONG"
+    }
+  },
+  "horizon": {
+    "SYNTHETIC": {
+      "by_horizon": [
+        {
+          "horizon_step": 1,
+          "n": 500,
+          "baseline_wape": 23.712,
+          "candidate_wape": 11.143,
+          "candidate_bias": 5.9743
+        },
+        {
+          "horizon_step": 2,
+          "n": 500,
+          "baseline_wape": 23.101,
+          "candidate_wape": 11.175,
+          "candidate_bias": -2.4784
+        },
+        {
+          "horizon_step": 3,
+          "n": 500,
+          "baseline_wape": 23.192,
+          "candidate_wape": 11.804,
+          "candidate_bias": 3.9861
+        },
+        {
+          "horizon_step": 4,
+          "n": 500,
+          "baseline_wape": 22.67,
+          "candidate_wape": 11.429,
+          "candidate_bias": 1.1142
+        },
+        {
+          "horizon_step": 5,
+          "n": 500,
+          "baseline_wape": 22.244,
+          "candidate_wape": 11.908,
+          "candidate_bias": 5.0444
+        },
+        {
+          "horizon_step": 6,
+          "n": 500,
+          "baseline_wape": 22.204,
+          "candidate_wape": 11.747,
+          "candidate_bias": 3.2785
+        },
+        {
+          "horizon_step": 7,
+          "n": 500,
+          "baseline_wape": 34.901,
+          "candidate_wape": 24.643,
+          "candidate_bias": 71.2088
+        },
+        {
+          "horizon_step": 8,
+          "n": 400,
+          "baseline_wape": 37.648,
+          "candidate_wape": 27.637,
+          "candidate_bias": 82.7275
+        }
+      ],
+      "degradation_pp": 16.49,
+      "horizon_status": "HIGH_DEGRADATION"
+    },
+    "UCI": {
+      "by_horizon": [
+        {
+          "horizon_step": 1,
+          "n": 13000,
+          "baseline_wape": 96.988,
+          "candidate_wape": 71.284,
+          "candidate_bias": 1.7017
+        },
+        {
+          "horizon_step": 2,
+          "n": 12198,
+          "baseline_wape": 94.211,
+          "candidate_wape": 68.607,
+          "candidate_bias": -3.2351
+        },
+        {
+          "horizon_step": 3,
+          "n": 11368,
+          "baseline_wape": 93.29,
+          "candidate_wape": 65.415,
+          "candidate_bias": -7.2551
+        },
+        {
+          "horizon_step": 4,
+          "n": 10505,
+          "baseline_wape": 91.655,
+          "candidate_wape": 61.418,
+          "candidate_bias": -12.9612
+        },
+        {
+          "horizon_step": 5,
+          "n": 9539,
+          "baseline_wape": 88.53,
+          "candidate_wape": 58.322,
+          "candidate_bias": -17.5461
+        },
+        {
+          "horizon_step": 6,
+          "n": 8509,
+          "baseline_wape": 86.072,
+          "candidate_wape": 56.91,
+          "candidate_bias": -22.0221
+        },
+        {
+          "horizon_step": 7,
+          "n": 7400,
+          "baseline_wape": 90.823,
+          "candidate_wape": 57.972,
+          "candidate_bias": -19.9487
+        },
+        {
+          "horizon_step": 8,
+          "n": 4994,
+          "baseline_wape": 92.473,
+          "candidate_wape": 56.613,
+          "candidate_bias": -16.9089
+        }
+      ],
+      "degradation_pp": -14.67,
+      "horizon_status": "MODERATE_DEGRADATION"
+    }
+  },
+  "sku_analysis": {
+    "SYNTHETIC": {
+      "total_skus": 100,
+      "median_sku_wape": 14.76,
+      "p75_sku_wape": 19.66,
+      "p90_sku_wape": 24.64,
+      "high_error_skus": 0,
+      "zero_demand_skus": 0,
+      "low_volume_skus": 25,
+      "high_volume_skus": 25,
+      "sku_details_sample": [
+        {
+          "product_key": "SYN_SKU_00001",
+          "n_periods": 39,
+          "mean_demand": 302.56,
+          "volume_class": "MID",
+          "baseline_wape": 96.59,
+          "candidate_wape": 31.13,
+          "candidate_bias": 36.81
+        },
+        {
+          "product_key": "SYN_SKU_00002",
+          "n_periods": 39,
+          "mean_demand": 419.54,
+          "volume_class": "MID",
+          "baseline_wape": 48.38,
+          "candidate_wape": 22.4,
+          "candidate_bias": 0.77
+        },
+        {
+          "product_key": "SYN_SKU_00003",
+          "n_periods": 39,
+          "mean_demand": 1338.64,
+          "volume_class": "HIGH",
+          "baseline_wape": 8.33,
+          "candidate_wape": 11.1,
+          "candidate_bias": 32.82
+        },
+        {
+          "product_key": "SYN_SKU_00004",
+          "n_periods": 39,
+          "mean_demand": 1063.41,
+          "volume_class": "HIGH",
+          "baseline_wape": 13.92,
+          "candidate_wape": 12.2,
+          "candidate_bias": 51.23
+        },
+        {
+          "product_key": "SYN_SKU_00005",
+          "n_periods": 39,
+          "mean_demand": 426.13,
+          "volume_class": "MID",
+          "baseline_wape": 15.93,
+          "candidate_wape": 18.56,
+          "candidate_bias": 14.12
+        },
+        {
+          "product_key": "SYN_SKU_00006",
+          "n_periods": 39,
+          "mean_demand": 222.33,
+          "volume_class": "LOW",
+          "baseline_wape": 23.88,
+          "candidate_wape": 12.5,
+          "candidate_bias": 23.83
+        },
+        {
+          "product_key": "SYN_SKU_00007",
+          "n_periods": 39,
+          "mean_demand": 417.41,
+          "volume_class": "MID",
+          "baseline_wape": 36.11,
+          "candidate_wape": 15.41,
+          "candidate_bias": 26.79
+        },
+        {
+          "product_key": "SYN_SKU_00008",
+          "n_periods": 39,
+          "mean_demand": 430.74,
+          "volume_class": "MID",
+          "baseline_wape": 32.64,
+          "candidate_wape": 9.51,
+          "candidate_bias": 13.54
+        },
+        {
+          "product_key": "SYN_SKU_00009",
+          "n_periods": 39,
+          "mean_demand": 236.77,
+          "volume_class": "MID",
+          "baseline_wape": 31.1,
+          "candidate_wape": 23.86,
+          "candidate_bias": 9.32
+        },
+        {
+          "product_key": "SYN_SKU_00010",
+          "n_periods": 39,
+          "mean_demand": 454.15,
+          "volume_class": "MID",
+          "baseline_wape": 37.58,
+          "candidate_wape": 12.58,
+          "candidate_bias": 16.96
+        }
+      ]
+    },
+    "UCI": {
+      "total_skus": 2675,
+      "median_sku_wape": 83.01,
+      "p75_sku_wape": 140.76,
+      "p90_sku_wape": 389.35,
+      "high_error_skus": 1041,
+      "zero_demand_skus": 0,
+      "low_volume_skus": 669,
+      "high_volume_skus": 669,
+      "sku_details_sample": [
+        {
+          "product_key": "UCI_10080",
+          "n_periods": 26,
+          "mean_demand": 18.77,
+          "volume_class": "MID",
+          "baseline_wape": 87.5,
+          "candidate_wape": 72.99,
+          "candidate_bias": 3.98
+        },
+        {
+          "product_key": "UCI_10120",
+          "n_periods": 22,
+          "mean_demand": 12.95,
+          "volume_class": "MID",
+          "baseline_wape": 85.96,
+          "candidate_wape": 190.37,
+          "candidate_bias": 20.12
+        },
+        {
+          "product_key": "UCI_10124A",
+          "n_periods": 5,
+          "mean_demand": 4.0,
+          "volume_class": "LOW",
+          "baseline_wape": 75.0,
+          "candidate_wape": 251.95,
+          "candidate_bias": 10.08
+        },
+        {
+          "product_key": "UCI_10125",
+          "n_periods": 26,
+          "mean_demand": 28.19,
+          "volume_class": "MID",
+          "baseline_wape": 43.52,
+          "candidate_wape": 133.48,
+          "candidate_bias": 11.37
+        },
+        {
+          "product_key": "UCI_10135",
+          "n_periods": 39,
+          "mean_demand": 33.41,
+          "volume_class": "MID",
+          "baseline_wape": 97.62,
+          "candidate_wape": 76.97,
+          "candidate_bias": -6.87
+        },
+        {
+          "product_key": "UCI_11001",
+          "n_periods": 39,
+          "mean_demand": 25.38,
+          "volume_class": "MID",
+          "baseline_wape": 232.83,
+          "candidate_wape": 67.37,
+          "candidate_bias": 7.85
+        },
+        {
+          "product_key": "UCI_15030",
+          "n_periods": 13,
+          "mean_demand": 12.85,
+          "volume_class": "MID",
+          "baseline_wape": 80.84,
+          "candidate_wape": 154.48,
+          "candidate_bias": 19.42
+        },
+        {
+          "product_key": "UCI_15034",
+          "n_periods": 39,
+          "mean_demand": 153.51,
+          "volume_class": "HIGH",
+          "baseline_wape": 90.2,
+          "candidate_wape": 92.13,
+          "candidate_bias": -17.64
+        },
+        {
+          "product_key": "UCI_15036",
+          "n_periods": 39,
+          "mean_demand": 158.05,
+          "volume_class": "HIGH",
+          "baseline_wape": 269.5,
+          "candidate_wape": 115.36,
+          "candidate_bias": 140.86
+        },
+        {
+          "product_key": "UCI_15039",
+          "n_periods": 34,
+          "mean_demand": 47.71,
+          "volume_class": "MID",
+          "baseline_wape": 191.25,
+          "candidate_wape": 82.89,
+          "candidate_bias": -9.53
+        }
+      ]
+    }
+  },
+  "bias": {
+    "SYNTHETIC": {
+      "overall_bias": 19.7833,
+      "direction": "OVER_FORECAST",
+      "mean_demand": 482.5813,
+      "relative_bias": 0.041,
+      "severity": "ACCEPTABLE"
+    },
+    "UCI": {
+      "overall_bias": -10.6149,
+      "direction": "UNDER_FORECAST",
+      "mean_demand": 69.9978,
+      "relative_bias": 0.1516,
+      "severity": "HIGH"
+    }
+  },
+  "feat_importance": {
+    "UCI": {
+      "top_features": [
+        {
+          "feature": "rolling_min_4",
+          "importance": 294.0,
+          "feature_type": "rolling",
+          "available_at_prediction_time": true,
+          "leakage_status": "PASS"
+        },
+        {
+          "feature": "lag_1",
+          "importance": 262.0,
+          "feature_type": "lag",
+          "available_at_prediction_time": true,
+          "leakage_status": "PASS"
+        },
+        {
+          "feature": "lag_13",
+          "importance": 243.0,
+          "feature_type": "lag",
+          "available_at_prediction_time": true,
+          "leakage_status": "PASS"
+        },
+        {
+          "feature": "lag_26",
+          "importance": 243.0,
+          "feature_type": "lag",
+          "available_at_prediction_time": true,
+          "leakage_status": "PASS"
+        },
+        {
+          "feature": "lag_4",
+          "importance": 228.0,
+          "feature_type": "lag",
+          "available_at_prediction_time": true,
+          "leakage_status": "PASS"
+        },
+        {
+          "feature": "lag_2",
+          "importance": 216.0,
+          "feature_type": "lag",
+          "available_at_prediction_time": true,
+          "leakage_status": "PASS"
+        },
+        {
+          "feature": "price_lag1",
+          "importance": 216.0,
+          "feature_type": "calendar",
+          "available_at_prediction_time": true,
+          "leakage_status": "PASS"
+        },
+        {
+          "feature": "lag_52",
+          "importance": 211.0,
+          "feature_type": "lag",
+          "available_at_prediction_time": true,
+          "leakage_status": "PASS"
+        },
+        {
+          "feature": "sin_week",
+          "importance": 206.0,
+          "feature_type": "calendar",
+          "available_at_prediction_time": true,
+          "leakage_status": "PASS"
+        },
+        {
+          "feature": "lag_7",
+          "importance": 183.0,
+          "feature_type": "lag",
+          "available_at_prediction_time": true,
+          "leakage_status": "PASS"
+        },
+        {
+          "feature": "rolling_min_8",
+          "importance": 183.0,
+          "feature_type": "rolling",
+          "available_at_prediction_time": true,
+          "leakage_status": "PASS"
+        },
+        {
+          "feature": "week_of_year",
+          "importance": 175.0,
+          "feature_type": "calendar",
+          "available_at_prediction_time": true,
+          "leakage_status": "PASS"
+        },
+        {
+          "feature": "rolling_min_13",
+          "importance": 171.0,
+          "feature_type": "rolling",
+          "available_at_prediction_time": true,
+          "leakage_status": "PASS"
+        },
+        {
+          "feature": "ewm_26",
+          "importance": 157.0,
+          "feature_type": "ewm",
+          "available_at_prediction_time": true,
+          "leakage_status": "PASS"
+        },
+        {
+          "feature": "rolling_mean_4",
+          "importance": 144.0,
+          "feature_type": "rolling",
+          "available_at_prediction_time": true,
+          "leakage_status": "PASS"
+        }
+      ],
+      "n_features_used": 36
+    },
+    "SYNTHETIC": {
+      "top_features": [
+        {
+          "feature": "rolling_mean_26",
+          "importance": 439.0,
+          "feature_type": "rolling",
+          "available_at_prediction_time": true,
+          "leakage_status": "PASS"
+        },
+        {
+          "feature": "lag_2",
+          "importance": 428.0,
+          "feature_type": "lag",
+          "available_at_prediction_time": true,
+          "leakage_status": "PASS"
+        },
+        {
+          "feature": "lag_1",
+          "importance": 415.0,
+          "feature_type": "lag",
+          "available_at_prediction_time": true,
+          "leakage_status": "PASS"
+        },
+        {
+          "feature": "ewm_4",
+          "importance": 288.0,
+          "feature_type": "ewm",
+          "available_at_prediction_time": true,
+          "leakage_status": "PASS"
+        },
+        {
+          "feature": "lag_4",
+          "importance": 271.0,
+          "feature_type": "lag",
+          "available_at_prediction_time": true,
+          "leakage_status": "PASS"
+        },
+        {
+          "feature": "rolling_mean_4",
+          "importance": 257.0,
+          "feature_type": "rolling",
+          "available_at_prediction_time": true,
+          "leakage_status": "PASS"
+        },
+        {
+          "feature": "price_lag1",
+          "importance": 210.0,
+          "feature_type": "calendar",
+          "available_at_prediction_time": true,
+          "leakage_status": "PASS"
+        },
+        {
+          "feature": "ewm_26",
+          "importance": 203.0,
+          "feature_type": "ewm",
+          "available_at_prediction_time": true,
+          "leakage_status": "PASS"
+        },
+        {
+          "feature": "week_of_year",
+          "importance": 198.0,
+          "feature_type": "calendar",
+          "available_at_prediction_time": true,
+          "leakage_status": "PASS"
+        },
+        {
+          "feature": "lag_52",
+          "importance": 168.0,
+          "feature_type": "lag",
+          "available_at_prediction_time": true,
+          "leakage_status": "PASS"
+        },
+        {
+          "feature": "lag_7",
+          "importance": 139.0,
+          "feature_type": "lag",
+          "available_at_prediction_time": true,
+          "leakage_status": "PASS"
+        },
+        {
+          "feature": "lag_13",
+          "importance": 121.0,
+          "feature_type": "lag",
+          "available_at_prediction_time": true,
+          "leakage_status": "PASS"
+        },
+        {
+          "feature": "sin_week",
+          "importance": 121.0,
+          "feature_type": "calendar",
+          "available_at_prediction_time": true,
+          "leakage_status": "PASS"
+        },
+        {
+          "feature": "rolling_mean_8",
+          "importance": 106.0,
+          "feature_type": "rolling",
+          "available_at_prediction_time": true,
+          "leakage_status": "PASS"
+        },
+        {
+          "feature": "rolling_mean_13",
+          "importance": 100.0,
+          "feature_type": "rolling",
+          "available_at_prediction_time": true,
+          "leakage_status": "PASS"
+        }
+      ],
+      "n_features_used": 36
+    }
+  },
+  "leakage": {
+    "status": "PASS",
+    "pass_count": 36,
+    "fail_count": 0,
+    "review_count": 0,
+    "lag_spot_check_pass": true,
+    "spot_check_results": [
+      {
+        "source": "SYNTHETIC",
+        "sku": "SYN_SKU_00001",
+        "feature": "lag_1",
+        "status": "OK"
+      },
+      {
+        "source": "SYNTHETIC",
+        "sku": "SYN_SKU_00001",
+        "feature": "lag_2",
+        "status": "OK"
+      },
+      {
+        "source": "SYNTHETIC",
+        "sku": "SYN_SKU_00001",
+        "feature": "lag_4",
+        "status": "OK"
+      },
+      {
+        "source": "SYNTHETIC",
+        "sku": "SYN_SKU_00002",
+        "feature": "lag_1",
+        "status": "OK"
+      },
+      {
+        "source": "SYNTHETIC",
+        "sku": "SYN_SKU_00002",
+        "feature": "lag_2",
+        "status": "OK"
+      },
+      {
+        "source": "SYNTHETIC",
+        "sku": "SYN_SKU_00002",
+        "feature": "lag_4",
+        "status": "OK"
+      },
+      {
+        "source": "SYNTHETIC",
+        "sku": "SYN_SKU_00003",
+        "feature": "lag_1",
+        "status": "OK"
+      },
+      {
+        "source": "SYNTHETIC",
+        "sku": "SYN_SKU_00003",
+        "feature": "lag_2",
+        "status": "OK"
+      },
+      {
+        "source": "SYNTHETIC",
+        "sku": "SYN_SKU_00003",
+        "feature": "lag_4",
+        "status": "OK"
+      },
+      {
+        "source": "UCI",
+        "sku": "UCI_10002",
+        "feature": "lag_1",
+        "status": "OK"
+      }
+    ],
+    "fails": []
+  },
+  "risk": {
+    "forecast_driven": true,
+    "missing_columns": [],
+    "decision_grid_pass": "True",
+    "wos_consistent": true,
+    "rupee_valid": true,
+    "uci_risk_status": "NOT_AVAILABLE \u2014 UCI has no inventory data",
+    "sample_critical_skus": [
+      {
+        "sku_id": "SKU_00008",
+        "forecast_weekly_demand": 444.28,
+        "lead_time_demand": 888.57,
+        "on_hand_units": 0,
+        "on_order_units": 990,
+        "inventory_position": 990,
+        "stockout_risk_level": "CRITICAL",
+        "overstock_risk_level": "OPTIMAL",
+        "action": "REORDER NOW",
+        "weeks_of_supply": 0.0,
+        "safety_stock": 9,
+        "sales_at_risk": 12466.62
+      },
+      {
+        "sku_id": "SKU_00013",
+        "forecast_weekly_demand": 342.09,
+        "lead_time_demand": 684.18,
+        "on_hand_units": 3,
+        "on_order_units": 700,
+        "inventory_position": 703,
+        "stockout_risk_level": "CRITICAL",
+        "overstock_risk_level": "OPTIMAL",
+        "action": "REORDER NOW",
+        "weeks_of_supply": 0.01,
+        "safety_stock": 6,
+        "sales_at_risk": 77045.18
+      },
+      {
+        "sku_id": "SKU_00028",
+        "forecast_weekly_demand": 281.28,
+        "lead_time_demand": 1125.13,
+        "on_hand_units": 0,
+        "on_order_units": 1080,
+        "inventory_position": 1080,
+        "stockout_risk_level": "CRITICAL",
+        "overstock_risk_level": "OPTIMAL",
+        "action": "REORDER NOW",
+        "weeks_of_supply": 0.0,
+        "safety_stock": 7,
+        "sales_at_risk": 203557.97
+      },
+      {
+        "sku_id": "SKU_00035",
+        "forecast_weekly_demand": 177.39,
+        "lead_time_demand": 532.18,
+        "on_hand_units": 0,
+        "on_order_units": 430,
+        "inventory_position": 430,
+        "stockout_risk_level": "CRITICAL",
+        "overstock_risk_level": "OPTIMAL",
+        "action": "REORDER NOW",
+        "weeks_of_supply": 0.0,
+        "safety_stock": 4,
+        "sales_at_risk": 36730.87
+      },
+      {
+        "sku_id": "SKU_00050",
+        "forecast_weekly_demand": 177.19,
+        "lead_time_demand": 708.76,
+        "on_hand_units": 0,
+        "on_order_units": 680,
+        "inventory_position": 680,
+        "stockout_risk_level": "CRITICAL",
+        "overstock_risk_level": "OPTIMAL",
+        "action": "REORDER NOW",
+        "weeks_of_supply": 0.0,
+        "safety_stock": 5,
+        "sales_at_risk": 188855.42
+      }
+    ],
+    "action_counts": {
+      "REORDER NOW": 15,
+      "MARKDOWN / CLEAR": 0,
+      "WATCH / VOLATILE": 82,
+      "HEALTHY": 3
+    },
+    "total_sales_at_risk": 15167809.6,
+    "total_locked_capital": 0.0
+  },
+  "reproducibility": {
+    "UCI": {
+      "status": "REPRODUCIBLE",
+      "max_prediction_diff": 0.0,
+      "stored_wape_pct": 62.1642,
+      "sample_size": 500
+    },
+    "SYNTHETIC": {
+      "status": "REPRODUCIBLE",
+      "max_prediction_diff": 0.0,
+      "stored_wape_pct": 14.4178,
+      "sample_size": 500
+    }
+  },
+  "decisions": {
+    "UCI": {
+      "decision": "KEEP AS RESEARCH CANDIDATE",
+      "issues": [],
+      "warnings": [
+        "High bias (UNDER_FORECAST)",
+        "No inventory data: UCI can only be a demand forecasting candidate"
+      ],
+      "reasoning": "UCI WAPE 64.19% remains high in absolute terms; no inventory data; warnings: High bias (UNDER_FORECAST); No inventory data: UCI can only be a demand forecasting candidate",
+      "fold_stability": "STRONG",
+      "reproducibility": "REPRODUCIBLE"
+    },
+    "SYNTHETIC": {
+      "decision": "PROMOTE WITH LIMITATIONS",
+      "issues": [],
+      "warnings": [
+        "High horizon degradation"
+      ],
+      "reasoning": "Warnings require documentation: High horizon degradation",
+      "fold_stability": "STRONG",
+      "reproducibility": "REPRODUCIBLE"
+    }
+  },
+  "final_hash_ok": true
+}

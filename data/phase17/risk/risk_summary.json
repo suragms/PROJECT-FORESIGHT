@@ -1,0 +1,17 @@
+{
+  "total_skus": 100,
+  "demand_source": "FORECAST",
+  "stockout_critical": 15,
+  "stockout_medium": 82,
+  "stockout_low": 3,
+  "overstock_severe": 0,
+  "overstock_moderate": 0,
+  "overstock_optimal": 100,
+  "reorder_now": 15,
+  "markdown_clear": 0,
+  "watch_volatile": 82,
+  "healthy": 3,
+  "total_locked_capital": 0.0,
+  "total_sales_at_risk": 15167809.6,
+  "uci_risk_status": "NOT_AVAILABLE \u2014 UCI has no inventory data"
+}

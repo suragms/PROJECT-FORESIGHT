@@ -45,10 +45,10 @@
     "Performance numbers above are the historical Phase 12 freeze record. Re-running validate_phase12.py measures current latency but must not replace this snapshot."
   ],
   "last_run_performance": {
-    "load_s": 0.0262,
-    "single_s": 0.0962,
-    "batch10_s": 0.0969,
-    "rows_per_s": 103.19,
+    "load_s": 0.0209,
+    "single_s": 0.0718,
+    "batch10_s": 0.075,
+    "rows_per_s": 133.28,
     "app_version": "0.13.0"
   }
 }

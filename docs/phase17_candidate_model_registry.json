@@ -1,0 +1,34 @@
+[
+  {
+    "model_id": "phase17_synthetic_lightgbm",
+    "source_dataset": "SYNTHETIC",
+    "training_data": "data/phase17/features/weekly_features.parquet (source=SYNTHETIC)",
+    "feature_version": "phase17_weekly",
+    "forecast_horizon": "8 weeks",
+    "validation_method": "rolling_origin",
+    "wape": 14.4178,
+    "bias": 19.7833,
+    "baseline_wape": 25.5056,
+    "improvement_vs_baseline": 11.0878,
+    "artifact_path": "C:\\Users\\SURAG\\Documents\\zidio\\Project_FORESIGHT\\Demand-Inventory-Intelligence\\models\\phase17\\synthetic\\phase17_synthetic_lightgbm.joblib",
+    "sha256": "3a55bed13149d965cb37e4b79e09e2fba8a076bb20646db5aa4896b280488e7c",
+    "status": "candidate",
+    "champion": "LightGBM"
+  },
+  {
+    "model_id": "phase17_uci_lightgbm",
+    "source_dataset": "UCI",
+    "training_data": "data/phase17/features/weekly_features.parquet (source=UCI)",
+    "feature_version": "phase17_weekly",
+    "forecast_horizon": "8 weeks",
+    "validation_method": "rolling_origin",
+    "wape": 64.1894,
+    "bias": -9.6978,
+    "baseline_wape": 91.6271,
+    "improvement_vs_baseline": 27.4377,
+    "artifact_path": "C:\\Users\\SURAG\\Documents\\zidio\\Project_FORESIGHT\\Demand-Inventory-Intelligence\\models\\phase17\\uci\\phase17_uci_lightgbm.joblib",
+    "sha256": "0ee70bb3265e26daa6bad5c8916d79db98e3ba8f18f5509bf73f0d0f562e80dd",
+    "status": "candidate",
+    "champion": "LightGBM"
+  }
+]

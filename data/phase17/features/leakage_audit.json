@@ -1,0 +1,218 @@
+[
+  {
+    "feature": "lag_1",
+    "source": "units_sold shifted by 1 weeks",
+    "leakage_status": "PASS",
+    "available_at_prediction_time": true
+  },
+  {
+    "feature": "lag_2",
+    "source": "units_sold shifted by 2 weeks",
+    "leakage_status": "PASS",
+    "available_at_prediction_time": true
+  },
+  {
+    "feature": "lag_4",
+    "source": "units_sold shifted by 4 weeks",
+    "leakage_status": "PASS",
+    "available_at_prediction_time": true
+  },
+  {
+    "feature": "lag_7",
+    "source": "units_sold shifted by 7 weeks",
+    "leakage_status": "PASS",
+    "available_at_prediction_time": true
+  },
+  {
+    "feature": "lag_13",
+    "source": "units_sold shifted by 13 weeks",
+    "leakage_status": "PASS",
+    "available_at_prediction_time": true
+  },
+  {
+    "feature": "lag_26",
+    "source": "units_sold shifted by 26 weeks",
+    "leakage_status": "PASS",
+    "available_at_prediction_time": true
+  },
+  {
+    "feature": "lag_52",
+    "source": "units_sold shifted by 52 weeks",
+    "leakage_status": "PASS",
+    "available_at_prediction_time": true
+  },
+  {
+    "feature": "rolling_mean_4",
+    "source": "units_sold shifted by 1 then rolling/ewm",
+    "leakage_status": "PASS",
+    "available_at_prediction_time": true
+  },
+  {
+    "feature": "rolling_std_4",
+    "source": "units_sold shifted by 1 then rolling/ewm",
+    "leakage_status": "PASS",
+    "available_at_prediction_time": true
+  },
+  {
+    "feature": "rolling_min_4",
+    "source": "units_sold shifted by 1 then rolling/ewm",
+    "leakage_status": "PASS",
+    "available_at_prediction_time": true
+  },
+  {
+    "feature": "rolling_max_4",
+    "source": "units_sold shifted by 1 then rolling/ewm",
+    "leakage_status": "PASS",
+    "available_at_prediction_time": true
+  },
+  {
+    "feature": "rolling_mean_8",
+    "source": "units_sold shifted by 1 then rolling/ewm",
+    "leakage_status": "PASS",
+    "available_at_prediction_time": true
+  },
+  {
+    "feature": "rolling_std_8",
+    "source": "units_sold shifted by 1 then rolling/ewm",
+    "leakage_status": "PASS",
+    "available_at_prediction_time": true
+  },
+  {
+    "feature": "rolling_min_8",
+    "source": "units_sold shifted by 1 then rolling/ewm",
+    "leakage_status": "PASS",
+    "available_at_prediction_time": true
+  },
+  {
+    "feature": "rolling_max_8",
+    "source": "units_sold shifted by 1 then rolling/ewm",
+    "leakage_status": "PASS",
+    "available_at_prediction_time": true
+  },
+  {
+    "feature": "rolling_mean_13",
+    "source": "units_sold shifted by 1 then rolling/ewm",
+    "leakage_status": "PASS",
+    "available_at_prediction_time": true
+  },
+  {
+    "feature": "rolling_std_13",
+    "source": "units_sold shifted by 1 then rolling/ewm",
+    "leakage_status": "PASS",
+    "available_at_prediction_time": true
+  },
+  {
+    "feature": "rolling_min_13",
+    "source": "units_sold shifted by 1 then rolling/ewm",
+    "leakage_status": "PASS",
+    "available_at_prediction_time": true
+  },
+  {
+    "feature": "rolling_max_13",
+    "source": "units_sold shifted by 1 then rolling/ewm",
+    "leakage_status": "PASS",
+    "available_at_prediction_time": true
+  },
+  {
+    "feature": "rolling_mean_26",
+    "source": "units_sold shifted by 1 then rolling/ewm",
+    "leakage_status": "PASS",
+    "available_at_prediction_time": true
+  },
+  {
+    "feature": "rolling_std_26",
+    "source": "units_sold shifted by 1 then rolling/ewm",
+    "leakage_status": "PASS",
+    "available_at_prediction_time": true
+  },
+  {
+    "feature": "rolling_min_26",
+    "source": "units_sold shifted by 1 then rolling/ewm",
+    "leakage_status": "PASS",
+    "available_at_prediction_time": true
+  },
+  {
+    "feature": "rolling_max_26",
+    "source": "units_sold shifted by 1 then rolling/ewm",
+    "leakage_status": "PASS",
+    "available_at_prediction_time": true
+  },
+  {
+    "feature": "ewm_4",
+    "source": "units_sold shifted by 1 then rolling/ewm",
+    "leakage_status": "PASS",
+    "available_at_prediction_time": true
+  },
+  {
+    "feature": "ewm_13",
+    "source": "units_sold shifted by 1 then rolling/ewm",
+    "leakage_status": "PASS",
+    "available_at_prediction_time": true
+  },
+  {
+    "feature": "ewm_26",
+    "source": "units_sold shifted by 1 then rolling/ewm",
+    "leakage_status": "PASS",
+    "available_at_prediction_time": true
+  },
+  {
+    "feature": "week_of_year",
+    "source": "calendar math on forecast week",
+    "leakage_status": "PASS",
+    "available_at_prediction_time": true
+  },
+  {
+    "feature": "month",
+    "source": "calendar math on forecast week",
+    "leakage_status": "PASS",
+    "available_at_prediction_time": true
+  },
+  {
+    "feature": "quarter",
+    "source": "calendar math on forecast week",
+    "leakage_status": "PASS",
+    "available_at_prediction_time": true
+  },
+  {
+    "feature": "year",
+    "source": "calendar math on forecast week",
+    "leakage_status": "PASS",
+    "available_at_prediction_time": true
+  },
+  {
+    "feature": "sin_week",
+    "source": "calendar math on forecast week",
+    "leakage_status": "PASS",
+    "available_at_prediction_time": true
+  },
+  {
+    "feature": "cos_week",
+    "source": "calendar math on forecast week",
+    "leakage_status": "PASS",
+    "available_at_prediction_time": true
+  },
+  {
+    "feature": "sin_month",
+    "source": "calendar math on forecast week",
+    "leakage_status": "PASS",
+    "available_at_prediction_time": true
+  },
+  {
+    "feature": "cos_month",
+    "source": "calendar math on forecast week",
+    "leakage_status": "PASS",
+    "available_at_prediction_time": true
+  },
+  {
+    "feature": "price_lag1",
+    "source": "avg_unit_price shifted by 1 week",
+    "leakage_status": "PASS",
+    "available_at_prediction_time": true
+  },
+  {
+    "feature": "promo_lag1",
+    "source": "promotion_flag shifted by 1 week",
+    "leakage_status": "PASS",
+    "available_at_prediction_time": true
+  }
+]

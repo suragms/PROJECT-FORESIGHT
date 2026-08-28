@@ -1,0 +1,30 @@
+{
+  "SYNTHETIC": {
+    "source": "SYNTHETIC",
+    "n_folds": 5,
+    "n_skus": 100,
+    "n_predictions": 3900,
+    "seasonal_naive_wape": 25.5056,
+    "seasonal_naive_bias": 14.7505,
+    "horizon": 8,
+    "candidate_model": "LightGBM",
+    "candidate_wape": 14.4178,
+    "candidate_bias": 19.7833,
+    "champion": "LightGBM",
+    "improvement_pct": 11.0878
+  },
+  "UCI": {
+    "source": "UCI",
+    "n_folds": 5,
+    "n_skus": 4917,
+    "n_predictions": 77513,
+    "seasonal_naive_wape": 91.6271,
+    "seasonal_naive_bias": 5.9195,
+    "horizon": 8,
+    "candidate_model": "LightGBM",
+    "candidate_wape": 64.1894,
+    "candidate_bias": -9.6978,
+    "champion": "LightGBM",
+    "improvement_pct": 27.4377
+  }
+}
