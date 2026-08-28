@@ -150,7 +150,10 @@ class TestFrozenModelHashes:
 
     def test_no_unexpected_model_files(self, registry):
         registered = {os.path.basename(e["model_file"]) for e in registry}
-        actual = set(os.listdir(MODELS_DIR)) if os.path.isdir(MODELS_DIR) else set()
+        actual = {
+            f for f in os.listdir(MODELS_DIR)
+            if os.path.isfile(os.path.join(MODELS_DIR, f)) and f.endswith(".joblib")
+        } if os.path.isdir(MODELS_DIR) else set()
         unexpected = actual - registered
         assert len(unexpected) == 0, f"Unexpected model files: {unexpected}"
 

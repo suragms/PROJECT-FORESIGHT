@@ -1,0 +1,160 @@
+{
+  "seasonal_naive_wape_pct": 25.5056,
+  "phase17_wape_pct": 14.4178,
+  "phase19_wape_pct": 13.9562,
+  "hybrid_wape_pct": 13.9562,
+  "supported_horizon_wape_pct": 11.0309,
+  "improvement_vs_baseline_pp": 11.549,
+  "improvement_vs_phase17_pp": 0.464,
+  "material_regression_from_phase17": false,
+  "supported_horizon_weeks": 6,
+  "hybrid_rule": {
+    "rule_name": "horizon_model_selection_from_historical_validation",
+    "defined_before_evaluation": true,
+    "selection": {
+      "1": "lightgbm",
+      "2": "lightgbm",
+      "3": "lightgbm",
+      "4": "lightgbm",
+      "5": "lightgbm",
+      "6": "lightgbm",
+      "7": "lightgbm",
+      "8": "lightgbm"
+    },
+    "supported_production_horizon_weeks": 6,
+    "extended_horizon_weeks": "7-8 (degraded accuracy; not recommended for production decisions)"
+  },
+  "fold_metrics": [
+    {
+      "fold": 0,
+      "origin": "2025-10-14 00:00:00",
+      "baseline_wape_pct": 23.347,
+      "phase17_wape_pct": 11.463,
+      "phase19_wape_pct": 11.067,
+      "phase19_bias": 1.266,
+      "p19_beats_baseline": true
+    },
+    {
+      "fold": 1,
+      "origin": "2025-10-21 00:00:00",
+      "baseline_wape_pct": 22.536,
+      "phase17_wape_pct": 11.628,
+      "phase19_wape_pct": 11.207,
+      "phase19_bias": 1.277,
+      "p19_beats_baseline": true
+    },
+    {
+      "fold": 2,
+      "origin": "2025-10-28 00:00:00",
+      "baseline_wape_pct": 22.421,
+      "phase17_wape_pct": 11.237,
+      "phase19_wape_pct": 10.768,
+      "phase19_bias": 3.482,
+      "p19_beats_baseline": true
+    },
+    {
+      "fold": 3,
+      "origin": "2025-11-04 00:00:00",
+      "baseline_wape_pct": 29.705,
+      "phase17_wape_pct": 18.958,
+      "phase19_wape_pct": 18.521,
+      "phase19_bias": 37.52,
+      "p19_beats_baseline": true
+    },
+    {
+      "fold": 4,
+      "origin": "2025-11-11 00:00:00",
+      "baseline_wape_pct": 30.997,
+      "phase17_wape_pct": 20.414,
+      "phase19_wape_pct": 19.799,
+      "phase19_bias": 44.976,
+      "p19_beats_baseline": true
+    }
+  ],
+  "horizon_metrics": [
+    {
+      "horizon": 1,
+      "baseline_wape_pct": 23.712,
+      "phase17_wape_pct": 11.143,
+      "phase19_wape_pct": 10.925,
+      "hybrid_wape_pct": 10.925,
+      "phase19_bias": 2.879,
+      "within_supported_horizon": true,
+      "status": "PASS"
+    },
+    {
+      "horizon": 2,
+      "baseline_wape_pct": 23.101,
+      "phase17_wape_pct": 11.175,
+      "phase19_wape_pct": 10.805,
+      "hybrid_wape_pct": 10.805,
+      "phase19_bias": -2.685,
+      "within_supported_horizon": true,
+      "status": "PASS"
+    },
+    {
+      "horizon": 3,
+      "baseline_wape_pct": 23.192,
+      "phase17_wape_pct": 11.804,
+      "phase19_wape_pct": 11.27,
+      "hybrid_wape_pct": 11.27,
+      "phase19_bias": 0.862,
+      "within_supported_horizon": true,
+      "status": "PASS"
+    },
+    {
+      "horizon": 4,
+      "baseline_wape_pct": 22.67,
+      "phase17_wape_pct": 11.429,
+      "phase19_wape_pct": 10.843,
+      "hybrid_wape_pct": 10.843,
+      "phase19_bias": -2.82,
+      "within_supported_horizon": true,
+      "status": "PASS"
+    },
+    {
+      "horizon": 5,
+      "baseline_wape_pct": 22.244,
+      "phase17_wape_pct": 11.908,
+      "phase19_wape_pct": 11.191,
+      "hybrid_wape_pct": 11.191,
+      "phase19_bias": 0.493,
+      "within_supported_horizon": true,
+      "status": "PASS"
+    },
+    {
+      "horizon": 6,
+      "baseline_wape_pct": 22.204,
+      "phase17_wape_pct": 11.747,
+      "phase19_wape_pct": 11.16,
+      "hybrid_wape_pct": 11.16,
+      "phase19_bias": 2.697,
+      "within_supported_horizon": true,
+      "status": "PASS"
+    },
+    {
+      "horizon": 7,
+      "baseline_wape_pct": 34.901,
+      "phase17_wape_pct": 24.643,
+      "phase19_wape_pct": 24.418,
+      "hybrid_wape_pct": 24.418,
+      "phase19_bias": 67.762,
+      "within_supported_horizon": false,
+      "degradation_pp": 13.26,
+      "status": "PARTIAL"
+    },
+    {
+      "horizon": 8,
+      "baseline_wape_pct": 37.648,
+      "phase17_wape_pct": 27.637,
+      "phase19_wape_pct": 27.236,
+      "hybrid_wape_pct": 27.236,
+      "phase19_bias": 79.311,
+      "within_supported_horizon": false,
+      "degradation_pp": 2.82,
+      "status": "PARTIAL"
+    }
+  ],
+  "model_path": "C:\\Users\\SURAG\\Documents\\zidio\\Project_FORESIGHT\\Demand-Inventory-Intelligence\\models\\phase19\\synthetic\\phase19_synthetic_lightgbm.joblib",
+  "model_sha256": "96a88f1dbb8e1904f2c0b79877afe7bfe30ef5336f8d4598dc07d6adf895e086"
+}

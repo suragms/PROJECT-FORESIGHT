@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-28T04:46:59.616009+00:00",
+  "generated_at": "2026-08-28T05:34:55.626498+00:00",
   "forecast_file": "C:\\Users\\SURAG\\Documents\\zidio\\Project_FORESIGHT\\Demand-Inventory-Intelligence\\data\\processed\\forecasts\\final\\final_predictions.parquet",
   "n_forecasts": 957949,
   "n_alerts": 0,
@@ -10,7 +10,7 @@
     "error_rate": 0.4872,
     "auth_failures": 1,
     "rate_limit_events": 1,
-    "mean_latency_ms": 57.62,
+    "mean_latency_ms": 31.679,
     "note": "In-process API counters; empty unless this process served traffic."
   },
   "retraining": "disabled"

@@ -1,18 +1,18 @@
 {
   "phase": 14,
-  "status": "COMPLETE",
+  "status": "INCOMPLETE",
   "implementation_class": "academic/reference",
   "production_deployment": false,
   "validation": {
     "command": "python src/validate_phase14.py",
-    "passed": 19,
+    "passed": 16,
     "total": 19,
-    "summary": "19/19 PASS",
+    "summary": "16/19 PASS",
     "note": "Counts are calculated at runtime, not hardcoded."
   },
   "regression": {
-    "phase12_validation": "42/42 PASS",
-    "phase13_validation": "42/42 PASS"
+    "phase12_validation": "41/42 PASS",
+    "phase13_validation": "41/42 PASS"
   },
   "model_hash_status": "UNCHANGED",
   "final_models": {
@@ -42,24 +42,24 @@
     "prediction": 10.749200294243758,
     "lower_bound": 0.9803840782755803,
     "upper_bound": 12.034108979147309,
-    "latency_s": 0.0959,
-    "request_id": "6de95bb3-0e84-4bae-b85c-6081c71c48d6",
+    "latency_s": 0.1427,
+    "request_id": "eb447806-f941-422d-93ca-6601cd27501d",
     "status_code": 200
   },
   "batch": {
-    "batch10_s": 0.0846,
-    "batch10_rows_per_s": 118.19,
+    "batch10_s": 0.1928,
+    "batch10_rows_per_s": 51.88,
     "batch10_response_bytes": 4301,
-    "batch100_s": 0.0838,
-    "batch100_rows_per_s": 1193.56,
+    "batch100_s": 0.2003,
+    "batch100_rows_per_s": 499.18,
     "batch100_response_bytes": 39312,
-    "batch500_s": 0.1809,
-    "batch500_rows_per_s": 2764.12,
+    "batch500_s": 0.2276,
+    "batch500_rows_per_s": 2196.47,
     "batch500_response_bytes": 195312,
     "error_rate": 0.0
   },
   "performance": {
-    "single_s": 0.0959,
+    "single_s": 0.1427,
     "batch": [
       {
         "n": 10,
@@ -67,8 +67,8 @@
         "rows_processed": 10,
         "success_count": 10,
         "failure_count": 0,
-        "latency_s": 0.0846,
-        "rows_per_s": 118.19,
+        "latency_s": 0.1928,
+        "rows_per_s": 51.88,
         "response_bytes": 4301
       },
       {
@@ -77,8 +77,8 @@
         "rows_processed": 100,
         "success_count": 100,
         "failure_count": 0,
-        "latency_s": 0.0838,
-        "rows_per_s": 1193.56,
+        "latency_s": 0.2003,
+        "rows_per_s": 499.18,
         "response_bytes": 39312
       },
       {
@@ -87,8 +87,8 @@
         "rows_processed": 500,
         "success_count": 500,
         "failure_count": 0,
-        "latency_s": 0.1809,
-        "rows_per_s": 2764.12,
+        "latency_s": 0.2276,
+        "rows_per_s": 2196.47,
         "response_bytes": 195312
       }
     ],
@@ -100,16 +100,16 @@
       "note": "Historical Phase 12 freeze snapshot; not an SLO."
     },
     "vs_phase12": {
-      "single_s_delta": 0.0278,
-      "batch10_s_delta": 0.0239,
+      "single_s_delta": 0.0746,
+      "batch10_s_delta": 0.1321,
       "note": "Phase 14 timings include production auth/TestClient overhead; not an SLO."
     }
   },
-  "docker_status": "PASS",
+  "docker_status": "PARTIAL",
   "docker": {
     "static": "PASS",
-    "runtime": "PASS",
-    "detail": "static=PASS runtime=PASS {\"health_200\": true, \"ready_200\": true, \"unauth_401\": true, \"auth_200\": true, \"non_root\": true, \"uid_10001\": true, \"no_secret_in_response\": true, \"no_secret_in_image\": true, \"uci_hash\": true, \"synthetic_hash\": true}"
+    "runtime": "NOT IMPLEMENTED",
+    "detail": "static=PASS runtime=NOT IMPLEMENTED Docker daemon unavailable: failed to connect to the docker API at npipe:////./pipe/dockerDesktopLinuxEngine; check if the path is correct and if the daemon is running: open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified."
   },
   "deployment_status": "NOT EXECUTED",
   "known_limitations_doc": "docs/phase14_known_limitations.md",

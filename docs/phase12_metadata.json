@@ -4,9 +4,9 @@
   "implementation_class": "academic/reference",
   "production_deployment": false,
   "validation": {
-    "passed": 42,
+    "passed": 41,
     "total": 42,
-    "summary": "42/42 PASS"
+    "summary": "41/42 PASS"
   },
   "pytest": {
     "passed": 33,
@@ -45,10 +45,10 @@
     "Performance numbers above are the historical Phase 12 freeze record. Re-running validate_phase12.py measures current latency but must not replace this snapshot."
   ],
   "last_run_performance": {
-    "load_s": 0.0209,
-    "single_s": 0.0718,
-    "batch10_s": 0.075,
-    "rows_per_s": 133.28,
+    "load_s": 0.0248,
+    "single_s": 0.1002,
+    "batch10_s": 0.1053,
+    "rows_per_s": 94.95,
     "app_version": "0.13.0"
   }
 }

@@ -1,0 +1,345 @@
+{
+  "fold_summary": [
+    {
+      "fold": 0,
+      "origin": "2025-10-14",
+      "val_start": "2025-10-21",
+      "val_end": "2025-12-09",
+      "n_predictions": 800,
+      "baseline_wape_pct": 23.347,
+      "candidate_wape_pct": 11.463,
+      "candidate_bias": 3.103,
+      "holiday_weeks_in_val": 200,
+      "promo_weeks": null,
+      "mean_actual": 500.26,
+      "mean_forecast": 503.36
+    },
+    {
+      "fold": 1,
+      "origin": "2025-10-21",
+      "val_start": "2025-10-28",
+      "val_end": "2025-12-16",
+      "n_predictions": 800,
+      "baseline_wape_pct": 22.536,
+      "candidate_wape_pct": 11.628,
+      "candidate_bias": 4.312,
+      "holiday_weeks_in_val": 200,
+      "promo_weeks": null,
+      "mean_actual": 500.23,
+      "mean_forecast": 504.54
+    },
+    {
+      "fold": 2,
+      "origin": "2025-10-28",
+      "val_start": "2025-11-04",
+      "val_end": "2025-12-23",
+      "n_predictions": 800,
+      "baseline_wape_pct": 22.421,
+      "candidate_wape_pct": 11.237,
+      "candidate_bias": 7.501,
+      "holiday_weeks_in_val": 200,
+      "promo_weeks": null,
+      "mean_actual": 497.51,
+      "mean_forecast": 505.01
+    },
+    {
+      "fold": 3,
+      "origin": "2025-11-04",
+      "val_start": "2025-11-11",
+      "val_end": "2025-12-30",
+      "n_predictions": 800,
+      "baseline_wape_pct": 29.705,
+      "candidate_wape_pct": 18.958,
+      "candidate_bias": 40.205,
+      "holiday_weeks_in_val": 300,
+      "promo_weeks": null,
+      "mean_actual": 459.04,
+      "mean_forecast": 499.25
+    },
+    {
+      "fold": 4,
+      "origin": "2025-11-11",
+      "val_start": "2025-11-18",
+      "val_end": "2025-12-30",
+      "n_predictions": 700,
+      "baseline_wape_pct": 30.997,
+      "candidate_wape_pct": 20.414,
+      "candidate_bias": 47.226,
+      "holiday_weeks_in_val": 300,
+      "promo_weeks": null,
+      "mean_actual": 452.06,
+      "mean_forecast": 499.29
+    }
+  ],
+  "root_cause_evidence": {
+    "fold_3_origin": "2025-11-04",
+    "fold_4_origin": "2025-11-11",
+    "fold_3_val_period": "2025-11-11 to 2025-12-30",
+    "fold_4_val_period": "2025-11-18 to 2025-12-30",
+    "folds_34_holiday_weeks": 600,
+    "folds_34_mean_demand": 455.78,
+    "other_folds_mean_demand": 499.33,
+    "demand_elevation_ratio": 0.913,
+    "folds_34_bias": 43.481,
+    "other_folds_bias": 4.972
+  },
+  "top_affected_skus": [
+    {
+      "product_key": "SYN_SKU_00060",
+      "mean_actual": 1313.8666666666666,
+      "mean_forecast": 1327.863819482146,
+      "mean_abs_error": 339.72967258610333,
+      "sku_wape": 25.857241164966254,
+      "bias": 13.997152815479467
+    },
+    {
+      "product_key": "SYN_SKU_00057",
+      "mean_actual": 1412.6666666666667,
+      "mean_forecast": 1543.2895475315686,
+      "mean_abs_error": 249.8617123807282,
+      "sku_wape": 17.687237780608417,
+      "bias": 130.62288086490184
+    },
+    {
+      "product_key": "SYN_SKU_00068",
+      "mean_actual": 1604.8666666666666,
+      "mean_forecast": 1772.0144030176048,
+      "mean_abs_error": 244.9550514087044,
+      "sku_wape": 15.263264948824688,
+      "bias": 167.1477363509382
+    },
+    {
+      "product_key": "SYN_SKU_00024",
+      "mean_actual": 675.5333333333333,
+      "mean_forecast": 735.4652148328945,
+      "mean_abs_error": 233.48979092178223,
+      "sku_wape": 34.56377049074049,
+      "bias": 59.9318814995612
+    },
+    {
+      "product_key": "SYN_SKU_00044",
+      "mean_actual": 1067.4666666666667,
+      "mean_forecast": 1176.6480052524078,
+      "mean_abs_error": 232.42865945822606,
+      "sku_wape": 21.77385643188478,
+      "bias": 109.18133858574106
+    },
+    {
+      "product_key": "SYN_SKU_00032",
+      "mean_actual": 1235.6666666666667,
+      "mean_forecast": 1361.091055799357,
+      "mean_abs_error": 210.79224217370367,
+      "sku_wape": 17.058989115756972,
+      "bias": 125.4243891326903
+    },
+    {
+      "product_key": "SYN_SKU_00031",
+      "mean_actual": 981.2,
+      "mean_forecast": 1021.2543246865864,
+      "mean_abs_error": 202.67481553098477,
+      "sku_wape": 20.655810796064486,
+      "bias": 40.05432468658637
+    },
+    {
+      "product_key": "SYN_SKU_00003",
+      "mean_actual": 1256.7333333333333,
+      "mean_forecast": 1375.6540541556722,
+      "mean_abs_error": 201.40455387415676,
+      "sku_wape": 16.026037388532977,
+      "bias": 118.92072082233881
+    },
+    {
+      "product_key": "SYN_SKU_00069",
+      "mean_actual": 1263.6,
+      "mean_forecast": 1384.7314242153345,
+      "mean_abs_error": 188.66920690160967,
+      "sku_wape": 14.93108633282761,
+      "bias": 121.13142421533462
+    },
+    {
+      "product_key": "SYN_SKU_00004",
+      "mean_actual": 1015.3333333333334,
+      "mean_forecast": 1115.9870643908114,
+      "mean_abs_error": 174.56533318138688,
+      "sku_wape": 17.192908717799103,
+      "bias": 100.65373105747801
+    },
+    {
+      "product_key": "SYN_SKU_00033",
+      "mean_actual": 957.1333333333333,
+      "mean_forecast": 1089.7668449391413,
+      "mean_abs_error": 172.69609485216412,
+      "sku_wape": 18.043055114456095,
+      "bias": 132.63351160580794
+    },
+    {
+      "product_key": "SYN_SKU_00041",
+      "mean_actual": 997.6666666666666,
+      "mean_forecast": 1083.5964933686612,
+      "mean_abs_error": 169.84561207120078,
+      "sku_wape": 17.024284537708063,
+      "bias": 85.92982670199456
+    },
+    {
+      "product_key": "SYN_SKU_00014",
+      "mean_actual": 1070.0,
+      "mean_forecast": 1187.6468591040443,
+      "mean_abs_error": 148.3938475133745,
+      "sku_wape": 13.868583879754626,
+      "bias": 117.64685910404432
+    },
+    {
+      "product_key": "SYN_SKU_00051",
+      "mean_actual": 358.2,
+      "mean_forecast": 410.13956754177815,
+      "mean_abs_error": 147.14772258162074,
+      "sku_wape": 41.07976621485782,
+      "bias": 51.93956754177816
+    },
+    {
+      "product_key": "SYN_SKU_00021",
+      "mean_actual": 600.1333333333333,
+      "mean_forecast": 674.4808468037938,
+      "mean_abs_error": 141.64470128167497,
+      "sku_wape": 23.602205279106023,
+      "bias": 74.34751347046051
+    }
+  ],
+  "high_volume_skus_affected": 25,
+  "low_volume_skus_affected": 25,
+  "category_breakdown": [
+    {
+      "category": "Apparel",
+      "mean_actual": 419.89,
+      "mean_forecast": 457.44,
+      "bias": 37.55,
+      "wape_pct": 24.21
+    },
+    {
+      "category": "Groceries & Essentials",
+      "mean_actual": 531.94,
+      "mean_forecast": 581.98,
+      "bias": 50.04,
+      "wape_pct": 15.81
+    },
+    {
+      "category": "Sports & Outdoors",
+      "mean_actual": 577.86,
+      "mean_forecast": 642.19,
+      "bias": 64.33,
+      "wape_pct": 19.64
+    },
+    {
+      "category": "Health & Beauty",
+      "mean_actual": 276.48,
+      "mean_forecast": 306.88,
+      "bias": 30.4,
+      "wape_pct": 19.02
+    },
+    {
+      "category": "Electronics",
+      "mean_actual": 439.09,
+      "mean_forecast": 481.89,
+      "bias": 42.8,
+      "wape_pct": 20.9
+    },
+    {
+      "category": "Home & Kitchen",
+      "mean_actual": 467.38,
+      "mean_forecast": 506.37,
+      "bias": 38.99,
+      "wape_pct": 22.67
+    }
+  ],
+  "period_detail": [
+    {
+      "week": "2025-11-11",
+      "observed_demand": 50789.0,
+      "forecast": 50382.6,
+      "forecast_error": -406.4,
+      "is_holiday_week": false,
+      "holiday_names": "",
+      "season": "Fall",
+      "month": 11,
+      "affected_skus": 19
+    },
+    {
+      "week": "2025-11-18",
+      "observed_demand": 99706.0,
+      "forecast": 102248.6,
+      "forecast_error": 2542.6,
+      "is_holiday_week": false,
+      "holiday_names": "",
+      "season": "Fall",
+      "month": 11,
+      "affected_skus": 44
+    },
+    {
+      "week": "2025-11-25",
+      "observed_demand": 111842.0,
+      "forecast": 103287.5,
+      "forecast_error": -8554.5,
+      "is_holiday_week": true,
+      "holiday_names": "Black Friday, Cyber Monday, Thanksgiving Window",
+      "season": "Fall",
+      "month": 11,
+      "affected_skus": 41
+    },
+    {
+      "week": "2025-12-02",
+      "observed_demand": 89908.0,
+      "forecast": 95667.8,
+      "forecast_error": 5759.8,
+      "is_holiday_week": false,
+      "holiday_names": "",
+      "season": "Winter",
+      "month": 12,
+      "affected_skus": 53
+    },
+    {
+      "week": "2025-12-09",
+      "observed_demand": 99652.0,
+      "forecast": 100531.8,
+      "forecast_error": 879.8,
+      "is_holiday_week": false,
+      "holiday_names": "",
+      "season": "Winter",
+      "month": 12,
+      "affected_skus": 34
+    },
+    {
+      "week": "2025-12-16",
+      "observed_demand": 96372.0,
+      "forecast": 100577.4,
+      "forecast_error": 4205.4,
+      "is_holiday_week": false,
+      "holiday_names": "",
+      "season": "Winter",
+      "month": 12,
+      "affected_skus": 46
+    },
+    {
+      "week": "2025-12-23",
+      "observed_demand": 102974.0,
+      "forecast": 104072.9,
+      "forecast_error": 1098.9,
+      "is_holiday_week": true,
+      "holiday_names": "Christmas Day, Christmas Eve",
+      "season": "Winter",
+      "month": 12,
+      "affected_skus": 48
+    },
+    {
+      "week": "2025-12-30",
+      "observed_demand": 32432.0,
+      "forecast": 92128.5,
+      "forecast_error": 59696.5,
+      "is_holiday_week": true,
+      "holiday_names": "New Year's Eve",
+      "season": "Winter",
+      "month": 12,
+      "affected_skus": 198
+    }
+  ],
+  "conclusion": "Folds 3-4 validation periods (Nov 2025) coincide with elevated demand (0.913x vs other folds) and holiday calendar weeks. Candidate systematically over-forecasts during this period (positive bias). Errors are concentrated among high-volume SKUs. Evidence supports seasonal/holiday shopping period as contributing factor, not a data anomaly."
+}

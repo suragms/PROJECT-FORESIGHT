@@ -182,6 +182,8 @@ def create_app() -> FastAPI:
         return JSONResponse(status_code=422, content={"detail": "Invalid request schema"})
 
     application.include_router(router)
+    from src.api.phase20_routes import router as phase20_router
+    application.include_router(phase20_router, prefix="/phase20", tags=["phase20"])
     return application
 
 

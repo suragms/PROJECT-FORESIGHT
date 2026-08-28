@@ -1,0 +1,82 @@
+{
+  "steps": [
+    {
+      "step": "feature_validation",
+      "rows": 100,
+      "complete_rows": 100,
+      "pass": true
+    },
+    {
+      "step": "promoted_model",
+      "forecasts": 600,
+      "horizons": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "pass": "True"
+    },
+    {
+      "step": "risk_adapter",
+      "skus": 100,
+      "pass": true
+    },
+    {
+      "step": "decision_grid",
+      "pass": true
+    },
+    {
+      "step": "dashboard_output",
+      "records": 600,
+      "pass": true
+    },
+    {
+      "step": "model_metadata",
+      "supported_horizon": 6,
+      "pass": true
+    }
+  ],
+  "smoke_tests": [
+    {
+      "scenario": "normal_sku",
+      "pass": true,
+      "detail": "forecasts=6"
+    },
+    {
+      "scenario": "high_demand_sku",
+      "pass": "True",
+      "detail": "demand=1080.05"
+    },
+    {
+      "scenario": "low_demand_sku",
+      "pass": "True"
+    },
+    {
+      "scenario": "stockout_risk_sku",
+      "pass": true,
+      "detail": "critical_count=15"
+    },
+    {
+      "scenario": "overstock_risk_sku",
+      "pass": true,
+      "detail": "overstock_count=5"
+    },
+    {
+      "scenario": "uci_rejection",
+      "pass": true
+    }
+  ],
+  "pass": true,
+  "smoke_pass_count": 6,
+  "smoke_total": 6,
+  "lineage": {
+    "phase19_unchanged": true,
+    "phase20_exists": true,
+    "lineage_match": true,
+    "source_hash": "96a88f1dbb8e1904f2c0b79877afe7bfe30ef5336f8d4598dc07d6adf895e086",
+    "promoted_hash": "96a88f1dbb8e1904f2c0b79877afe7bfe30ef5336f8d4598dc07d6adf895e086"
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "timestamp": "2026-08-28T05:16:55.782782+00:00",
+  "git_commit": "79d3f1ae29f9a6bed5485b90dcbaeec897a53e24",
+  "frozen_models_count": 12,
+  "all_frozen_match": true,
+  "models": [
+    {
+      "model_id": "uci_h1_phase8_lightgbm",
+      "path": "models\\final\\uci_h1_phase8_lightgbm.joblib",
+      "expected_hash": "331909f0fe191c0b9cb0418884b25eb59012f479f61f8b3e2ad51b729273e90d",
+      "actual_hash": "331909f0fe191c0b9cb0418884b25eb59012f479f61f8b3e2ad51b729273e90d",
+      "size_bytes": 434759,
+      "match": true,
+      "status": "selected"
+    },
+    {
+      "model_id": "synthetic_h1_hurdle_th050",
+      "path": "models\\final\\synthetic_h1_hurdle_th050.joblib",
+      "expected_hash": "59a2b72024861d7f9c827596a52256af95facabfa796bdae5955374221cf1bf4",
+      "actual_hash": "59a2b72024861d7f9c827596a52256af95facabfa796bdae5955374221cf1bf4",
+      "size_bytes": 1012132,
+      "match": true,
+      "status": "selected"
+    },
+    {
+      "model_id": "uci_h3_direct_lightgbm",
+      "path": "models\\final\\uci_h3_direct_lightgbm.joblib",
+      "expected_hash": "28403041bd349d68993c51f5aae43b3d064b458e92e5d89c32b71279d4c0c2f8",
+      "actual_hash": "28403041bd349d68993c51f5aae43b3d064b458e92e5d89c32b71279d4c0c2f8",
+      "size_bytes": 432583,
+      "match": true,
+      "status": "selected"
+    },
+    {
+      "model_id": "uci_h7_direct_lightgbm",
+      "path": "models\\final\\uci_h7_direct_lightgbm.joblib",
+      "expected_hash": "ce215ffcd0cf3a5db1489c85e86c283cb60bb7501914efd882872a7b0bbe5406",
+      "actual_hash": "ce215ffcd0cf3a5db1489c85e86c283cb60bb7501914efd882872a7b0bbe5406",
+      "size_bytes": 431725,
+      "match": true,
+      "status": "selected"
+    },
+    {
+      "model_id": "uci_h14_direct_lightgbm",
+      "path": "models\\final\\uci_h14_direct_lightgbm.joblib",
+      "expected_hash": "905b7859f163a9623cd38792bf101812bf5d4622924502248a9b96885e2f816d",
+      "actual_hash": "905b7859f163a9623cd38792bf101812bf5d4622924502248a9b96885e2f816d",
+      "size_bytes": 431237,
+      "match": true,
+      "status": "selected"
+    },
+    {
+      "model_id": "uci_h30_direct_lightgbm",
+      "path": "models\\final\\uci_h30_direct_lightgbm.joblib",
+      "expected_hash": "d87831a4aa65a28aad5fd282612309d3b1952c8f4d9eae2f5516b2b393ed1c9b",
+      "actual_hash": "d87831a4aa65a28aad5fd282612309d3b1952c8f4d9eae2f5516b2b393ed1c9b",
+      "size_bytes": 427283,
+      "match": true,
+      "status": "selected"
+    },
+    {
+      "model_id": "uci_h1_quantile_p10p90",
+      "path": "models\\final\\uci_h1_quantile_p10p90.joblib",
+      "expected_hash": "294e1dbbda363321820482036ee69557238dfa56f03dce7cf890cd982c30c3ed",
+      "actual_hash": "294e1dbbda363321820482036ee69557238dfa56f03dce7cf890cd982c30c3ed",
+      "size_bytes": 1315149,
+      "match": true,
+      "status": "interval_companion"
+    },
+    {
+      "model_id": "synthetic_h3_direct_lightgbm",
+      "path": "models\\final\\synthetic_h3_direct_lightgbm.joblib",
+      "expected_hash": "2c896d2c4589a24457ee3df9f37442f5d837a551c1a9a8e5d29f158868b08d6e",
+      "actual_hash": "2c896d2c4589a24457ee3df9f37442f5d837a551c1a9a8e5d29f158868b08d6e",
+      "size_bytes": 463778,
+      "match": true,
+      "status": "selected"
+    },
+    {
+      "model_id": "synthetic_h7_direct_lightgbm",
+      "path": "models\\final\\synthetic_h7_direct_lightgbm.joblib",
+      "expected_hash": "f6df774aa0a9e287912e8a654e2998ce38af06412cfafefad86ce036ce83ce9a",
+      "actual_hash": "f6df774aa0a9e287912e8a654e2998ce38af06412cfafefad86ce036ce83ce9a",
+      "size_bytes": 463311,
+      "match": true,
+      "status": "selected"
+    },
+    {
+      "model_id": "synthetic_h14_direct_lightgbm",
+      "path": "models\\final\\synthetic_h14_direct_lightgbm.joblib",
+      "expected_hash": "a31dbb6cc97618a068c5ee5ad8eaf3c6449d794efedec8ef10cc69e1bd4ede39",
+      "actual_hash": "a31dbb6cc97618a068c5ee5ad8eaf3c6449d794efedec8ef10cc69e1bd4ede39",
+      "size_bytes": 463094,
+      "match": true,
+      "status": "selected"
+    },
+    {
+      "model_id": "synthetic_h30_direct_lightgbm",
+      "path": "models\\final\\synthetic_h30_direct_lightgbm.joblib",
+      "expected_hash": "2b9124359964f112efaced0869d761d752c0ac9944a745c77e1e1534d4d58251",
+      "actual_hash": "2b9124359964f112efaced0869d761d752c0ac9944a745c77e1e1534d4d58251",
+      "size_bytes": 462284,
+      "match": true,
+      "status": "selected"
+    },
+    {
+      "model_id": "synthetic_h1_quantile_p10p90",
+      "path": "models\\final\\synthetic_h1_quantile_p10p90.joblib",
+      "expected_hash": "9c09a25717cab87f2d594fe71aa9fc11d158bfa56380e902decc957daa5d574e",
+      "actual_hash": "9c09a25717cab87f2d594fe71aa9fc11d158bfa56380e902decc957daa5d574e",
+      "size_bytes": 1329384,
+      "match": true,
+      "status": "interval_companion"
+    }
+  ]
+}

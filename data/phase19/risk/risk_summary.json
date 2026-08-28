@@ -1,0 +1,71 @@
+{
+  "demand_source": "PHASE19_FORECAST",
+  "total_skus": 100,
+  "reorder_now": 15,
+  "markdown_clear": 0,
+  "watch_volatile": 82,
+  "healthy": 3,
+  "decision_grid_reorder_pass": true,
+  "decision_grid_healthy_pass": "True",
+  "wos_consistency_pass": true,
+  "stress_tests_pass": true,
+  "stress_test_details": [
+    {
+      "scenario": "severe_stockout",
+      "stockout_level": "CRITICAL",
+      "overstock_level": "OPTIMAL",
+      "action": "REORDER NOW",
+      "expected_action": "REORDER NOW",
+      "pass": true,
+      "explanation": "on_hand=0, forecast=100, lead_time_demand=200"
+    },
+    {
+      "scenario": "moderate_stockout",
+      "stockout_level": "MEDIUM",
+      "overstock_level": "OPTIMAL",
+      "action": "WATCH / VOLATILE",
+      "expected_action": "WATCH / VOLATILE",
+      "pass": true,
+      "explanation": "on_hand=100, forecast=100.0, lead_time_demand=200"
+    },
+    {
+      "scenario": "healthy_inventory",
+      "stockout_level": "LOW",
+      "overstock_level": "OPTIMAL",
+      "action": "HEALTHY",
+      "expected_action": "HEALTHY",
+      "pass": true,
+      "explanation": "on_hand=400, forecast=100.0, lead_time_demand=200"
+    },
+    {
+      "scenario": "moderate_overstock",
+      "stockout_level": "LOW",
+      "overstock_level": "MODERATE",
+      "action": "WATCH / VOLATILE",
+      "expected_action": "WATCH / VOLATILE",
+      "pass": true,
+      "explanation": "on_hand=900, forecast=100.0, lead_time_demand=200"
+    },
+    {
+      "scenario": "severe_overstock",
+      "stockout_level": "LOW",
+      "overstock_level": "SEVERE",
+      "action": "MARKDOWN / CLEAR",
+      "expected_action": "MARKDOWN / CLEAR",
+      "pass": true,
+      "explanation": "on_hand=5000, forecast=20.0, lead_time_demand=40"
+    },
+    {
+      "scenario": "high_volatility",
+      "stockout_level": "CRITICAL",
+      "overstock_level": "OPTIMAL",
+      "action": "REORDER NOW",
+      "expected_action": "REORDER NOW",
+      "pass": true,
+      "explanation": "on_hand=5, forecast=500.0, lead_time_demand=1000"
+    }
+  ],
+  "total_sales_at_risk": 15075716.8,
+  "total_locked_capital": 0.0,
+  "uci_risk_status": "NOT_AVAILABLE"
+}

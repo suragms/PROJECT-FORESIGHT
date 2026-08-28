@@ -1,0 +1,412 @@
+{
+  "model_id": "phase20_synthetic_lightgbm",
+  "feature_version": "phase19_weekly_holiday",
+  "feature_count": 45,
+  "features": [
+    {
+      "feature_name": "is_holiday_week",
+      "dtype": "int64",
+      "required": true,
+      "source": "calendar.csv is_holiday aggregated to week",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    },
+    {
+      "feature_name": "holiday_count",
+      "dtype": "int64",
+      "required": true,
+      "source": "calendar.csv holiday count per week",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    },
+    {
+      "feature_name": "season_Winter",
+      "dtype": "int64",
+      "required": true,
+      "source": "calendar.csv season one-hot",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    },
+    {
+      "feature_name": "season_Spring",
+      "dtype": "int64",
+      "required": true,
+      "source": "calendar.csv season one-hot",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    },
+    {
+      "feature_name": "season_Summer",
+      "dtype": "int64",
+      "required": true,
+      "source": "calendar.csv season one-hot",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    },
+    {
+      "feature_name": "season_Fall",
+      "dtype": "int64",
+      "required": true,
+      "source": "calendar.csv season one-hot",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    },
+    {
+      "feature_name": "weeks_to_next_holiday",
+      "dtype": "int64",
+      "required": true,
+      "source": "calendar-derived; no demand data used",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    },
+    {
+      "feature_name": "weeks_since_last_holiday",
+      "dtype": "int64",
+      "required": true,
+      "source": "calendar-derived; no demand data used",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    },
+    {
+      "feature_name": "lag_1",
+      "dtype": "float64",
+      "required": true,
+      "source": "units_sold shifted 1 weeks",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    },
+    {
+      "feature_name": "lag_2",
+      "dtype": "float64",
+      "required": true,
+      "source": "units_sold shifted 2 weeks",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    },
+    {
+      "feature_name": "lag_4",
+      "dtype": "float64",
+      "required": true,
+      "source": "units_sold shifted 4 weeks",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    },
+    {
+      "feature_name": "lag_7",
+      "dtype": "float64",
+      "required": true,
+      "source": "units_sold shifted 7 weeks",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    },
+    {
+      "feature_name": "lag_13",
+      "dtype": "float64",
+      "required": true,
+      "source": "units_sold shifted 13 weeks",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    },
+    {
+      "feature_name": "lag_26",
+      "dtype": "float64",
+      "required": true,
+      "source": "units_sold shifted 26 weeks",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    },
+    {
+      "feature_name": "lag_52",
+      "dtype": "float64",
+      "required": true,
+      "source": "units_sold shifted 52 weeks",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    },
+    {
+      "feature_name": "rolling_mean_4",
+      "dtype": "float64",
+      "required": true,
+      "source": "demand shifted 1 then rolling/ewm",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    },
+    {
+      "feature_name": "rolling_std_4",
+      "dtype": "float64",
+      "required": true,
+      "source": "demand shifted 1 then rolling/ewm",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    },
+    {
+      "feature_name": "rolling_min_4",
+      "dtype": "float64",
+      "required": true,
+      "source": "demand shifted 1 then rolling/ewm",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    },
+    {
+      "feature_name": "rolling_max_4",
+      "dtype": "float64",
+      "required": true,
+      "source": "demand shifted 1 then rolling/ewm",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    },
+    {
+      "feature_name": "rolling_mean_8",
+      "dtype": "float64",
+      "required": true,
+      "source": "demand shifted 1 then rolling/ewm",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    },
+    {
+      "feature_name": "rolling_std_8",
+      "dtype": "float64",
+      "required": true,
+      "source": "demand shifted 1 then rolling/ewm",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    },
+    {
+      "feature_name": "rolling_min_8",
+      "dtype": "float64",
+      "required": true,
+      "source": "demand shifted 1 then rolling/ewm",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    },
+    {
+      "feature_name": "rolling_max_8",
+      "dtype": "float64",
+      "required": true,
+      "source": "demand shifted 1 then rolling/ewm",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    },
+    {
+      "feature_name": "rolling_mean_13",
+      "dtype": "float64",
+      "required": true,
+      "source": "demand shifted 1 then rolling/ewm",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    },
+    {
+      "feature_name": "rolling_std_13",
+      "dtype": "float64",
+      "required": true,
+      "source": "demand shifted 1 then rolling/ewm",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    },
+    {
+      "feature_name": "rolling_min_13",
+      "dtype": "float64",
+      "required": true,
+      "source": "demand shifted 1 then rolling/ewm",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    },
+    {
+      "feature_name": "rolling_max_13",
+      "dtype": "float64",
+      "required": true,
+      "source": "demand shifted 1 then rolling/ewm",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    },
+    {
+      "feature_name": "rolling_mean_26",
+      "dtype": "float64",
+      "required": true,
+      "source": "demand shifted 1 then rolling/ewm",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    },
+    {
+      "feature_name": "rolling_std_26",
+      "dtype": "float64",
+      "required": true,
+      "source": "demand shifted 1 then rolling/ewm",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    },
+    {
+      "feature_name": "rolling_min_26",
+      "dtype": "float64",
+      "required": true,
+      "source": "demand shifted 1 then rolling/ewm",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    },
+    {
+      "feature_name": "rolling_max_26",
+      "dtype": "float64",
+      "required": true,
+      "source": "demand shifted 1 then rolling/ewm",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    },
+    {
+      "feature_name": "ewm_4",
+      "dtype": "float64",
+      "required": true,
+      "source": "demand shifted 1 then rolling/ewm",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    },
+    {
+      "feature_name": "ewm_13",
+      "dtype": "float64",
+      "required": true,
+      "source": "demand shifted 1 then rolling/ewm",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    },
+    {
+      "feature_name": "ewm_26",
+      "dtype": "float64",
+      "required": true,
+      "source": "demand shifted 1 then rolling/ewm",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    },
+    {
+      "feature_name": "week_of_year",
+      "dtype": "int64",
+      "required": true,
+      "source": "calendar or lagged price/promo",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    },
+    {
+      "feature_name": "month",
+      "dtype": "int32",
+      "required": true,
+      "source": "calendar or lagged price/promo",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    },
+    {
+      "feature_name": "quarter",
+      "dtype": "int32",
+      "required": true,
+      "source": "calendar or lagged price/promo",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    },
+    {
+      "feature_name": "year",
+      "dtype": "int32",
+      "required": true,
+      "source": "calendar or lagged price/promo",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    },
+    {
+      "feature_name": "sin_week",
+      "dtype": "float64",
+      "required": true,
+      "source": "calendar or lagged price/promo",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    },
+    {
+      "feature_name": "cos_week",
+      "dtype": "float64",
+      "required": true,
+      "source": "calendar or lagged price/promo",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    },
+    {
+      "feature_name": "sin_month",
+      "dtype": "float64",
+      "required": true,
+      "source": "calendar or lagged price/promo",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    },
+    {
+      "feature_name": "cos_month",
+      "dtype": "float64",
+      "required": true,
+      "source": "calendar or lagged price/promo",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    },
+    {
+      "feature_name": "price_lag1",
+      "dtype": "float64",
+      "required": true,
+      "source": "calendar or lagged price/promo",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    },
+    {
+      "feature_name": "promo_lag1",
+      "dtype": "int64",
+      "required": true,
+      "source": "calendar or lagged price/promo",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    },
+    {
+      "feature_name": "holiday_x_promo",
+      "dtype": "int64",
+      "required": true,
+      "source": "is_holiday_week \u00d7 promo_lag1; both known at prediction",
+      "available_at_prediction_time": true,
+      "default_behavior": "reject_if_missing",
+      "leakage_status": "PASS"
+    }
+  ]
+}

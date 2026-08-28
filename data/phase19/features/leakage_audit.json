@@ -1,0 +1,317 @@
+[
+  {
+    "feature": "is_holiday_week",
+    "leakage_status": "PASS",
+    "source": "calendar.csv is_holiday aggregated to week",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  },
+  {
+    "feature": "holiday_count",
+    "leakage_status": "PASS",
+    "source": "calendar.csv holiday count per week",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  },
+  {
+    "feature": "season_Winter",
+    "leakage_status": "PASS",
+    "source": "calendar.csv season one-hot",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  },
+  {
+    "feature": "season_Spring",
+    "leakage_status": "PASS",
+    "source": "calendar.csv season one-hot",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  },
+  {
+    "feature": "season_Summer",
+    "leakage_status": "PASS",
+    "source": "calendar.csv season one-hot",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  },
+  {
+    "feature": "season_Fall",
+    "leakage_status": "PASS",
+    "source": "calendar.csv season one-hot",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  },
+  {
+    "feature": "weeks_to_next_holiday",
+    "leakage_status": "PASS",
+    "source": "calendar-derived; no demand data used",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  },
+  {
+    "feature": "weeks_since_last_holiday",
+    "leakage_status": "PASS",
+    "source": "calendar-derived; no demand data used",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  },
+  {
+    "feature": "lag_1",
+    "leakage_status": "PASS",
+    "source": "units_sold shifted 1 weeks",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  },
+  {
+    "feature": "lag_2",
+    "leakage_status": "PASS",
+    "source": "units_sold shifted 2 weeks",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  },
+  {
+    "feature": "lag_4",
+    "leakage_status": "PASS",
+    "source": "units_sold shifted 4 weeks",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  },
+  {
+    "feature": "lag_7",
+    "leakage_status": "PASS",
+    "source": "units_sold shifted 7 weeks",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  },
+  {
+    "feature": "lag_13",
+    "leakage_status": "PASS",
+    "source": "units_sold shifted 13 weeks",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  },
+  {
+    "feature": "lag_26",
+    "leakage_status": "PASS",
+    "source": "units_sold shifted 26 weeks",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  },
+  {
+    "feature": "lag_52",
+    "leakage_status": "PASS",
+    "source": "units_sold shifted 52 weeks",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  },
+  {
+    "feature": "rolling_mean_4",
+    "leakage_status": "PASS",
+    "source": "demand shifted 1 then rolling/ewm",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  },
+  {
+    "feature": "rolling_std_4",
+    "leakage_status": "PASS",
+    "source": "demand shifted 1 then rolling/ewm",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  },
+  {
+    "feature": "rolling_min_4",
+    "leakage_status": "PASS",
+    "source": "demand shifted 1 then rolling/ewm",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  },
+  {
+    "feature": "rolling_max_4",
+    "leakage_status": "PASS",
+    "source": "demand shifted 1 then rolling/ewm",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  },
+  {
+    "feature": "rolling_mean_8",
+    "leakage_status": "PASS",
+    "source": "demand shifted 1 then rolling/ewm",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  },
+  {
+    "feature": "rolling_std_8",
+    "leakage_status": "PASS",
+    "source": "demand shifted 1 then rolling/ewm",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  },
+  {
+    "feature": "rolling_min_8",
+    "leakage_status": "PASS",
+    "source": "demand shifted 1 then rolling/ewm",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  },
+  {
+    "feature": "rolling_max_8",
+    "leakage_status": "PASS",
+    "source": "demand shifted 1 then rolling/ewm",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  },
+  {
+    "feature": "rolling_mean_13",
+    "leakage_status": "PASS",
+    "source": "demand shifted 1 then rolling/ewm",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  },
+  {
+    "feature": "rolling_std_13",
+    "leakage_status": "PASS",
+    "source": "demand shifted 1 then rolling/ewm",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  },
+  {
+    "feature": "rolling_min_13",
+    "leakage_status": "PASS",
+    "source": "demand shifted 1 then rolling/ewm",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  },
+  {
+    "feature": "rolling_max_13",
+    "leakage_status": "PASS",
+    "source": "demand shifted 1 then rolling/ewm",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  },
+  {
+    "feature": "rolling_mean_26",
+    "leakage_status": "PASS",
+    "source": "demand shifted 1 then rolling/ewm",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  },
+  {
+    "feature": "rolling_std_26",
+    "leakage_status": "PASS",
+    "source": "demand shifted 1 then rolling/ewm",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  },
+  {
+    "feature": "rolling_min_26",
+    "leakage_status": "PASS",
+    "source": "demand shifted 1 then rolling/ewm",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  },
+  {
+    "feature": "rolling_max_26",
+    "leakage_status": "PASS",
+    "source": "demand shifted 1 then rolling/ewm",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  },
+  {
+    "feature": "ewm_4",
+    "leakage_status": "PASS",
+    "source": "demand shifted 1 then rolling/ewm",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  },
+  {
+    "feature": "ewm_13",
+    "leakage_status": "PASS",
+    "source": "demand shifted 1 then rolling/ewm",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  },
+  {
+    "feature": "ewm_26",
+    "leakage_status": "PASS",
+    "source": "demand shifted 1 then rolling/ewm",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  },
+  {
+    "feature": "week_of_year",
+    "leakage_status": "PASS",
+    "source": "calendar or lagged price/promo",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  },
+  {
+    "feature": "month",
+    "leakage_status": "PASS",
+    "source": "calendar or lagged price/promo",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  },
+  {
+    "feature": "quarter",
+    "leakage_status": "PASS",
+    "source": "calendar or lagged price/promo",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  },
+  {
+    "feature": "year",
+    "leakage_status": "PASS",
+    "source": "calendar or lagged price/promo",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  },
+  {
+    "feature": "sin_week",
+    "leakage_status": "PASS",
+    "source": "calendar or lagged price/promo",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  },
+  {
+    "feature": "cos_week",
+    "leakage_status": "PASS",
+    "source": "calendar or lagged price/promo",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  },
+  {
+    "feature": "sin_month",
+    "leakage_status": "PASS",
+    "source": "calendar or lagged price/promo",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  },
+  {
+    "feature": "cos_month",
+    "leakage_status": "PASS",
+    "source": "calendar or lagged price/promo",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  },
+  {
+    "feature": "price_lag1",
+    "leakage_status": "PASS",
+    "source": "calendar or lagged price/promo",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  },
+  {
+    "feature": "promo_lag1",
+    "leakage_status": "PASS",
+    "source": "calendar or lagged price/promo",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  },
+  {
+    "feature": "holiday_x_promo",
+    "leakage_status": "PASS",
+    "source": "is_holiday_week \u00d7 promo_lag1; both known at prediction",
+    "available_at_prediction_time": true,
+    "known_before_forecast_origin": true
+  }
+]

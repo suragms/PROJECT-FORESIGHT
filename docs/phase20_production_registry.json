@@ -1,0 +1,28 @@
+[
+  {
+    "model_id": "phase20_synthetic_lightgbm",
+    "status": "production",
+    "source_dataset": "SYNTHETIC",
+    "parent_candidate": "phase19_synthetic_lightgbm",
+    "forecast_grain": "weekly_sku",
+    "supported_horizon_weeks": 6,
+    "extended_horizon": {
+      "supported": true,
+      "weeks": [
+        7,
+        8
+      ],
+      "accuracy_status": "PARTIAL"
+    },
+    "wape": 13.9562,
+    "supported_horizon_wape": 11.0309,
+    "validation": "rolling_origin",
+    "promotion_phase": 20,
+    "model_file": "models/final/phase20/phase20_synthetic_lightgbm.joblib",
+    "hash": "96a88f1dbb8e1904f2c0b79877afe7bfe30ef5336f8d4598dc07d6adf895e086",
+    "limitations": [
+      "Holiday bias in Nov-Dec not fully eliminated",
+      "Horizon 7-8 has partial accuracy"
+    ]
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "source_artifact": "C:/Users/SURAG/Documents/zidio/Project_FORESIGHT/Demand-Inventory-Intelligence/models/phase19/synthetic/phase19_synthetic_lightgbm.joblib",
+  "source_sha256": "96a88f1dbb8e1904f2c0b79877afe7bfe30ef5336f8d4598dc07d6adf895e086",
+  "promoted_artifact": "C:/Users/SURAG/Documents/zidio/Project_FORESIGHT/Demand-Inventory-Intelligence/models/final/phase20/phase20_synthetic_lightgbm.joblib",
+  "promoted_sha256": "96a88f1dbb8e1904f2c0b79877afe7bfe30ef5336f8d4598dc07d6adf895e086",
+  "copy_verified": true,
+  "phase19_wape_pct": 13.9562,
+  "supported_horizon_wape_pct": 11.0309,
+  "promotion_timestamp": "2026-08-28T05:16:55.885285+00:00",
+  "promotion_phase": 20
+}
