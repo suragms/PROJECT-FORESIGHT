@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "demand-inventory-intelligence"
+version = "1.0.0"
+description = "Project Foresight — AI-Powered Demand & Inventory Intelligence Platform"
+readme = "README.md"
+requires-python = ">=3.10"
+
+[tool.vercel]
+entrypoint = "src.api.app:app"
