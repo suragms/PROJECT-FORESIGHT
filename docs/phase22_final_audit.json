@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-08-29T11:14:23.524315+00:00",
+  "timestamp": "2026-08-29T11:48:12.519023+00:00",
   "checks": {
     "documentation": true,
     "production_model": true,
@@ -14,8 +14,8 @@
     "executive_dashboard": true
   },
   "integrity_snapshot": {
-    "timestamp": "2026-08-29T11:14:23.473955+00:00",
-    "git_status_short": "M data/phase21/monitoring/alerts.json\n M data/phase21/monitoring/data_drift_report.json\n M data/phase21/monitoring/data_quality_report.json\n M data/phase21/monitoring/feature_quality_report.json\n M data/phase21/monitoring/forecast_performance_report.json\n M data/phase21/monitoring/model_integrity_report.json\n M data/phase21/monitoring/monitoring_summary.json\n M data/phase21/monitoring/prediction_drift_report.json\n M data/phase21/monitoring/risk_consistency_report.json\n M docs/phase21_production_integrity_baseline.json\n M docs/phase22_integrity_snapshot.json",
+    "timestamp": "2026-08-29T11:48:12.471449+00:00",
+    "git_status_short": "M data/phase21/monitoring/alerts.json\n M data/phase21/monitoring/data_drift_report.json\n M data/phase21/monitoring/data_quality_report.json\n M data/phase21/monitoring/feature_quality_report.json\n M data/phase21/monitoring/forecast_performance_report.json\n M data/phase21/monitoring/model_integrity_report.json\n M data/phase21/monitoring/monitoring_summary.json\n M data/phase21/monitoring/prediction_drift_report.json\n M data/phase21/monitoring/risk_consistency_report.json\n M docs/phase21_production_integrity_baseline.json\n M docs/phase22_integrity_snapshot.json\n M outputs/bi/executive_kpis.parquet\n M outputs/bi/schema.json\n M outputs/bi/system_health.parquet\n M outputs/monitoring/accuracy_monitoring_report.json\n M outputs/monitoring/api_metrics.json\n M outputs/monitoring/data_quality_report.json\n M outputs/monitoring/drift_report.json\n M outputs/monitoring/forecast_monitoring_report.json\n M outputs/monitoring/monitoring_summary.json\n M outputs/phase14/simulation.json\n M pyproject.toml\n?? index.html\n?? public/\n?? vercel.json",
     "frozen_models_12_unchanged": true,
     "phase20_production_unchanged": true,
     "phase17_artifact_exists": true,
