@@ -254,9 +254,14 @@ async function handleLogin(e) {
     }
 
     const err = await res.json().catch(() => ({ detail: 'Authentication failed' }));
-    showAuthAlert(err.detail || 'Invalid email or password.');
+    const detail = typeof err.detail === 'string' ? err.detail : 'Invalid email or password.';
+    showAuthAlert(detail);
   } catch (err) {
-    showAuthAlert('Unable to reach authentication service. Please try again later.');
+    showAuthAlert(
+      'Cannot reach the API from this browser (network or CORS). ' +
+      'Register a new account first if you have not already, then try again. ' +
+      'If this persists, the backend may still be restarting.'
+    );
   } finally {
     if (btn) btn.textContent = 'Sign In to Foresight Platform →';
   }
@@ -293,9 +298,13 @@ async function handleRegister(e) {
     }
 
     const err = await res.json().catch(() => ({ detail: 'Registration failed' }));
-    showAuthAlert(err.detail || 'Could not complete registration.');
+    const detail = typeof err.detail === 'string' ? err.detail : 'Could not complete registration.';
+    showAuthAlert(detail);
   } catch (err) {
-    showAuthAlert('Unable to reach authentication service. Please try again later.');
+    showAuthAlert(
+      'Cannot reach the API from this browser (network or CORS). ' +
+      'Please wait for the backend to finish starting, then try again.'
+    );
   } finally {
     if (btn) btn.textContent = 'Create Account via Backend API';
   }

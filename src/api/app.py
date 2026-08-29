@@ -86,13 +86,6 @@ def create_app() -> FastAPI:
     )
     application.state.engines = {}
     application.state.rate_limiter = RateLimiter()
-    application.add_middleware(
-        CORSMiddleware,
-        allow_origins=["*"],
-        allow_credentials=False,
-        allow_methods=["*"],
-        allow_headers=["*"],
-    )
 
     @application.middleware("http")
     async def limit_payload(request: Request, call_next):
@@ -113,13 +106,19 @@ def create_app() -> FastAPI:
     @application.middleware("http")
     async def security_headers(request: Request, call_next):
         response = await call_next(request)
-        for key, value in SECURITY_HEADERS.items():
-            response.headers.setdefault(key, value)
+        # Do not attach restrictive CSP to CORS preflight / public browser calls —
+        # it is unnecessary on JSON APIs and can confuse browsers.
+        if request.method != "OPTIONS":
+            for key, value in SECURITY_HEADERS.items():
+                if key == "Content-Security-Policy" and request.url.path.startswith("/auth"):
+                    continue
+                response.headers.setdefault(key, value)
         return response
 
     @application.middleware("http")
     async def authenticate(request: Request, call_next):
-        if is_public_path(request.url.path):
+        # Preflight must never require API keys.
+        if request.method == "OPTIONS" or is_public_path(request.url.path):
             return await call_next(request)
         if not auth_is_required():
             return await call_next(request)
@@ -149,7 +148,11 @@ def create_app() -> FastAPI:
 
     @application.middleware("http")
     async def rate_limit(request: Request, call_next):
-        if is_public_path(request.url.path) or not rate_limit_enabled():
+        if (
+            request.method == "OPTIONS"
+            or is_public_path(request.url.path)
+            or not rate_limit_enabled()
+        ):
             return await call_next(request)
         limiter: RateLimiter = request.app.state.rate_limiter
         host = request.client.host if request.client else "unknown"
@@ -218,6 +221,20 @@ def create_app() -> FastAPI:
     application.include_router(phase20_router, prefix="/phase20", tags=["phase20"])
     from src.api.phase21_routes import router as phase21_router
     application.include_router(phase21_router, prefix="/phase21", tags=["phase21"])
+
+    # CORS must be outermost so early middleware returns (401/429/413)
+    # still receive Access-Control-Allow-Origin for the Vercel frontend.
+    origins = cors_allowed_origins()
+    allow_star = origins == ["*"]
+    application.add_middleware(
+        CORSMiddleware,
+        allow_origins=origins,
+        # Browsers forbid credentials with wildcard origin.
+        allow_credentials=not allow_star,
+        allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+        allow_headers=["Authorization", "Content-Type", "X-API-Key", "X-Request-ID"],
+        expose_headers=["X-Request-ID"],
+    )
     return application
 
 
