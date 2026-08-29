@@ -1,28 +1,62 @@
-"""Phase 23 — Sidebar navigation."""
+"""Phase 23.5 — Professional left sidebar navigation."""
 
 from __future__ import annotations
 
 import streamlit as st
 
 from dashboard.navigation import filtered_nav_groups, nav_label_map
-from dashboard.session_auth import current_role, current_user_name, logout_user, page_allowed
+from dashboard.session_auth import (
+    current_role,
+    current_user_email,
+    current_user_name,
+    logout_user,
+    page_allowed,
+)
 
 
 def render_brand() -> None:
     st.markdown(
         """
-<div class="foresight-brand">
-  <div class="foresight-brand-title">📊 PROJECT FORESIGHT</div>
-  <div class="foresight-brand-sub">AI-Powered Demand &amp;<br/>Inventory Intelligence</div>
-  <div class="foresight-tagline">Forecast. Monitor. Optimize. Decide.</div>
+<div class="fs-sidebar-brand">
+  <div class="fs-brand-row">
+    <div class="fs-brand-mark">F</div>
+    <div class="fs-brand-text">
+      <div class="fs-brand-title">PROJECT FORESIGHT</div>
+      <div class="fs-brand-sub">AI-Powered Demand &amp;<br/>Inventory Intelligence</div>
+    </div>
+  </div>
+</div>
+<div class="fs-nav-label">Navigate to:</div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def render_user_footer() -> None:
+    name = current_user_name() or "User"
+    email = current_user_email() or ""
+    initial = (name.strip()[:1] or "U").upper()
+    st.markdown(
+        f"""
+<div class="fs-user-block">
+  <div class="fs-user-row">
+    <div class="fs-user-avatar">{initial}</div>
+    <div class="fs-user-meta">
+      <div class="fs-user-name">{name}</div>
+      <div class="fs-user-email">{email}</div>
+    </div>
+  </div>
+</div>
+<div class="fs-sidebar-foot">
+  PROJECT FORESIGHT<br/>
+  Demand &amp; Inventory Intelligence
 </div>
         """,
         unsafe_allow_html=True,
     )
-    name = current_user_name()
-    if name:
-        st.markdown(f"**Welcome,** {name}")
-    st.divider()
+    if st.button("🚪  Logout", key="nav_logout", use_container_width=True):
+        logout_user()
+        st.rerun()
 
 
 def render_navigation() -> str:
@@ -33,14 +67,17 @@ def render_navigation() -> str:
         st.session_state.foresight_page = "home"
 
     for group_name, items in filtered_nav_groups(role):
-        st.markdown(f'<div class="foresight-section-header">{group_name}</div>', unsafe_allow_html=True)
+        st.markdown(
+            f'<div class="fs-section-header">{group_name}</div>',
+            unsafe_allow_html=True,
+        )
         for item in items:
-            label = labels[item.key]
+            active = st.session_state.foresight_page == item.key
             if st.button(
-                label,
+                labels[item.key],
                 key=f"nav_{item.key}",
                 use_container_width=True,
-                type="primary" if st.session_state.foresight_page == item.key else "secondary",
+                type="primary" if active else "secondary",
             ):
                 st.session_state.foresight_page = item.key
                 st.rerun()
@@ -50,9 +87,13 @@ def render_navigation() -> str:
         st.session_state.foresight_page = "home"
         page = "home"
 
-    st.divider()
-    if st.button("🚪 Logout", use_container_width=True):
-        logout_user()
-        st.rerun()
+    return page
 
+
+def render_sidebar() -> str:
+    """Full authenticated sidebar: brand → nav → user footer."""
+    render_brand()
+    page = render_navigation()
+    st.markdown('<div class="fs-sidebar-spacer"></div>', unsafe_allow_html=True)
+    render_user_footer()
     return page

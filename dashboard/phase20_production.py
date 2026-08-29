@@ -15,48 +15,58 @@ if BASE_DIR not in sys.path:
 
 from src.phase20_dashboard_adapter import dashboard_bundle, model_info_panel, to_dashboard_records
 from dashboard.components.theme import inject_theme
+from dashboard.components.ui import kv_table, metric_row, page_header, safe_dataframe, show_error
 
 st.set_page_config(page_title="FORESIGHT | Phase 20 Production", layout="wide")
 inject_theme()
 
-st.title("FORESIGHT — Phase 20 Production Forecast")
+page_header(
+    "Phase 20 Production Forecast",
+    "Weekly SKU-level forecasts from the promoted production model.",
+)
 
 info = model_info_panel()
 with st.expander("Model Information", expanded=True):
-    st.markdown(f"""
-| Field | Value |
-|-------|-------|
-| **Production Model** | {info['production_model']} |
-| **Source Dataset** | {info['source_dataset']} |
-| **Validated Horizon** | {info['validated_horizon']} |
-| **Extended Forecast** | {info['extended_forecast']} |
-| **Overall WAPE** | {info.get('overall_wape', 'N/A')}% |
-| **Supported Horizon WAPE** | {info.get('supported_horizon_wape', 'N/A')}% |
-    """)
-    st.warning(info["known_limitation"])
+    kv_table(
+        [
+            ("Production Model", info.get("production_model", "phase20_synthetic_lightgbm")),
+            ("Source Dataset", info.get("source_dataset", "SYNTHETIC")),
+            ("Validated Horizon", info.get("validated_horizon", "6 Weeks")),
+            ("Extended Forecast", info.get("extended_forecast", "N/A")),
+            ("Overall Validation WAPE", f"{info.get('overall_wape', 'N/A')}%"),
+            ("Supported Horizon WAPE (h1–h6)", f"{info.get('supported_horizon_wape', 'N/A')}%"),
+            ("Live Production Performance", "PENDING ACTUALS"),
+        ]
+    )
+    st.warning(info.get("known_limitation", "See project documentation for known limitations."))
 
 try:
     bundle = dashboard_bundle()
     records = to_dashboard_records(bundle)
     df = pd.DataFrame(records)
-
-    col1, col2, col3, col4 = st.columns(4)
-    col1.metric("SKUs", bundle["sku_count"])
-    col2.metric("Forecasts", bundle["forecast_count"])
     risk = bundle["risk"]
-    col3.metric("REORDER NOW", int((risk["recommended_action"] == "REORDER NOW").sum()))
-    col4.metric("HEALTHY", int((risk["recommended_action"] == "HEALTHY").sum()))
+
+    metric_row(
+        [
+            ("SKUs", bundle["sku_count"]),
+            ("Forecasts", bundle["forecast_count"]),
+            ("REORDER NOW", int((risk["recommended_action"] == "REORDER NOW").sum())),
+            ("HEALTHY", int((risk["recommended_action"] == "HEALTHY").sum())),
+        ]
+    )
 
     st.subheader("Weekly Demand Forecast (6-Week Production Horizon)")
-    st.dataframe(df[df["horizon"] <= 6], use_container_width=True)
+    safe_dataframe(df[df["horizon"] <= 6] if "horizon" in df.columns else df)
 
     st.subheader("Risk & Recommended Actions")
-    risk_display = risk[[
-        "sku_id", "forecast_weekly_demand", "on_hand_units", "stockout_risk_level",
-        "overstock_risk_level", "recommended_action", "sales_at_risk"
-    ]].copy()
-    st.dataframe(risk_display, use_container_width=True)
+    risk_cols = [
+        c for c in [
+            "sku_id", "forecast_weekly_demand", "on_hand_units", "stockout_risk_level",
+            "overstock_risk_level", "recommended_action", "sales_at_risk",
+        ] if c in risk.columns
+    ]
+    safe_dataframe(risk[risk_cols] if risk_cols else risk)
 
 except Exception as ex:
-    st.error(f"Failed to load production data: {ex}")
+    show_error(str(ex))
     st.info("Run `python src/run_phase20.py` to complete promotion first.")

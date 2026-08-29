@@ -35,6 +35,30 @@ class TestComponents:
     def test_sidebar_import(self):
         import dashboard.components.sidebar as sidebar
         assert hasattr(sidebar, "render_navigation")
+        assert hasattr(sidebar, "render_sidebar")
+        assert hasattr(sidebar, "render_brand")
+
+    def test_nav_has_navigate_structure(self):
+        from dashboard.navigation import NAV_GROUPS, all_nav_items
+        group_names = [g for g, _ in NAV_GROUPS]
+        assert "OVERVIEW" in group_names
+        assert "PRODUCTION" in group_names
+        assert "INVENTORY & RISK" in group_names
+        keys = {i.key for i in all_nav_items()}
+        assert "home" in keys
+        assert "executive" in keys
+        # No invented pages
+        assert "churn_prediction" not in keys
+        assert "customer_segmentation" not in keys
+        assert "inventory_optimization" not in keys
+
+    def test_public_sidebar_branding(self):
+        app_js = open(os.path.join(BASE, "public", "js", "app.js"), encoding="utf-8").read()
+        assert "PROJECT FORESIGHT" in app_js
+        assert "RetailPulse" not in app_js
+        assert "Navigate to:" in app_js
+        assert 'data-page="home"' in app_js
+        assert "logout-btn" in app_js
 
     def test_status_badge(self):
         from dashboard.components.status_cards import status_badge
@@ -124,3 +148,30 @@ class TestDocumentation:
         ]
         for token in forbidden:
             assert token not in app_js, f"public/js/app.js must not expose {token!r}"
+
+    def test_no_markdown_pipe_tables_in_dashboard_pages(self):
+        pages_dir = os.path.join(BASE, "dashboard", "pages")
+        legacy = [
+            os.path.join(BASE, "dashboard", "phase20_production.py"),
+            os.path.join(BASE, "dashboard", "phase21_monitoring.py"),
+            os.path.join(BASE, "dashboard", "phase22_executive_dashboard.py"),
+        ]
+        files = [
+            os.path.join(pages_dir, f)
+            for f in os.listdir(pages_dir)
+            if f.endswith(".py")
+        ] + legacy
+        offenders = []
+        for path in files:
+            text = open(path, encoding="utf-8").read()
+            if "st.markdown" in text and "| Field | Value |" in text:
+                offenders.append(os.path.relpath(path, BASE))
+            if "st.markdown" in text and "|-------|" in text:
+                offenders.append(os.path.relpath(path, BASE))
+        assert not offenders, f"Markdown pipe tables still present in: {offenders}"
+
+    def test_ui_helpers_exist(self):
+        from dashboard.components.ui import kv_table, safe_dataframe, page_header
+        assert callable(kv_table)
+        assert callable(safe_dataframe)
+        assert callable(page_header)

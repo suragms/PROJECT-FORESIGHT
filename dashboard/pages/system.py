@@ -7,6 +7,7 @@ import os
 import streamlit as st
 
 from dashboard.components.status_cards import validation_disclaimer
+from dashboard.components.ui import kv_table, page_header, show_empty
 from dashboard.navigation import all_nav_items
 
 BASE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -15,55 +16,66 @@ DOCS = os.path.join(BASE, "docs")
 
 def render(page: str) -> None:
     if page == "model_information":
-        st.title("Model Information")
+        page_header(
+            "Model Information",
+            "Production model card — validation metrics are backtest results, not live WAPE.",
+        )
         validation_disclaimer()
-        st.markdown("""
-| Field | Value |
-|-------|-------|
-| Model Name | phase20_synthetic_lightgbm |
-| Model Type | LightGBM |
-| Dataset | Synthetic Retail Dataset |
-| Forecast Grain | Weekly SKU-level |
-| Feature Count | 45 |
-| Production Horizon | 6 Weeks |
-| Overall Validation WAPE | 13.96% |
-| Validated h1–h6 WAPE | 11.03% |
-| Live Performance | PENDING ACTUALS |
-        """)
+        kv_table(
+            [
+                ("Model Name", "phase20_synthetic_lightgbm"),
+                ("Model Type", "LightGBM"),
+                ("Dataset", "Synthetic Retail Dataset"),
+                ("Forecast Grain", "Weekly SKU-level"),
+                ("Feature Count", "45"),
+                ("Production Horizon", "6 Weeks"),
+                ("Overall Validation WAPE", "13.96%"),
+                ("Validated h1–h6 WAPE", "11.03%"),
+                ("Live Production Performance", "PENDING ACTUALS"),
+            ]
+        )
 
     elif page == "documentation":
-        st.title("Documentation")
+        page_header("Documentation", "Phase reports and delivery documents in docs/.")
+        if not os.path.isdir(DOCS):
+            show_empty("Documentation folder not found.")
+            return
         docs = sorted(f for f in os.listdir(DOCS) if f.endswith(".md") and "phase" in f.lower())
+        if not docs:
+            show_empty("No phase documentation files found.")
+            return
         for doc in docs:
             st.markdown(f"- `{doc}`")
         st.info("Master report: `docs/PROJECT_FORESIGHT_FINAL_REPORT.md`")
 
     elif page == "validation_status":
-        st.title("Validation Status")
-        st.markdown("""
-| Check | Status |
-|-------|--------|
-| Full Regression | 241/241 PASS |
-| Phase 21 Tests | 24/24 PASS |
-| Phase 22 Tests | 27/27 PASS |
-| Frozen Models | 12/12 unchanged |
-| Delivery Status | PROJECT DELIVERY READY |
-| Live Production WAPE | PENDING ACTUALS |
-        """)
+        page_header("Validation Status", "Regression and integrity checks for submission readiness.")
+        kv_table(
+            [
+                ("Full Regression", "280+/PASS (see latest pytest run)"),
+                ("Phase 21 Tests", "PASS"),
+                ("Phase 22 Tests", "PASS"),
+                ("Frozen Models", "12/12 unchanged"),
+                ("Delivery Status", "PROJECT DELIVERY READY"),
+                ("Live Production WAPE", "PENDING ACTUALS"),
+            ],
+            field_col="Check",
+            value_col="Status",
+        )
 
     elif page == "about":
-        st.title("About Project")
-        st.markdown("""
-**PROJECT FORESIGHT** — AI-Powered Demand & Inventory Intelligence
+        page_header("About Project", "AI-Powered Demand & Inventory Intelligence")
+        st.markdown(
+            """
+**PROJECT FORESIGHT** is a decision-support platform for retail demand forecasting
+and inventory risk.
 
-Project lifecycle:
-
-Data Engineering → Feature Engineering → Forecasting → Candidate Validation →
+**Lifecycle:** Data Engineering → Feature Engineering → Forecasting → Candidate Validation →
 Promotion Gate → Model Hardening → Production Promotion → Monitoring → Executive Intelligence
 
-**Project Status:** PROJECT DELIVERY READY  
-**Regression:** 241/241 PASS
+**Status:** PROJECT DELIVERY READY
 
-This is a decision-support system. It does not automatically place purchase orders or retrain models in production.
-        """)
-        st.caption(f"Navigation pages: {len(all_nav_items())}")
+This system does **not** automatically place purchase orders or retrain models in production.
+            """
+        )
+        st.caption(f"Unified navigation pages: {len(all_nav_items())}")

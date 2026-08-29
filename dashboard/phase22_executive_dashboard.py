@@ -16,16 +16,20 @@ if BASE_DIR not in sys.path:
 
 from src.phase22_executive_adapter import executive_bundle
 from dashboard.components.theme import inject_theme
+from dashboard.components.ui import kv_table, page_header, safe_dataframe, show_error
 
 st.set_page_config(page_title="FORESIGHT | Executive Dashboard", layout="wide", page_icon="📊")
 inject_theme()
 
-st.title("PROJECT FORESIGHT — Executive Dashboard")
+page_header(
+    "PROJECT FORESIGHT — Executive Dashboard",
+    "Business view of production forecasts, inventory risk, and monitoring health.",
+)
 
 try:
     data = executive_bundle()
 except Exception as ex:
-    st.error(f"Failed to load executive data: {ex}")
+    show_error(str(ex))
     st.info("Ensure Phase 20 promotion and Phase 21 monitoring have been run.")
     st.stop()
 
@@ -109,15 +113,15 @@ else:
         if len(sku_risk) > 0:
             r = sku_risk.iloc[0]
             st.subheader(f"Risk Detail — {selected_sku}")
-            st.markdown(f"""
-| Field | Value |
-|-------|-------|
-| Stockout Risk | {r.get('stockout_risk_level', 'N/A')} |
-| Overstock Risk | {r.get('overstock_risk_level', 'N/A')} |
-| Recommended Action | **{r.get('recommended_action', 'N/A')}** |
-| Weeks of Supply | {r.get('weeks_of_supply', 'N/A')} |
-| Projected Balance | {r.get('projected_balance', 'N/A')} |
-            """)
+            kv_table(
+                [
+                    ("Stockout Risk", r.get("stockout_risk_level", "N/A")),
+                    ("Overstock Risk", r.get("overstock_risk_level", "N/A")),
+                    ("Recommended Action", r.get("recommended_action", "N/A")),
+                    ("Weeks of Supply", r.get("weeks_of_supply", "N/A")),
+                    ("Projected Balance", r.get("projected_balance", "N/A")),
+                ]
+            )
 
 # ── Section 4: Business Impact ────────────────────────────────────────────
 st.header("Business Impact")
@@ -159,20 +163,21 @@ if alerts:
 st.header("Model Information")
 
 info = data["model_info"]
-st.markdown(f"""
-| Field | Value |
-|-------|-------|
-| **Model ID** | {info.get('model_id', 'phase20_synthetic_lightgbm')} |
-| **Source Dataset** | SYNTHETIC |
-| **Forecast Grain** | Weekly SKU-level |
-| **Feature Count** | {data.get('feature_count', 45)} |
-| **Supported Horizon** | 6 Weeks |
-| **Extended Horizon** | Weeks 7–8 (PARTIAL) |
-| **Validation Method** | Rolling-origin backtest |
-| **Overall Validation WAPE** | {data['validation_overall_wape']}% |
-| **h1–h6 Validation WAPE** | {data['validation_h16_wape']}% |
-| **Known Limitations** | {info.get('known_limitation', 'N/A')} |
-""")
+kv_table(
+    [
+        ("Model ID", info.get("model_id", "phase20_synthetic_lightgbm")),
+        ("Source Dataset", "SYNTHETIC"),
+        ("Forecast Grain", "Weekly SKU-level"),
+        ("Feature Count", data.get("feature_count", 45)),
+        ("Supported Horizon", "6 Weeks"),
+        ("Extended Horizon", "Weeks 7–8 (PARTIAL)"),
+        ("Validation Method", "Rolling-origin backtest"),
+        ("Overall Validation WAPE", f"{data['validation_overall_wape']}%"),
+        ("h1–h6 Validation WAPE", f"{data['validation_h16_wape']}%"),
+        ("Live Production Performance", "PENDING ACTUALS"),
+        ("Known Limitations", info.get("known_limitation", "N/A")),
+    ]
+)
 
 st.caption(
     "Decision-support system only. Validation metrics are backtest results, not guaranteed live performance. "

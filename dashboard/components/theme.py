@@ -1,4 +1,4 @@
-"""Phase 23 — Application theme and design system (Streamlit light)."""
+"""Phase 23.5 — Application theme and professional sidebar design system."""
 
 import streamlit as st
 
@@ -7,7 +7,7 @@ def inject_theme() -> None:
     st.markdown(
         """
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
     html, body, [class*="css"] {
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -19,7 +19,10 @@ def inject_theme() -> None:
     }
 
     .block-container {
-        padding-top: 2rem;
+        padding-top: 1.5rem;
+        padding-bottom: 3rem;
+        padding-left: 2rem;
+        padding-right: 2rem;
         max-width: 1200px;
     }
 
@@ -28,25 +31,191 @@ def inject_theme() -> None:
         font-weight: 700 !important;
     }
 
-    .foresight-brand-title {
-        font-size: 1.05rem;
-        font-weight: 700;
-        color: #1e293b;
-        line-height: 1.3;
+    /* —— Sidebar shell —— */
+    div[data-testid="stSidebar"] {
+        background: #f8fafc !important;
+        border-right: 1px solid #e2e8f0;
+        min-width: 260px !important;
+        max-width: 280px !important;
     }
 
-    .foresight-brand-sub {
-        font-size: 0.72rem;
+    div[data-testid="stSidebar"] > div:first-child {
+        padding-top: 0.75rem;
+        padding-bottom: 1rem;
+    }
+
+    section[data-testid="stSidebar"] {
+        width: 270px !important;
+    }
+
+    /* Brand */
+    .fs-sidebar-brand {
+        padding: 0.25rem 0.15rem 0.85rem 0.15rem;
+        border-bottom: 1px solid #e2e8f0;
+        margin-bottom: 0.75rem;
+    }
+
+    .fs-brand-row {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.65rem;
+    }
+
+    .fs-brand-mark {
+        width: 36px;
+        height: 36px;
+        border-radius: 9px;
+        background: #ff4b4b;
+        color: #fff;
+        font-weight: 800;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        letter-spacing: -0.02em;
+    }
+
+    .fs-brand-title {
+        font-size: 0.92rem;
+        font-weight: 800;
+        color: #0f172a;
+        letter-spacing: -0.02em;
+        line-height: 1.25;
+    }
+
+    .fs-brand-sub {
+        font-size: 0.68rem;
         color: #64748b;
         line-height: 1.35;
+        margin-top: 0.15rem;
+        font-weight: 500;
     }
 
-    .foresight-tagline {
-        font-size: 0.68rem;
+    .fs-nav-label {
+        font-size: 0.72rem;
+        font-weight: 600;
+        color: #64748b;
+        margin: 0.35rem 0 0.55rem 0.15rem;
+    }
+
+    .fs-section-header {
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
         color: #94a3b8;
-        font-style: italic;
+        margin: 0.85rem 0 0.3rem 0.15rem;
+        text-transform: uppercase;
     }
 
+    /* Nav buttons as clean list rows (no radio circles) */
+    div[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p,
+    div[data-testid="stSidebar"] .stButton > button {
+        white-space: normal !important;
+        word-break: break-word !important;
+        overflow-wrap: anywhere !important;
+        text-align: left !important;
+        height: auto !important;
+        min-height: 2.35rem;
+        line-height: 1.3 !important;
+    }
+
+    div[data-testid="stSidebar"] .stButton {
+        margin-bottom: 0.2rem;
+    }
+
+    div[data-testid="stSidebar"] .stButton > button[kind="primary"] {
+        background-color: #ff4b4b !important;
+        border: 1px solid #ff4b4b !important;
+        border-left: 3px solid #b91c1c !important;
+        color: #ffffff !important;
+        border-radius: 8px !important;
+        font-weight: 600 !important;
+        box-shadow: none !important;
+        padding: 0.45rem 0.7rem !important;
+    }
+
+    div[data-testid="stSidebar"] .stButton > button[kind="primary"]:hover {
+        background-color: #e04343 !important;
+        border-color: #e04343 !important;
+    }
+
+    div[data-testid="stSidebar"] .stButton > button[kind="secondary"] {
+        background-color: transparent !important;
+        border: 1px solid transparent !important;
+        border-left: 3px solid transparent !important;
+        color: #334155 !important;
+        border-radius: 8px !important;
+        font-weight: 500 !important;
+        box-shadow: none !important;
+        padding: 0.45rem 0.7rem !important;
+    }
+
+    div[data-testid="stSidebar"] .stButton > button[kind="secondary"]:hover {
+        background-color: #f1f5f9 !important;
+        border-color: #e2e8f0 !important;
+        border-left: 3px solid #cbd5e1 !important;
+    }
+
+    /* User footer */
+    .fs-sidebar-spacer {
+        height: 0.75rem;
+    }
+
+    .fs-user-block {
+        border-top: 1px solid #e2e8f0;
+        padding-top: 0.85rem;
+        margin-top: 0.5rem;
+    }
+
+    .fs-user-row {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        margin-bottom: 0.55rem;
+    }
+
+    .fs-user-avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 999px;
+        background: #ff4b4b;
+        color: #fff;
+        font-weight: 700;
+        font-size: 0.8rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .fs-user-name {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #0f172a;
+        line-height: 1.2;
+        word-break: break-word;
+    }
+
+    .fs-user-email {
+        font-size: 0.68rem;
+        color: #64748b;
+        word-break: break-all;
+        line-height: 1.25;
+    }
+
+    .fs-sidebar-foot {
+        font-size: 0.62rem;
+        color: #94a3b8;
+        line-height: 1.35;
+        margin: 0.35rem 0 0.5rem 0;
+        text-align: center;
+    }
+
+    /* Legacy class aliases */
+    .foresight-brand-title { font-size: 1.05rem; font-weight: 700; color: #1e293b; }
+    .foresight-brand-sub { font-size: 0.72rem; color: #64748b; }
+    .foresight-tagline { font-size: 0.68rem; color: #94a3b8; font-style: italic; }
     .foresight-section-header {
         font-size: 0.68rem;
         font-weight: 700;
@@ -114,41 +283,23 @@ def inject_theme() -> None:
     }
 
     .metric-card-value {
-        font-size: 1.15rem;
+        font-size: 1.05rem;
         font-weight: 700;
         color: #0f172a;
         margin-top: 0.35rem;
+        word-break: break-word;
+        overflow-wrap: anywhere;
+        line-height: 1.35;
     }
 
-    div[data-testid="stSidebar"] {
-        background: #f8fafc;
-        border-right: 1px solid #e2e8f0;
+    div[data-testid="stDataFrame"] {
+        width: 100%;
+        overflow-x: auto;
     }
 
-    div[data-testid="stSidebar"] .stButton > button[kind="primary"] {
-        background-color: #ff4b4b !important;
-        border-color: #ff4b4b !important;
-        color: #ffffff !important;
-        border-radius: 8px !important;
-        font-weight: 600 !important;
-    }
-
-    div[data-testid="stSidebar"] .stButton > button[kind="primary"]:hover {
-        background-color: #e04343 !important;
-        border-color: #e04343 !important;
-    }
-
-    div[data-testid="stSidebar"] .stButton > button[kind="secondary"] {
-        background-color: #ffffff !important;
-        border: 1px solid #e2e8f0 !important;
-        color: #334155 !important;
-        border-radius: 8px !important;
-        font-weight: 500 !important;
-    }
-
-    div[data-testid="stSidebar"] .stButton > button[kind="secondary"]:hover {
-        background-color: #f1f5f9 !important;
-        border-color: #cbd5e1 !important;
+    div[data-testid="stMetricValue"] {
+        word-break: break-word;
+        overflow-wrap: anywhere;
     }
 
     div[data-testid="stFormSubmitButton"] > button[kind="primaryFormSubmit"] {
@@ -170,6 +321,13 @@ def inject_theme() -> None:
 
     hr {
         border-color: #e2e8f0 !important;
+    }
+
+    /* Hide default radio circles if any radio nav remains */
+    div[data-testid="stSidebar"] div[role="radiogroup"] label {
+        background: transparent;
+        border-radius: 8px;
+        padding: 0.4rem 0.55rem;
     }
 </style>
         """,

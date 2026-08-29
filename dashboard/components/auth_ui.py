@@ -12,12 +12,10 @@ def render_auth_screen() -> None:
     st.markdown(
         """
 <div style="text-align:center; padding: 1rem 0 1.5rem 0;">
-  <div style="font-size:1.6rem; font-weight:700; color:#0f172a;">📊 PROJECT FORESIGHT</div>
-  <div style="font-size:0.95rem; color:#64748b; margin-top:0.35rem;">
+  <div style="width:40px;height:40px;border-radius:9px;background:#ff4b4b;color:#fff;font-weight:800;font-size:1rem;display:inline-flex;align-items:center;justify-content:center;margin-bottom:0.55rem;">F</div>
+  <div style="font-size:1.45rem; font-weight:800; color:#0f172a; letter-spacing:-0.02em;">PROJECT FORESIGHT</div>
+  <div style="font-size:0.9rem; color:#64748b; margin-top:0.35rem;">
     AI-Powered Demand &amp; Inventory Intelligence
-  </div>
-  <div style="font-size:0.8rem; color:#94a3b8; margin-top:0.25rem; font-style:italic;">
-    Forecast. Monitor. Optimize. Decide.
   </div>
 </div>
         """,

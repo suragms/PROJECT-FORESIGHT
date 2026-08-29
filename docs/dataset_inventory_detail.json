@@ -1,0 +1,260 @@
+{
+  "uci_quality": {
+    "rows": 1067371,
+    "nulls": {
+      "Invoice": 0,
+      "StockCode": 0,
+      "Description": 4382,
+      "Quantity": 0,
+      "InvoiceDate": 0,
+      "Price": 0,
+      "Customer ID": 243007,
+      "Country": 0
+    },
+    "negative_qty": 22950,
+    "negative_price": 5,
+    "zero_price": 6202,
+    "zero_qty": 0,
+    "cancellation_invoice_prefix_C": 19494,
+    "invalid_dates": 0,
+    "date_min": "2009-12-01 07:45:00",
+    "date_max": "2011-12-09 12:50:00",
+    "unique_invoices_approx": null,
+    "unique_stockcodes": 5305,
+    "unique_customers": 5942,
+    "countries": [
+      "Australia",
+      "Austria",
+      "Bahrain",
+      "Belgium",
+      "Bermuda",
+      "Brazil",
+      "Canada",
+      "Channel Islands",
+      "Cyprus",
+      "Czech Republic",
+      "Denmark",
+      "EIRE",
+      "European Community",
+      "Finland",
+      "France",
+      "Germany",
+      "Greece",
+      "Hong Kong",
+      "Iceland",
+      "Israel",
+      "Italy",
+      "Japan",
+      "Korea",
+      "Lebanon",
+      "Lithuania",
+      "Malta",
+      "Netherlands",
+      "Nigeria",
+      "Norway",
+      "Poland",
+      "Portugal",
+      "RSA",
+      "Saudi Arabia",
+      "Singapore",
+      "Spain",
+      "Sweden",
+      "Switzerland",
+      "Thailand",
+      "USA",
+      "United Arab Emirates",
+      "United Kingdom",
+      "Unspecified",
+      "West Indies"
+    ],
+    "duplicate_row_estimate": "computed_via_hash_optional_skipped_for_memory",
+    "unique_invoices": 53628,
+    "country_count": 43,
+    "field_presence": {
+      "transaction_invoice_id": {
+        "observed_column": "Invoice",
+        "status": "PRESENT"
+      },
+      "product_sku": {
+        "observed_column": "StockCode",
+        "status": "PRESENT"
+      },
+      "product_description": {
+        "observed_column": "Description",
+        "status": "PRESENT"
+      },
+      "quantity": {
+        "observed_column": "Quantity",
+        "status": "PRESENT"
+      },
+      "transaction_date": {
+        "observed_column": "InvoiceDate",
+        "status": "PRESENT"
+      },
+      "unit_price": {
+        "observed_column": "Price",
+        "status": "PRESENT"
+      },
+      "customer_identifier": {
+        "observed_column": "Customer ID",
+        "status": "PRESENT"
+      },
+      "country": {
+        "observed_column": "Country",
+        "status": "PRESENT"
+      }
+    }
+  },
+  "syn_quality": {
+    "source_note": "LOCAL_GENERATOR_NOT_KAGGLE_10M",
+    "sales_rows": 1461000,
+    "sales_columns": [
+      "date",
+      "store_id",
+      "sku_id",
+      "units_sold",
+      "total_revenue",
+      "avg_unit_price",
+      "transaction_count",
+      "unique_customers",
+      "promotion_flag"
+    ],
+    "sales_nulls": {
+      "date": 0,
+      "store_id": 0,
+      "sku_id": 0,
+      "units_sold": 0,
+      "total_revenue": 0,
+      "avg_unit_price": 0,
+      "transaction_count": 0,
+      "unique_customers": 0,
+      "promotion_flag": 0
+    },
+    "sales_duplicates": 0,
+    "negative_units": 0,
+    "zero_units": 915612,
+    "invalid_dates": 0,
+    "date_min": "2022-01-01 00:00:00",
+    "date_max": "2025-12-31 00:00:00",
+    "unique_stores_in_sales": 10,
+    "unique_skus_in_sales": 100,
+    "promotion_flag_values": {
+      "0": 1314715,
+      "1": 146285
+    },
+    "sku_master_rows": 5000,
+    "sku_master_columns": [
+      "sku_id",
+      "sku_name",
+      "category",
+      "sub_category",
+      "brand",
+      "cost_price",
+      "base_price",
+      "weight_kg",
+      "supplier_id",
+      "lead_time_days",
+      "reorder_point",
+      "safety_stock"
+    ],
+    "sku_categories": 6,
+    "store_master_rows": 30,
+    "store_master_columns": [
+      "store_id",
+      "store_name",
+      "city",
+      "state",
+      "region",
+      "store_type",
+      "store_size_sqft",
+      "opening_date"
+    ],
+    "customer_master_rows": 10000,
+    "customer_master_columns": [
+      "customer_id",
+      "customer_name",
+      "customer_segment",
+      "loyalty_member",
+      "signup_date"
+    ],
+    "customer_master_ids": 10000,
+    "calendar_rows": 1461,
+    "calendar_columns": [
+      "date",
+      "year",
+      "month",
+      "quarter",
+      "day",
+      "day_of_week",
+      "day_name",
+      "is_weekend",
+      "is_holiday",
+      "holiday_name",
+      "season",
+      "week_of_year"
+    ],
+    "calendar_date_min": "2022-01-01 00:00:00",
+    "calendar_date_max": "2025-12-31 00:00:00",
+    "calendar_holiday_like_columns": [
+      "is_holiday",
+      "holiday_name"
+    ],
+    "inventory_rows": 1461000,
+    "inventory_columns": [
+      "date",
+      "store_id",
+      "sku_id",
+      "beginning_inventory",
+      "receipts",
+      "units_sold",
+      "ending_inventory",
+      "stockout_flag",
+      "on_order_qty"
+    ],
+    "inventory_skus": 100,
+    "inventory_stores": 10,
+    "relationships": [
+      {
+        "from": "sales_daily.sku_id",
+        "to": "sku_master.sku_id",
+        "unmatched_sales_rows": 0,
+        "match_rate": 1.0
+      },
+      {
+        "from": "sales_daily.store_id",
+        "to": "store_master.store_id",
+        "unmatched_sales_rows": 0,
+        "match_rate": 1.0
+      }
+    ]
+  },
+  "phase_usage": {
+    "phase17": {
+      "uci_source": "data/raw/online_retail_II.csv",
+      "synthetic_source": "data/raw/sales_daily.parquet (+ inventory/sku/store)",
+      "manifest": "data/phase17/ingestion_manifest.json"
+    },
+    "phase19_20_21_22": {
+      "note": "Use Phase 17/19 processed weekly features and Phase 20 production artifacts derived from repository synthetic + UCI pipelines \u2014 not Kaggle 10M archive."
+    },
+    "kaggle_10m_used_in_phases": false,
+    "uci_kaggle_zip_present": false
+  },
+  "copies": {
+    "uci_copied": [
+      "online_retail_II.csv"
+    ],
+    "synthetic_copied": [
+      "sales_daily.csv",
+      "sales_daily.parquet",
+      "inventory_snapshots.csv",
+      "inventory_snapshots.parquet",
+      "sku_master.csv",
+      "store_master.csv",
+      "customer_master.csv",
+      "calendar.csv"
+    ],
+    "notes": []
+  },
+  "kaggle_credentials_available": false
+}

@@ -15,7 +15,7 @@ if BASE_DIR not in sys.path:
     sys.path.insert(0, BASE_DIR)
 
 from dashboard.components.auth_ui import render_auth_screen
-from dashboard.components.sidebar import render_brand, render_navigation
+from dashboard.components.sidebar import render_sidebar
 from dashboard.components.theme import inject_theme
 from dashboard.pages import analytics, executive, forecasting, home, inventory, ml, monitoring, system
 from dashboard.session_auth import is_authenticated, page_allowed, current_role
@@ -67,8 +67,6 @@ if not is_authenticated():
     st.stop()
 
 with st.sidebar:
-    render_brand()
-    page = render_navigation()
-    st.caption("Authenticated session • Decision support only")
+    page = render_sidebar()
 
 route_page(page)

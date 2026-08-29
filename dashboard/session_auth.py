@@ -30,6 +30,10 @@ def current_user_name() -> str:
     return st.session_state.get("full_name", "")
 
 
+def current_user_email() -> str:
+    return st.session_state.get("email", "")
+
+
 def login_user(email: str, password: str) -> None:
     user, token = get_auth_service().login(email, password)
     st.session_state.authenticated = True

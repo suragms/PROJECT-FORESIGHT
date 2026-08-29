@@ -19,7 +19,7 @@ function resolveApiBaseUrl() {
 const STATE = {
   isAuthenticated: !!localStorage.getItem('foresight_token'),
   token: localStorage.getItem('foresight_token') || null,
-  activePage: localStorage.getItem('foresight_page') || 'executive',
+  activePage: localStorage.getItem('foresight_page') || 'home',
   theme: 'light',
   apiBaseUrl: resolveApiBaseUrl(),
   user: (() => {
@@ -138,9 +138,9 @@ function renderAuthPortal() {
     <div class="auth-wrapper">
       <div class="auth-card">
         <div class="auth-header">
-          <div class="brand-icon" style="margin: 0 auto 16px auto; width: 48px; height: 48px; font-size: 24px;">📈</div>
+          <div class="brand-icon" style="margin: 0 auto 16px auto; width: 48px; height: 48px; font-size: 22px;">F</div>
           <h1 style="font-size: 22px; font-weight: 800; margin-bottom: 4px;">PROJECT FORESIGHT</h1>
-          <p style="font-size: 13px; color: var(--text-secondary);">Enterprise Demand & Inventory AI Platform</p>
+          <p style="font-size: 13px; color: var(--text-secondary);">AI-Powered Demand &amp; Inventory Intelligence</p>
           <div style="margin-top: 10px; display: inline-flex; align-items: center; gap: 6px; font-size: 11px; color: var(--accent-emerald); background: rgba(16, 185, 129, 0.1); padding: 4px 10px; border-radius: 20px;">
             <span class="status-dot" style="width: 6px; height: 6px;"></span>
             <span>Live Backend: ${backendDisplayHost()}</span>
@@ -394,64 +394,71 @@ function setupAuthListeners() {}
 // -----------------------------------------------------------------------------
 
 function renderDashboardShell() {
+  const page = STATE.activePage;
   return `
-    <aside class="sidebar">
+    <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Open navigation">☰</button>
+    <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+    <aside class="sidebar" id="app-sidebar">
       <div class="sidebar-header">
-        <div class="brand-icon">📈</div>
+        <div class="brand-icon">F</div>
         <div>
           <div class="brand-title">PROJECT FORESIGHT</div>
-          <div class="brand-subtitle">Demand & Inventory AI</div>
+          <div class="brand-subtitle">AI-Powered Demand &amp;<br/>Inventory Intelligence</div>
         </div>
       </div>
 
+      <div class="nav-label">Navigate to:</div>
+
       <nav class="nav-menu">
         <div class="nav-section-title">Overview</div>
-        <a class="nav-item ${STATE.activePage === 'executive' ? 'active' : ''}" data-page="executive">
-          <span class="icon">📊</span>
-          <span>Executive Dashboard</span>
-          <span class="nav-badge badge-indigo">Live</span>
+        <a class="nav-item ${page === 'home' ? 'active' : ''}" data-page="home">
+          <span class="icon">🏠</span><span>Home</span>
         </a>
-        <a class="nav-item ${STATE.activePage === 'forecasting' ? 'active' : ''}" data-page="forecasting">
-          <span class="icon">📈</span>
-          <span>Demand Forecasting</span>
-          <span class="nav-badge badge-green">1-30d</span>
-        </a>
-        <a class="nav-item ${STATE.activePage === 'inventory' ? 'active' : ''}" data-page="inventory">
-          <span class="icon">📦</span>
-          <span>Inventory & Risk</span>
-          <span class="nav-badge badge-amber">Action</span>
+        <a class="nav-item ${page === 'executive' ? 'active' : ''}" data-page="executive">
+          <span class="icon">📊</span><span>Executive Dashboard</span>
         </a>
 
-        <div class="nav-section-title">Analytics & Intelligence</div>
-        <a class="nav-item ${STATE.activePage === 'analytics' ? 'active' : ''}" data-page="analytics">
-          <span class="icon">🔍</span>
-          <span>Trends & Seasonality</span>
-        </a>
-        <a class="nav-item ${STATE.activePage === 'ml' ? 'active' : ''}" data-page="ml">
-          <span class="icon">🤖</span>
-          <span>ML Model Portfolio</span>
-        </a>
-        <a class="nav-item ${STATE.activePage === 'monitoring' ? 'active' : ''}" data-page="monitoring">
-          <span class="icon">🛡️</span>
-          <span>System Monitoring</span>
-          <span class="nav-badge badge-green">99.8%</span>
+        <div class="nav-section-title">Analytics</div>
+        <a class="nav-item ${page === 'analytics' ? 'active' : ''}" data-page="analytics">
+          <span class="icon">📈</span><span>Sales Analytics</span>
         </a>
 
-        <div class="nav-section-title">Reference</div>
-        <a class="nav-item ${STATE.activePage === 'docs' ? 'active' : ''}" data-page="docs">
-          <span class="icon">📖</span>
-          <span>Documentation & Audit</span>
+        <div class="nav-section-title">Inventory &amp; Risk</div>
+        <a class="nav-item ${page === 'inventory' ? 'active' : ''}" data-page="inventory">
+          <span class="icon">📦</span><span>Inventory</span>
+        </a>
+
+        <div class="nav-section-title">Forecasting</div>
+        <a class="nav-item ${page === 'forecasting' ? 'active' : ''}" data-page="forecasting">
+          <span class="icon">🔮</span><span>Forecasting</span>
+        </a>
+
+        <div class="nav-section-title">Machine Learning</div>
+        <a class="nav-item ${page === 'ml' ? 'active' : ''}" data-page="ml">
+          <span class="icon">🤖</span><span>ML Performance</span>
+        </a>
+
+        <div class="nav-section-title">Production</div>
+        <a class="nav-item ${page === 'monitoring' ? 'active' : ''}" data-page="monitoring">
+          <span class="icon">📡</span><span>Monitoring</span>
+        </a>
+
+        <div class="nav-section-title">System</div>
+        <a class="nav-item ${page === 'docs' ? 'active' : ''}" data-page="docs">
+          <span class="icon">ℹ️</span><span>Documentation</span>
         </a>
       </nav>
 
       <div class="sidebar-footer">
-        <div class="user-pill" onclick="logout()" title="Click to Sign Out">
+        <div class="user-pill" title="Signed-in user">
           <div class="user-avatar" id="user-avatar">${STATE.user?.avatar || 'U'}</div>
           <div class="user-details">
             <span class="user-name" id="user-display-name">${STATE.user?.name || 'User'}</span>
-            <span class="user-role-tag" id="user-display-role">${STATE.user?.role || 'USER'} (Sign Out)</span>
+            <span class="user-role-tag" id="user-display-email">${STATE.user?.email || ''}</span>
           </div>
         </div>
+        <button class="logout-btn" onclick="logout()">🚪 Logout</button>
+        <div class="sidebar-version">PROJECT FORESIGHT<br/>Demand &amp; Inventory Intelligence</div>
       </div>
     </aside>
 
@@ -459,27 +466,27 @@ function renderDashboardShell() {
       <header class="top-bar">
         <div class="system-status-indicator">
           <span class="status-dot"></span>
-          <span>FORESIGHT v0.13.0 • BACKEND: ${backendDisplayHost()}</span>
+          <span>FORESIGHT • BACKEND: ${backendDisplayHost()}</span>
         </div>
 
         <div class="top-actions">
           <a href="${docsUrl()}" target="_blank" rel="noreferrer" class="btn btn-secondary">
-            <span>⚡ API Swagger Docs</span>
+            <span>API Docs</span>
           </a>
           <button class="btn btn-secondary" onclick="logout()">
-            <span>🚪 Sign Out</span>
+            <span>Logout</span>
           </button>
         </div>
       </header>
 
       <div class="integrity-banner">
         <div class="banner-tags">
-          <span class="banner-tag tag-backtest">🛡️ VALIDATION / BACKTEST METRICS</span>
-          <span class="banner-tag tag-pending">⚡ LIVE PERFORMANCE: PENDING ACTUALS</span>
-          <span class="banner-tag tag-audit">🔒 DECISION SUPPORT PLATFORM</span>
+          <span class="banner-tag tag-backtest">VALIDATION / BACKTEST METRICS</span>
+          <span class="banner-tag tag-pending">LIVE PERFORMANCE: PENDING ACTUALS</span>
+          <span class="banner-tag tag-audit">DECISION SUPPORT PLATFORM</span>
         </div>
         <div style="font-size: 11px; color: var(--text-muted);">
-          All models validated via chronological temporal splits (Phase 6–22).
+          Validated via chronological temporal splits. Live WAPE not yet measured.
         </div>
       </div>
 
@@ -497,8 +504,26 @@ function setupNavigation() {
       e.preventDefault();
       const page = item.getAttribute('data-page');
       if (page) navigateTo(page);
+      closeMobileSidebar();
     });
   });
+
+  const toggle = document.getElementById('mobile-nav-toggle');
+  const backdrop = document.getElementById('sidebar-backdrop');
+  if (toggle) {
+    toggle.addEventListener('click', () => {
+      document.getElementById('app-sidebar')?.classList.toggle('open');
+      backdrop?.classList.toggle('visible');
+    });
+  }
+  if (backdrop) {
+    backdrop.addEventListener('click', closeMobileSidebar);
+  }
+}
+
+function closeMobileSidebar() {
+  document.getElementById('app-sidebar')?.classList.remove('open');
+  document.getElementById('sidebar-backdrop')?.classList.remove('visible');
 }
 
 function navigateTo(pageKey) {
@@ -517,10 +542,10 @@ function navigateTo(pageKey) {
 function updateUserUI() {
   if (!STATE.user) return;
   const nameEl = document.getElementById('user-display-name');
-  const roleEl = document.getElementById('user-display-role');
+  const emailEl = document.getElementById('user-display-email');
   const avatarEl = document.getElementById('user-avatar');
   if (nameEl) nameEl.textContent = STATE.user.name;
-  if (roleEl) roleEl.textContent = `${STATE.user.role} (Sign Out)`;
+  if (emailEl) emailEl.textContent = STATE.user.email || STATE.user.role || '';
   if (avatarEl) avatarEl.textContent = STATE.user.avatar || 'U';
 }
 
@@ -534,6 +559,9 @@ function renderCurrentPage() {
   }
 
   switch(STATE.activePage) {
+    case 'home':
+      content.innerHTML = renderHomePage();
+      break;
     case 'executive':
       content.innerHTML = renderExecutivePage();
       initExecutiveChart();
@@ -561,9 +589,61 @@ function renderCurrentPage() {
       content.innerHTML = renderDocsPage();
       break;
     default:
-      content.innerHTML = renderExecutivePage();
-      initExecutiveChart();
+      content.innerHTML = renderHomePage();
   }
+}
+
+function renderHomePage() {
+  const k = METRICS_DATA.SYNTHETIC.kpis;
+  return `
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">🚀 PROJECT FORESIGHT</h1>
+        <p class="page-subtitle">AI-Powered Demand &amp; Inventory Intelligence Platform</p>
+        <p class="page-desc">Transforming retail data into actionable demand forecasts, inventory intelligence, and business recommendations.</p>
+      </div>
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-label">Production Model</div>
+        <div class="kpi-value" style="font-size:1.05rem;">phase20_synthetic_lightgbm</div>
+        <div class="kpi-sub">Weekly SKU · 6-week horizon</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Validation WAPE</div>
+        <div class="kpi-value">13.96%</div>
+        <div class="kpi-sub">h1–h6 WAPE 11.03%</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Active SKUs (demo set)</div>
+        <div class="kpi-value">${k.activeSkus}</div>
+        <div class="kpi-sub">Synthetic portfolio</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Live Performance</div>
+        <div class="kpi-value" style="font-size:1.15rem;">PENDING ACTUALS</div>
+        <div class="kpi-sub">Not live production WAPE</div>
+      </div>
+    </div>
+
+    <div class="section-grid-2" style="margin-top: 1.25rem;">
+      <div class="panel">
+        <h3 class="panel-title">Quick Insights</h3>
+        <ul class="insight-list">
+          <li>Production forecasting uses <strong>phase20_synthetic_lightgbm</strong>.</li>
+          <li>Validated horizon is <strong>6 weeks</strong> at weekly SKU grain.</li>
+          <li>Validation metrics are backtest reference only.</li>
+        </ul>
+        <button class="btn btn-primary" onclick="navigateTo('executive')" style="margin-top:12px;">Open Executive Dashboard →</button>
+      </div>
+      <div class="panel">
+        <h3 class="panel-title">Inventory Risk Summary</h3>
+        <p class="page-desc">Critical / elevated risk SKUs in the synthetic demo set: <strong>${k.criticalRisk}</strong>.</p>
+        <button class="btn btn-secondary" onclick="navigateTo('inventory')" style="margin-top:12px;">Open Inventory →</button>
+      </div>
+    </div>
+  `;
 }
 
 // -----------------------------------------------------------------------------

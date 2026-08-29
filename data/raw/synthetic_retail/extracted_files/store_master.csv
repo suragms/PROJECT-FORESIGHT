@@ -1,0 +1,31 @@
+store_id,store_name,city,state,region,store_type,store_size_sqft,opening_date
+STORE_001,New York Express Retail,New York,NY,East,Express,85000,2021-11-08
+STORE_002,Los Angeles Express Retail,Los Angeles,CA,West,Express,25000,2017-07-11
+STORE_003,Chicago Express Retail,Chicago,IL,Midwest,Express,85000,2018-08-24
+STORE_004,Houston Standard Retail,Houston,TX,South,Standard,85000,2016-08-12
+STORE_005,Phoenix Outlet Retail,Phoenix,AZ,West,Outlet,25000,2018-05-01
+STORE_006,Philadelphia Flagship Retail,Philadelphia,PA,East,Flagship,85000,2018-09-17
+STORE_007,San Antonio Express Retail,San Antonio,TX,South,Express,25000,2018-12-16
+STORE_008,San Diego Flagship Retail,San Diego,CA,West,Flagship,45000,2018-07-20
+STORE_009,Dallas Express Retail,Dallas,TX,South,Express,45000,2019-03-07
+STORE_010,San Jose Superstore Retail,San Jose,CA,West,Superstore,25000,2018-09-28
+STORE_011,Austin Express Retail,Austin,TX,South,Express,25000,2015-10-21
+STORE_012,Jacksonville Flagship Retail,Jacksonville,FL,South,Flagship,60000,2021-12-07
+STORE_013,San Francisco Standard Retail,San Francisco,CA,West,Standard,45000,2020-01-04
+STORE_014,Columbus Superstore Retail,Columbus,OH,Midwest,Superstore,60000,2016-06-22
+STORE_015,Indianapolis Express Retail,Indianapolis,IN,Midwest,Express,85000,2021-02-26
+STORE_016,Seattle Express Retail,Seattle,WA,West,Express,25000,2020-04-14
+STORE_017,Denver Standard Retail,Denver,CO,West,Standard,60000,2015-08-21
+STORE_018,Boston Express Retail,Boston,MA,East,Express,25000,2021-05-24
+STORE_019,El Paso Express Retail,El Paso,TX,South,Express,60000,2018-12-13
+STORE_020,Nashville Superstore Retail,Nashville,TN,South,Superstore,85000,2015-09-07
+STORE_021,Detroit Express Retail,Detroit,MI,Midwest,Express,15000,2018-08-24
+STORE_022,Portland Superstore Retail,Portland,OR,West,Superstore,45000,2015-08-03
+STORE_023,Memphis Standard Retail,Memphis,TN,South,Standard,45000,2019-10-07
+STORE_024,Oklahoma City Standard Retail,Oklahoma City,OK,South,Standard,60000,2021-09-08
+STORE_025,Las Vegas Express Retail,Las Vegas,NV,West,Express,15000,2021-07-24
+STORE_026,Louisville Standard Retail,Louisville,KY,South,Standard,60000,2020-11-03
+STORE_027,Baltimore Express Retail,Baltimore,MD,East,Express,85000,2021-03-01
+STORE_028,Milwaukee Standard Retail,Milwaukee,WI,Midwest,Standard,45000,2015-10-10
+STORE_029,Albuquerque Express Retail,Albuquerque,NM,West,Express,45000,2021-07-17
+STORE_030,Tucson Flagship Retail,Tucson,AZ,West,Flagship,60000,2020-05-23
