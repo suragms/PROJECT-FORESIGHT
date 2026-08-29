@@ -1,9 +1,8 @@
-# Exclude large datasets, legacy non-production models, and dashboard from Vercel serverless function
+# Exclude large datasets, legacy non-production models, tests, and local dashboard UI
 data/
 outputs/
 notebooks/
 tests/
-docs/
 dashboard/
 models/*.joblib
 models/phase17/
