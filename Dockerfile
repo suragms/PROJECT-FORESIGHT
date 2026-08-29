@@ -21,11 +21,10 @@ RUN pip install --no-cache-dir --disable-pip-version-check -r requirements.txt \
     && rm -rf /root/.cache/pip
 
 COPY --chown=appuser:appuser src/ src/
-COPY --chown=appuser:appuser docs/final_model_registry.json docs/final_model_registry.json
-COPY --chown=appuser:appuser docs/phase11_metadata.json docs/phase11_metadata.json
+COPY --chown=appuser:appuser docs/ docs/
 COPY --chown=appuser:appuser models/final/ models/final/
 
-RUN mkdir -p /app/outputs /app/data/samples /app/logs \
+RUN mkdir -p /app/outputs /app/data/samples /app/logs /app/data/auth \
     && chown -R appuser:appuser /app/outputs /app/data /app/logs
 
 USER appuser
@@ -33,6 +32,6 @@ USER appuser
 EXPOSE 8000
 
 HEALTHCHECK --interval=30s --timeout=5s --start-period=40s --retries=3 \
-    CMD python -c "import os,urllib.request; port=os.environ.get('FORESIGHT_API_PORT','8000'); urllib.request.urlopen(f'http://127.0.0.1:{port}/health')"
+    CMD python -c "import os,urllib.request; port=os.environ.get('PORT', os.environ.get('FORESIGHT_API_PORT','8000')); urllib.request.urlopen(f'http://127.0.0.1:{port}/health')"
 
-CMD ["sh", "-c", "uvicorn src.api.app:app --host ${FORESIGHT_API_HOST:-0.0.0.0} --port ${FORESIGHT_API_PORT:-8000}"]
+CMD ["sh", "-c", "uvicorn src.api.app:app --host 0.0.0.0 --port ${PORT:-8000}"]
