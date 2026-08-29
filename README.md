@@ -288,6 +288,7 @@ Endpoints: `/phase20/forecast`, `/phase20/risk/explain`, `/phase21/health` — s
 
 ### Dashboards
 ```bash
+streamlit run app.py                                 # Phase 23 unified platform (recommended)
 streamlit run dashboard/phase20_production.py      # Production forecast
 streamlit run dashboard/phase21_monitoring.py      # Observability
 streamlit run dashboard/phase22_executive_dashboard.py  # Executive view
