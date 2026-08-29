@@ -8,6 +8,16 @@ PROJECT FORESIGHT uses two datasets with distinct roles. **Do not misrepresent e
 
 ## UCI Online Retail II
 
+### Official Reference Source
+
+https://www.kaggle.com/datasets/cgrymn/online-retail-ii-uci-dataset
+
+| Aspect | Status |
+|--------|--------|
+| Pipeline input | `data/raw/online_retail_II.csv` — **1,067,371 rows** |
+| SHA-256 | `32569a66f3842a82b0d8c4d63b263c5d98a76bde5d1f65c6c01bf457e541d3a9` |
+| Original Kaggle ZIP in repo | **NO** — archive not preserved; pipeline CSV verified |
+
 ### Purpose
 
 Historical UK online retail transaction data for benchmarking and research.
@@ -40,6 +50,22 @@ Invoice, StockCode, Description, Quantity, InvoiceDate, Price, Customer ID, Coun
 ---
 
 ## Synthetic Retail Dataset
+
+### Official Reference Source (not used directly by current pipeline)
+
+**Kaggle Synthetic Retail Dataset — 10 Million Transactions**  
+https://www.kaggle.com/datasets/mrayyanshehzad/synthetic-retail-dataset-10-million-transactions
+
+| Aspect | Status |
+|--------|--------|
+| Official Kaggle archive in repository | **NOT INCLUDED** — manual download required |
+| Used by validated production pipeline | **NO** — local generator used instead |
+
+### Current Pipeline Implementation
+
+**Local source:** `src/generate_synthetic_retail.py` (NumPy seed=42)
+
+**Pipeline inputs:** `data/raw/sales_daily.parquet`, `inventory_snapshots.parquet`, master tables, `calendar.csv`
 
 ### Purpose
 

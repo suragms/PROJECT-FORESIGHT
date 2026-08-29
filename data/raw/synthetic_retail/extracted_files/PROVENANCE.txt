@@ -1,4 +1,4 @@
 PROVENANCE: Local synthetic retail files copied from data/raw/.
 Origin: src/generate_synthetic_retail.py (seed=42).
 NOT the Kaggle dataset: https://www.kaggle.com/datasets/mrayyanshehzad/synthetic-retail-dataset-10-million-transactions
-Copied at: 2026-08-29T15:23:20.560999+00:00
+Copied at: 2026-08-29T16:13:11.375790+00:00
