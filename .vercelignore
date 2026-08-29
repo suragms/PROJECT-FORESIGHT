@@ -1,14 +1,17 @@
-# Exclude large datasets, legacy non-production models, tests, and local Python Streamlit app from Vercel static build
+# Exclude backend Python runtime and heavy ML assets from Vercel static frontend
+src/
 data/
 outputs/
 notebooks/
 tests/
 dashboard/
+models/
+docs/
 app.py
 _p*.py
-models/*.joblib
-models/phase17/
-models/phase19/
+pyproject.toml
+requirements.txt
+Dockerfile
 .venv/
 .pytest_cache/
 .streamlit/
