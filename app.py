@@ -39,8 +39,7 @@ SYSTEM_PAGES = {"model_information", "documentation", "validation_status", "abou
 
 def route_page(page_key: str) -> None:
     if not page_allowed(page_key, current_role()):
-        st.error("403 Forbidden — your role does not have access to this page.")
-        st.info("Monitoring and validation pages require an ADMIN role.")
+        st.error("403 Forbidden — session invalid. Please log in again.")
         return
 
     if page_key == "home":

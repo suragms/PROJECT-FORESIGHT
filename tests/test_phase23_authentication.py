@@ -137,15 +137,15 @@ class TestSessionAndUI:
         assert hasattr(auth_ui, "render_auth_screen")
         assert hasattr(session_auth, "logout_user")
 
-    def test_admin_only_pages_defined(self):
+    def test_admin_only_pages_open_to_all_authenticated(self):
         from dashboard.navigation import ADMIN_ONLY_PAGES
-        assert "system_health" in ADMIN_ONLY_PAGES
-        assert "validation_status" in ADMIN_ONLY_PAGES
+        assert len(ADMIN_ONLY_PAGES) == 0
 
-    def test_page_allowed_user_vs_admin(self):
+    def test_page_allowed_for_all_roles(self):
         from dashboard.session_auth import page_allowed
         assert page_allowed("home", "USER")
-        assert not page_allowed("alerts", "USER")
+        assert page_allowed("alerts", "USER")
+        assert page_allowed("system_health", "USER")
         assert page_allowed("alerts", "ADMIN")
 
 

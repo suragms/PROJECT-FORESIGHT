@@ -502,11 +502,6 @@ function setupNavigation() {
 }
 
 function navigateTo(pageKey) {
-  if (pageKey === 'monitoring' && STATE.user?.role !== 'ADMIN') {
-    alert('Access Restricted: System Monitoring requires ADMIN role.');
-    return;
-  }
-
   STATE.activePage = pageKey;
   localStorage.setItem('foresight_page', pageKey);
   document.querySelectorAll('.nav-item').forEach(item => {

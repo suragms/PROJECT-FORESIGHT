@@ -54,7 +54,5 @@ def logout_user() -> None:
 
 
 def page_allowed(page_key: str, role: str) -> bool:
-    from dashboard.navigation import ADMIN_ONLY_PAGES
-    if page_key in ADMIN_ONLY_PAGES:
-        return role == "ADMIN"
+    """Any authenticated role may open any unified-app page."""
     return True
