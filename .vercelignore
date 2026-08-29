@@ -1,9 +1,13 @@
-# Ignore large data files, notebooks, outputs, tests, and virtual environments from Vercel function bundle
+# Exclude large datasets, legacy non-production models, and dashboard from Vercel serverless function
 data/
 outputs/
 notebooks/
 tests/
 docs/
+dashboard/
+models/*.joblib
+models/phase17/
+models/phase19/
 .venv/
 .pytest_cache/
 .streamlit/
