@@ -177,6 +177,10 @@ def create_app() -> FastAPI:
 
     @application.exception_handler(Exception)
     async def unhandled(_, exc: Exception):
+        if hasattr(exc, "status_code"):
+            status = getattr(exc, "status_code", 500)
+            detail = getattr(exc, "detail", str(exc))
+            return JSONResponse(status_code=status, content={"detail": detail})
         if isinstance(exc, HTTPException):
             return JSONResponse(status_code=exc.status_code, content={"detail": exc.detail})
         logger.error("unhandled_error type=%s", type(exc).__name__)

@@ -7,7 +7,7 @@ from datetime import datetime, timezone
 import numpy as np
 import pandas as pd
 from fastapi import APIRouter, HTTPException, Request
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, Response
 
 from src.api.metrics import incr, observe_batch, snapshot
 from src.api.schemas import (
@@ -95,6 +95,11 @@ def root() -> dict:
         "supported_datasets": list(SUPPORTED_DATASETS),
         "supported_horizons": list(SUPPORTED_HORIZONS),
     }
+
+
+@router.get("/favicon.ico", include_in_schema=False)
+def favicon():
+    return Response(status_code=204)
 
 
 @router.get("/health", response_model=HealthResponse)
