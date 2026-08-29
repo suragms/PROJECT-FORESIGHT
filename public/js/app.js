@@ -7,18 +7,20 @@ const STATE = {
   isAuthenticated: !!localStorage.getItem('foresight_token'),
   token: localStorage.getItem('foresight_token') || null,
   activePage: localStorage.getItem('foresight_page') || 'executive',
-  theme: localStorage.getItem('foresight_theme') || 'dark',
+  theme: 'light',
   apiBaseUrl: (typeof window !== 'undefined' && window.FORESIGHT_API_URL) ? window.FORESIGHT_API_URL : 'https://project-foresight-api-tofn.onrender.com',
-  user: JSON.parse(localStorage.getItem('foresight_user')) || {
-    name: 'Sarah Chen',
-    email: 'executive@foresight.ai',
-    role: 'EXECUTIVE',
-    avatar: 'SC'
-  },
+  user: (() => {
+    try {
+      const raw = localStorage.getItem('foresight_user');
+      return raw ? JSON.parse(raw) : null;
+    } catch {
+      return null;
+    }
+  })(),
   dataset: 'SYNTHETIC', // 'SYNTHETIC' | 'UCI'
   horizon: 1,           // 1 | 3 | 7 | 14 | 30
   activeChart: null,
-  authTab: 'login'      // 'login' | 'register' | 'roles'
+  authTab: 'login'      // 'login' | 'register'
 };
 
 // Validated Project Baseline Metrics
@@ -87,20 +89,16 @@ const MODEL_REGISTRY = [
 
 // Initialize UI
 document.addEventListener('DOMContentLoaded', () => {
-  applyTheme(STATE.theme);
+  applyTheme();
   renderApp();
 });
 
-function applyTheme(theme) {
-  STATE.theme = theme;
-  document.documentElement.setAttribute('data-theme', theme);
-  localStorage.setItem('foresight_theme', theme);
-  const icon = document.getElementById('theme-toggle-icon');
-  if (icon) icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+function applyTheme() {
+  document.documentElement.setAttribute('data-theme', 'light');
 }
 
 function toggleTheme() {
-  applyTheme(STATE.theme === 'dark' ? 'light' : 'dark');
+  /* Light theme only — matches Streamlit dashboard */
 }
 
 function renderApp() {
@@ -119,7 +117,7 @@ function renderApp() {
 }
 
 // -----------------------------------------------------------------------------
-// AUTHENTICATION PORTAL (LOGIN / REGISTER / PERSONA)
+// AUTHENTICATION PORTAL (LOGIN / REGISTER)
 // -----------------------------------------------------------------------------
 
 function renderAuthPortal() {
@@ -139,14 +137,11 @@ function renderAuthPortal() {
         <div class="auth-tabs">
           <button class="auth-tab ${STATE.authTab === 'login' ? 'active' : ''}" onclick="setAuthTab('login')">Sign In</button>
           <button class="auth-tab ${STATE.authTab === 'register' ? 'active' : ''}" onclick="setAuthTab('register')">Register</button>
-          <button class="auth-tab ${STATE.authTab === 'roles' ? 'active' : ''}" onclick="setAuthTab('roles')">Quick Demo Roles</button>
         </div>
 
         <div id="auth-alert" class="auth-alert"></div>
 
-        ${STATE.authTab === 'login' ? renderLoginForm() : ''}
-        ${STATE.authTab === 'register' ? renderRegisterForm() : ''}
-        ${STATE.authTab === 'roles' ? renderRolesForm() : ''}
+        ${STATE.authTab === 'login' ? renderLoginForm() : renderRegisterForm()}
 
         <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border-color); text-align: center;">
           <div style="font-size: 11px; color: var(--text-muted);">
@@ -163,11 +158,11 @@ function renderLoginForm() {
     <form id="login-form" onsubmit="handleLogin(event)">
       <div class="auth-form-group">
         <label class="auth-label">Email Address</label>
-        <input type="email" id="login-email" class="auth-input" placeholder="executive@foresight.ai" value="executive@foresight.ai" required>
+        <input type="email" id="login-email" class="auth-input" placeholder="you@company.com" autocomplete="username" required>
       </div>
       <div class="auth-form-group">
         <label class="auth-label">Password</label>
-        <input type="password" id="login-password" class="auth-input" placeholder="••••••••" value="Foresight2026!" required>
+        <input type="password" id="login-password" class="auth-input" placeholder="••••••••" autocomplete="current-password" required>
       </div>
       <button type="submit" class="btn btn-primary" id="login-btn" style="width: 100%; padding: 12px; font-size: 14px; margin-top: 8px;">
         Sign In to Foresight Platform →
@@ -181,7 +176,7 @@ function renderRegisterForm() {
     <form id="register-form" onsubmit="handleRegister(event)">
       <div class="auth-form-group">
         <label class="auth-label">Full Name</label>
-        <input type="text" id="reg-name" class="auth-input" placeholder="Sarah Chen" required>
+        <input type="text" id="reg-name" class="auth-input" placeholder="Full name" required>
       </div>
       <div class="auth-form-group">
         <label class="auth-label">Work Email</label>
@@ -202,42 +197,27 @@ function renderRegisterForm() {
   `;
 }
 
-function renderRolesForm() {
-  return `
-    <div style="display: flex; flex-direction: column; gap: 10px;">
-      <button class="persona-btn" onclick="signInWithPreset('EXECUTIVE')">
-        <span style="font-size: 22px;">💼</span>
-        <div>
-          <div style="font-weight: 700; font-size: 13px;">Executive (Sarah Chen)</div>
-          <div style="font-size: 11px; color: var(--text-muted);">Access to Executive KPIs, Revenue Forecast, Risk Liabilities</div>
-        </div>
-      </button>
+function normalizeUserProfile(user) {
+  const name = user.full_name || user.name || 'User';
+  const parts = name.trim().split(/\s+/).filter(Boolean);
+  const avatar = parts.length >= 2
+    ? (parts[0][0] + parts[parts.length - 1][0]).toUpperCase()
+    : name.slice(0, 2).toUpperCase();
+  return {
+    name,
+    email: user.email,
+    role: user.role || 'USER',
+    avatar
+  };
+}
 
-      <button class="persona-btn" onclick="signInWithPreset('ANALYST')">
-        <span style="font-size: 22px;">🔍</span>
-        <div>
-          <div style="font-weight: 700; font-size: 13px;">Lead Demand Analyst (David Kumar)</div>
-          <div style="font-size: 11px; color: var(--text-muted);">Access to Multi-Horizon Forecasting, SKU Pareto, Seasonality</div>
-        </div>
-      </button>
-
-      <button class="persona-btn" onclick="signInWithPreset('ADMIN')">
-        <span style="font-size: 22px;">🛡️</span>
-        <div>
-          <div style="font-weight: 700; font-size: 13px;">System Administrator (Alex Rivera)</div>
-          <div style="font-size: 11px; color: var(--text-muted);">Full access including Live Model Monitoring & Drift Audits</div>
-        </div>
-      </button>
-
-      <button class="persona-btn" onclick="signInWithPreset('VIEWER')">
-        <span style="font-size: 22px;">👁️</span>
-        <div>
-          <div style="font-weight: 700; font-size: 13px;">Guest Observer (Read-Only)</div>
-          <div style="font-size: 11px; color: var(--text-muted);">Evaluation mode with restricted system modification rights</div>
-        </div>
-      </button>
-    </div>
-  `;
+function completeLogin(token, user) {
+  STATE.isAuthenticated = true;
+  STATE.token = token;
+  STATE.user = normalizeUserProfile(user);
+  localStorage.setItem('foresight_token', token);
+  localStorage.setItem('foresight_user', JSON.stringify(STATE.user));
+  renderApp();
 }
 
 function setAuthTab(tab) {
@@ -274,18 +254,9 @@ async function handleLogin(e) {
     }
 
     const err = await res.json().catch(() => ({ detail: 'Authentication failed' }));
-    if (email.includes('@foresight.ai')) {
-      signInWithPreset(email.split('@')[0].toUpperCase());
-      return;
-    }
     showAuthAlert(err.detail || 'Invalid email or password.');
   } catch (err) {
-    if (email.includes('@foresight.ai')) {
-      signInWithPreset(email.split('@')[0].toUpperCase());
-    } else {
-      showAuthAlert('Backend offline. Logged in with local demo credentials.');
-      signInWithPreset('EXECUTIVE');
-    }
+    showAuthAlert('Unable to reach authentication service. Please try again later.');
   } finally {
     if (btn) btn.textContent = 'Sign In to Foresight Platform →';
   }
@@ -324,36 +295,16 @@ async function handleRegister(e) {
     const err = await res.json().catch(() => ({ detail: 'Registration failed' }));
     showAuthAlert(err.detail || 'Could not complete registration.');
   } catch (err) {
-    showAuthAlert('Account registered in demo session. You can now log in.', 'success');
-    setTimeout(() => { setAuthTab('login'); }, 1500);
+    showAuthAlert('Unable to reach authentication service. Please try again later.');
   } finally {
     if (btn) btn.textContent = 'Create Account via Backend API';
   }
 }
 
-function signInWithPreset(role) {
-  const presets = {
-    EXECUTIVE: { name: 'Sarah Chen', email: 'executive@foresight.ai', role: 'EXECUTIVE', avatar: 'SC' },
-    ANALYST: { name: 'David Kumar', email: 'analyst@foresight.ai', role: 'ANALYST', avatar: 'DK' },
-    ADMIN: { name: 'Alex Rivera', email: 'admin@foresight.ai', role: 'ADMIN', avatar: 'AR' },
-    VIEWER: { name: 'Guest Observer', email: 'viewer@foresight.ai', role: 'VIEWER', avatar: 'GO' }
-  };
-  const user = presets[role] || presets.EXECUTIVE;
-  completeLogin(`demo_token_${role.toLowerCase()}_jwt_2026`, user);
-}
-
-function completeLogin(token, user) {
-  STATE.isAuthenticated = true;
-  STATE.token = token;
-  STATE.user = user;
-  localStorage.setItem('foresight_token', token);
-  localStorage.setItem('foresight_user', JSON.stringify(user));
-  renderApp();
-}
-
 function logout() {
   STATE.isAuthenticated = false;
   STATE.token = null;
+  STATE.user = null;
   localStorage.removeItem('foresight_token');
   localStorage.removeItem('foresight_user');
   renderApp();
@@ -418,15 +369,12 @@ function renderDashboardShell() {
 
       <div class="sidebar-footer">
         <div class="user-pill" onclick="logout()" title="Click to Sign Out">
-          <div class="user-avatar" id="user-avatar">${STATE.user.avatar || 'SC'}</div>
+          <div class="user-avatar" id="user-avatar">${STATE.user?.avatar || 'U'}</div>
           <div class="user-details">
-            <span class="user-name" id="user-display-name">${STATE.user.name || 'Sarah Chen'}</span>
-            <span class="user-role-tag" id="user-display-role">${STATE.user.role || 'EXECUTIVE'} (Sign Out)</span>
+            <span class="user-name" id="user-display-name">${STATE.user?.name || 'User'}</span>
+            <span class="user-role-tag" id="user-display-role">${STATE.user?.role || 'USER'} (Sign Out)</span>
           </div>
         </div>
-        <button class="btn-icon" onclick="toggleTheme()" id="theme-toggle-btn" title="Toggle Light/Dark Theme">
-          <span id="theme-toggle-icon">${STATE.theme === 'dark' ? '☀️' : '🌙'}</span>
-        </button>
       </div>
     </aside>
 
@@ -477,8 +425,8 @@ function setupNavigation() {
 }
 
 function navigateTo(pageKey) {
-  if (pageKey === 'monitoring' && STATE.user.role === 'VIEWER') {
-    alert('Access Restricted: System Monitoring requires ANALYST, EXECUTIVE, or ADMIN role.');
+  if (pageKey === 'monitoring' && STATE.user?.role !== 'ADMIN') {
+    alert('Access Restricted: System Monitoring requires ADMIN role.');
     return;
   }
 
@@ -495,12 +443,13 @@ function navigateTo(pageKey) {
 }
 
 function updateUserUI() {
+  if (!STATE.user) return;
   const nameEl = document.getElementById('user-display-name');
   const roleEl = document.getElementById('user-display-role');
   const avatarEl = document.getElementById('user-avatar');
   if (nameEl) nameEl.textContent = STATE.user.name;
   if (roleEl) roleEl.textContent = `${STATE.user.role} (Sign Out)`;
-  if (avatarEl) avatarEl.textContent = STATE.user.avatar || 'SC';
+  if (avatarEl) avatarEl.textContent = STATE.user.avatar || 'U';
 }
 
 function renderCurrentPage() {
@@ -636,9 +585,8 @@ function initExecutiveChart() {
   const ctx = document.getElementById('exec-forecast-chart');
   if (!ctx) return;
 
-  const isDark = STATE.theme === 'dark';
-  const gridColor = isDark ? 'rgba(255, 255, 255, 0.06)' : 'rgba(0, 0, 0, 0.06)';
-  const textColor = isDark ? '#9ca3af' : '#475569';
+  const gridColor = 'rgba(0, 0, 0, 0.06)';
+  const textColor = '#475569';
 
   STATE.activeChart = new Chart(ctx, {
     type: 'line',
@@ -657,7 +605,7 @@ function initExecutiveChart() {
         {
           label: 'Phase 20 Promoted Forecast',
           data: [null, null, null, null, null, null, null, null, null, 5100, 5380, 5640],
-          borderColor: '#6366f1',
+          borderColor: '#ff4b4b',
           borderDash: [5, 5],
           backgroundColor: 'rgba(99, 102, 241, 0.15)',
           fill: true,
@@ -735,9 +683,8 @@ function initForecastingChart() {
   const ctx = document.getElementById('forecast-horizon-chart');
   if (!ctx) return;
 
-  const isDark = STATE.theme === 'dark';
-  const gridColor = isDark ? 'rgba(255, 255, 255, 0.06)' : 'rgba(0, 0, 0, 0.06)';
-  const textColor = isDark ? '#9ca3af' : '#475569';
+  const gridColor = 'rgba(0, 0, 0, 0.06)';
+  const textColor = '#475569';
 
   const days = Array.from({length: 14}, (_, i) => `Day ${i + 1}`);
   const baseActuals = [42, 38, 55, 60, 48, 62, 59, 70, 68, 75, 72, 80, 84, 88];
@@ -761,7 +708,7 @@ function initForecastingChart() {
         {
           label: 'Point Forecast (Selected ML Model)',
           data: pointForecast,
-          borderColor: '#6366f1',
+          borderColor: '#ff4b4b',
           backgroundColor: 'rgba(99, 102, 241, 0.15)',
           fill: true,
           borderWidth: 3
@@ -1002,9 +949,8 @@ function initAnalyticsChart() {
   const ctx = document.getElementById('seasonality-chart');
   if (!ctx) return;
 
-  const isDark = STATE.theme === 'dark';
-  const gridColor = isDark ? 'rgba(255, 255, 255, 0.06)' : 'rgba(0, 0, 0, 0.06)';
-  const textColor = isDark ? '#9ca3af' : '#475569';
+  const gridColor = 'rgba(0, 0, 0, 0.06)';
+  const textColor = '#475569';
 
   STATE.activeChart = new Chart(ctx, {
     type: 'bar',
@@ -1013,7 +959,7 @@ function initAnalyticsChart() {
       datasets: [{
         label: 'Relative Demand Index (Base 100)',
         data: [112, 108, 98, 104, 128, 86, 64],
-        backgroundColor: ['#6366f1', '#6366f1', '#6366f1', '#6366f1', '#10b981', '#f59e0b', '#f43f5e'],
+        backgroundColor: ['#ff4b4b', '#ff4b4b', '#ff4b4b', '#ff4b4b', '#16a34a', '#d97706', '#dc2626'],
         borderRadius: 6
       }]
     },
@@ -1141,8 +1087,7 @@ function initMonitoringRadar() {
   const ctx = document.getElementById('monitoring-radar-chart');
   if (!ctx) return;
 
-  const isDark = STATE.theme === 'dark';
-  const textColor = isDark ? '#9ca3af' : '#475569';
+  const textColor = '#475569';
 
   STATE.activeChart = new Chart(ctx, {
     type: 'radar',
@@ -1161,8 +1106,8 @@ function initMonitoringRadar() {
       maintainAspectRatio: false,
       scales: {
         r: {
-          grid: { color: isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.08)' },
-          angleLines: { color: isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.08)' },
+          grid: { color: 'rgba(0, 0, 0, 0.08)' },
+          angleLines: { color: 'rgba(0, 0, 0, 0.08)' },
           pointLabels: { color: textColor, font: { size: 12 } },
           ticks: { display: false, min: 80, max: 100 }
         }

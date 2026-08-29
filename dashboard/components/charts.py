@@ -14,7 +14,7 @@ def forecast_bar_chart(df: pd.DataFrame, title: str = "6-Week Production Forecas
     fig = px.bar(
         df, x="horizon", y="forecast_demand", title=title,
         labels={"horizon": "Week Ahead", "forecast_demand": "Forecast Demand"},
-        color_discrete_sequence=["#2563eb"],
+        color_discrete_sequence=["#ff4b4b"],
     )
     st.plotly_chart(fig, use_container_width=True)
 
@@ -37,6 +37,6 @@ def horizon_comparison_chart(horizon_rows: list[dict]) -> None:
         df, x="horizon", y="wape_pct", color="label",
         title="WAPE by Horizon (Validation Reference)",
         labels={"wape_pct": "WAPE %", "horizon": "Horizon"},
-        color_discrete_map={"PRODUCTION": "#2563eb", "EXTENDED_PARTIAL": "#94a3b8"},
+        color_discrete_map={"PRODUCTION": "#ff4b4b", "EXTENDED_PARTIAL": "#94a3b8"},
     )
     st.plotly_chart(fig, use_container_width=True)

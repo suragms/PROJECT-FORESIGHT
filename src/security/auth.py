@@ -24,10 +24,7 @@ PUBLIC_PATHS = frozenset({
 
 
 def auth_is_required() -> bool:
-    """Production always requires auth. Development may bypass when disabled."""
-    env = foresight_env()
-    if env == "production":
-        return True
+    """API-key auth is enforced only when FORESIGHT_API_AUTH_ENABLED=true."""
     return api_auth_enabled()
 
 

@@ -8,7 +8,23 @@
 ---
 
 ## 📌 1. Project Overview
-**Demand & Inventory Intelligence** is a retail **decision-support** platform developed under **Project FORESIGHT**. The system analyzes multi-year retail transactions, forecasts product demand with frozen machine-learning models, scores inventory risk on a reference extract, and produces business reviews. It does **not** place purchase orders or retrain models in production. Serving is academic/reference: local API, dashboards, and BI extracts — not a live cloud deployment.
+**Demand & Inventory Intelligence** is a retail **decision-support** platform developed under **Project FORESIGHT**. The system analyzes multi-year retail transactions, forecasts product demand with frozen machine-learning models, scores inventory risk on a reference extract, and produces business reviews. It does **not** place purchase orders or retrain models in production. The **scoring API and Vercel web dashboard are deployed publicly**; Streamlit dashboards and BI extracts remain available for local use.
+
+---
+
+## Live Application
+
+| Component | URL |
+|-----------|-----|
+| **Frontend (Vercel)** | https://foresight-project-green.vercel.app/ |
+| **Backend API (Render)** | https://project-foresight-api-tofn.onrender.com/ |
+| **API Documentation (Swagger)** | https://project-foresight-api-tofn.onrender.com/docs |
+
+**Architecture:** Vercel static dashboard → HTTPS → Render FastAPI scoring service → frozen Phase 11/20 models and Phase 20 risk adapters.
+
+The deployed API provides forecast scoring (`POST /forecast`, `POST /phase20/forecast`) and inventory risk scoring (`POST /phase20/risk/explain`). Configure secrets via Render/Vercel environment variables — never commit `.env`. See `.env.example` and `docs/phase23_3_api_live_verification.md`.
+
+**Validation/backtest performance** (Phase 19–20, not live production): overall WAPE **13.96%**, validated h1–h6 WAPE **11.03%**. **Live production performance: PENDING ACTUALS.**
 
 ---
 
@@ -57,7 +73,7 @@ Historical Data → Data Validation → Feature Engineering → Frozen ML Models
         → BI exports + Streamlit dashboards
 ```
 
-**Implemented** locally: data pipeline, frozen models, FastAPI, monitoring files, dashboards, `outputs/bi/`. Inventory scoring is **reference**. Cloud hosting, TLS, identity provider, secrets manager, autoscaling, automated retraining, and Power BI publication are **not deployed**. See `docs/phase15_final_system_report.md`.
+**Implemented:** data pipeline, frozen models, FastAPI (local + Render), Vercel web dashboard, monitoring files, Streamlit dashboards, `outputs/bi/`. Inventory scoring on the full WMS universe is **reference** (1000-row extract). Identity provider, secrets manager, autoscaling, automated retraining, and Power BI publication remain out of scope. See `docs/phase15_final_system_report.md` and `docs/phase23_3_zidio_final_acceptance_matrix.md`.
 
 ```
 Demand-Inventory-Intelligence/
@@ -113,11 +129,14 @@ Reference scoring on a **1000-row extract**: 733 CRITICAL / HIGH stockout labels
 
 ## API
 
+**Production base URL:** https://project-foresight-api-tofn.onrender.com/
+
+Local development:
 ```bash
 uvicorn src.api.app:app --host 127.0.0.1 --port 8000
 ```
 
-`GET /health`, `GET /ready`, `POST /forecast` (single and batch). Docs: `docs/api_documentation.md`.
+`GET /health`, `GET /ready`, `POST /forecast`, `POST /phase20/forecast`, `POST /phase20/risk/explain`. Docs: `docs/phase22_api_documentation.md`, live Swagger at `/docs`.
 
 ---
 
@@ -305,7 +324,8 @@ python src/phase22_final_audit.py
 - h7–h8 extended horizon has partial accuracy
 - UCI dataset: RESEARCH CANDIDATE only
 - `models/lightgbm_forecaster.joblib`: LEGACY NON-PRODUCTION ARTIFACT ISSUE
-- Cloud deployment: NOT IMPLEMENTED IN CURRENT REPOSITORY
+- Live production WAPE: **PENDING ACTUALS** (use validation/backtest metrics only)
+- Render redeploy recommended after Phase 23.3 auth/CORS fixes — see `docs/phase23_3_api_live_verification.md`
 
 ---
 

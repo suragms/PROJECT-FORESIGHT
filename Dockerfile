@@ -22,6 +22,7 @@ RUN pip install --no-cache-dir --disable-pip-version-check -r requirements.txt \
 
 COPY --chown=appuser:appuser src/ src/
 COPY --chown=appuser:appuser docs/ docs/
+# Bundles docs/final_model_registry.json for runtime hash verification.
 COPY --chown=appuser:appuser models/final/ models/final/
 
 RUN mkdir -p /app/outputs /app/data/samples /app/logs /app/data/auth \

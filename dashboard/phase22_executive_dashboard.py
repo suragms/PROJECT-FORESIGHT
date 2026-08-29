@@ -15,8 +15,10 @@ if BASE_DIR not in sys.path:
     sys.path.insert(0, BASE_DIR)
 
 from src.phase22_executive_adapter import executive_bundle
+from dashboard.components.theme import inject_theme
 
 st.set_page_config(page_title="FORESIGHT | Executive Dashboard", layout="wide", page_icon="📊")
+inject_theme()
 
 st.title("PROJECT FORESIGHT — Executive Dashboard")
 
@@ -63,7 +65,7 @@ else:
         prod_fc, x="horizon", y="forecast_demand",
         title="6-Week Production Forecast (Validated Horizon)",
         labels={"horizon": "Week Ahead", "forecast_demand": "Forecast Demand"},
-        color_discrete_sequence=["#2563eb"],
+        color_discrete_sequence=["#ff4b4b"],
     )
     st.plotly_chart(fig, use_container_width=True)
 

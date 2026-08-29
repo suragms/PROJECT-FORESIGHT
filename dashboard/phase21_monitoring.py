@@ -26,6 +26,8 @@ def load_json(name):
 
 
 st.set_page_config(page_title="FORESIGHT | Phase 21 Monitoring", layout="wide")
+from dashboard.components.theme import inject_theme
+inject_theme()
 st.title("FORESIGHT — Phase 21 Production Monitoring")
 
 summary = load_json("monitoring_summary.json")

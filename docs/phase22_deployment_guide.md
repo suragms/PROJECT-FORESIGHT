@@ -109,11 +109,14 @@ Documented in `docs/phase20_rollback_plan.md`:
 3. Phase 20 model is a copy — original Phase 19 candidate remains at `models/phase19/synthetic/phase19_synthetic_lightgbm.joblib`
 4. Do not modify frozen `models/final/` 12-model registry
 
-## 12. Cloud / Docker Deployment
+## 12. Cloud Deployment (Live)
 
-**NOT IMPLEMENTED IN CURRENT REPOSITORY**
+| Component | Platform | URL |
+|-----------|----------|-----|
+| Frontend | Vercel | https://foresight-project-green.vercel.app/ |
+| Scoring API | Render | https://project-foresight-api-tofn.onrender.com/ |
 
-A local Docker configuration may exist from earlier phases (`Dockerfile`), but cloud deployment, TLS, identity provider, and autoscaling are not deployed. Do not claim cloud production exists.
+Configure Render/Vercel secrets per `.env.example`. Redeploy Render after Phase 23.3 auth/CORS fixes for full live scoring verification. Local Docker (`Dockerfile`) remains available for offline testing.
 
 ## Known Legacy Issue
 

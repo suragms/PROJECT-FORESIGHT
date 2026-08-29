@@ -25,7 +25,7 @@ Evidence-based checklist. Items marked based on actual repository state.
 ## NOT INCLUDED / LIMITATIONS
 
 - [ ] **Live production WAPE measured** — PENDING ACTUALS (by design)
-- [ ] **Cloud deployment** — NOT IMPLEMENTED IN CURRENT REPOSITORY
+- [x] **Cloud deployment** — LIVE: Vercel frontend + Render API (see `docs/phase23_3_api_live_verification.md`)
 - [ ] **Financial savings measured** — Not claimed (decision-support only)
 - [ ] **UCI production promotion** — Research candidate only
 

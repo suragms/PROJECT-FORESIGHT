@@ -110,3 +110,17 @@ class TestIntegrity:
 class TestDocumentation:
     def test_phase23_doc_exists(self):
         assert os.path.exists(os.path.join(DOCS, "phase23_unified_navigation.md"))
+
+    def test_public_frontend_has_no_demo_credentials(self):
+        app_js_path = os.path.join(BASE, "public", "js", "app.js")
+        app_js = open(app_js_path, encoding="utf-8").read()
+        forbidden = [
+            "Foresight2026",
+            "foresight.ai",
+            "signInWithPreset",
+            "Quick Demo Roles",
+            "demo_token_",
+            "local demo credentials",
+        ]
+        for token in forbidden:
+            assert token not in app_js, f"public/js/app.js must not expose {token!r}"

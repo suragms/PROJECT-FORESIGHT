@@ -1,6 +1,8 @@
 # Phase 22 — API Documentation
 
-Base URL (local): `http://127.0.0.1:8000`
+**Production base URL:** https://project-foresight-api-tofn.onrender.com/
+
+Local development base URL: `http://127.0.0.1:8000`
 
 Start server:
 ```bash

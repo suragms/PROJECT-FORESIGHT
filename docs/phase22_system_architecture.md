@@ -116,4 +116,4 @@ flowchart TB
 
 ## Deployment Status
 
-Local FastAPI + Streamlit dashboards are implemented. **Cloud deployment is NOT IMPLEMENTED IN CURRENT REPOSITORY.**
+Local FastAPI + Streamlit dashboards are implemented. **Cloud deployment is LIVE:** Vercel frontend + Render FastAPI (see README Live Application section).

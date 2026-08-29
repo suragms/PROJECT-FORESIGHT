@@ -14,8 +14,10 @@ if BASE_DIR not in sys.path:
     sys.path.insert(0, BASE_DIR)
 
 from src.phase20_dashboard_adapter import dashboard_bundle, model_info_panel, to_dashboard_records
+from dashboard.components.theme import inject_theme
 
 st.set_page_config(page_title="FORESIGHT | Phase 20 Production", layout="wide")
+inject_theme()
 
 st.title("FORESIGHT — Phase 20 Production Forecast")
 

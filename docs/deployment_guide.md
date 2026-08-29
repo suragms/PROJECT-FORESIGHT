@@ -1,6 +1,6 @@
 # Deployment guide
 
-This is a local/reference deployment. Cloud deployment has **not** been performed.
+**Live deployment:** Vercel frontend + Render FastAPI scoring service. See README and `docs/phase23_3_api_live_verification.md`. Local/Docker workflow below remains supported.
 
 ## Local workflow
 

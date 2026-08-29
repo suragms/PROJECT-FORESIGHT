@@ -10,6 +10,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.exceptions import RequestValidationError
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from src.api.metrics import incr, observe_latency
@@ -18,6 +19,7 @@ from src.config import (
     APP_NAME,
     APP_VERSION,
     api_max_payload_bytes,
+    cors_allowed_origins,
     foresight_env,
     rate_limit_enabled,
     rate_limit_forecast_requests,
@@ -84,6 +86,13 @@ def create_app() -> FastAPI:
     )
     application.state.engines = {}
     application.state.rate_limiter = RateLimiter()
+    application.add_middleware(
+        CORSMiddleware,
+        allow_origins=cors_allowed_origins(),
+        allow_credentials=True,
+        allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        allow_headers=["Authorization", "Content-Type", "X-API-Key", "X-Request-ID"],
+    )
 
     @application.middleware("http")
     async def limit_payload(request: Request, call_next):
@@ -119,6 +128,17 @@ def create_app() -> FastAPI:
             if request.url.path in {"/model", "/forecast", "/forecast/batch"}:
                 audit("authentication_success", path=request.url.path)
             return await call_next(request)
+        auth_header = request.headers.get("authorization", "")
+        if auth_header.lower().startswith("bearer "):
+            token = auth_header[7:].strip()
+            if token and not key_matches(token):
+                from src.auth.security import safe_decode_access_token
+
+                payload = safe_decode_access_token(token)
+                if payload:
+                    request.state.jwt_user_id = payload.get("sub")
+                    audit("authentication_success", path=request.url.path, method="jwt")
+                    return await call_next(request)
         incr("auth_failures")
         audit(
             "authentication_failure",

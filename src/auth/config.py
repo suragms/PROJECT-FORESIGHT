@@ -20,7 +20,12 @@ def auth_db_path() -> Path:
 
 
 def jwt_secret_key() -> str:
-    key = os.environ.get("JWT_SECRET_KEY") or os.environ.get("SECRET_KEY")
+    key = (
+        os.environ.get("JWT_SECRET_KEY")
+        or os.environ.get("FORESIGHT_API_JWT_SECRET")
+        or os.environ.get("FORESIGHT_JWT_SECRET_KEY")
+        or os.environ.get("SECRET_KEY")
+    )
     if not key:
         if os.environ.get("FORESIGHT_ENV", "development") == "production":
             raise RuntimeError("JWT_SECRET_KEY or SECRET_KEY must be set in production")

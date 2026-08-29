@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-08-29T11:48:11.446314+00:00",
+  "timestamp": "2026-08-29T13:42:28.013547+00:00",
   "health_score": "DEGRADED",
   "components": {
     "data_quality": "PASS",
@@ -11,7 +11,7 @@
     "model_integrity": "PASS"
   },
   "holiday_monitoring": {
-    "timestamp": "2026-08-29T11:48:11.105911+00:00",
+    "timestamp": "2026-08-29T13:42:27.906275+00:00",
     "calendar_source": "data/raw/calendar.csv",
     "holiday_weeks_in_data": 1200,
     "status": "WARNING",
@@ -23,13 +23,13 @@
   },
   "alerts": [
     {
-      "alert_id": "44cc8207",
-      "timestamp": "2026-08-29T11:48:11.121604+00:00",
+      "alert_id": "42f74545",
+      "timestamp": "2026-08-29T13:42:27.917932+00:00",
       "component": "data_drift",
       "severity": "WARNING",
       "message": "data_drift warning",
       "evidence": {
-        "timestamp": "2026-08-29T11:48:11.073934+00:00",
+        "timestamp": "2026-08-29T13:42:27.861538+00:00",
         "baseline_weeks": 147,
         "current_weeks": 42,
         "feature_drift": {
@@ -128,13 +128,13 @@
       "recommended_action": "Investigate drift in input features"
     },
     {
-      "alert_id": "045f1574",
-      "timestamp": "2026-08-29T11:48:11.121604+00:00",
+      "alert_id": "eb69982f",
+      "timestamp": "2026-08-29T13:42:27.917932+00:00",
       "component": "prediction_drift",
       "severity": "WARNING",
       "message": "prediction_drift warning",
       "evidence": {
-        "timestamp": "2026-08-29T11:48:11.089881+00:00",
+        "timestamp": "2026-08-29T13:42:27.878149+00:00",
         "current_distribution": {
           "mean": 183.1597,
           "median": 140.6482,

@@ -86,6 +86,18 @@ def api_max_payload_bytes() -> int:
 def log_level() -> str:
     return os.environ.get("FORESIGHT_LOG_LEVEL", LOG_LEVEL).strip().upper()
 
+
+def cors_allowed_origins() -> list[str]:
+    raw = os.environ.get("FORESIGHT_CORS_ORIGINS", "")
+    if not raw.strip():
+        return [
+            "https://foresight-project-green.vercel.app",
+            "http://localhost:3000",
+            "http://localhost:8501",
+            "http://127.0.0.1:8501",
+        ]
+    return [part.strip() for part in raw.split(",") if part.strip()]
+
 REGISTRY_PATH = PROJECT_ROOT / os.environ.get(
     "FORESIGHT_REGISTRY_PATH", os.path.join("docs", "final_model_registry.json")
 )

@@ -162,7 +162,7 @@ Phase 21: Data quality, feature quality, drift detection, prediction drift, inte
 4. UCI candidate not production promoted
 5. Quantile/hurdle companion models not implemented
 6. Legacy `models/lightgbm_forecaster.joblib` hash issue — **LEGACY NON-PRODUCTION ARTIFACT ISSUE**
-7. Cloud deployment not implemented
+7. Cloud deployment: **LIVE** (Vercel + Render); live production WAPE **PENDING ACTUALS**
 8. Risk matrix covers 100 SKUs (reference scope)
 
 ---
