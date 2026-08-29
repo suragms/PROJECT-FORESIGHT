@@ -1,9 +1,11 @@
-# Exclude large datasets, legacy non-production models, tests, and local dashboard UI
+# Exclude large datasets, legacy non-production models, tests, and local Python Streamlit app from Vercel static build
 data/
 outputs/
 notebooks/
 tests/
 dashboard/
+app.py
+_p*.py
 models/*.joblib
 models/phase17/
 models/phase19/
