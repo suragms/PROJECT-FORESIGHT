@@ -3,12 +3,25 @@
  * Phase 23.1 Enterprise Authentication & Full Stack Intelligence Dashboard
  */
 
+function resolveApiBaseUrl() {
+  if (typeof window === 'undefined') {
+    return 'https://project-foresight-api-tofn.onrender.com';
+  }
+  if (typeof window.FORESIGHT_API_URL === 'string' && window.FORESIGHT_API_URL.length > 0) {
+    return window.FORESIGHT_API_URL.replace(/\/$/, '');
+  }
+  if (window.location.hostname.endsWith('vercel.app')) {
+    return `${window.location.origin}/api`;
+  }
+  return 'https://project-foresight-api-tofn.onrender.com';
+}
+
 const STATE = {
   isAuthenticated: !!localStorage.getItem('foresight_token'),
   token: localStorage.getItem('foresight_token') || null,
   activePage: localStorage.getItem('foresight_page') || 'executive',
   theme: 'light',
-  apiBaseUrl: (typeof window !== 'undefined' && window.FORESIGHT_API_URL) ? window.FORESIGHT_API_URL : 'https://project-foresight-api-tofn.onrender.com',
+  apiBaseUrl: resolveApiBaseUrl(),
   user: (() => {
     try {
       const raw = localStorage.getItem('foresight_user');
@@ -130,7 +143,7 @@ function renderAuthPortal() {
           <p style="font-size: 13px; color: var(--text-secondary);">Enterprise Demand & Inventory AI Platform</p>
           <div style="margin-top: 10px; display: inline-flex; align-items: center; gap: 6px; font-size: 11px; color: var(--accent-emerald); background: rgba(16, 185, 129, 0.1); padding: 4px 10px; border-radius: 20px;">
             <span class="status-dot" style="width: 6px; height: 6px;"></span>
-            <span>Live Backend: ${STATE.apiBaseUrl.replace('https://', '')}</span>
+            <span>Live Backend: ${backendDisplayHost()}</span>
           </div>
         </div>
 
@@ -225,6 +238,20 @@ function setAuthTab(tab) {
   renderApp();
 }
 
+function backendDisplayHost() {
+  if (STATE.apiBaseUrl.includes('/api') && typeof window !== 'undefined' && window.location.hostname.endsWith('vercel.app')) {
+    return 'project-foresight-api-tofn.onrender.com (proxied)';
+  }
+  return STATE.apiBaseUrl.replace(/^https?:\/\//, '');
+}
+
+function docsUrl() {
+  if (STATE.apiBaseUrl.endsWith('/api')) {
+    return 'https://project-foresight-api-tofn.onrender.com/docs';
+  }
+  return `${STATE.apiBaseUrl}/docs`;
+}
+
 function showAuthAlert(msg, type = 'error') {
   const alertEl = document.getElementById('auth-alert');
   if (alertEl) {
@@ -233,19 +260,62 @@ function showAuthAlert(msg, type = 'error') {
   }
 }
 
+async function wakeBackend(timeoutMs = 45000) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    await fetch(`${STATE.apiBaseUrl}/health`, {
+      method: 'GET',
+      cache: 'no-store',
+      signal: controller.signal,
+    });
+    return true;
+  } catch {
+    return false;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+async function apiFetch(path, options = {}, retries = 1) {
+  const url = `${STATE.apiBaseUrl}${path}`;
+  let lastError = null;
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    try {
+      if (attempt === 0) {
+        await wakeBackend();
+      }
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 60000);
+      try {
+        return await fetch(url, { ...options, signal: controller.signal });
+      } finally {
+        clearTimeout(timer);
+      }
+    } catch (err) {
+      lastError = err;
+      if (attempt < retries) {
+        await new Promise((r) => setTimeout(r, 2000));
+        continue;
+      }
+    }
+  }
+  throw lastError || new Error('Network request failed');
+}
+
 async function handleLogin(e) {
   e.preventDefault();
   const email = document.getElementById('login-email').value.trim();
   const password = document.getElementById('login-password').value;
   const btn = document.getElementById('login-btn');
-  if (btn) btn.textContent = 'Authenticating...';
+  if (btn) btn.textContent = 'Connecting to API...';
 
   try {
-    const res = await fetch(`${STATE.apiBaseUrl}/auth/login`, {
+    const res = await apiFetch('/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password })
-    });
+    }, 1);
 
     if (res.ok) {
       const data = await res.json();
@@ -258,9 +328,8 @@ async function handleLogin(e) {
     showAuthAlert(detail);
   } catch (err) {
     showAuthAlert(
-      'Cannot reach the API from this browser (network or CORS). ' +
-      'Register a new account first if you have not already, then try again. ' +
-      'If this persists, the backend may still be restarting.'
+      'Backend is waking up or unreachable. Wait ~30 seconds and try again. ' +
+      'If you have not registered yet, open the Register tab first.'
     );
   } finally {
     if (btn) btn.textContent = 'Sign In to Foresight Platform →';
@@ -280,14 +349,14 @@ async function handleRegister(e) {
     return;
   }
 
-  if (btn) btn.textContent = 'Creating Account...';
+  if (btn) btn.textContent = 'Connecting to API...';
 
   try {
-    const res = await fetch(`${STATE.apiBaseUrl}/auth/register`, {
+    const res = await apiFetch('/auth/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ full_name, email, password, confirm_password })
-    });
+    }, 1);
 
     if (res.ok) {
       showAuthAlert('Account created successfully! Switching to login...', 'success');
@@ -302,8 +371,7 @@ async function handleRegister(e) {
     showAuthAlert(detail);
   } catch (err) {
     showAuthAlert(
-      'Cannot reach the API from this browser (network or CORS). ' +
-      'Please wait for the backend to finish starting, then try again.'
+      'Backend is waking up or unreachable. Wait ~30 seconds and try Register again.'
     );
   } finally {
     if (btn) btn.textContent = 'Create Account via Backend API';
@@ -391,11 +459,11 @@ function renderDashboardShell() {
       <header class="top-bar">
         <div class="system-status-indicator">
           <span class="status-dot"></span>
-          <span>FORESIGHT v0.13.0 • BACKEND: ${STATE.apiBaseUrl.replace('https://', '')}</span>
+          <span>FORESIGHT v0.13.0 • BACKEND: ${backendDisplayHost()}</span>
         </div>
 
         <div class="top-actions">
-          <a href="${STATE.apiBaseUrl}/docs" target="_blank" rel="noreferrer" class="btn btn-secondary">
+          <a href="${docsUrl()}" target="_blank" rel="noreferrer" class="btn btn-secondary">
             <span>⚡ API Swagger Docs</span>
           </a>
           <button class="btn btn-secondary" onclick="logout()">
