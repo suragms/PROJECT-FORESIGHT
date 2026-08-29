@@ -1,0 +1,8 @@
+{
+  "name": "project-foresight-web",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "echo 'Static site ready'"
+  }
+}
