@@ -1,0 +1,14 @@
+# Ignore large data files, notebooks, outputs, tests, and virtual environments from Vercel function bundle
+data/
+outputs/
+notebooks/
+tests/
+docs/
+.venv/
+.pytest_cache/
+.streamlit/
+.github/
+*.parquet
+*.csv
+*.xlsx
+*.ipynb
