@@ -4,9 +4,10 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, Field
 
+from src.auth.dependencies import require_user_auth
 from src.phase20_api_adapter import (
     SUPPORTED_HORIZON,
     batch_forecast_from_features_df,
@@ -16,7 +17,7 @@ from src.phase20_api_adapter import (
 )
 from src.phase20_risk_adapter import explain_risk, compute_risk
 
-router = APIRouter()
+router = APIRouter(dependencies=[Depends(require_user_auth)])
 
 
 class Phase20FeatureRecord(BaseModel):

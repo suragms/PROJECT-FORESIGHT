@@ -1,13 +1,13 @@
 {
   "alerts": [
     {
-      "alert_id": "3e5e28dd",
-      "timestamp": "2026-08-29T05:11:41.841404+00:00",
+      "alert_id": "7d0e0c60",
+      "timestamp": "2026-08-29T05:28:47.419417+00:00",
       "component": "data_drift",
       "severity": "WARNING",
       "message": "data_drift warning",
       "evidence": {
-        "timestamp": "2026-08-29T05:11:41.741945+00:00",
+        "timestamp": "2026-08-29T05:28:47.378757+00:00",
         "baseline_weeks": 147,
         "current_weeks": 42,
         "feature_drift": {
@@ -106,13 +106,13 @@
       "recommended_action": "Investigate drift in input features"
     },
     {
-      "alert_id": "50e106d5",
-      "timestamp": "2026-08-29T05:11:41.841404+00:00",
+      "alert_id": "d99ee30a",
+      "timestamp": "2026-08-29T05:28:47.419417+00:00",
       "component": "prediction_drift",
       "severity": "WARNING",
       "message": "prediction_drift warning",
       "evidence": {
-        "timestamp": "2026-08-29T05:11:41.756655+00:00",
+        "timestamp": "2026-08-29T05:28:47.386997+00:00",
         "current_distribution": {
           "mean": 183.1597,
           "median": 140.6482,
@@ -133,5 +133,5 @@
       "recommended_action": "Investigate forecast distribution shift"
     }
   ],
-  "timestamp": "2026-08-29T05:11:42.136654+00:00"
+  "timestamp": "2026-08-29T05:28:47.613971+00:00"
 }

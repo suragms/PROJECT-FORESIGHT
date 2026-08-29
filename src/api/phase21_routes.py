@@ -5,12 +5,13 @@ from __future__ import annotations
 import json
 import os
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
 
+from src.auth.dependencies import require_admin
 from src.phase21_common import P21_MON, DOCS
 from src.phase21_integrity_monitoring import run_integrity_monitoring
 
-router = APIRouter()
+router = APIRouter(dependencies=[Depends(require_admin)])
 
 
 def _load_json(name: str) -> dict:

@@ -9,7 +9,7 @@ from fastapi import Request
 
 from src.config import api_api_key, api_auth_enabled, foresight_env
 
-PUBLIC_PATHS = frozenset({"/health", "/ready"})
+PUBLIC_PATHS = frozenset({"/health", "/ready", "/auth/register", "/auth/login", "/auth/logout"})
 
 
 def auth_is_required() -> bool:

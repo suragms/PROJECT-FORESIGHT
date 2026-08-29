@@ -14,10 +14,11 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 if BASE_DIR not in sys.path:
     sys.path.insert(0, BASE_DIR)
 
+from dashboard.components.auth_ui import render_auth_screen
 from dashboard.components.sidebar import render_brand, render_navigation
 from dashboard.components.theme import inject_theme
-from dashboard.navigation import all_nav_items
 from dashboard.pages import analytics, executive, forecasting, home, inventory, ml, monitoring, system
+from dashboard.session_auth import is_authenticated, page_allowed, current_role
 
 st.set_page_config(
     page_title="PROJECT FORESIGHT | Unified Platform",
@@ -37,6 +38,11 @@ SYSTEM_PAGES = {"model_information", "documentation", "validation_status", "abou
 
 
 def route_page(page_key: str) -> None:
+    if not page_allowed(page_key, current_role()):
+        st.error("403 Forbidden — your role does not have access to this page.")
+        st.info("Monitoring and validation pages require an ADMIN role.")
+        return
+
     if page_key == "home":
         home.render()
     elif page_key == "executive":
@@ -57,10 +63,13 @@ def route_page(page_key: str) -> None:
         st.error(f"Unknown page: {page_key}")
 
 
+if not is_authenticated():
+    render_auth_screen()
+    st.stop()
+
 with st.sidebar:
     render_brand()
     page = render_navigation()
-    st.divider()
-    st.caption("Phase 20–22 production system • Observability only")
+    st.caption("Authenticated session • Decision support only")
 
 route_page(page)

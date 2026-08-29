@@ -68,3 +68,25 @@ def all_nav_items() -> list[NavItem]:
 
 def nav_label_map() -> dict[str, str]:
     return {item.key: f"{item.icon} {item.label}" for item in all_nav_items()}
+
+
+ADMIN_ONLY_PAGES = frozenset({
+    "system_health",
+    "data_quality",
+    "data_drift",
+    "prediction_drift",
+    "alerts",
+    "integrity",
+    "validation_status",
+})
+
+
+def filtered_nav_groups(role: str) -> list[tuple[str, list[NavItem]]]:
+    if role == "ADMIN":
+        return NAV_GROUPS
+    filtered = []
+    for group_name, items in NAV_GROUPS:
+        visible = [item for item in items if item.key not in ADMIN_ONLY_PAGES]
+        if visible:
+            filtered.append((group_name, visible))
+    return filtered

@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-08-29T05:11:47.109468+00:00",
+  "timestamp": "2026-08-29T05:28:50.002033+00:00",
   "checks": {
     "documentation": true,
     "production_model": true,
@@ -14,8 +14,8 @@
     "executive_dashboard": true
   },
   "integrity_snapshot": {
-    "timestamp": "2026-08-29T05:11:47.011134+00:00",
-    "git_status_short": "M data/phase21/monitoring/alerts.json\n M data/phase21/monitoring/data_drift_report.json\n M data/phase21/monitoring/data_quality_report.json\n M data/phase21/monitoring/feature_quality_report.json\n M data/phase21/monitoring/forecast_performance_report.json\n M data/phase21/monitoring/model_integrity_report.json\n M data/phase21/monitoring/monitoring_summary.json\n M data/phase21/monitoring/prediction_drift_report.json\n M data/phase21/monitoring/risk_consistency_report.json\n M docs/phase21_production_integrity_baseline.json\n M docs/phase22_integrity_snapshot.json\n M outputs/bi/executive_kpis.parquet\n M outputs/bi/schema.json\n M outputs/bi/system_health.parquet\n M outputs/monitoring/accuracy_monitoring_report.json\n M outputs/monitoring/api_metrics.json\n M outputs/monitoring/data_quality_report.json\n M outputs/monitoring/drift_report.json\n M outputs/monitoring/forecast_monitoring_report.json\n M outputs/monitoring/monitoring_summary.json\n M outputs/phase14/simulation.json\n?? app.py\n?? dashboard/components/\n?? dashboard/navigation.py\n?? dashboard/pages/\n?? docs/phase23_unified_navigation.md\n?? tests/test_phase23_navigation.py",
+    "timestamp": "2026-08-29T05:28:49.913395+00:00",
+    "git_status_short": "M .env.example\n M .gitignore\n M app.py\n M dashboard/components/sidebar.py\n M dashboard/navigation.py\n M data/phase21/monitoring/alerts.json\n M data/phase21/monitoring/data_drift_report.json\n M data/phase21/monitoring/data_quality_report.json\n M data/phase21/monitoring/feature_quality_report.json\n M data/phase21/monitoring/forecast_performance_report.json\n M data/phase21/monitoring/model_integrity_report.json\n M data/phase21/monitoring/monitoring_summary.json\n M data/phase21/monitoring/prediction_drift_report.json\n M data/phase21/monitoring/risk_consistency_report.json\n M docs/phase21_production_integrity_baseline.json\n M docs/phase22_integrity_snapshot.json\n M outputs/bi/executive_kpis.parquet\n M outputs/bi/schema.json\n M outputs/bi/system_health.parquet\n M outputs/monitoring/accuracy_monitoring_report.json\n M outputs/monitoring/api_metrics.json\n M outputs/monitoring/data_quality_report.json\n M outputs/monitoring/drift_report.json\n M outputs/monitoring/forecast_monitoring_report.json\n M outputs/monitoring/monitoring_summary.json\n M outputs/phase14/simulation.json\n M src/api/app.py\n M src/api/phase20_routes.py\n M src/api/phase21_routes.py\n M src/security/auth.py\n?? dashboard/components/auth_ui.py\n?? dashboard/session_auth.py\n?? docs/phase23_1_authentication.md\n?? src/api/auth_routes.py\n?? src/auth/\n?? tests/test_phase23_authentication.py",
     "frozen_models_12_unchanged": true,
     "phase20_production_unchanged": true,
     "phase17_artifact_exists": true,

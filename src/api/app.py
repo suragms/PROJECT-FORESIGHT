@@ -61,6 +61,8 @@ async def lifespan(application: FastAPI):
         version=APP_VERSION,
         config=config_snapshot(),
     )
+    from src.auth.database import init_db
+    init_db()
     yield
     audit("application_shutdown", environment=env, version=APP_VERSION)
 
@@ -182,6 +184,8 @@ def create_app() -> FastAPI:
         return JSONResponse(status_code=422, content={"detail": "Invalid request schema"})
 
     application.include_router(router)
+    from src.api.auth_routes import router as auth_router
+    application.include_router(auth_router)
     from src.api.phase20_routes import router as phase20_router
     application.include_router(phase20_router, prefix="/phase20", tags=["phase20"])
     from src.api.phase21_routes import router as phase21_router

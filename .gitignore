@@ -48,3 +48,6 @@ _phase16_*.json
 
 # Phase 21 monitoring history snapshots (regenerable)
 data/phase21/monitoring/history/
+
+# Auth database (local user credentials)
+data/auth/
