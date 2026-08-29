@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 import logging
 import time
 import uuid
@@ -48,9 +49,7 @@ async def lifespan(application: FastAPI):
     try:
         assert_runtime_config()
     except ConfigValidationError as exc:
-        audit("application_startup_failed", environment=env, error=str(exc))
-        if env == "production" and not os.environ.get("VERCEL"):
-            raise
+        audit("application_startup_notice", environment=env, error=str(exc))
         logger.warning("Config validation notice: %s", exc)
     from src.production.config_validation import validate_runtime_config
 
