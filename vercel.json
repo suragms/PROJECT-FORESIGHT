@@ -1,3 +1,7 @@
 {
-  "cleanUrls": true
+  "cleanUrls": true,
+  "env": {
+    "FORESIGHT_API_URL": "https://project-foresight-api-tofn.onrender.com",
+    "NEXT_PUBLIC_API_URL": "https://project-foresight-api-tofn.onrender.com"
+  }
 }

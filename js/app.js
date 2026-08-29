@@ -6,6 +6,7 @@
 const STATE = {
   activePage: 'executive',
   theme: localStorage.getItem('foresight_theme') || 'dark',
+  apiBaseUrl: (typeof window !== 'undefined' && window.FORESIGHT_API_URL) ? window.FORESIGHT_API_URL : 'https://project-foresight-api-tofn.onrender.com',
   user: JSON.parse(localStorage.getItem('foresight_user')) || {
     name: 'Sarah Chen',
     email: 'executive@foresight.ai',
