@@ -173,3 +173,19 @@ class TestIntegrity:
 class TestDocumentation:
     def test_auth_doc_exists(self):
         assert os.path.exists(os.path.join(DOCS, "phase23_1_authentication.md"))
+
+
+class TestProductionJwtFallback:
+    def test_login_works_without_jwt_env_in_production(self, auth_db, monkeypatch):
+        monkeypatch.setenv("FORESIGHT_ENV", "production")
+        for key in ("JWT_SECRET_KEY", "FORESIGHT_API_JWT_SECRET", "FORESIGHT_JWT_SECRET_KEY", "SECRET_KEY"):
+            monkeypatch.delenv(key, raising=False)
+        from src.auth import service as auth_service_mod
+        auth_service_mod._service = None
+        from src.api.app import create_app
+        client = TestClient(create_app())
+        assert _register(client, "produser@example.com", "Secret123").status_code == 200
+        login = _login(client, "produser@example.com", "Secret123")
+        assert login.status_code == 200, login.text
+        assert login.json()["access_token"]
+

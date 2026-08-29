@@ -31,6 +31,12 @@ def login(body: LoginRequest):
         user, token = get_auth_service().login(body.email, body.password)
     except AuthError as exc:
         raise HTTPException(status_code=401, detail=str(exc)) from exc
+    except Exception as exc:
+        # Surface config failures as 503 instead of opaque 500
+        raise HTTPException(
+            status_code=503,
+            detail="Authentication service misconfigured. Set JWT_SECRET_KEY on the API host.",
+        ) from exc
     return AuthResponse(
         access_token=token,
         user=UserPublic(**user.to_public_dict()),

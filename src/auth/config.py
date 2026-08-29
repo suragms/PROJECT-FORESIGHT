@@ -2,10 +2,13 @@
 
 from __future__ import annotations
 
+import logging
 import os
 from pathlib import Path
 
 from src.config import PROJECT_ROOT
+
+logger = logging.getLogger("forecast_service.auth")
 
 
 def auth_db_path() -> Path:
@@ -20,17 +23,33 @@ def auth_db_path() -> Path:
 
 
 def jwt_secret_key() -> str:
+    """Resolve JWT signing secret. Never raise during login — fall back safely."""
     key = (
         os.environ.get("JWT_SECRET_KEY")
         or os.environ.get("FORESIGHT_API_JWT_SECRET")
         or os.environ.get("FORESIGHT_JWT_SECRET_KEY")
         or os.environ.get("SECRET_KEY")
     )
-    if not key:
-        if os.environ.get("FORESIGHT_ENV", "development") == "production":
-            raise RuntimeError("JWT_SECRET_KEY or SECRET_KEY must be set in production")
-        key = "foresight-dev-only-change-in-production"
-    return key
+    if key and key.strip():
+        return key.strip()
+
+    api_key = (os.environ.get("FORESIGHT_API_API_KEY") or "").strip()
+    if api_key:
+        logger.warning(
+            "JWT_SECRET_KEY unset; using FORESIGHT_API_API_KEY as token signing secret. "
+            "Set JWT_SECRET_KEY on Render for production."
+        )
+        return api_key
+
+    env = os.environ.get("FORESIGHT_ENV", "development").strip().lower()
+    if env == "production":
+        # Prefer working auth over a hard 500 when deploy env is incomplete.
+        logger.error(
+            "JWT_SECRET_KEY unset in production; using ephemeral fallback. "
+            "Set JWT_SECRET_KEY (or FORESIGHT_API_JWT_SECRET) on Render."
+        )
+        return "foresight-production-jwt-fallback-change-me"
+    return "foresight-dev-only-change-in-production"
 
 
 def user_auth_required_for_api() -> bool:

@@ -75,7 +75,10 @@ class AuthService:
             conn.execute("UPDATE users SET last_login = ? WHERE id = ?", (now, row["id"]))
             row = conn.execute("SELECT * FROM users WHERE id = ?", (row["id"],)).fetchone()
         user = self._row_to_user(row)
-        token = create_access_token({"sub": user.id, "email": user.email, "role": user.role})
+        # itsdangerous JSON serializer is happiest with string subject ids
+        token = create_access_token(
+            {"sub": str(user.id), "email": user.email, "role": user.role}
+        )
         return user, token
 
     def get_user_by_id(self, user_id: int) -> User | None:
