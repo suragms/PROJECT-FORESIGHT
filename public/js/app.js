@@ -246,10 +246,13 @@ function backendDisplayHost() {
 }
 
 function docsUrl() {
-  if (STATE.apiBaseUrl.endsWith('/api')) {
-    return 'https://project-foresight-api-tofn.onrender.com/docs';
+  if (typeof window !== 'undefined' && window.location.hostname.endsWith('vercel.app')) {
+    return `${window.location.origin}/api/docs`;
   }
-  return `${STATE.apiBaseUrl}/docs`;
+  if (STATE.apiBaseUrl.endsWith('/api')) {
+    return `${window.location.origin}/api/docs`;
+  }
+  return `${STATE.apiBaseUrl.replace(/\/$/, '')}/docs`;
 }
 
 function showAuthAlert(msg, type = 'error') {
@@ -1272,30 +1275,43 @@ function initMonitoringRadar() {
 }
 
 function renderDocsPage() {
+  const apiDocs = docsUrl();
+  const openapiUrl = apiDocs.replace(/\/docs\/?$/, '/openapi.json');
   return `
     <div class="page-header">
-      <h1 class="page-title">Documentation & Validation Audit</h1>
-      <p class="page-description">Complete end-to-end methodology, project phases, and delivery audit status.</p>
+      <h1 class="page-title">Documentation & API Reference</h1>
+      <p class="page-description">Project methodology, validation status, and interactive API documentation.</p>
+    </div>
+
+    <div class="card" style="margin-bottom: 16px;">
+      <div class="card-header">
+        <div class="card-title">Interactive API Docs (Swagger)</div>
+      </div>
+      <p style="font-size: 14px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 14px;">
+        Open the FastAPI Swagger UI for live endpoint schemas, request examples, and try-it-out requests.
+      </p>
+      <a href="${apiDocs}" target="_blank" rel="noreferrer" class="btn btn-primary" style="display:inline-flex; margin-right:10px;">Open Swagger UI →</a>
+      <a href="${openapiUrl}" target="_blank" rel="noreferrer" class="btn btn-secondary" style="display:inline-flex;">OpenAPI JSON</a>
     </div>
 
     <div class="card">
       <div class="card-header">
-        <div class="card-title">Phase 22 Deliverable Audit Certificate</div>
-        <span class="banner-tag tag-audit">PROJECT DELIVERY READY</span>
+        <div class="card-title">Key API Endpoints</div>
       </div>
-      <p style="font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 16px;">
-        <strong>Project FORESIGHT</strong> is an enterprise-grade demand forecasting and inventory risk intelligence platform developed across 23 rigorous engineering phases. The platform provides predictive decision support, automated safety stock optimization, and proactive stockout prevention.
+      <table class="table-custom" style="width:100%;">
+        <thead><tr><th>Method</th><th>Path</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td>GET</td><td>/health</td><td>Liveness check</td></tr>
+          <tr><td>POST</td><td>/auth/register</td><td>Create account</td></tr>
+          <tr><td>POST</td><td>/auth/login</td><td>Obtain JWT session</td></tr>
+          <tr><td>POST</td><td>/phase20/forecast</td><td>Production 6-week forecast</td></tr>
+          <tr><td>POST</td><td>/phase20/risk/explain</td><td>Inventory risk scoring</td></tr>
+          <tr><td>GET</td><td>/phase21/monitoring/latest</td><td>Monitoring summary</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size: 12px; color: var(--text-muted); margin-top: 12px;">
+        Validation WAPE 13.96% (overall), 11.03% (h1–h6). Live production performance: <strong>PENDING ACTUALS</strong>.
       </p>
-      <div style="background: var(--bg-tertiary); padding: 18px; border-radius: 8px; font-family: var(--font-mono); font-size: 12px; color: var(--text-secondary); line-height: 1.6;">
-        {<br>
-        &nbsp;&nbsp;"delivery_status": "PROJECT DELIVERY READY",<br>
-        &nbsp;&nbsp;"frozen_models_12_unchanged": true,<br>
-        &nbsp;&nbsp;"phase20_production_unchanged": true,<br>
-        &nbsp;&nbsp;"phase21_monitoring_status": "PASS",<br>
-        &nbsp;&nbsp;"integrity_status": "PASS",<br>
-        &nbsp;&nbsp;"tests_passed": "280 passed, 0 failures"<br>
-        }
-      </div>
     </div>
   `;
 }

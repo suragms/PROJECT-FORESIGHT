@@ -42,6 +42,28 @@ SECURITY_HEADERS = {
     "Content-Security-Policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'",
     "Cache-Control": "no-store",
 }
+# Swagger UI loads scripts/styles from jsDelivr and fetches /openapi.json — strict CSP breaks /docs.
+DOCS_PATH_PREFIXES = ("/docs", "/redoc", "/openapi.json")
+DOCS_SECURITY_HEADERS = {
+    "X-Content-Type-Options": "nosniff",
+    "Referrer-Policy": "no-referrer",
+    "Content-Security-Policy": (
+        "default-src 'self'; "
+        "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; "
+        "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; "
+        "img-src 'self' data: https:; "
+        "font-src 'self' data: https://cdn.jsdelivr.net; "
+        "connect-src 'self'"
+    ),
+    "Cache-Control": "no-store",
+}
+
+
+def _is_docs_path(path: str) -> bool:
+    normalized = path.rstrip("/") or "/"
+    if normalized in {"/docs", "/redoc", "/openapi.json"}:
+        return True
+    return any(normalized.startswith(prefix) for prefix in ("/docs/", "/redoc/"))
 
 
 @asynccontextmanager
@@ -106,13 +128,12 @@ def create_app() -> FastAPI:
     @application.middleware("http")
     async def security_headers(request: Request, call_next):
         response = await call_next(request)
-        # Do not attach restrictive CSP to CORS preflight / public browser calls —
-        # it is unnecessary on JSON APIs and can confuse browsers.
         if request.method != "OPTIONS":
-            for key, value in SECURITY_HEADERS.items():
+            headers = DOCS_SECURITY_HEADERS if _is_docs_path(request.url.path) else SECURITY_HEADERS
+            for key, value in headers.items():
                 if key == "Content-Security-Policy" and request.url.path.startswith("/auth"):
                     continue
-                response.headers.setdefault(key, value)
+                response.headers[key] = value
         return response
 
     @application.middleware("http")

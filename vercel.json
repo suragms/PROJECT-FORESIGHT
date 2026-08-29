@@ -11,6 +11,10 @@
     {
       "source": "/api/(.*)",
       "destination": "https://project-foresight-api-tofn.onrender.com/$1"
+    },
+    {
+      "source": "/openapi.json",
+      "destination": "https://project-foresight-api-tofn.onrender.com/openapi.json"
     }
   ],
   "headers": [

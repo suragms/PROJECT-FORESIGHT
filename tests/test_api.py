@@ -47,6 +47,24 @@ def test_health(client):
     assert "timestamp" in body
 
 
+def test_docs_swagger_accessible(client):
+    """Swagger /docs must not use default-src 'none' CSP (breaks blank UI)."""
+    r = client.get("/docs")
+    assert r.status_code == 200
+    assert "swagger-ui" in r.text.lower()
+    csp = r.headers.get("content-security-policy", "")
+    assert "default-src 'none'" not in csp
+    assert "cdn.jsdelivr.net" in csp
+
+
+def test_openapi_json(client):
+    r = client.get("/openapi.json")
+    assert r.status_code == 200
+    body = r.json()
+    assert body.get("openapi", "").startswith("3.")
+    assert "/health" in body.get("paths", {})
+
+
 def test_model_registry(client):
     r = client.get("/model")
     assert r.status_code == 200
