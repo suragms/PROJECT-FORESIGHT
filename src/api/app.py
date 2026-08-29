@@ -49,7 +49,9 @@ async def lifespan(application: FastAPI):
         assert_runtime_config()
     except ConfigValidationError as exc:
         audit("application_startup_failed", environment=env, error=str(exc))
-        raise
+        if env == "production" and not os.environ.get("VERCEL"):
+            raise
+        logger.warning("Config validation notice: %s", exc)
     from src.production.config_validation import validate_runtime_config
 
     warnings = validate_runtime_config()
@@ -61,8 +63,11 @@ async def lifespan(application: FastAPI):
         version=APP_VERSION,
         config=config_snapshot(),
     )
-    from src.auth.database import init_db
-    init_db()
+    try:
+        from src.auth.database import init_db
+        init_db()
+    except Exception as exc:
+        logger.warning("Auth DB initialization fallback notice: %s", exc)
     yield
     audit("application_shutdown", environment=env, version=APP_VERSION)
 

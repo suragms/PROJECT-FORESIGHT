@@ -83,6 +83,20 @@ def _engine(request: Request, dataset: str, horizon: int) -> ForecastEngine:
     return cache[key]
 
 
+@router.get("/")
+def root() -> dict:
+    return {
+        "status": "online",
+        "service": "Project FORESIGHT — Demand & Inventory Intelligence API",
+        "version": APP_VERSION,
+        "docs": "/docs",
+        "health": "/health",
+        "ready": "/ready",
+        "supported_datasets": list(SUPPORTED_DATASETS),
+        "supported_horizons": list(SUPPORTED_HORIZONS),
+    }
+
+
 @router.get("/health", response_model=HealthResponse)
 def health() -> HealthResponse:
     body = liveness()

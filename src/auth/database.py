@@ -25,7 +25,11 @@ CREATE TABLE IF NOT EXISTS users (
 
 def init_db(db_path: Path | None = None) -> Path:
     path = db_path or auth_db_path()
-    path.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        path.parent.mkdir(parents=True, exist_ok=True)
+    except OSError:
+        path = Path("/tmp/project_foresight_auth.db")
+        path.parent.mkdir(parents=True, exist_ok=True)
     with sqlite3.connect(path) as conn:
         conn.execute(SCHEMA)
         conn.commit()
@@ -34,8 +38,11 @@ def init_db(db_path: Path | None = None) -> Path:
 
 @contextmanager
 def get_connection(db_path: Path | None = None):
-    path = db_path or auth_db_path()
-    init_db(path)
+    try:
+        path = init_db(db_path)
+    except Exception:
+        path = Path("/tmp/project_foresight_auth.db")
+        init_db(path)
     conn = sqlite3.connect(path)
     conn.row_factory = sqlite3.Row
     try:

@@ -9,9 +9,14 @@ from src.config import PROJECT_ROOT
 
 
 def auth_db_path() -> Path:
-    raw = os.environ.get("FORESIGHT_AUTH_DB_PATH", "data/auth/project_foresight_auth.db")
-    p = Path(raw)
-    return p if p.is_absolute() else PROJECT_ROOT / p
+    raw = os.environ.get("FORESIGHT_AUTH_DB_PATH")
+    if raw:
+        p = Path(raw)
+        return p if p.is_absolute() else PROJECT_ROOT / p
+    # On Vercel, AWS Lambda, or Linux serverless, use writable /tmp
+    if os.environ.get("VERCEL") or os.environ.get("AWS_LAMBDA_FUNCTION_NAME") or not os.access(str(PROJECT_ROOT), os.W_OK):
+        return Path("/tmp/project_foresight_auth.db")
+    return PROJECT_ROOT / Path("data/auth/project_foresight_auth.db")
 
 
 def jwt_secret_key() -> str:
