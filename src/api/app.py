@@ -88,10 +88,10 @@ def create_app() -> FastAPI:
     application.state.rate_limiter = RateLimiter()
     application.add_middleware(
         CORSMiddleware,
-        allow_origins=cors_allowed_origins(),
-        allow_credentials=True,
-        allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-        allow_headers=["Authorization", "Content-Type", "X-API-Key", "X-Request-ID"],
+        allow_origins=["*"],
+        allow_credentials=False,
+        allow_methods=["*"],
+        allow_headers=["*"],
     )
 
     @application.middleware("http")

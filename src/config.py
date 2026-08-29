@@ -89,13 +89,8 @@ def log_level() -> str:
 
 def cors_allowed_origins() -> list[str]:
     raw = os.environ.get("FORESIGHT_CORS_ORIGINS", "")
-    if not raw.strip():
-        return [
-            "https://foresight-project-green.vercel.app",
-            "http://localhost:3000",
-            "http://localhost:8501",
-            "http://127.0.0.1:8501",
-        ]
+    if not raw.strip() or "*" in raw:
+        return ["*"]
     return [part.strip() for part in raw.split(",") if part.strip()]
 
 REGISTRY_PATH = PROJECT_ROOT / os.environ.get(
